@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Panel } from "./panel";
+import { Output } from "./output";
 
 interface iConst {
   x: number;
@@ -9,6 +10,7 @@ interface iConst {
 
 export function Const({ x, y, output }: iConst) {
   const [input, setInput] = useState(0);
+  const [connect, setConnect] = useState(false);
 
   useEffect(() => {
     output(input);
@@ -18,7 +20,7 @@ export function Const({ x, y, output }: iConst) {
     setInput(parseInt(e.target.value));
   };
 
-  const io = <label className="output">({input})</label>;
+  const io = <Output key={"a"} value={input} />;
 
   const controls = (
     <input

@@ -2,6 +2,7 @@
   position: relative;
   font-family: "PT Sans", sans-serif;
   font-size: 14px;
+  user-select: none;
 }
 
 .Panel {
@@ -44,8 +45,15 @@
   border-radius: 10px;
 }
 
+.IO label.connecting::before {
+  background-color: #88ff88;
+  border: 1px solid #dddddd;
+  width: 18px;
+  height: 18px;
+}
+
 .IO label:hover::before {
-  background-color: #ff0000;
+  background-color: #ddffdd;
 }
 
 .IO label.input {

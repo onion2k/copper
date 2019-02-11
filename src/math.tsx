@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Panel } from "./panel";
+import { Input } from "./input";
+import { Output } from "./output";
 
 interface iAdd {
   x: number;
@@ -22,15 +24,9 @@ export function Math({ x, y, op, input, output }: iAdd) {
   });
 
   const io = [
-    <label key={"a"} className="input">
-      ({input[0]})
-    </label>,
-    <label key={"b"} className="output">
-      Output
-    </label>,
-    <label key={"c"} className="input">
-      ({input[1]})
-    </label>
+    <Input key={"a"} value={input[0]} />,
+    <Output key={"b"} value={"Output"} />,
+    <Input key={"c"} value={input[1]} />
   ];
 
   const controls = "Add input 1 and input 2.";
