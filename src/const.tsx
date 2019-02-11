@@ -4,14 +4,14 @@ import { Panel } from "./panel";
 interface iConst {
   x: number;
   y: number;
-  outputCallback: any;
+  output: any;
 }
 
-export function Const({ x, y, outputCallback }: iConst) {
+export function Const({ x, y, output }: iConst) {
   const [input, setInput] = useState(0);
 
   useEffect(() => {
-    outputCallback(input);
+    output(input);
   });
 
   const updateIo = (e: any) => {

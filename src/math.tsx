@@ -4,13 +4,21 @@ import { Panel } from "./panel";
 interface iAdd {
   x: number;
   y: number;
+  op: string;
   input: any;
-  outputCallback: any;
+  output: any;
 }
 
-export function Add({ x, y, input, outputCallback }: iAdd) {
+export function Math({ x, y, op, input, output }: iAdd) {
   useEffect(() => {
-    outputCallback(input[0] + input[1]);
+    switch (op) {
+      case "add":
+        output(input[0] + input[1]);
+        break;
+      case "multiply":
+        output(input[0] * input[1]);
+        break;
+    }
   });
 
   const io = [
@@ -21,5 +29,5 @@ export function Add({ x, y, input, outputCallback }: iAdd) {
 
   const controls = <p>Add input 1 and input 2.</p>;
 
-  return <Panel x={x} y={y} title={"Math.add"} io={io} controls={controls} />;
+  return <Panel x={x} y={y} title={`Math.${op}`} io={io} controls={controls} />;
 }

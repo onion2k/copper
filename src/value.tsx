@@ -5,12 +5,12 @@ interface iValue {
   x: number;
   y: number;
   input: any;
-  outputCallback: any;
+  output: any;
 }
 
-export function Value({ x, y, input, outputCallback }: iValue) {
+export function Value({ x, y, input, output }: iValue) {
   useEffect(() => {
-    outputCallback(parseInt(input));
+    output(parseInt(input));
   });
   return (
     <Panel
