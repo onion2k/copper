@@ -19,7 +19,7 @@ export function Value({ x, y, input, output }: iValue) {
       title={"Value"}
       io={[
         <label key="a" className="input">
-          Input {input[0]}
+          {input[0]}
         </label>,
         <label key="b" className="output">
           Output

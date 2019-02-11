@@ -23,13 +23,13 @@ export function Math({ x, y, op, input, output }: iAdd) {
 
   const io = [
     <label key={"a"} className="input">
-      Input A ({input[0]})
+      ({input[0]})
     </label>,
     <label key={"b"} className="output">
       Output
     </label>,
     <label key={"c"} className="input">
-      Input B ({input[1]})
+      ({input[1]})
     </label>
   ];
 

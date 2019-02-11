@@ -18,13 +18,7 @@ function App() {
     <div className="Control">
       <Const x={10} y={10} output={setConst0} />
       <Const x={10} y={210} output={setConst1} />
-      <Math
-        x={360}
-        y={110}
-        input={[const0, const1]}
-        output={setAdd1}
-        op="add"
-      />
+      <Math x={360} y={95} input={[const0, const1]} output={setAdd1} op="add" />
       <Const x={10} y={410} output={setConst3} />
       <Math
         x={710}
@@ -40,7 +34,7 @@ function App() {
           x1="325"
           y1="93"
           x2="375"
-          y2="193"
+          y2="178"
           strokeWidth="1"
           stroke="black"
         />

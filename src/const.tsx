@@ -18,7 +18,7 @@ export function Const({ x, y, output }: iConst) {
     setInput(parseInt(e.target.value));
   };
 
-  const io = <label className="output">Output ({input})</label>;
+  const io = <label className="output">({input})</label>;
 
   const controls = (
     <input
