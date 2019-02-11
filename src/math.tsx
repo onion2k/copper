@@ -22,12 +22,18 @@ export function Math({ x, y, op, input, output }: iAdd) {
   });
 
   const io = [
-    <label className="input">Input A ({input[0]})</label>,
-    <label className="output">Output</label>,
-    <label className="input">Input B ({input[1]})</label>
+    <label key={"a"} className="input">
+      Input A ({input[0]})
+    </label>,
+    <label key={"b"} className="output">
+      Output
+    </label>,
+    <label key={"c"} className="input">
+      Input B ({input[1]})
+    </label>
   ];
 
-  const controls = <p>Add input 1 and input 2.</p>;
+  const controls = "Add input 1 and input 2.";
 
   return <Panel x={x} y={y} title={`Math.${op}`} io={io} controls={controls} />;
 }

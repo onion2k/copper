@@ -41,7 +41,7 @@ function App() {
           y1="93"
           x2="375"
           y2="193"
-          stroke-width="1"
+          strokeWidth="1"
           stroke="black"
         />
       </svg>

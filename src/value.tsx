@@ -18,10 +18,14 @@ export function Value({ x, y, input, output }: iValue) {
       y={y}
       title={"Value"}
       io={[
-        <label className="input">Input {input[0]}</label>,
-        <label className="output">Output</label>
+        <label key="a" className="input">
+          Input {input[0]}
+        </label>,
+        <label key="b" className="output">
+          Output
+        </label>
       ]}
-      controls={<p>Display a value from an output.</p>}
+      controls={"Display a value from an output."}
     />
   );
 }
