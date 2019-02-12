@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Connector } from "./connector";
 
 interface iInput {
   key: string;
@@ -9,6 +10,7 @@ export function Input({ key, value }: iInput) {
   return (
     <label key={key} className="input">
       ({value})
+      <Connector />
     </label>
   );
 }

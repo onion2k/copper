@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Connector } from "./connector";
 
 interface iOutput {
   key: string;
@@ -9,6 +10,7 @@ export function Output({ key, value }: iOutput) {
   return (
     <label key={key} className="output">
       ({value})
+      <Connector />
     </label>
   );
 }

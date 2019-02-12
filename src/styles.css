@@ -35,9 +35,9 @@
   padding: 5px 15px 10px;
 }
 
-.IO label::before {
-  content: "";
+.IO label > .node {
   position: absolute;
+  top: 5px;
   background-color: #dddddd;
   border: 5px solid #888888;
   width: 10px;
@@ -45,14 +45,14 @@
   border-radius: 10px;
 }
 
-.IO label.connecting::before {
+.IO label.connecting > .node {
   background-color: #88ff88;
   border: 1px solid #dddddd;
   width: 18px;
   height: 18px;
 }
 
-.IO label:hover::before {
+.IO label:hover > .node {
   background-color: #ddffdd;
 }
 
@@ -60,7 +60,7 @@
   grid-column: 1 / 2;
 }
 
-.IO label.input::before {
+.IO label.input > .node {
   left: -10px;
 }
 
@@ -69,7 +69,7 @@
   text-align: right;
 }
 
-.IO label.output::before {
+.IO label.output > .node {
   right: -10px;
 }
 
