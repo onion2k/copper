@@ -10,7 +10,7 @@ export function Input({ key, value }: iInput) {
   return (
     <label key={key} className="input">
       ({value})
-      <Connector />
+      <Connector connect={key} />
     </label>
   );
 }

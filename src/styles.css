@@ -45,7 +45,7 @@
   border-radius: 10px;
 }
 
-.IO label.connecting > .node {
+.IO label > .node.connecting {
   background-color: #88ff88;
   border: 1px solid #dddddd;
   width: 18px;

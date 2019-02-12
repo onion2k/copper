@@ -5,5 +5,17 @@ interface iConnector {
 }
 
 export function Connector({ key }: iConnector) {
-  return <div className="node" />;
+  const [connecting, setConnecting] = useState(false);
+
+  const connect = () => {
+    setConnecting(!connecting);
+  };
+
+  return (
+    <div
+      className={`node ${connecting === true ? "connecting" : ""}`}
+      onMouseDown={connect}
+      onMouseUp={connect}
+    />
+  );
 }
