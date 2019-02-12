@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
-import { Const } from "./const";
-import { Value } from "./value";
-import { Math } from "./math";
+import { Const } from "./Nodes/const";
+import { Value } from "./Nodes/value";
+import { Math } from "./Nodes/math";
 
 import "./styles.css";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Panel } from "./panel";
-import { Output } from "./output";
+import { Panel } from "../Components/panel";
+import { Output } from "../Components/output";
 
 interface iConst {
   x: number;

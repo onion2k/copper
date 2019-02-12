@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Panel } from "./panel";
-import { Input } from "./input";
-import { Output } from "./output";
+import { Panel } from "../Components/panel";
+import { Input } from "../Components/input";
+import { Output } from "../Components/output";
 
 interface iAdd {
   x: number;

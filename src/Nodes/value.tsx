@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Panel } from "./panel";
+import { Panel } from "../Components/panel";
 
 interface iValue {
   x: number;
