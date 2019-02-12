@@ -24,9 +24,9 @@ export function Math({ x, y, op, input, output }: iAdd) {
   });
 
   const io = [
-    <Input key={"a"} value={input[0]} />,
-    <Output key={"b"} value={"Output"} />,
-    <Input key={"c"} value={input[1]} />
+    <Input key={"a"} id={"a"} value={input[0]} />,
+    <Output key={"b"} id={"b"} value={"Output"} />,
+    <Input key={"c"} id={"c"} value={input[1]} />
   ];
 
   const controls = "Add input 1 and input 2.";

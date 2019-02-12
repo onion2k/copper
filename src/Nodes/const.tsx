@@ -20,7 +20,7 @@ export function Const({ x, y, output }: iConst) {
     setInput(parseInt(e.target.value));
   };
 
-  const io = <Output key={"a"} value={input} />;
+  const io = <Output key={"a"} id={"a"} value={input} />;
 
   const controls = (
     <input

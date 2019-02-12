@@ -3,14 +3,15 @@ import { Connector } from "./connector";
 
 interface iOutput {
   key: string;
+  id: string;
   value: number | string;
 }
 
-export function Output({ key, value }: iOutput) {
+export function Output({ key, id, value }: iOutput) {
   return (
     <label key={key} className="output">
-      ({value})
-      <Connector connect={key} />
+      ({value}, {id})
+      <Connector connectorKey={id} />
     </label>
   );
 }

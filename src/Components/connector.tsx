@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ConnectorContext } from "../Contexts/connector";
 
 interface iConnector {
-  key: string;
+  connectorKey: string;
 }
 
-export function Connector({ key }: iConnector) {
-  const [connecting, setConnecting] = useState(false);
+export function Connector({ connectorKey }: iConnector) {
+  const [connector, setConnector] = useContext(ConnectorContext);
 
-  const connect = () => {
-    setConnecting(!connecting);
+  const startConnect = () => {
+    setConnector(connectorKey);
+  };
+
+  const endConnect = () => {
+    console.log(`Connecting ${connector} to ${connectorKey}`);
+    setConnector(null);
   };
 
   return (
     <div
-      className={`node ${connecting === true ? "connecting" : ""}`}
-      onMouseDown={connect}
-      onMouseUp={connect}
+      className={`node ${connector === connectorKey ? "connecting" : ""}`}
+      onMouseDown={startConnect}
+      onMouseUp={endConnect}
     />
   );
 }
