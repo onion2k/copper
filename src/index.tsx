@@ -13,20 +13,48 @@ function App() {
   const [connector, setConnector] = useState(null);
   const [const0, setConst0] = useState(0);
   const [const1, setConst1] = useState(0);
-  const [add1, setAdd1] = useState(0);
+  const [math0, setMath0] = useState(0);
   const [const2, setConst2] = useState(0);
-  const [add2, setAdd2] = useState(0);
+  const [math1, setMath1] = useState(0);
+
+  const nodeOutputMap = {
+    "const0-o-0": const0,
+    "const1-o-0": const1,
+    "const2-o-0": const2,
+    "math0-o-0": math0,
+    "math1-o-0": math1
+  };
+
+  const nodeInputMap = {
+    math0: [const0, const1],
+    math1: [math0, const2],
+    value0: [math1]
+  };
+
+  const connectConnector = (from, to) => {
+    //math0-i[0] = const0-o-0
+    console.log(`${from} to ${to}`);
+  };
+
+  const endConnect = () => {
+    if (connector) {
+      setConnector(null);
+    }
+  };
+
   return (
-    <ConnectorContext.Provider value={[connector, setConnector]}>
-      <div className="Control">
+    <ConnectorContext.Provider
+      value={[connector, setConnector, connectConnector]}
+    >
+      <div className="Control" onMouseUp={endConnect}>
         <Const id={"const0"} x={10} y={10} output={setConst0} />
         <Const id={"const1"} x={10} y={210} output={setConst1} />
         <Math
           id={"math0"}
           x={360}
           y={95}
-          input={[const0, const1]}
-          output={setAdd1}
+          input={nodeInputMap["math0"]}
+          output={setMath0}
           op="add"
         />
         <Const id={"const2"} x={10} y={410} output={setConst2} />
@@ -34,15 +62,15 @@ function App() {
           id={"math1"}
           x={710}
           y={310}
-          input={[add1, const2]}
-          output={setAdd2}
+          input={nodeInputMap["math1"]}
+          output={setMath1}
           op="multiply"
         />
         <Value
-          id={"value1"}
+          id={"value0"}
           x={1060}
           y={210}
-          input={[add2]}
+          input={nodeInputMap["value0"]}
           output={setOutput}
         />
 

@@ -6,15 +6,20 @@ interface iConnector {
 }
 
 export function Connector({ connectorKey }: iConnector) {
-  const [connector, setConnector] = useContext(ConnectorContext);
+  const [connector, setConnector, connectConnector] = useContext(
+    ConnectorContext
+  );
 
   const startConnect = () => {
     setConnector(connectorKey);
   };
 
-  const endConnect = () => {
-    console.log(`Connecting ${connector} to ${connectorKey}`);
-    setConnector(null);
+  const endConnect = e => {
+    e.preventDefault();
+    if (connector) {
+      connectConnector(connector, connectorKey);
+      setConnector(null);
+    }
   };
 
   return (

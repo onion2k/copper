@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface iPanel {
-  ref?: any;
   title: string;
   x: number;
   y: number;
@@ -9,21 +8,18 @@ interface iPanel {
   controls: any;
 }
 
-export function Panel({
-  ref = React.createRef(),
-  title,
-  x,
-  y,
-  io,
-  controls
-}: iPanel) {
-  useEffect(() => {
-    if (ref.current) {
-      // console.log(ref.current.getBoundingClientRect());
-    }
-  });
+export function Panel({ title, x, y, io, controls }: iPanel) {
+  const panelRef = useRef(null);
+  useEffect(
+    () => {
+      if (panelRef.current) {
+        // console.log(panelRef.current.getBoundingClientRect());
+      }
+    },
+    [panelRef]
+  );
   return (
-    <div className="Panel" style={{ top: y, left: x }} ref={ref}>
+    <div ref={panelRef} className="Panel" style={{ top: y, left: x }}>
       <div className="Title">{title}</div>
       <div className="IO">{io}</div>
       <p className="Description">{controls}</p>
