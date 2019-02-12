@@ -4,6 +4,7 @@ import { Input } from "../Components/input";
 import { Output } from "../Components/output";
 
 interface iAdd {
+  id: string;
   x: number;
   y: number;
   op: string;
@@ -11,7 +12,7 @@ interface iAdd {
   output: any;
 }
 
-export function Math({ x, y, op, input, output }: iAdd) {
+export function Math({ id, x, y, op, input, output }: iAdd) {
   useEffect(() => {
     switch (op) {
       case "add":
@@ -24,9 +25,9 @@ export function Math({ x, y, op, input, output }: iAdd) {
   });
 
   const io = [
-    <Input key={"a"} id={"a"} value={input[0]} />,
-    <Output key={"b"} id={"b"} value={"Output"} />,
-    <Input key={"c"} id={"c"} value={input[1]} />
+    <Input key={`${id}-i-0`} id={`${id}-i-0`} value={input[0]} />,
+    <Output key={`${id}-o-0`} id={`${id}-o-0`} value={"Output"} />,
+    <Input key={`${id}-i-1`} id={`${id}-i-1`} value={input[1]} />
   ];
 
   const controls = "Add input 1 and input 2.";

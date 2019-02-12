@@ -3,12 +3,13 @@ import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
 interface iConst {
+  id: string;
   x: number;
   y: number;
   output: any;
 }
 
-export function Const({ x, y, output }: iConst) {
+export function Const({ id, x, y, output }: iConst) {
   const [input, setInput] = useState(0);
   const [connect, setConnect] = useState(false);
 
@@ -20,7 +21,7 @@ export function Const({ x, y, output }: iConst) {
     setInput(parseInt(e.target.value));
   };
 
-  const io = <Output key={"a"} id={"a"} value={input} />;
+  const io = <Output key={`${id}-o-0`} id={`${id}-o-0`} value={input} />;
 
   const controls = (
     <input
