@@ -43,17 +43,21 @@
   width: 10px;
   height: 10px;
   border-radius: 10px;
-}
-
-.IO label > .node.connecting {
-  background-color: #88ff88;
-  border: 1px solid #dddddd;
-  width: 18px;
-  height: 18px;
+  transition: all 0.4s;
 }
 
 .IO label:hover > .node {
-  background-color: #ddffdd;
+  background-color: #88ff88;
+  border: 2px solid #888888;
+  width: 16px;
+  height: 16px;
+}
+
+.IO label > .node.connecting {
+  background-color: #ff8888;
+  border: 2px solid #888888;
+  width: 16px;
+  height: 16px;
 }
 
 .IO label.input {
