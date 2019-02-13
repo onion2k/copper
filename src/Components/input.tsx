@@ -8,9 +8,11 @@ interface iInput {
 }
 
 export function Input({ key, id, value }: iInput) {
+  const display = typeof value === "number" ? value.toFixed(3) : value;
+
   return (
     <label key={key} className="input">
-      ({value})
+      ({display})
       <Connector connectorKey={id} />
     </label>
   );

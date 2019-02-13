@@ -18,7 +18,7 @@ export function Const({ id, x, y, output }: iConst) {
   });
 
   const updateIo = (e: any) => {
-    setInput(parseInt(e.target.value));
+    setInput(parseFloat(e.target.value));
   };
 
   const io = <Output key={`${id}-o-0`} id={`${id}-o-0`} value={input} />;

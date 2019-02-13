@@ -26,7 +26,7 @@ export function Math({ id, x, y, op, input, output }: iAdd) {
 
   const io = [
     <Input key={`${id}-i-0`} id={`${id}-i-0`} value={input[0]} />,
-    <Output key={`${id}-o-0`} id={`${id}-o-0`} value={"Output"} />,
+    <Output key={`${id}-o-0`} id={`${id}-o-0`} value={"output"} />,
     <Input key={`${id}-i-1`} id={`${id}-i-1`} value={input[1]} />
   ];
 

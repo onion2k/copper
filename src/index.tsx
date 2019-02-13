@@ -47,6 +47,16 @@ function App() {
     <ConnectorContext.Provider
       value={[connector, setConnector, connectConnector]}
     >
+      <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+        <line
+          x1="325"
+          y1="93"
+          x2="375"
+          y2="178"
+          strokeWidth="2"
+          stroke="#888888"
+        />
+      </svg>
       <div className="Control" onMouseUp={endConnect}>
         <Time id={"time0"} x={10} y={10} output={setTime0} />
         <Const id={"const1"} x={10} y={210} output={setConst1} />
@@ -74,17 +84,6 @@ function App() {
           input={nodeInputMap["value0"]}
           output={setOutput}
         />
-
-        <svg viewBox="0 0 1424 1424" xmlns="http://www.w3.org/2000/svg">
-          <line
-            x1="325"
-            y1="93"
-            x2="375"
-            y2="178"
-            strokeWidth="1"
-            stroke="black"
-          />
-        </svg>
       </div>
     </ConnectorContext.Provider>
   );
