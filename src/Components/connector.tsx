@@ -14,7 +14,7 @@ export function Connector({ connectorKey }: iConnector) {
     setConnector(connectorKey);
   };
 
-  const endConnect = e => {
+  const endConnect = (e: any) => {
     e.preventDefault();
     if (connector) {
       connectConnector(connector, connectorKey);

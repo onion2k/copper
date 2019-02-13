@@ -9,14 +9,11 @@ interface iTime {
   output: any;
 }
 
-const useAnimationFrame = callback => {
+const useAnimationFrame = (callback: () => any) => {
   const callbackRef = useRef(callback);
-  useLayoutEffect(
-    () => {
-      callbackRef.current = callback;
-    },
-    [callback]
-  );
+  useLayoutEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
 
   const loop = () => {
     frameRef.current = requestAnimationFrame(loop);
@@ -24,7 +21,7 @@ const useAnimationFrame = callback => {
     cb();
   };
 
-  const frameRef = useRef();
+  const frameRef = useRef(0);
   useLayoutEffect(() => {
     frameRef.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameRef.current);

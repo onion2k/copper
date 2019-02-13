@@ -32,7 +32,7 @@ function App() {
     value0: [math1]
   };
 
-  const connectConnector = (from, to) => {
+  const connectConnector = (from: string, to: string) => {
     //math0-i[0] = const0-o-0
     console.log(`${from} to ${to}`);
   };
