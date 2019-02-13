@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
 import { Const } from "./Nodes/const";
+import { Time } from "./Nodes/time";
 import { Value } from "./Nodes/value";
 import { Math } from "./Nodes/math";
 import { ConnectorContext } from "./Contexts/connector";
@@ -11,14 +12,14 @@ function setOutput(output: any) {}
 
 function App() {
   const [connector, setConnector] = useState(null);
-  const [const0, setConst0] = useState(0);
+  const [time0, setTime0] = useState(0);
   const [const1, setConst1] = useState(0);
   const [math0, setMath0] = useState(0);
   const [const2, setConst2] = useState(0);
   const [math1, setMath1] = useState(0);
 
   const nodeOutputMap = {
-    "const0-o-0": const0,
+    "time0-o-0": time0,
     "const1-o-0": const1,
     "const2-o-0": const2,
     "math0-o-0": math0,
@@ -26,7 +27,7 @@ function App() {
   };
 
   const nodeInputMap = {
-    math0: [const0, const1],
+    math0: [time0, const1],
     math1: [math0, const2],
     value0: [math1]
   };
@@ -47,7 +48,7 @@ function App() {
       value={[connector, setConnector, connectConnector]}
     >
       <div className="Control" onMouseUp={endConnect}>
-        <Const id={"const0"} x={10} y={10} output={setConst0} />
+        <Time id={"time0"} x={10} y={10} output={setTime0} />
         <Const id={"const1"} x={10} y={210} output={setConst1} />
         <Math
           id={"math0"}
