@@ -10,7 +10,7 @@ interface iOutput {
 export function Output({ key, id, value }: iOutput) {
   return (
     <label key={key} className="output">
-      ({value}, {id})
+      ({value})
       <Connector connectorKey={id} />
     </label>
   );

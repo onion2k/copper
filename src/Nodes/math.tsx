@@ -16,10 +16,10 @@ export function Math({ id, x, y, op, input, output }: iAdd) {
   useEffect(() => {
     switch (op) {
       case "add":
-        output(input[0] + input[1]);
+        output(parseFloat(input[0]) + parseFloat(input[1]));
         break;
       case "multiply":
-        output(input[0] * input[1]);
+        output(parseFloat(input[0]) * parseFloat(input[1]));
         break;
     }
   });
