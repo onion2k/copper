@@ -37,7 +37,7 @@ export function Time({ id, x, y, output }: iTime) {
   const [connect, setConnect] = useState(false);
 
   useEffect(() => {
-    output(value);
+    output(value.toPrecision(3));
   });
 
   useAnimationFrame(() => {
@@ -46,7 +46,9 @@ export function Time({ id, x, y, output }: iTime) {
     }
   });
 
-  const io = <Output key={`${id}-o-0`} id={`${id}-o-0`} value={value} />;
+  const io = (
+    <Output key={`${id}-o-0`} id={`${id}-o-0`} value={value.toPrecision(3)} />
+  );
 
   const controls = <button onClick={() => setPause(!pause)}>Pause</button>;
 
