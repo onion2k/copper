@@ -45,10 +45,9 @@ function App() {
     }
   };
 
-  let connectorLine = null;
+  let activeConnectorLine = null;
   if (connector) {
-    console.log(connector.x, connector.y + window.scrollY);
-    connectorLine = (
+    activeConnectorLine = (
       <line
         x1={connector.x + window.scrollX}
         y1={connector.y + window.scrollY}
@@ -73,7 +72,7 @@ function App() {
           strokeWidth="2"
           stroke="#888888"
         />
-        {connectorLine}
+        {activeConnectorLine}
       </svg>
       <div className="Control" onMouseUp={endConnect}>
         <Time id={"time0"} x={10} y={10} output={setTime0} />
