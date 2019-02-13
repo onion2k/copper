@@ -32,9 +32,11 @@ function App() {
     value0: [math1]
   };
 
-  const connectConnector = (from: string, to: string) => {
-    //math0-i[0] = const0-o-0
-    console.log(`${from} to ${to}`);
+  const connectConnector = (
+    from: { id: string; x: number; y: number },
+    to: { id: string; x: number; y: number }
+  ) => {
+    console.log(`${from.id} to ${to}`);
   };
 
   const endConnect = () => {
@@ -42,6 +44,21 @@ function App() {
       setConnector(null);
     }
   };
+
+  let connectorLine = null;
+  if (connector) {
+    console.log(connector.x, connector.y + window.scrollY);
+    connectorLine = (
+      <line
+        x1={connector.x + window.scrollX}
+        y1={connector.y + window.scrollY}
+        x2={0}
+        y2={0}
+        strokeWidth="2"
+        stroke="#888888"
+      />
+    );
+  }
 
   return (
     <ConnectorContext.Provider
@@ -56,6 +73,7 @@ function App() {
           strokeWidth="2"
           stroke="#888888"
         />
+        {connectorLine}
       </svg>
       <div className="Control" onMouseUp={endConnect}>
         <Time id={"time0"} x={10} y={10} output={setTime0} />

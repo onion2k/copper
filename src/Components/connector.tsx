@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
 
 interface iConnector {
@@ -10,8 +10,15 @@ export function Connector({ connectorKey }: iConnector) {
     ConnectorContext
   );
 
+  const ref = useRef(null);
+
   const startConnect = () => {
-    setConnector(connectorKey);
+    const c = {
+      x: ref.current.getBoundingClientRect().x + 10,
+      y: ref.current.getBoundingClientRect().y + 10,
+      id: connectorKey
+    };
+    setConnector(c);
   };
 
   const endConnect = (e: any) => {
@@ -24,7 +31,10 @@ export function Connector({ connectorKey }: iConnector) {
 
   return (
     <div
-      className={`node ${connector === connectorKey ? "connecting" : ""}`}
+      ref={ref}
+      className={`node ${
+        connector !== null && connector.id === connectorKey ? "connecting" : ""
+      }`}
       onMouseDown={startConnect}
       onMouseUp={endConnect}
     />
