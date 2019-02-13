@@ -11,9 +11,12 @@ interface iTime {
 
 const useAnimationFrame = (callback: () => any) => {
   const callbackRef = useRef(callback);
-  useLayoutEffect(() => {
-    callbackRef.current = callback;
-  }, [callback]);
+  useLayoutEffect(
+    () => {
+      callbackRef.current = callback;
+    },
+    [callback]
+  );
 
   const loop = () => {
     frameRef.current = requestAnimationFrame(loop);
@@ -47,7 +50,11 @@ export function Time({ id, x, y, output }: iTime) {
     <Output key={`${id}-o-0`} id={`${id}-o-0`} value={value.toFixed(3)} />
   );
 
-  const controls = <button onClick={() => setPause(!pause)}>Pause</button>;
+  const controls = (
+    <button onClick={() => setPause(!pause)} style={{ width: "100%" }}>
+      Pause
+    </button>
+  );
 
   return <Panel x={x} y={y} title={"Timer"} io={io} controls={controls} />;
 }
