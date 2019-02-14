@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
@@ -8,28 +9,6 @@ interface iTime {
   y: number;
   output: any;
 }
-
-const useAnimationFrame = (callback: () => any) => {
-  const callbackRef = useRef(callback);
-  useLayoutEffect(
-    () => {
-      callbackRef.current = callback;
-    },
-    [callback]
-  );
-
-  const loop = () => {
-    frameRef.current = requestAnimationFrame(loop);
-    const cb = callbackRef.current;
-    cb();
-  };
-
-  const frameRef = useRef(0);
-  useLayoutEffect(() => {
-    frameRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(frameRef.current);
-  }, []);
-};
 
 export function Time({ id, x, y, output }: iTime) {
   const [value, setValue] = useState(0);

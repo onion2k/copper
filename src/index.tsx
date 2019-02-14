@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
+
+import useMousePosition from "./Hooks/useMousePosition";
+
 import { Const } from "./Nodes/const";
 import { Time } from "./Nodes/time";
 import { Value } from "./Nodes/value";
@@ -8,34 +11,10 @@ import { ConnectorContext } from "./Contexts/connector";
 
 import "./styles.css";
 
-function useWindowMousePosition() {
-  let [WindowMousePosition, setWindowMousePosition] = useState({
-    x: null,
-    y: null
-  });
-
-  function handleMouseMove(e) {
-    setWindowMousePosition({
-      x: e.pageX,
-      y: e.pageY
-    });
-  }
-
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  return WindowMousePosition;
-}
-
 function setOutput(output: any) {}
 
 function App() {
-  let { x: mouseX, y: mouseY } = useWindowMousePosition();
+  let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [connector, setConnector] = useState(null);
   const [time0, setTime0] = useState(0);
