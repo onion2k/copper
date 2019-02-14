@@ -17,6 +17,7 @@ function setOutput(output: any) {}
 function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
+  const [nodes, setNodes] = useState([]);
   const [connector, setConnector] = useState(null);
 
   const [time0, setTime0] = useState(0);
@@ -48,6 +49,9 @@ function App() {
 
   const registerNode = node => {
     // console.log("Register node position", node.id, node.x, node.y);
+    const newNodes = nodes;
+    newNodes.push(node);
+    setNodes(newNodes);
   };
 
   const endConnect = () => {
@@ -70,6 +74,13 @@ function App() {
     );
   }
 
+  let nodeMap = [];
+  if (nodes.length > 0) {
+    nodes.forEach((node, i) => {
+      nodeMap.push(<circle cx={node.x + 10} cy={node.y + 10} r="20" />);
+    });
+  }
+
   return (
     <ConnectorContext.Provider
       value={[connector, setConnector, connectConnector, registerNode]}
@@ -83,6 +94,7 @@ function App() {
           strokeWidth="2"
           stroke="#888888"
         />
+        {nodeMap}
         {activeConnectorLine}
       </svg>
       <div className="Control" onMouseUp={endConnect}>
