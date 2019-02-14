@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
 import { Const } from "./Nodes/const";
 import { Time } from "./Nodes/time";
@@ -8,9 +8,35 @@ import { ConnectorContext } from "./Contexts/connector";
 
 import "./styles.css";
 
+function useWindowMousePosition() {
+  let [WindowMousePosition, setWindowMousePosition] = useState({
+    x: null,
+    y: null
+  });
+
+  function handleMouseMove(e) {
+    setWindowMousePosition({
+      x: e.pageX,
+      y: e.pageY
+    });
+  }
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return WindowMousePosition;
+}
+
 function setOutput(output: any) {}
 
 function App() {
+  let { x: mouseX, y: mouseY } = useWindowMousePosition();
+
   const [connector, setConnector] = useState(null);
   const [time0, setTime0] = useState(0);
   const [const1, setConst1] = useState(0);
@@ -51,8 +77,8 @@ function App() {
       <line
         x1={connector.x + window.scrollX}
         y1={connector.y + window.scrollY}
-        x2={0}
-        y2={0}
+        x2={mouseX}
+        y2={mouseY}
         strokeWidth="2"
         stroke="#888888"
       />
