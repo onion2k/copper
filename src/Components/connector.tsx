@@ -6,11 +6,21 @@ interface iConnector {
 }
 
 export function Connector({ connectorKey }: iConnector) {
-  const [connector, setConnector, connectConnector] = useContext(
+  const [connector, setConnector, connectConnector, registerNode] = useContext(
     ConnectorContext
   );
 
   const ref = useRef(null);
+
+  useEffect(
+    () => {
+      if (ref.current) {
+        const { x, y } = ref.current.getBoundingClientRect();
+        registerNode({ id: connectorKey, x, y });
+      }
+    },
+    [ref]
+  );
 
   const startConnect = () => {
     const c = {

@@ -8,11 +8,12 @@ interface iTime {
   x: number;
   y: number;
   output: any;
+  initPauseState: boolean;
 }
 
-export function Time({ id, x, y, output }: iTime) {
+export function Time({ id, x, y, output, initPauseState }: iTime) {
   const [value, setValue] = useState(0);
-  const [pause, setPause] = useState(false);
+  const [pause, setPause] = useState(initPauseState);
   const [connect, setConnect] = useState(false);
 
   useEffect(() => {

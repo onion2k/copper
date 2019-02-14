@@ -3,11 +3,12 @@ import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
 
+import { ConnectorContext } from "./Contexts/connector";
+
 import { Const } from "./Nodes/const";
 import { Time } from "./Nodes/time";
 import { Value } from "./Nodes/value";
 import { Math } from "./Nodes/math";
-import { ConnectorContext } from "./Contexts/connector";
 
 import "./styles.css";
 
@@ -17,6 +18,7 @@ function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [connector, setConnector] = useState(null);
+
   const [time0, setTime0] = useState(0);
   const [const1, setConst1] = useState(0);
   const [math0, setMath0] = useState(0);
@@ -44,6 +46,10 @@ function App() {
     console.log(`${from.id} to ${to}`);
   };
 
+  const registerNode = node => {
+    // console.log("Register node position", node.id, node.x, node.y);
+  };
+
   const endConnect = () => {
     if (connector) {
       setConnector(null);
@@ -66,7 +72,7 @@ function App() {
 
   return (
     <ConnectorContext.Provider
-      value={[connector, setConnector, connectConnector]}
+      value={[connector, setConnector, connectConnector, registerNode]}
     >
       <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
         <line
@@ -80,7 +86,13 @@ function App() {
         {activeConnectorLine}
       </svg>
       <div className="Control" onMouseUp={endConnect}>
-        <Time id={"time0"} x={10} y={10} output={setTime0} />
+        <Time
+          id={"time0"}
+          x={10}
+          y={10}
+          output={setTime0}
+          initPauseState={true}
+        />
         <Const id={"const1"} x={10} y={210} output={setConst1} />
         <Math
           id={"math0"}
