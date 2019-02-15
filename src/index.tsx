@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
-
 import { ConnectorContext } from "./Contexts/connector";
-
 import { Const } from "./Nodes/const";
 import { Time } from "./Nodes/time";
 import { Value } from "./Nodes/value";
 import { Math } from "./Nodes/math";
+
+import { ConnectorMap } from "./Components/connectorMap";
 
 import "./styles.css";
 
@@ -18,6 +18,7 @@ function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [nodes, setNodes] = useState([]);
+  const [connections, setConnections] = useState([]);
   const [connector, setConnector] = useState(null);
 
   const [time0, setTime0] = useState(0);
@@ -25,20 +26,33 @@ function App() {
   const [math0, setMath0] = useState(0);
   const [const2, setConst2] = useState(0);
   const [math1, setMath1] = useState(0);
+  const [value0, setValue0] = useState(0);
 
-  const nodeOutputMap = {
-    "time0-o-0": time0,
-    "const1-o-0": const1,
-    "const2-o-0": const2,
-    "math0-o-0": math0,
-    "math1-o-0": math1
+  const outputs: { [id: string]: string } = {
+    time0: "math0",
+    const1: "math0",
+    const2: "math1",
+    math0: "math1",
+    math1: "value0",
+    value0: null
   };
 
   const nodeInputMap = {
-    math0: [time0, const1],
-    math1: [math0, const2],
-    value0: [math1]
+    math0: ["time0", "const1"],
+    math1: ["math0", "const2"],
+    value0: ["math1"]
   };
+
+  // Object.keys(nodeOutputMap).forEach(key => {});
+
+  useEffect(
+    () => {
+      if (nodes.length > 0) {
+        console.log(nodes.length);
+      }
+    },
+    [nodes]
+  );
 
   const connectConnector = (
     from: { id: string; x: number; y: number },
@@ -48,7 +62,6 @@ function App() {
   };
 
   const registerNode = node => {
-    // console.log("Register node position", node.id, node.x, node.y);
     const newNodes = nodes;
     newNodes.push(node);
     setNodes(newNodes);
@@ -74,29 +87,16 @@ function App() {
     );
   }
 
-  let nodeMap = [];
-  if (nodes.length > 0) {
-    nodes.forEach((node, i) => {
-      nodeMap.push(<circle cx={node.x + 10} cy={node.y + 10} r="20" />);
-    });
-  }
-
   return (
     <ConnectorContext.Provider
       value={[connector, setConnector, connectConnector, registerNode]}
     >
       <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
-        <line
-          x1="325"
-          y1="93"
-          x2="375"
-          y2="178"
-          strokeWidth="2"
-          stroke="#888888"
-        />
-        {nodeMap}
         {activeConnectorLine}
       </svg>
+
+      <ConnectorMap nodes={nodes} connections={connections} />
+
       <div className="Control" onMouseUp={endConnect}>
         <Time
           id={"time0"}

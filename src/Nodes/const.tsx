@@ -21,7 +21,7 @@ export function Const({ id, x, y, output }: iConst) {
     setInput(parseFloat(e.target.value));
   };
 
-  const io = <Output key={`${id}-o-0`} id={`${id}-o-0`} value={input} />;
+  const io = <Output key={`${id}-o-0`} id={`${id}`} value={input} />;
 
   const controls = (
     <input
