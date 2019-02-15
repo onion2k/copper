@@ -17,15 +17,15 @@ export function Value({ id, x, y, input, output }: iValue) {
   });
 
   const io = [
-    <Input key={`${id}-i-0`} id={`${id}-i-0`} value={input[0]} />,
-    <Output key={`${id}-o-0`} id={`${id}-o-0`} value={"Output"} />
+    <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />,
+    <Output id={id} direction={"out"} index={0} value={"Output"} />
   ];
 
   return (
     <Panel
       x={x}
       y={y}
-      title={"Value"}
+      title={`Value ${id}`}
       io={io}
       controls={"Display a value from an output."}
     />

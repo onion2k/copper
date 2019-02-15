@@ -21,7 +21,7 @@ export function Const({ id, x, y, output }: iConst) {
     setInput(parseFloat(e.target.value));
   };
 
-  const io = <Output key={`${id}-o-0`} id={`${id}`} value={input} />;
+  const io = <Output id={id} direction={"out"} index={0} value={input} />;
 
   const controls = (
     <input
@@ -32,5 +32,7 @@ export function Const({ id, x, y, output }: iConst) {
     />
   );
 
-  return <Panel x={x} y={y} title={"Constant"} io={io} controls={controls} />;
+  return (
+    <Panel x={x} y={y} title={`Constant ${id}`} io={io} controls={controls} />
+  );
 }

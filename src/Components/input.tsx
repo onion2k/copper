@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Connector } from "./connector";
 
 interface iInput {
-  key: string;
   id: string;
+  direction: string;
+  index: number;
   value: number | string;
 }
 
-export function Input({ key, id, value }: iInput) {
+export function Input({ id, direction, index, value }: iInput) {
   const display = typeof value === "number" ? value.toFixed(3) : value;
 
   return (
-    <label key={key} className="input">
+    <label key={`input-${id}-${direction}-${index}`} className="input">
       ({display})
-      <Connector connectorKey={id} />
+      <Connector id={id} direction={direction} index={index} />
     </label>
   );
 }

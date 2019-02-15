@@ -43,22 +43,51 @@ function App() {
     value0: ["math1"]
   };
 
-  // Object.keys(nodeOutputMap).forEach(key => {});
-
   useEffect(
     () => {
       if (nodes.length > 0) {
-        console.log(nodes.length);
+        Object.keys(outputs).forEach((key: string) => {
+          const n = nodes.find(node => {
+            return key === node.id;
+          });
+          // console.log(n);
+        });
       }
     },
     [nodes]
   );
 
-  const connectConnector = (
-    from: { id: string; x: number; y: number },
-    to: { id: string; x: number; y: number }
-  ) => {
-    console.log(`${from.id} to ${to}`);
+  const connectConnector = (to: {
+    id: string;
+    direction: string;
+    index: number;
+    key: string;
+    x: number;
+    y: number;
+  }) => {
+    // console.log(`${connector.key} to ${to.key}`);
+    const start = nodes.find(node => {
+      return (
+        node.id === connector.id &&
+        node.direction === connector.direction &&
+        node.index === connector.index
+      );
+    });
+    const end = nodes.find(node => {
+      return (
+        node.id === to.id &&
+        node.direction === to.direction &&
+        node.index === to.index
+      );
+    });
+    const tempConnections = connections;
+    connections.push({
+      x1: start.x,
+      y1: start.y,
+      x2: end.x,
+      y2: end.y
+    });
+    setConnections(connections);
   };
 
   const registerNode = node => {

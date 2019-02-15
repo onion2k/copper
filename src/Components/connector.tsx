@@ -2,10 +2,12 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
 
 interface iConnector {
-  connectorKey: string;
+  id: string;
+  direction: string;
+  index: number;
 }
 
-export function Connector({ connectorKey }: iConnector) {
+export function Connector({ id, direction, index }: iConnector) {
   const [connector, setConnector, connectConnector, registerNode] = useContext(
     ConnectorContext
   );
@@ -16,7 +18,13 @@ export function Connector({ connectorKey }: iConnector) {
     () => {
       if (ref.current) {
         const { x, y } = ref.current.getBoundingClientRect();
-        registerNode({ id: connectorKey, x, y });
+        registerNode({
+          id: id,
+          direction: direction,
+          index: index,
+          x,
+          y
+        });
       }
     },
     [ref]
@@ -26,7 +34,10 @@ export function Connector({ connectorKey }: iConnector) {
     const c = {
       x: ref.current.getBoundingClientRect().x + 10,
       y: ref.current.getBoundingClientRect().y + 10,
-      id: connectorKey
+      id: id,
+      direction: direction,
+      index: index,
+      key: `${id}-${direction}-${index}`
     };
     setConnector(c);
   };
@@ -34,16 +45,25 @@ export function Connector({ connectorKey }: iConnector) {
   const endConnect = (e: any) => {
     e.preventDefault();
     if (connector) {
-      connectConnector(connector, connectorKey);
+      const c = {
+        id: id,
+        direction: direction,
+        index: index,
+        key: `${id}-${direction}-${index}`
+      };
+      connectConnector(c);
       setConnector(null);
     }
   };
 
   return (
     <div
+      key={`${id}-${direction}-${index}`}
       ref={ref}
       className={`node ${
-        connector !== null && connector.id === connectorKey ? "connecting" : ""
+        connector !== null && connector.key === `${id}-${direction}-${index}`
+          ? "connecting"
+          : ""
       }`}
       onMouseDown={startConnect}
       onMouseUp={endConnect}

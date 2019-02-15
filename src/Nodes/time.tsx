@@ -27,7 +27,7 @@ export function Time({ id, x, y, output, initPauseState }: iTime) {
   });
 
   const io = (
-    <Output key={`${id}-o-0`} id={`${id}-o-0`} value={value.toFixed(3)} />
+    <Output id={id} direction={"out"} index={0} value={value.toFixed(3)} />
   );
 
   const controls = (
@@ -36,5 +36,7 @@ export function Time({ id, x, y, output, initPauseState }: iTime) {
     </button>
   );
 
-  return <Panel x={x} y={y} title={"Timer"} io={io} controls={controls} />;
+  return (
+    <Panel x={x} y={y} title={`Timer ${id}`} io={io} controls={controls} />
+  );
 }

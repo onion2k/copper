@@ -25,12 +25,14 @@ export function Math({ id, x, y, op, input, output }: iAdd) {
   });
 
   const io = [
-    <Input key={`${id}-i-0`} id={`${id}-i-0`} value={input[0]} />,
-    <Output key={`${id}-o-0`} id={`${id}-o-0`} value={"output"} />,
-    <Input key={`${id}-i-1`} id={`${id}-i-1`} value={input[1]} />
+    <Input id={id} direction={"in"} index={0} value={input[0]} />,
+    <Output id={id} direction={"out"} index={0} value={"output"} />,
+    <Input id={id} direction={"in"} index={1} value={input[1]} />
   ];
 
   const controls = "Add input 1 and input 2.";
 
-  return <Panel x={x} y={y} title={`Math.${op}`} io={io} controls={controls} />;
+  return (
+    <Panel x={x} y={y} title={`Math.${op} ${id}`} io={io} controls={controls} />
+  );
 }
