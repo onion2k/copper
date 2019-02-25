@@ -20,17 +20,16 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
   let connectionsMap = [];
   if (connections.length > 0) {
     connections.forEach((connection, i) => {
+      const { x1, y1, x2, y2 } = connection;
       connectionsMap.push(
-        <line
-          key={`${connection.x1}-${connection.y1}-${connection.x2}-${
-            connection.y2
-          }-`}
-          x1={connection.x1 + 10}
-          y1={connection.y1 + 10}
-          x2={connection.x2 + 10}
-          y2={connection.y2 + 10}
-          stroke={"#888888"}
+        <path
+          id="Connector"
+          key={`${x1}-${y1}-${x2}-${y2}`}
+          d={`M${x1 + 10} ${y1 + 10} c ${(x2 - x1) * 0.75} 0, ${(x2 - x1) *
+            0.25} ${y2 - y1}, ${x2 - x1} ${y2 - y1}`}
           strokeWidth="2"
+          stroke={"#888888"}
+          fill={"none"}
         />
       );
     });
