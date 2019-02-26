@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { ConnectorMapLine } from "./connectorMapLine";
 
 interface iConnectorMap {
   nodes: Array<{
@@ -22,15 +23,7 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
     connections.forEach((connection, i) => {
       const { x1, y1, x2, y2 } = connection;
       connectionsMap.push(
-        <path
-          id="Connector"
-          key={`${x1}-${y1}-${x2}-${y2}`}
-          d={`M${x1 + 10} ${y1 + 10} c ${(x2 - x1) * 0.75} 0, ${(x2 - x1) *
-            0.25} ${y2 - y1}, ${x2 - x1} ${y2 - y1}`}
-          strokeWidth="2"
-          stroke={"#888888"}
-          fill={"none"}
-        />
+        <ConnectorMapLine id="Connector" x1={x1} y1={y1} x2={x2} y2={y2} />
       );
     });
   }
