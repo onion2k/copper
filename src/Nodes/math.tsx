@@ -13,20 +13,23 @@ interface iAdd {
 }
 
 export function Math({ id, x, y, op, input, output }: iAdd) {
+  const [value, setValue] = useState(0);
   useEffect(() => {
     switch (op) {
       case "add":
-        output(parseFloat(input[0]) + parseFloat(input[1]));
+        setValue(parseFloat(input[0]) + parseFloat(input[1]));
+        output(value);
         break;
       case "multiply":
-        output(parseFloat(input[0]) * parseFloat(input[1]));
+        setValue(parseFloat(input[0]) * parseFloat(input[1]));
+        output(value);
         break;
     }
   });
 
   const io = [
     <Input id={id} direction={"in"} index={0} value={input[0]} />,
-    <Output id={id} direction={"out"} index={0} value={"output"} />,
+    <Output id={id} direction={"out"} index={0} value={value} />,
     <Input id={id} direction={"in"} index={1} value={input[1]} />
   ];
 

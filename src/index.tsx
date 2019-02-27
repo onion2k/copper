@@ -15,12 +15,12 @@ import "./styles.css";
 
 const initialState = {
   outputs: {
-    time0: null,
-    const1: null,
-    math0: null
+    time0: 0,
+    const1: 0,
+    math0: 0
   },
   inputs: {
-    math0: [null, null]
+    math0: [0, 0]
   },
   connections: {
     time0: null,
@@ -40,7 +40,6 @@ function reducer(state, action) {
       }
       return newState;
     case "connect":
-      // newState.connections[action.to][action.index] = action.from;
       newState.connections[action.from] = {
         id: action.to,
         index: action.index
