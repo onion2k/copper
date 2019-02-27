@@ -51,7 +51,6 @@ function App() {
           const n = nodes.find(node => {
             return key === node.id;
           });
-          // console.log(n);
         });
       }
     },
@@ -66,7 +65,6 @@ function App() {
     x: number;
     y: number;
   }) => {
-    // console.log(`${connector.key} to ${to.key}`);
     const start = nodes.find(node => {
       return (
         node.id === connector.id &&
@@ -82,7 +80,6 @@ function App() {
       );
     });
     const tempConnections = connections;
-    // console.log(end);
     connections.push({
       x1: start.x,
       y1: start.y,
