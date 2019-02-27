@@ -23,7 +23,13 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
     connections.forEach((connection, i) => {
       const { x1, y1, x2, y2 } = connection;
       connectionsMap.push(
-        <ConnectorMapLine id="Connector" x1={x1} y1={y1} x2={x2} y2={y2} />
+        <ConnectorMapLine
+          id="Connector"
+          x1={x1 + 10}
+          y1={y1 + 10}
+          x2={x2 + 10}
+          y2={y2 + 10}
+        />
       );
     });
   }

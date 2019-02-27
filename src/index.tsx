@@ -9,6 +9,7 @@ import { Value } from "./Nodes/value";
 import { Math } from "./Nodes/math";
 
 import { ConnectorMap } from "./Components/connectorMap";
+import { ConnectorMapLine } from "./Components/connectorMapLine";
 
 import "./styles.css";
 
@@ -81,6 +82,7 @@ function App() {
       );
     });
     const tempConnections = connections;
+    // console.log(end);
     connections.push({
       x1: start.x,
       y1: start.y,
@@ -105,13 +107,11 @@ function App() {
   let activeConnectorLine = null;
   if (connector) {
     activeConnectorLine = (
-      <line
+      <ConnectorMapLine
         x1={connector.x + window.scrollX}
         y1={connector.y + window.scrollY}
         x2={mouseX}
         y2={mouseY}
-        strokeWidth="2"
-        stroke="#888888"
       />
     );
   }
