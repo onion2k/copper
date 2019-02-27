@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
@@ -13,7 +13,43 @@ import { ConnectorMapLine } from "./Components/connectorMapLine";
 
 import "./styles.css";
 
-function setOutput(output: any) {}
+const initialState = {
+  outputs: {
+    time0: null,
+    const1: null,
+    math0: null
+  },
+  inputs: {
+    math0: [null, null]
+  },
+  connections: {
+    time0: null,
+    const1: null
+  }
+};
+
+function reducer(state, action) {
+  const newState = { ...state };
+  switch (action.type) {
+    case "update":
+      newState.outputs[action.id] = action.value;
+      if (newState.connections[action.id]) {
+        newState.inputs[newState.connections[action.id].id][
+          newState.connections[action.id].index
+        ] = action.value;
+      }
+      return newState;
+    case "connect":
+      // newState.connections[action.to][action.index] = action.from;
+      newState.connections[action.from] = {
+        id: action.to,
+        index: action.index
+      };
+      return newState;
+    default:
+      throw new Error();
+  }
+}
 
 function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
@@ -26,14 +62,16 @@ function App() {
   const [const1, setConst1] = useState(0);
   const [math0, setMath0] = useState(0);
 
-  const outputs: { [id: string]: string } = {
-    time0: time0,
-    const1: const1
-  };
+  // const outputs: { [id: string]: string } = {
+  //   time0: time0,
+  //   const1: const1
+  // };
 
-  const nodeInputMap = {
-    math0: [null, null]
-  };
+  // const nodeInputMap = {
+  //   math0: [null, null]
+  // };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const connectConnector = (to: {
     id: string;
@@ -66,9 +104,12 @@ function App() {
     });
     setConnections(connections);
 
-    console.log("Settings");
-
-    nodeInputMap["math0"][1] = outputs[connector.id];
+    dispatch({
+      type: "connect",
+      from: connector.id,
+      to: to.id,
+      index: to.index
+    });
   };
 
   const registerNode = node => {
@@ -110,19 +151,41 @@ function App() {
           id={"time0"}
           x={10}
           y={10}
-          output={setTime0}
+          output={value => {
+            dispatch({
+              type: "update",
+              id: "time0",
+              value: value
+            });
+          }}
           initPauseState={true}
         />
-        <Const id={"const1"} x={10} y={210} output={setConst1} />
+        <Const
+          id={"const1"}
+          x={10}
+          y={210}
+          output={value => {
+            dispatch({
+              type: "update",
+              id: "const1",
+              value: value
+            });
+          }}
+        />
         <Math
           id={"math0"}
           x={360}
           y={95}
-          input={nodeInputMap["math0"]}
-          output={setMath0}
+          input={state.inputs["math0"]}
+          output={value => {
+            dispatch({
+              type: "update",
+              id: "math0",
+              value: value
+            });
+          }}
           op="add"
         />
-        {outputs["const1"]}-{nodeInputMap["math0"][1]}-
       </div>
     </ConnectorContext.Provider>
   );
