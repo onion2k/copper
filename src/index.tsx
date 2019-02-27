@@ -25,37 +25,15 @@ function App() {
   const [time0, setTime0] = useState(0);
   const [const1, setConst1] = useState(0);
   const [math0, setMath0] = useState(0);
-  const [const2, setConst2] = useState(0);
-  const [math1, setMath1] = useState(0);
-  const [value0, setValue0] = useState(0);
 
   const outputs: { [id: string]: string } = {
-    time0: "math0",
-    const1: "math0",
-    const2: "math1",
-    math0: "math1",
-    math1: "value0",
-    value0: null
+    time0: time0,
+    const1: const1
   };
 
   const nodeInputMap = {
-    math0: ["time0", "const1"],
-    math1: ["math0", "const2"],
-    value0: ["math1"]
+    math0: [null, null]
   };
-
-  useEffect(
-    () => {
-      if (nodes.length > 0) {
-        Object.keys(outputs).forEach((key: string) => {
-          const n = nodes.find(node => {
-            return key === node.id;
-          });
-        });
-      }
-    },
-    [nodes]
-  );
 
   const connectConnector = (to: {
     id: string;
@@ -87,6 +65,10 @@ function App() {
       y2: end.y
     });
     setConnections(connections);
+
+    console.log("Settings");
+
+    nodeInputMap["math0"][1] = outputs[connector.id];
   };
 
   const registerNode = node => {
@@ -140,22 +122,7 @@ function App() {
           output={setMath0}
           op="add"
         />
-        <Const id={"const2"} x={10} y={410} output={setConst2} />
-        <Math
-          id={"math1"}
-          x={710}
-          y={310}
-          input={nodeInputMap["math1"]}
-          output={setMath1}
-          op="multiply"
-        />
-        <Value
-          id={"value0"}
-          x={1060}
-          y={210}
-          input={nodeInputMap["value0"]}
-          output={setOutput}
-        />
+        {outputs["const1"]}-{nodeInputMap["math0"][1]}-
       </div>
     </ConnectorContext.Provider>
   );

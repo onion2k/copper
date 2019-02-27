@@ -105,8 +105,8 @@ p {
 
 svg {
   position: absolute;
-  width: 4000px;
-  height: 4000px;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   bottom: 0;
