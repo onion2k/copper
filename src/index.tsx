@@ -65,6 +65,8 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [dynNodes, setDynNodes] = useState([]);
+
   const connectConnector = (to: {
     id: string;
     direction: string;
@@ -128,6 +130,29 @@ function App() {
     );
   }
 
+  function newConst() {
+    console.log("adding a node");
+    const const2 = (
+      <Const
+        key={"const2"}
+        id={"const2"}
+        x={10}
+        y={320}
+        output={value => {
+          dispatch({
+            type: "update",
+            id: "const2",
+            value: value
+          });
+        }}
+      />
+    );
+
+    const tempDynNodes = dynNodes;
+    tempDynNodes.push(const2);
+    setDynNodes(tempDynNodes);
+  }
+
   return (
     <ConnectorContext.Provider
       value={[connector, setConnector, connectConnector, registerNode]}
@@ -155,7 +180,7 @@ function App() {
         <Const
           id={"const1"}
           x={10}
-          y={210}
+          y={160}
           output={value => {
             dispatch({
               type: "update",
@@ -178,7 +203,6 @@ function App() {
           }}
           op="multiply"
         />
-
         <Value
           id={"value0"}
           x={760}
@@ -192,6 +216,12 @@ function App() {
             });
           }}
         />
+
+        {dynNodes.map(node => {
+          return node;
+        })}
+
+        <button onClick={newConst}>New const</button>
       </div>
     </ConnectorContext.Provider>
   );
