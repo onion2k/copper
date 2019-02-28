@@ -17,14 +17,17 @@ const initialState = {
   outputs: {
     time0: 0,
     const1: 0,
-    math0: 0
+    math0: 0,
+    value0: 0
   },
   inputs: {
-    math0: [0, 0]
+    math0: [0, 0],
+    value0: [0]
   },
   connections: {
     time0: null,
-    const1: null
+    const1: null,
+    math0: null
   }
 };
 
@@ -45,6 +48,8 @@ function reducer(state, action) {
         index: action.index
       };
       return newState;
+    case "register":
+      break;
     default:
       throw new Error();
   }
@@ -56,19 +61,6 @@ function App() {
   const [nodes, setNodes] = useState([]);
   const [connections, setConnections] = useState([]);
   const [connector, setConnector] = useState(null);
-
-  const [time0, setTime0] = useState(0);
-  const [const1, setConst1] = useState(0);
-  const [math0, setMath0] = useState(0);
-
-  // const outputs: { [id: string]: string } = {
-  //   time0: time0,
-  //   const1: const1
-  // };
-
-  // const nodeInputMap = {
-  //   math0: [null, null]
-  // };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -183,7 +175,21 @@ function App() {
               value: value
             });
           }}
-          op="add"
+          op="multiply"
+        />
+
+        <Value
+          id={"value0"}
+          x={760}
+          y={95}
+          input={state.inputs["value0"]}
+          output={value => {
+            dispatch({
+              type: "update",
+              id: "value0",
+              value: value
+            });
+          }}
         />
       </div>
     </ConnectorContext.Provider>
