@@ -28,7 +28,8 @@ const initialState = {
     time0: null,
     const1: null,
     math0: null
-  }
+  },
+  nodes: []
 };
 
 function reducer(state, action) {
