@@ -35,7 +35,5 @@ export function Math({ id, x, y, op, input, output }: iAdd) {
 
   const controls = `Add input 1 and input 2.`;
 
-  return (
-    <Panel x={x} y={y} title={`Math.${op} ${id}`} io={io} controls={controls} />
-  );
+  return <Panel x={x} y={y} title={`Math.${op}`} io={io} controls={controls} />;
 }

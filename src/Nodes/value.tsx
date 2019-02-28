@@ -25,7 +25,7 @@ export function Value({ id, x, y, input, output }: iValue) {
     <Panel
       x={x}
       y={y}
-      title={`Value ${id}`}
+      title={`Value`}
       io={io}
       controls={"Display a value from an output."}
     />

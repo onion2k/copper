@@ -32,7 +32,5 @@ export function Const({ id, x, y, output }: iConst) {
     />
   );
 
-  return (
-    <Panel x={x} y={y} title={`Constant ${id}`} io={io} controls={controls} />
-  );
+  return <Panel x={x} y={y} title={`Constant`} io={io} controls={controls} />;
 }
