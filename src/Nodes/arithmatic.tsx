@@ -3,7 +3,7 @@ import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
 
-interface iAdd {
+interface iArithmatic {
   id: string;
   x: number;
   y: number;
@@ -12,7 +12,7 @@ interface iAdd {
   output: any;
 }
 
-export function Math({ id, x, y, op, input, output }: iAdd) {
+export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
   const [value, setValue] = useState(0);
   useEffect(() => {
     switch (op) {

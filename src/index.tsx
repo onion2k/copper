@@ -6,10 +6,19 @@ import { ConnectorContext } from "./Contexts/connector";
 import { Const } from "./Nodes/const";
 import { Time } from "./Nodes/time";
 import { Value } from "./Nodes/value";
-import { Math } from "./Nodes/math";
+import { Arithmatic } from "./Nodes/arithmatic";
 
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
+
+function uniqueID() {
+  function chr4() {
+    return Math.random()
+      .toString(16)
+      .slice(-4);
+  }
+  return chr4() + "-" + chr4() + "-" + chr4() + "-" + chr4();
+}
 
 import "./styles.css";
 
@@ -34,13 +43,13 @@ const initialState = {
 
 function reducer(state, action) {
   const newState = { ...state };
+  let connection;
   switch (action.type) {
     case "update":
       newState.outputs[action.id] = action.value;
-      if (newState.connections[action.id]) {
-        newState.inputs[newState.connections[action.id].id][
-          newState.connections[action.id].index
-        ] = action.value;
+      connection = newState.connections[action.id];
+      if (connection) {
+        newState.inputs[connection.id][connection.index] = action.value;
       }
       return newState;
     case "connect":
@@ -48,6 +57,9 @@ function reducer(state, action) {
         id: action.to,
         index: action.index
       };
+      connection = newState.connections[action.from];
+      newState.inputs[connection.id][connection.index] =
+        newState.outputs[action.from];
       return newState;
     case "register":
       break;
@@ -131,17 +143,17 @@ function App() {
   }
 
   function newConst() {
-    console.log("adding a node");
+    const id = uniqueID();
     const const2 = (
       <Const
-        key={"const2"}
-        id={"const2"}
+        key={id}
+        id={id}
         x={10}
         y={320}
         output={value => {
           dispatch({
             type: "update",
-            id: "const2",
+            id: id,
             value: value
           });
         }}
@@ -153,6 +165,28 @@ function App() {
     setDynNodes(tempDynNodes);
   }
 
+  function newTime() {
+    const id = uniqueID();
+    const const2 = (
+      <Time
+        key={id}
+        id={id}
+        x={10}
+        y={320}
+        output={value => {
+          dispatch({
+            type: "update",
+            id: id,
+            value: value
+          });
+        }}
+      />
+    );
+
+    const tempDynNodes = dynNodes;
+    tempDynNodes.push(const2);
+    setDynNodes(tempDynNodes);
+  }
   return (
     <ConnectorContext.Provider
       value={[connector, setConnector, connectConnector, registerNode]}
@@ -189,7 +223,7 @@ function App() {
             });
           }}
         />
-        <Math
+        <Arithmatic
           id={"math0"}
           x={360}
           y={95}
@@ -216,12 +250,12 @@ function App() {
             });
           }}
         />
-
         {dynNodes.map(node => {
           return node;
         })}
 
         <button onClick={newConst}>New const</button>
+        <button onClick={newTime}>New time</button>
       </div>
     </ConnectorContext.Provider>
   );
