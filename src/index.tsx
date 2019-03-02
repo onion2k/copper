@@ -11,16 +11,7 @@ import { Arithmatic } from "./Nodes/arithmatic";
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
 
-function uniqueID() {
-  function chr4() {
-    return Math.random()
-      .toString(16)
-      .slice(-4);
-  }
-  return chr4() + "-" + chr4() + "-" + chr4() + "-" + chr4();
-}
-
-import "./styles.css";
+import { uniqueID } from "./uniqueID.tsx";
 
 const initialState = {
   outputs: {
@@ -41,32 +32,9 @@ const initialState = {
   nodes: []
 };
 
-function reducer(state, action) {
-  const newState = { ...state };
-  let connection;
-  switch (action.type) {
-    case "update":
-      newState.outputs[action.id] = action.value;
-      connection = newState.connections[action.id];
-      if (connection) {
-        newState.inputs[connection.id][connection.index] = action.value;
-      }
-      return newState;
-    case "connect":
-      newState.connections[action.from] = {
-        id: action.to,
-        index: action.index
-      };
-      connection = newState.connections[action.from];
-      newState.inputs[connection.id][connection.index] =
-        newState.outputs[action.from];
-      return newState;
-    case "register":
-      break;
-    default:
-      throw new Error();
-  }
-}
+import { reducer } from "./reducer.tsx";
+
+import "./styles.css";
 
 function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
