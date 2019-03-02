@@ -3,10 +3,10 @@ import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
 import { ConnectorContext } from "./Contexts/connector";
-import { Const } from "./Nodes/const";
-import { Time } from "./Nodes/time";
-import { Value } from "./Nodes/value";
-import { Arithmatic } from "./Nodes/arithmatic";
+import { Const } from "./Panels/const";
+import { Time } from "./Panels/time";
+import { Value } from "./Panels/value";
+import { Arithmatic } from "./Panels/arithmatic";
 
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";

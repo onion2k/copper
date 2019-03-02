@@ -10,14 +10,6 @@ interface iPanel {
 
 export function Panel({ title, x, y, io, controls }: iPanel) {
   const panelRef = useRef(null);
-  useEffect(
-    () => {
-      if (panelRef.current) {
-        // console.log(panelRef.current.getBoundingClientRect());
-      }
-    },
-    [panelRef]
-  );
   return (
     <div ref={panelRef} className="Panel" style={{ top: y, left: x }}>
       <div className="Title">{title}</div>
