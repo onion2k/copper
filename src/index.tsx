@@ -110,51 +110,38 @@ function App() {
     );
   }
 
-  function newConst() {
+  function newPanel(type = "const") {
     const id = uniqueID();
-    const const2 = (
-      <Const
-        key={id}
-        id={id}
-        x={10}
-        y={320}
-        output={value => {
-          dispatch({
-            type: "update",
-            id: id,
-            value: value
-          });
-        }}
-      />
-    );
+    let panel;
+
+    const props = {
+      key: id,
+      id: id,
+      x: 10,
+      y: 320,
+      output: value => {
+        dispatch({
+          type: "update",
+          id: id,
+          value: value
+        });
+      }
+    };
+
+    switch (type) {
+      case "const":
+        panel = <Const {...props} />;
+        break;
+      case "time":
+        panel = <Time {...props} />;
+        break;
+    }
 
     const tempDynNodes = dynNodes;
-    tempDynNodes.push(const2);
+    tempDynNodes.push(panel);
     setDynNodes(tempDynNodes);
   }
 
-  function newTime() {
-    const id = uniqueID();
-    const const2 = (
-      <Time
-        key={id}
-        id={id}
-        x={10}
-        y={320}
-        output={value => {
-          dispatch({
-            type: "update",
-            id: id,
-            value: value
-          });
-        }}
-      />
-    );
-
-    const tempDynNodes = dynNodes;
-    tempDynNodes.push(const2);
-    setDynNodes(tempDynNodes);
-  }
   return (
     <ConnectorContext.Provider
       value={[connector, setConnector, connectConnector, registerNode]}
@@ -222,8 +209,8 @@ function App() {
           return node;
         })}
 
-        <button onClick={newConst}>New const</button>
-        <button onClick={newTime}>New time</button>
+        <button onClick={() => newPanel("const")}>New const</button>
+        <button onClick={() => newPanel("time")}>New time</button>
       </div>
     </ConnectorContext.Provider>
   );
