@@ -183,7 +183,7 @@ function App() {
         <Arithmatic
           id={"math0"}
           x={360}
-          y={95}
+          y={10}
           input={state.inputs["math0"]}
           output={value => {
             dispatch({
@@ -198,7 +198,7 @@ function App() {
         <Sin
           id={"sin0"}
           x={360}
-          y={395}
+          y={195}
           input={state.inputs["sin0"]}
           output={value => {
             dispatch({
@@ -211,8 +211,8 @@ function App() {
 
         <Value
           id={"value0"}
-          x={760}
-          y={95}
+          x={710}
+          y={10}
           input={state.inputs["value0"]}
           output={value => {
             dispatch({
