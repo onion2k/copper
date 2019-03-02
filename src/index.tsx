@@ -7,6 +7,7 @@ import { Const } from "./Panels/const";
 import { Time } from "./Panels/time";
 import { Value } from "./Panels/value";
 import { Arithmatic } from "./Panels/arithmatic";
+import { Sin } from "./Panels/sin";
 
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
@@ -18,13 +19,16 @@ const initialState = {
     time0: 0,
     const1: 0,
     math0: 0,
-    value0: 0
+    value0: 0,
+    sin0: 0
   },
   inputs: {
+    sin0: [0],
     math0: [0, 0],
     value0: [0]
   },
   connections: {
+    sin0: null,
     time0: null,
     const1: null,
     math0: null
@@ -39,12 +43,10 @@ import "./styles.css";
 function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [nodes, setNodes] = useState([]);
   const [connections, setConnections] = useState([]);
   const [connector, setConnector] = useState(null);
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-
   const [dynNodes, setDynNodes] = useState([]);
 
   const connectConnector = (to: {
@@ -192,6 +194,21 @@ function App() {
           }}
           op="multiply"
         />
+
+        <Sin
+          id={"sin0"}
+          x={360}
+          y={395}
+          input={state.inputs["sin0"]}
+          output={value => {
+            dispatch({
+              type: "update",
+              id: "sin0",
+              value: value
+            });
+          }}
+        />
+
         <Value
           id={"value0"}
           x={760}
@@ -205,6 +222,7 @@ function App() {
             });
           }}
         />
+
         {dynNodes.map(node => {
           return node;
         })}
