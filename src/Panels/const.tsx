@@ -9,7 +9,7 @@ interface iConst {
   output: any;
 }
 
-export function Const({ id, x, y, output }: iConst) {
+export default function Const({ id, x, y, output }: iConst) {
   const [input, setInput] = useState(0);
   const [connect, setConnect] = useState(false);
 

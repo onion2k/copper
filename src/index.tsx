@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { Suspense, useState, useEffect, useReducer } from "react";
 import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
 import { ConnectorContext } from "./Contexts/connector";
 import { Const } from "./Panels/const";
+
+const ConstLazy = React.lazy(() => import("./Panels/const"));
+
 import { Time } from "./Panels/time";
 import { Value } from "./Panels/value";
 import { Arithmatic } from "./Panels/arithmatic";
@@ -155,80 +158,82 @@ function App() {
       <ConnectorMap nodes={nodes} connections={connections} />
 
       <div className="Control" onMouseUp={endConnect}>
-        <Time
-          id={"time0"}
-          x={10}
-          y={10}
-          output={value => {
-            dispatch({
-              type: "update",
-              id: "time0",
-              value: value
-            });
-          }}
-          initPauseState={true}
-        />
-        <Const
-          id={"const1"}
-          x={10}
-          y={160}
-          output={value => {
-            dispatch({
-              type: "update",
-              id: "const1",
-              value: value
-            });
-          }}
-        />
-        <Arithmatic
-          id={"math0"}
-          x={360}
-          y={10}
-          input={state.inputs["math0"]}
-          output={value => {
-            dispatch({
-              type: "update",
-              id: "math0",
-              value: value
-            });
-          }}
-          op="multiply"
-        />
+        <Suspense fallback={"Loading"}>
+          <Time
+            id={"time0"}
+            x={10}
+            y={10}
+            output={value => {
+              dispatch({
+                type: "update",
+                id: "time0",
+                value: value
+              });
+            }}
+            initPauseState={true}
+          />
+          <ConstLazy
+            id={"const1"}
+            x={10}
+            y={160}
+            output={value => {
+              dispatch({
+                type: "update",
+                id: "const1",
+                value: value
+              });
+            }}
+          />
+          <Arithmatic
+            id={"math0"}
+            x={360}
+            y={10}
+            input={state.inputs["math0"]}
+            output={value => {
+              dispatch({
+                type: "update",
+                id: "math0",
+                value: value
+              });
+            }}
+            op="multiply"
+          />
 
-        <Sin
-          id={"sin0"}
-          x={360}
-          y={195}
-          input={state.inputs["sin0"]}
-          output={value => {
-            dispatch({
-              type: "update",
-              id: "sin0",
-              value: value
-            });
-          }}
-        />
+          <Sin
+            id={"sin0"}
+            x={360}
+            y={195}
+            input={state.inputs["sin0"]}
+            output={value => {
+              dispatch({
+                type: "update",
+                id: "sin0",
+                value: value
+              });
+            }}
+          />
 
-        <Value
-          id={"value0"}
-          x={710}
-          y={10}
-          input={state.inputs["value0"]}
-          output={value => {
-            dispatch({
-              type: "update",
-              id: "value0",
-              value: value
-            });
-          }}
-        />
+          <Value
+            id={"value0"}
+            x={710}
+            y={10}
+            input={state.inputs["value0"]}
+            output={value => {
+              dispatch({
+                type: "update",
+                id: "value0",
+                value: value
+              });
+            }}
+          />
 
-        {dynNodes.map(node => {
-          return node;
-        })}
+          {dynNodes.map(node => {
+            return node;
+          })}
 
-        <button onClick={() => newPanel("const")}>New const</button>
-        <button onClick={() => newPanel("time")}>New time</button>
+          <button onClick={() => newPanel("const")}>New const</button>
+          <button onClick={() => newPanel("time")}>New time</button>
+        </Suspense>
       </div>
     </ConnectorContext.Provider>
   );
