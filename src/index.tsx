@@ -4,8 +4,9 @@ import { render } from "react-dom";
 import useMousePosition from "./Hooks/useMousePosition";
 import { ConnectorContext } from "./Contexts/connector";
 
-const Const = React.lazy(() => import("./Panels/const"));
+// const Const = React.lazy(() => import("./Panels/const"));
 
+import Const from "./Panels/const";
 import { Time } from "./Panels/time";
 import { Value } from "./Panels/value";
 import { Arithmatic } from "./Panels/arithmatic";
@@ -200,7 +201,7 @@ function App() {
 
           <Sin
             id={"sin0"}
-            x={360}
+            x={710}
             y={195}
             input={state.inputs["sin0"]}
             output={value => {
