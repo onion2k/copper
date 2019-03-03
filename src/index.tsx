@@ -3,9 +3,8 @@ import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
 import { ConnectorContext } from "./Contexts/connector";
-import { Const } from "./Panels/const";
 
-const ConstLazy = React.lazy(() => import("./Panels/const"));
+const Const = React.lazy(() => import("./Panels/const"));
 
 import { Time } from "./Panels/time";
 import { Value } from "./Panels/value";
@@ -172,7 +171,7 @@ function App() {
             }}
             initPauseState={true}
           />
-          <ConstLazy
+          <Const
             id={"const1"}
             x={10}
             y={160}
