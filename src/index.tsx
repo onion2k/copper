@@ -4,8 +4,6 @@ import { render } from "react-dom";
 import useMousePosition from "./Hooks/useMousePosition";
 import { ConnectorContext } from "./Contexts/connector";
 
-// const Const = React.lazy(() => import("./Panels/const"));
-
 import Const from "./Panels/const";
 import { Time } from "./Panels/time";
 import { Value } from "./Panels/value";
@@ -57,14 +55,6 @@ interface Connection {
   x2: number;
   y2: number;
 }
-
-// interface Panel {
-//   id: string;
-//   x: number;
-//   y: number;
-//   input: any;
-//   output: any;
-// }
 
 function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
