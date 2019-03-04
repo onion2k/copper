@@ -17,13 +17,15 @@ export function ConnectorMapLine({
   x2,
   y2
 }: iConnectorMapLine) {
-  const pathRef = useRef(null);
-  const endsRef = useRef(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const endsRef = useRef<SVGUseElement>(null);
   useLayoutEffect(() => {
     const pathEl = pathRef.current;
     const pathEnds = endsRef.current;
-    const pathLength = pathEl.getTotalLength();
-    pathEnds.setAttribute("stroke-dasharray", pathLength / 3);
+    if (pathEl && pathEnds) {
+      const pathLength = pathEl.getTotalLength();
+      pathEnds.setAttribute("stroke-dasharray", String(pathLength / 3));
+    }
   });
   return (
     <g key={`connector-${x1}-${y1}-${x2}-${y2}`}>

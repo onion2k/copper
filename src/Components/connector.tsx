@@ -12,34 +12,34 @@ export function Connector({ id, direction, index }: iConnector) {
     ConnectorContext
   );
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(
-    () => {
-      if (ref.current) {
-        const { x, y } = ref.current.getBoundingClientRect();
-        registerNode({
-          id: id,
-          direction: direction,
-          index: index,
-          x,
-          y
-        });
-      }
-    },
-    [ref]
-  );
+  useEffect(() => {
+    if (ref.current !== null) {
+      const { x, y } = ref.current.getBoundingClientRect() as DOMRect;
+      registerNode({
+        id: id,
+        direction: direction,
+        index: index,
+        x,
+        y
+      });
+    }
+  }, [ref]);
 
   const startConnect = () => {
-    const c = {
-      x: ref.current.getBoundingClientRect().x + 10,
-      y: ref.current.getBoundingClientRect().y + 10,
-      id: id,
-      direction: direction,
-      index: index,
-      key: `${id}-${direction}-${index}`
-    };
-    setConnector(c);
+    if (ref.current !== null) {
+      const { x, y } = ref.current.getBoundingClientRect() as DOMRect;
+      const c = {
+        x: x + 10,
+        y: y + 10,
+        id: id,
+        direction: direction,
+        index: index,
+        key: `${id}-${direction}-${index}`
+      };
+      setConnector(c);
+    }
   };
 
   const endConnect = (e: any) => {

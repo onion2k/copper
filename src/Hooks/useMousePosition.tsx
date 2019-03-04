@@ -2,22 +2,22 @@ import React, { useState, useEffect } from "react";
 
 export default function useMousePosition() {
   let [MousePosition, setMousePosition] = useState({
-    x: null,
-    y: null
+    x: -1,
+    y: -1
   });
 
-  function handleMouseMove(e) {
+  const handleMouseMove = (e: React.MouseEvent) => {
     setMousePosition({
       x: e.pageX,
       y: e.pageY
     });
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", e => handleMouseMove);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", e => handleMouseMove);
     };
   }, []);
 

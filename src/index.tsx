@@ -15,7 +15,7 @@ import { Sin } from "./Panels/sin";
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
 
-import { uniqueID } from "./uniqueID.tsx";
+import { uniqueID } from "./uniqueID";
 
 const initialState = {
   outputs: {
@@ -39,15 +39,24 @@ const initialState = {
   nodes: []
 };
 
-import { reducer } from "./reducer.tsx";
+import { reducer } from "./reducer";
 
 import "./styles.css";
+import { number } from "prop-types";
+
+interface Node {
+  id: string;
+  x: number;
+  y: number;
+  direction: string;
+  index: number;
+}
 
 function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [nodes, setNodes] = useState([]);
+  const [nodes, setNodes] = useState(Array<Node>());
   const [connections, setConnections] = useState([]);
   const [connector, setConnector] = useState(null);
   const [dynNodes, setDynNodes] = useState([]);
@@ -116,15 +125,15 @@ function App() {
   }
 
   function newPanel(type = "const") {
-    const id = uniqueID();
     let panel;
+    const id = uniqueID();
 
     const props = {
       key: id,
       id: id,
       x: 10,
       y: 320,
-      output: value => {
+      output: (value: number) => {
         dispatch({
           type: "update",
           id: id,
@@ -138,7 +147,7 @@ function App() {
         panel = <Const {...props} />;
         break;
       case "time":
-        panel = <Time {...props} />;
+        panel = <Time {...props} initPauseState={true} />;
         break;
     }
 
@@ -163,7 +172,7 @@ function App() {
             id={"time0"}
             x={10}
             y={10}
-            output={value => {
+            output={(value: number) => {
               dispatch({
                 type: "update",
                 id: "time0",
@@ -176,7 +185,7 @@ function App() {
             id={"const1"}
             x={10}
             y={160}
-            output={value => {
+            output={(value: number) => {
               dispatch({
                 type: "update",
                 id: "const1",
@@ -189,7 +198,7 @@ function App() {
             x={360}
             y={10}
             input={state.inputs["math0"]}
-            output={value => {
+            output={(value: number) => {
               dispatch({
                 type: "update",
                 id: "math0",
@@ -204,7 +213,7 @@ function App() {
             x={710}
             y={195}
             input={state.inputs["sin0"]}
-            output={value => {
+            output={(value: number) => {
               dispatch({
                 type: "update",
                 id: "sin0",
@@ -218,7 +227,7 @@ function App() {
             x={710}
             y={10}
             input={state.inputs["value0"]}
-            output={value => {
+            output={(value: number) => {
               dispatch({
                 type: "update",
                 id: "value0",

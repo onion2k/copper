@@ -18,12 +18,13 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
     ConnectorContext
   );
 
-  let connectionsMap = [];
+  let connectionsMap = new Array<any>();
   if (connections.length > 0) {
     connections.forEach((connection, i) => {
       const { x1, y1, x2, y2 } = connection;
       connectionsMap.push(
         <ConnectorMapLine
+          title={"Title"}
           id="Connector"
           x1={x1 + 10}
           y1={y1 + 10}
