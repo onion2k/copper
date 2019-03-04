@@ -18,7 +18,7 @@ export function Value({ id, x, y, input, output }: iValue) {
 
   const io = [
     <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />,
-    <Output id={id} direction={"out"} index={0} value={"Output"} />
+    <Output key={id} id={id} direction={"out"} index={0} value={"Output"} />
   ];
 
   return (

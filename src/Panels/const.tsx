@@ -21,7 +21,9 @@ export default function Const({ id, x, y, output }: iConst) {
     setInput(parseFloat(e.target.value));
   };
 
-  const io = <Output id={id} direction={"out"} index={0} value={input} />;
+  const io = (
+    <Output key={id} id={id} direction={"out"} index={0} value={input} />
+  );
 
   const controls = (
     <input

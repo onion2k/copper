@@ -1,4 +1,4 @@
-export function reducer(state, action) {
+export function reducer(state: any, action: any) {
   const newState = { ...state };
   let connection;
   switch (action.type) {

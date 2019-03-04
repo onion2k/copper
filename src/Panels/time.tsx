@@ -27,7 +27,13 @@ export function Time({ id, x, y, output, initPauseState }: iTime) {
   });
 
   const io = (
-    <Output id={id} direction={"out"} index={0} value={value.toFixed(3)} />
+    <Output
+      key={id}
+      id={id}
+      direction={"out"}
+      index={0}
+      value={value.toFixed(3)}
+    />
   );
 
   const controls = (

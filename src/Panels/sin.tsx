@@ -13,10 +13,10 @@ interface iSin {
 }
 
 export function Sin({ id, x, y, input, output }: iSin) {
-  const canvasRef = useRef();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [factor, setFactor] = useState(1);
   const [value, setValue] = useState(1);
-  const [prev, setPrev] = useState([]);
+  const [prev, setPrev] = useState(Array<number>());
 
   useEffect(() => {
     setValue(Math.sin(parseFloat(input[0]) / factor));
@@ -38,17 +38,21 @@ export function Sin({ id, x, y, input, output }: iSin) {
 
   const io = [
     <Input id={id} direction={"in"} index={0} value={input[0]} />,
-    <Output id={id} direction={"out"} index={0} value={value} />
+    <Output key={id} id={id} direction={"out"} index={0} value={value} />
   ];
 
   function renderCanvas() {
-    const ctx = canvasRef.current.getContext("2d");
-    ctx.fillStyle = "#FFF";
-    ctx.fillRect(0, 0, 280, 100);
-    ctx.fillStyle = "#000";
-    prev.forEach((v, i) => {
-      ctx.fillRect(i * 2, 50 + v * 40, 2, 2);
-    });
+    if (canvasRef.current !== null) {
+      const ctx = canvasRef.current.getContext("2d");
+      if (ctx) {
+        ctx.fillStyle = "#FFF";
+        ctx.fillRect(0, 0, 280, 100);
+        ctx.fillStyle = "#000";
+        prev.forEach((v, i) => {
+          ctx.fillRect(i * 2, 50 + v * 40, 2, 2);
+        });
+      }
+    }
   }
 
   const controls = [

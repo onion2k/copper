@@ -29,7 +29,7 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
 
   const io = [
     <Input id={id} direction={"in"} index={0} value={input[0]} />,
-    <Output id={id} direction={"out"} index={0} value={value} />,
+    <Output key={id} id={id} direction={"out"} index={0} value={value} />,
     <Input id={id} direction={"in"} index={1} value={input[1]} />
   ];
 

@@ -42,7 +42,6 @@ const initialState = {
 import { reducer } from "./reducer";
 
 import "./styles.css";
-import { number } from "prop-types";
 
 interface Node {
   id: string;
@@ -52,14 +51,29 @@ interface Node {
   index: number;
 }
 
+interface Connection {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+}
+
+// interface Panel {
+//   id: string;
+//   x: number;
+//   y: number;
+//   input: any;
+//   output: any;
+// }
+
 function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [nodes, setNodes] = useState(Array<Node>());
-  const [connections, setConnections] = useState([]);
-  const [connector, setConnector] = useState(null);
-  const [dynNodes, setDynNodes] = useState([]);
+  const [connections, setConnections] = useState(Array<Connection>());
+  const [connector, setConnector] = useState<Node | null>(null);
+  const [dynNodes, setDynNodes] = useState(Array<JSX.Element>());
 
   const connectConnector = (to: {
     id: string;
@@ -69,11 +83,14 @@ function App() {
     x: number;
     y: number;
   }) => {
+    if (!connector) {
+      return;
+    }
+
+    const { id, direction, index } = connector;
     const start = nodes.find(node => {
       return (
-        node.id === connector.id &&
-        node.direction === connector.direction &&
-        node.index === connector.index
+        node.id === id && node.direction === direction && node.index === index
       );
     });
     const end = nodes.find(node => {
@@ -83,24 +100,26 @@ function App() {
         node.index === to.index
       );
     });
-    const tempConnections = connections;
-    connections.push({
-      x1: start.x,
-      y1: start.y,
-      x2: end.x,
-      y2: end.y
-    });
-    setConnections(connections);
+    if (start && end) {
+      const tempConnections = connections;
+      tempConnections.push({
+        x1: start.x,
+        y1: start.y,
+        x2: end.x,
+        y2: end.y
+      });
+      setConnections(tempConnections);
 
-    dispatch({
-      type: "connect",
-      from: connector.id,
-      to: to.id,
-      index: to.index
-    });
+      dispatch({
+        type: "connect",
+        from: connector.id,
+        to: to.id,
+        index: to.index
+      });
+    }
   };
 
-  const registerNode = node => {
+  const registerNode = (node: any) => {
     const newNodes = nodes;
     newNodes.push(node);
     setNodes(newNodes);
@@ -116,6 +135,8 @@ function App() {
   if (connector) {
     activeConnectorLine = (
       <ConnectorMapLine
+        id={"id"}
+        title={"title"}
         x1={connector.x + window.scrollX}
         y1={connector.y + window.scrollY}
         x2={mouseX}
@@ -151,9 +172,11 @@ function App() {
         break;
     }
 
-    const tempDynNodes = dynNodes;
-    tempDynNodes.push(panel);
-    setDynNodes(tempDynNodes);
+    if (panel) {
+      const tempDynNodes = dynNodes;
+      tempDynNodes.push(panel);
+      setDynNodes(tempDynNodes);
+    }
   }
 
   return (
