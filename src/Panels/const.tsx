@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ConnectorContext } from "../Contexts/connector";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
@@ -6,23 +7,36 @@ interface iConst {
   id: string;
   x: number;
   y: number;
-  output: any;
 }
 
-export default function Const({ id, x, y, output }: iConst) {
-  const [input, setInput] = useState(0);
+export default function Const({ id, x, y }: iConst) {
+  const [
+    connector,
+    setConnector,
+    connectConnector,
+    registerNode,
+    mouseX,
+    mouseY,
+    dispatch
+  ] = useContext(ConnectorContext);
+
+  const [value, setValue] = useState(0);
   const [connect, setConnect] = useState(false);
 
   useEffect(() => {
-    output(input);
+    dispatch({
+      type: "update",
+      id: id,
+      value: value
+    });
   });
 
   const updateIo = (e: any) => {
-    setInput(parseFloat(e.target.value));
+    setValue(parseFloat(e.target.value));
   };
 
   const io = (
-    <Output key={id} id={id} direction={"out"} index={0} value={input} />
+    <Output key={id} id={id} direction={"out"} index={0} value={value} />
   );
 
   const controls = (

@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+  useContext
+} from "react";
+import { ConnectorContext } from "../Contexts/connector";
 import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
@@ -7,17 +14,29 @@ interface iTime {
   id: string;
   x: number;
   y: number;
-  output: any;
   initPauseState: boolean;
 }
 
-export function Time({ id, x, y, output, initPauseState }: iTime) {
+export function Time({ id, x, y, initPauseState }: iTime) {
+  const [
+    connector,
+    setConnector,
+    connectConnector,
+    registerNode,
+    mouseX,
+    mouseY,
+    dispatch
+  ] = useContext(ConnectorContext);
   const [value, setValue] = useState(0);
   const [pause, setPause] = useState(initPauseState);
   const [connect, setConnect] = useState(false);
 
   useEffect(() => {
-    output(value.toFixed(3));
+    dispatch({
+      type: "update",
+      id: id,
+      value: value
+    });
   });
 
   useAnimationFrame(() => {

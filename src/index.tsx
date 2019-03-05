@@ -143,14 +143,7 @@ function App() {
       key: id,
       id: id,
       x: 10,
-      y: 320,
-      output: (value: number) => {
-        dispatch({
-          type: "update",
-          id: id,
-          value: value
-        });
-      }
+      y: 320
     };
 
     switch (type) {
@@ -159,6 +152,9 @@ function App() {
         break;
       case "time":
         panel = <Time {...props} initPauseState={true} />;
+        break;
+      case "arithmatic":
+        panel = <Arithmatic {...props} op={"add"} />;
         break;
     }
 
@@ -177,7 +173,8 @@ function App() {
         connectConnector,
         registerNode,
         mouseX,
-        mouseY
+        mouseY,
+        dispatch
       ]}
     >
       <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
@@ -201,18 +198,7 @@ function App() {
             }}
             initPauseState={true}
           />
-          <Const
-            id={"const1"}
-            x={10}
-            y={160}
-            output={(value: number) => {
-              dispatch({
-                type: "update",
-                id: "const1",
-                value: value
-              });
-            }}
-          />
+          <Const id={"const1"} x={10} y={160} />
           <Arithmatic
             id={"math0"}
             x={360}
@@ -262,6 +248,7 @@ function App() {
 
           <button onClick={() => newPanel("const")}>New const</button>
           <button onClick={() => newPanel("time")}>New time</button>
+          <button onClick={() => newPanel("arithmatic")}>New Arithmatic</button>
         </Suspense>
       </div>
     </ConnectorContext.Provider>

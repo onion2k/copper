@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+  useContext
+} from "react";
+import { ConnectorContext } from "../Contexts/connector";
 import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
@@ -9,10 +16,18 @@ interface iSin {
   x: number;
   y: number;
   input: any;
-  output: any;
 }
 
-export function Sin({ id, x, y, input, output }: iSin) {
+export function Sin({ id, x, y, input }: iSin) {
+  const [
+    connector,
+    setConnector,
+    connectConnector,
+    registerNode,
+    mouseX,
+    mouseY,
+    dispatch
+  ] = useContext(ConnectorContext);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [factor, setFactor] = useState(1);
   const [value, setValue] = useState(1);
@@ -20,7 +35,11 @@ export function Sin({ id, x, y, input, output }: iSin) {
 
   useEffect(() => {
     setValue(Math.sin(parseFloat(input[0]) / factor));
-    output(value);
+    dispatch({
+      type: "update",
+      id: id,
+      value: value
+    });
 
     const tPrev = prev;
     tPrev.unshift(value);

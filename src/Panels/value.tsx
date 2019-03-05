@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { ConnectorContext } from "../Contexts/connector";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
@@ -8,12 +9,25 @@ interface iValue {
   x: number;
   y: number;
   input: any;
-  output: any;
 }
 
-export function Value({ id, x, y, input, output }: iValue) {
+export function Value({ id, x, y, input }: iValue) {
+  const [
+    connector,
+    setConnector,
+    connectConnector,
+    registerNode,
+    mouseX,
+    mouseY,
+    dispatch
+  ] = useContext(ConnectorContext);
+
   useEffect(() => {
-    output(parseInt(input));
+    dispatch({
+      type: "update",
+      id: id,
+      value: input[0]
+    });
   });
 
   const io = [

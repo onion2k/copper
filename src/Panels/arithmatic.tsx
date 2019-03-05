@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ConnectorContext } from "../Contexts/connector";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
@@ -9,22 +10,33 @@ interface iArithmatic {
   y: number;
   op: string;
   input: any;
-  output: any;
 }
 
-export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
+export function Arithmatic({ id, x, y, op, input }: iArithmatic) {
+  const [
+    connector,
+    setConnector,
+    connectConnector,
+    registerNode,
+    mouseX,
+    mouseY,
+    dispatch
+  ] = useContext(ConnectorContext);
   const [value, setValue] = useState(0);
   useEffect(() => {
     switch (op) {
       case "add":
         setValue(parseFloat(input[0]) + parseFloat(input[1]));
-        output(value);
         break;
       case "multiply":
         setValue(parseFloat(input[0]) * parseFloat(input[1]));
-        output(value);
         break;
     }
+    dispatch({
+      type: "update",
+      id: id,
+      value: value
+    });
   });
 
   const io = [

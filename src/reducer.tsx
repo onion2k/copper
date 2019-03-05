@@ -19,6 +19,8 @@ export function reducer(state: any, action: any) {
         newState.outputs[action.from];
       return newState;
     case "register":
+      newState.inputs[action.id] = [];
+      return newState;
       break;
     default:
       throw new Error();
