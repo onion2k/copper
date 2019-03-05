@@ -171,7 +171,14 @@ function App() {
 
   return (
     <ConnectorContext.Provider
-      value={[connector, setConnector, connectConnector, registerNode]}
+      value={[
+        connector,
+        setConnector,
+        connectConnector,
+        registerNode,
+        mouseX,
+        mouseY
+      ]}
     >
       <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
         {activeConnectorLine}

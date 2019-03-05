@@ -4,5 +4,7 @@ export const ConnectorContext = React.createContext<Array<any>>([
   null,
   () => {}, // setConnector
   () => {}, // connectConnector
-  () => {} // registerNode
+  () => {}, // registerNode
+  null, // mouseX
+  null //mouseY
 ]);
