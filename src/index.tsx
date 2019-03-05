@@ -125,7 +125,7 @@ function App() {
   if (connector) {
     activeConnectorLine = (
       <ConnectorMapLine
-        id={"id"}
+        id={"active"}
         title={"title"}
         x1={connector.x + window.scrollX}
         y1={connector.y + window.scrollY}

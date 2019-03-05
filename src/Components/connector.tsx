@@ -14,18 +14,21 @@ export function Connector({ id, direction, index }: iConnector) {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (ref.current !== null) {
-      const { x, y } = ref.current.getBoundingClientRect() as DOMRect;
-      registerNode({
-        id: id,
-        direction: direction,
-        index: index,
-        x,
-        y
-      });
-    }
-  }, [ref]);
+  useEffect(
+    () => {
+      if (ref.current !== null) {
+        const { x, y } = ref.current.getBoundingClientRect() as DOMRect;
+        registerNode({
+          id: id,
+          direction: direction,
+          index: index,
+          x,
+          y
+        });
+      }
+    },
+    [ref]
+  );
 
   const startConnect = () => {
     if (ref.current !== null) {

@@ -14,10 +14,10 @@ export default function useMousePosition() {
   };
 
   useEffect(() => {
-    window.addEventListener("mousemove", e => handleMouseMove);
+    window.addEventListener("mousemove", e => handleMouseMove(e));
 
     return () => {
-      window.removeEventListener("mousemove", e => handleMouseMove);
+      window.removeEventListener("mousemove", e => handleMouseMove(e));
     };
   }, []);
 
