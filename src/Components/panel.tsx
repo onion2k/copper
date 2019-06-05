@@ -46,14 +46,6 @@ export function Panel({ title, x, y, io, controls }: iPanel) {
           setInitPos({ x: e.clientX, y: e.clientY });
         }}
         onMouseUp={() => setDragging(false)}
-        // onMouseMove={(e: React.MouseEvent<EventTarget>) => {
-        //   if (dragging) {
-        //     const deltaX = e.clientX - initPos.x;
-        //     const deltaY = e.clientY - initPos.y;
-
-        //     setPos({ x: x + deltaX, y: y + deltaY });
-        //   }
-        // }}
       >
         {title}
       </div>

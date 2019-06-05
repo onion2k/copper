@@ -35,7 +35,7 @@ export function Sin({ id, x, y, input }: iSin) {
   const [prev, setPrev] = useState(Array<number>());
 
   useEffect(() => {
-    setValue(Math.sin(parseFloat(input[0]) / factor));
+    setValue(Math.sin(parseFloat(input[0]) * factor));
     dispatch({
       type: "update",
       id: id,
