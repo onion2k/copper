@@ -6,7 +6,7 @@ export default function useMousePosition() {
     y: -1
   });
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent) => {
     setMousePosition({
       x: e.pageX,
       y: e.pageY

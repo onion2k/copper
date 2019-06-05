@@ -9,10 +9,11 @@ interface iArithmatic {
   x: number;
   y: number;
   op: string;
-  input: any;
+  input?: any;
+  output?: any;
 }
 
-export function Arithmatic({ id, x, y, op, input }: iArithmatic) {
+export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
   const [
     connector,
     setConnector,

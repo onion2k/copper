@@ -15,6 +15,8 @@ interface iTime {
   x: number;
   y: number;
   initPauseState: boolean;
+  input?: any;
+  output?: any;
 }
 
 export function Time({ id, x, y, initPauseState }: iTime) {

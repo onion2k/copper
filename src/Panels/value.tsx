@@ -8,7 +8,8 @@ interface iValue {
   id: string;
   x: number;
   y: number;
-  input: any;
+  input?: any;
+  output?: any;
 }
 
 export function Value({ id, x, y, input }: iValue) {
