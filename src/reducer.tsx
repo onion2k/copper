@@ -26,6 +26,10 @@ export function reducer(state: any, action: any) {
       newState.nodes.push(action.node);
       return newState;
       break;
+    case "Panel-move":
+      console.log(action);
+      return newState;
+      break;
     default:
       throw new Error();
   }

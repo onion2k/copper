@@ -23,7 +23,9 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
     mouseY,
     dispatch
   ] = useContext(ConnectorContext);
+
   const [value, setValue] = useState(0);
+
   useEffect(() => {
     switch (op) {
       case "add":
@@ -48,5 +50,14 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
 
   const controls = `Add input 1 and input 2.`;
 
-  return <Panel x={x} y={y} title={`Math.${op}`} io={io} controls={controls} />;
+  return (
+    <Panel
+      id={id}
+      x={x}
+      y={y}
+      title={`Math.${op}`}
+      io={io}
+      controls={controls}
+    />
+  );
 }

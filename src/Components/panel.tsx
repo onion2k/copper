@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
 
 interface iPanel {
+  id?: string;
   title: string;
   x: number;
   y: number;
@@ -14,14 +15,15 @@ interface iInitPos {
   y: number;
 }
 
-export function Panel({ title, x, y, io, controls }: iPanel) {
+export function Panel({ id, title, x, y, io, controls }: iPanel) {
   const [
     connector,
     setConnector,
     connectConnector,
     registerNode,
     mouseX,
-    mouseY
+    mouseY,
+    dispatch
   ] = useContext(ConnectorContext);
 
   const panelRef = useRef(null);
@@ -45,7 +47,14 @@ export function Panel({ title, x, y, io, controls }: iPanel) {
           setDragging(true);
           setInitPos({ x: e.clientX, y: e.clientY });
         }}
-        onMouseUp={() => setDragging(false)}
+        onMouseUp={() => {
+          setDragging(false);
+          dispatch({
+            type: "Panel-move",
+            id: id,
+            value: pos
+          });
+        }}
       >
         {title}
       </div>
