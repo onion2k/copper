@@ -63,5 +63,7 @@ export function Time({ id, x, y, initPauseState }: iTime) {
     </button>
   );
 
-  return <Panel x={x} y={y} title={`Timer`} io={io} controls={controls} />;
+  return (
+    <Panel id={id} x={x} y={y} title={`Timer`} io={io} controls={controls} />
+  );
 }

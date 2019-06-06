@@ -124,7 +124,7 @@ function App() {
   let activeConnectorLine = null;
   if (connector) {
     console.log("Connector", connector.id);
-    //disconnect if input, multiple if output?
+    // disconnect if input, multiple if output?
     // this happens on every render...
     activeConnectorLine = (
       <ConnectorMapLine

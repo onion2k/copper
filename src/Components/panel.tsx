@@ -32,6 +32,17 @@ export function Panel({ id, title, x, y, io, controls }: iPanel) {
   const [pos, setPos] = useState({ x, y });
 
   useEffect(() => {
+    dispatch({
+      type: "panelRegister",
+      id,
+      value: {
+        pos,
+        panelRef
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (dragging) {
       const deltaX = mouseX - initPos.x;
       const deltaY = mouseY - initPos.y;

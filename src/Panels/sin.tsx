@@ -85,5 +85,7 @@ export function Sin({ id, x, y, input }: iSin) {
     />
   ];
 
-  return <Panel x={x} y={y} title={`Sin`} io={io} controls={controls} />;
+  return (
+    <Panel id={id} x={x} y={y} title={`Sin`} io={io} controls={controls} />
+  );
 }

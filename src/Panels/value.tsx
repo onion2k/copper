@@ -38,6 +38,7 @@ export function Value({ id, x, y, input }: iValue) {
 
   return (
     <Panel
+      id={id}
       x={x}
       y={y}
       title={`Value`}

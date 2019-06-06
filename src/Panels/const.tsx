@@ -48,5 +48,7 @@ export default function Const({ id, x, y }: iConst) {
     />
   );
 
-  return <Panel x={x} y={y} title={`Constant`} io={io} controls={controls} />;
+  return (
+    <Panel id={id} x={x} y={y} title={`Constant`} io={io} controls={controls} />
+  );
 }
