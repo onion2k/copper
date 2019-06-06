@@ -1,3 +1,5 @@
+import panel from "./reducers/panel";
+
 export function reducer(state: any, action: any) {
   const newState = { ...state };
   let connection;
@@ -26,61 +28,11 @@ export function reducer(state: any, action: any) {
       newState.nodes.push(action.node);
       return newState;
       break;
-    case "Panel-move":
-      console.log(action);
-      return newState;
-      break;
+    case "panelMove":
+      return panel.move(newState, action);
+    case "panelRegister":
+      return panel.register(newState, action);
     default:
       throw new Error();
   }
 }
-
-// const connectConnector = (to: {
-//   id: string;
-//   direction: string;
-//   index: number;
-//   key: string;
-//   x: number;
-//   y: number;
-// }) => {
-//   if (!connector) {
-//     return;
-//   }
-
-//   const { id, direction, index } = connector;
-//   const start = nodes.find(node => {
-//     return (
-//       node.id === id && node.direction === direction && node.index === index
-//     );
-//   });
-//   const end = nodes.find(node => {
-//     return (
-//       node.id === to.id &&
-//       node.direction === to.direction &&
-//       node.index === to.index
-//     );
-//   });
-//   if (start && end) {
-//     const tempConnections = connections;
-//     tempConnections.push({
-//       x1: start.x,
-//       y1: start.y,
-//       x2: end.x,
-//       y2: end.y
-//     });
-//     setConnections(tempConnections);
-
-//     dispatch({
-//       type: "connect",
-//       from: connector.id,
-//       to: to.id,
-//       index: to.index
-//     });
-//   }
-// };
-
-// const registerNode = (node: any) => {
-//   const newNodes = nodes;
-//   newNodes.push(node);
-//   setNodes(newNodes);
-// };

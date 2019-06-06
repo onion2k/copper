@@ -50,7 +50,7 @@ export function Panel({ id, title, x, y, io, controls }: iPanel) {
         onMouseUp={() => {
           setDragging(false);
           dispatch({
-            type: "Panel-move",
+            type: "panelMove",
             id: id,
             value: pos
           });
