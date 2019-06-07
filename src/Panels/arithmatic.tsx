@@ -40,7 +40,7 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
       id: id,
       value: value
     });
-  });
+  }, [input[0], input[1], op]);
 
   const io = [
     <Input id={id} direction={"in"} index={0} value={input[0]} />,

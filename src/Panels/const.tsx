@@ -29,7 +29,7 @@ export default function Const({ id, x, y }: iConst) {
       id: id,
       value: value
     });
-  });
+  }, [value]);
 
   const updateIo = (e: any) => {
     setValue(parseFloat(e.target.value));

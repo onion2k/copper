@@ -29,7 +29,7 @@ export function Value({ id, x, y, input }: iValue) {
       id: id,
       value: input[0]
     });
-  });
+  }, [input[0]]);
 
   const io = [
     <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />,

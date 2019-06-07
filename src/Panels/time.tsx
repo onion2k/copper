@@ -39,7 +39,7 @@ export function Time({ id, x, y, initPauseState }: iTime) {
       id: id,
       value: value
     });
-  });
+  }, [value]);
 
   useAnimationFrame(() => {
     if (!pause) {

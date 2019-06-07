@@ -50,7 +50,7 @@ export function Sin({ id, x, y, input }: iSin) {
     setPrev(tPrev);
 
     renderCanvas();
-  });
+  }, [input[0]]);
 
   const updateFactor = (e: any) => {
     setFactor(parseFloat(e.target.value));

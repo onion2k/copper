@@ -5,7 +5,7 @@ export default class {
   };
 
   static move = (state: object, action: object) => {
-    console.log(action);
+    // console.log(action);
     return state;
   };
 }
