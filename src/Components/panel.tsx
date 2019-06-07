@@ -65,14 +65,14 @@ export function Panel({ id, title, x, y, io, controls }: iPanel) {
           console.log("down", initPos, pos);
         }}
         onMouseUp={e => {
-          setDragging(false);
-          setPos({ x: pos.x + delta.x, y: pos.y + delta.y });
-          setDelta({ x: 0, y: 0 });
           dispatch({
             type: "panelMove",
             id: id,
-            value: pos
+            value: delta
           });
+          setDragging(false);
+          setPos({ x: pos.x + delta.x, y: pos.y + delta.y });
+          setDelta({ x: 0, y: 0 });
         }}
       >
         {title}

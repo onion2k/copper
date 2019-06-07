@@ -24,12 +24,12 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
       const { x1, y1, x2, y2 } = connection;
       connectionsMap.push(
         <ConnectorMapLine
-          title={"Title"}
+          title={""}
           id="Connector"
-          x1={x1 + 10}
-          y1={y1 + 10}
-          x2={x2 + 10}
-          y2={y2 + 10}
+          x1={x1}
+          y1={y1}
+          x2={x2}
+          y2={y2}
         />
       );
     });
