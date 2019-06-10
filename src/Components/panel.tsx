@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { MouseContext } from "../Contexts/mouse";
 
 interface iPanel {
   id?: string;
@@ -21,10 +22,10 @@ export function Panel({ id, title, x, y, io, controls }: iPanel) {
     setConnector,
     connectConnector,
     registerNode,
-    mouseX,
-    mouseY,
     dispatch
   ] = useContext(ConnectorContext);
+
+  const [mouseX, mouseY] = useContext(MouseContext);
 
   const panelRef = useRef(null);
   const [dragging, setDragging] = useState(false);

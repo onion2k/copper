@@ -3,6 +3,7 @@ import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
 import { ConnectorContext } from "./Contexts/connector";
+import { MouseContext } from "./Contexts/mouse";
 
 import Const from "./Panels/const";
 import { Time } from "./Panels/time";
@@ -15,6 +16,7 @@ import { ConnectorMapLine } from "./Components/connectorMapLine";
 
 import { uniqueID } from "./uniqueID";
 
+import { reducer } from "./reducer";
 const initialState = {
   outputs: {
     time0: 0,
@@ -36,8 +38,6 @@ const initialState = {
   },
   nodes: []
 };
-
-import { reducer } from "./reducer";
 
 import "./styles.css";
 
@@ -78,18 +78,25 @@ function App() {
     }
 
     const { id, direction, index } = connector;
-    const start = nodes.find(node => {
-      return (
-        node.id === id && node.direction === direction && node.index === index
-      );
-    });
-    const end = nodes.find(node => {
-      return (
-        node.id === to.id &&
-        node.direction === to.direction &&
-        node.index === to.index
-      );
-    });
+
+    const start = state.nodes.find(
+      (node: { id: string; direction: string; index: number }) => {
+        return (
+          node.id === id && node.direction === direction && node.index === index
+        );
+      }
+    );
+
+    const end = state.nodes.find(
+      (node: { id: string; direction: string; index: number }) => {
+        return (
+          node.id === to.id &&
+          node.direction === to.direction &&
+          node.index === to.index
+        );
+      }
+    );
+
     if (start && end) {
       const tempConnections = connections;
       tempConnections.push({
@@ -123,7 +130,6 @@ function App() {
 
   let activeConnectorLine = null;
   if (connector) {
-    console.log("Connector", connector.id);
     // disconnect if input, multiple if output?
     // this happens on every render...
     activeConnectorLine = (
@@ -169,92 +175,94 @@ function App() {
   }
 
   return (
-    <ConnectorContext.Provider
-      value={[
-        connector,
-        setConnector,
-        connectConnector,
-        registerNode,
-        mouseX,
-        mouseY,
-        dispatch
-      ]}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
-        {activeConnectorLine}
-      </svg>
+    <MouseContext.Provider value={[mouseX, mouseY]}>
+      <ConnectorContext.Provider
+        value={[
+          connector,
+          setConnector,
+          connectConnector,
+          registerNode,
+          dispatch
+        ]}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+          {activeConnectorLine}
+        </svg>
 
-      <ConnectorMap nodes={nodes} connections={connections} />
+        <ConnectorMap nodes={nodes} connections={connections} />
 
-      <div className="Control" onMouseUp={endConnect}>
-        <Suspense fallback={"Loading"}>
-          <Time
-            id={"time0"}
-            x={10}
-            y={10}
-            output={(value: number) => {
-              dispatch({
-                type: "update",
-                id: "time0",
-                value: value
-              });
-            }}
-            initPauseState={true}
-          />
-          <Const id={"const1"} x={10} y={160} />
-          <Arithmatic
-            id={"math0"}
-            x={360}
-            y={10}
-            input={state.inputs["math0"]}
-            output={(value: number) => {
-              dispatch({
-                type: "update",
-                id: "math0",
-                value: value
-              });
-            }}
-            op="multiply"
-          />
+        <div className="Control" onMouseUp={endConnect}>
+          <Suspense fallback={"Loading"}>
+            <Time
+              id={"time0"}
+              x={10}
+              y={10}
+              output={(value: number) => {
+                dispatch({
+                  type: "update",
+                  id: "time0",
+                  value: value
+                });
+              }}
+              initPauseState={true}
+            />
+            <Const id={"const1"} x={10} y={160} />
+            <Arithmatic
+              id={"math0"}
+              x={360}
+              y={10}
+              input={state.inputs["math0"]}
+              output={(value: number) => {
+                dispatch({
+                  type: "update",
+                  id: "math0",
+                  value: value
+                });
+              }}
+              op="multiply"
+            />
 
-          <Sin
-            id={"sin0"}
-            x={710}
-            y={195}
-            input={state.inputs["sin0"]}
-            output={(value: number) => {
-              dispatch({
-                type: "update",
-                id: "sin0",
-                value: value
-              });
-            }}
-          />
+            <Sin
+              id={"sin0"}
+              x={710}
+              y={195}
+              input={state.inputs["sin0"]}
+              output={(value: number) => {
+                dispatch({
+                  type: "update",
+                  id: "sin0",
+                  value: value
+                });
+              }}
+            />
 
-          <Value
-            id={"value0"}
-            x={710}
-            y={10}
-            input={state.inputs["value0"]}
-            output={(value: number) => {
-              dispatch({
-                type: "update",
-                id: "value0",
-                value: value
-              });
-            }}
-          />
+            <Value
+              id={"value0"}
+              x={710}
+              y={10}
+              input={state.inputs["value0"]}
+              output={(value: number) => {
+                dispatch({
+                  type: "update",
+                  id: "value0",
+                  value: value
+                });
+              }}
+            />
 
-          {dynNodes.map(node => {
-            return node;
-          })}
+            {dynNodes.map(node => {
+              return node;
+            })}
 
-          <button onClick={() => newPanel("const")}>New const</button>
-          <button onClick={() => newPanel("time")}>New time</button>
-          <button onClick={() => newPanel("arithmatic")}>New Arithmatic</button>
-        </Suspense>
-      </div>
-    </ConnectorContext.Provider>
+            <button onClick={() => newPanel("const")}>New const</button>
+            <button onClick={() => newPanel("time")}>New time</button>
+            <button onClick={() => newPanel("arithmatic")}>
+              New Arithmatic
+            </button>
+          </Suspense>
+        </div>
+      </ConnectorContext.Provider>
+    </MouseContext.Provider>
   );
 }
 

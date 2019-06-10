@@ -18,8 +18,6 @@ export function Value({ id, x, y, input }: iValue) {
     setConnector,
     connectConnector,
     registerNode,
-    mouseX,
-    mouseY,
     dispatch
   ] = useContext(ConnectorContext);
 

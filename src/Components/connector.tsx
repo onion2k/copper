@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { MouseContext } from "../Contexts/mouse";
 
 interface iConnector {
   id: string;
@@ -13,10 +14,10 @@ export function Connector({ id, direction, index }: iConnector) {
     setConnector,
     connectConnector,
     registerNode,
-    mouseX,
-    mouseY,
     dispatch
   ] = useContext(ConnectorContext);
+
+  const [mouseX, mouseY] = useContext(MouseContext);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -28,13 +29,13 @@ export function Connector({ id, direction, index }: iConnector) {
         width,
         height
       } = ref.current.getBoundingClientRect() as DOMRect;
-      registerNode({
-        id: id,
-        direction: direction,
-        index: index,
-        x: x + width / 2,
-        y: y + height / 2
-      });
+      // registerNode({
+      //   id: id,
+      //   direction: direction,
+      //   index: index,
+      //   x: x + width / 2,
+      //   y: y + height / 2
+      // });
       dispatch({
         type: "registerNode",
         node: {

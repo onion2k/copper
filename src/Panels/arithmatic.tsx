@@ -19,8 +19,6 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
     setConnector,
     connectConnector,
     registerNode,
-    mouseX,
-    mouseY,
     dispatch
   ] = useContext(ConnectorContext);
 

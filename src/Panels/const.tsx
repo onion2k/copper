@@ -15,8 +15,6 @@ export default function Const({ id, x, y }: iConst) {
     setConnector,
     connectConnector,
     registerNode,
-    mouseX,
-    mouseY,
     dispatch
   ] = useContext(ConnectorContext);
 

@@ -25,8 +25,6 @@ export function Time({ id, x, y, initPauseState }: iTime) {
     setConnector,
     connectConnector,
     registerNode,
-    mouseX,
-    mouseY,
     dispatch
   ] = useContext(ConnectorContext);
   const [value, setValue] = useState(0);

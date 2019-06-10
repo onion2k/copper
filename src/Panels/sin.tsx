@@ -25,8 +25,6 @@ export function Sin({ id, x, y, input }: iSin) {
     setConnector,
     connectConnector,
     registerNode,
-    mouseX,
-    mouseY,
     dispatch
   ] = useContext(ConnectorContext);
   const canvasRef = useRef<HTMLCanvasElement>(null);

@@ -26,8 +26,8 @@ export function reducer(state: any, action: any) {
       return newState;
       break;
     case "registerNode":
-      console.log(action);
       newState.nodes.push(action.node);
+      console.log(newState);
       return newState;
       break;
     case "panelMove":

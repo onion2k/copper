@@ -1,10 +1,9 @@
 import React from "react";
 
 export const ConnectorContext = React.createContext<Array<any>>([
-  null,
+  null, // connector
   () => {}, // setConnector
   () => {}, // connectConnector
   () => {}, // registerNode
-  null, // mouseX
-  null //mouseY
+  null // dispatch
 ]);
