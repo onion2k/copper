@@ -8,9 +8,15 @@ interface iConnector {
 }
 
 export function Connector({ id, direction, index }: iConnector) {
-  const [connector, setConnector, connectConnector, registerNode] = useContext(
-    ConnectorContext
-  );
+  const [
+    connector,
+    setConnector,
+    connectConnector,
+    registerNode,
+    mouseX,
+    mouseY,
+    dispatch
+  ] = useContext(ConnectorContext);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -28,6 +34,16 @@ export function Connector({ id, direction, index }: iConnector) {
         index: index,
         x: x + width / 2,
         y: y + height / 2
+      });
+      dispatch({
+        type: "registerNode",
+        node: {
+          id,
+          direction,
+          index,
+          x: x + width / 2,
+          y: y + height / 2
+        }
       });
     }
   }, [ref]);

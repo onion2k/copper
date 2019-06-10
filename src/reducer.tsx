@@ -22,9 +22,11 @@ export function reducer(state: any, action: any) {
       return newState;
     case "register":
       newState.inputs[action.id] = [];
+      console.log("node reg", action.id);
       return newState;
       break;
     case "registerNode":
+      console.log(action);
       newState.nodes.push(action.node);
       return newState;
       break;
