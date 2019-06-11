@@ -116,11 +116,11 @@ function App() {
     }
   };
 
-  const registerNode = (node: any) => {
-    const newNodes = nodes;
-    newNodes.push(node);
-    setNodes(newNodes);
-  };
+  // const registerNode = (node: any) => {
+  //   const newNodes = nodes;
+  //   newNodes.push(node);
+  //   setNodes(newNodes);
+  // };
 
   const endConnect = () => {
     if (connector) {
@@ -177,13 +177,7 @@ function App() {
   return (
     <MouseContext.Provider value={[mouseX, mouseY]}>
       <ConnectorContext.Provider
-        value={[
-          connector,
-          setConnector,
-          connectConnector,
-          registerNode,
-          dispatch
-        ]}
+        value={[connector, setConnector, connectConnector, null, dispatch]}
       >
         <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
           {activeConnectorLine}
