@@ -14,13 +14,9 @@ interface iConnectorMap {
 }
 
 export function ConnectorMap({ nodes, connections }: iConnectorMap) {
-  const [connector, setConnector, connectConnector, registerNode] = useContext(
-    ConnectorContext
-  );
-
   let connectionsMap = new Array<any>();
   if (connections.length > 0) {
-    connections.forEach((connection, i) => {
+    connections.forEach(connection => {
       const { x1, y1, x2, y2 } = connection;
       connectionsMap.push(
         <ConnectorMapLine

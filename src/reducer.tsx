@@ -16,9 +16,10 @@ export function reducer(state: any, action: any) {
         id: action.to,
         index: action.index
       };
-      connection = newState.connections[action.from];
-      newState.inputs[connection.id][connection.index] =
-        newState.outputs[action.from];
+      // connection = newState.connections[action.from];
+      // newState.inputs[connection.id][connection.index] =
+      //   newState.outputs[action.from];
+      newState.connectionLines.push({ ...action });
       return newState;
     case "register":
       newState.inputs[action.id] = [];

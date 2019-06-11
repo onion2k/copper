@@ -36,6 +36,7 @@ const initialState = {
     const1: null,
     math0: null
   },
+  connectionLines: [],
   nodes: []
 };
 
@@ -60,10 +61,9 @@ function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [nodes, setNodes] = useState(Array<Node>());
+  // const [nodes, setNodes] = useState(Array<Node>());
   const [connections, setConnections] = useState(Array<Connection>());
   const [connector, setConnector] = useState<Node | null>(null);
-  const [dynNodes, setDynNodes] = useState(Array<JSX.Element>());
 
   const connectConnector = (to: {
     id: string;
@@ -111,7 +111,11 @@ function App() {
         type: "connect",
         from: connector.id,
         to: to.id,
-        index: to.index
+        index: to.index,
+        x1: start.x,
+        y1: start.y,
+        x2: end.x,
+        y2: end.y
       });
     }
   };
@@ -133,57 +137,57 @@ function App() {
     // disconnect if input, multiple if output?
     // this happens on every render...
     activeConnectorLine = (
-      <ConnectorMapLine
-        id={"active"}
-        title={"title"}
-        x1={connector.x + window.scrollX}
-        y1={connector.y + window.scrollY}
-        x2={mouseX}
-        y2={mouseY}
-      />
+      <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+        <ConnectorMapLine
+          id={"active"}
+          title={"title"}
+          x1={connector.x + window.scrollX}
+          y1={connector.y + window.scrollY}
+          x2={mouseX}
+          y2={mouseY}
+        />
+      </svg>
     );
   }
 
-  function newPanel(type = "const") {
-    let panel;
-    const id = uniqueID();
+  // function newPanel(type = "const") {
+  //   let panel;
+  //   const id = uniqueID();
 
-    const props = {
-      key: id,
-      id: id,
-      x: 10,
-      y: 320
-    };
+  //   const props = {
+  //     key: id,
+  //     id: id,
+  //     x: 10,
+  //     y: 320
+  //   };
 
-    switch (type) {
-      case "const":
-        panel = <Const {...props} />;
-        break;
-      case "time":
-        panel = <Time {...props} initPauseState={true} />;
-        break;
-      case "arithmatic":
-        panel = <Arithmatic {...props} op={"add"} />;
-        break;
-    }
+  //   switch (type) {
+  //     case "const":
+  //       panel = <Const {...props} />;
+  //       break;
+  //     case "time":
+  //       panel = <Time {...props} initPauseState={true} />;
+  //       break;
+  //     case "arithmatic":
+  //       panel = <Arithmatic {...props} op={"add"} />;
+  //       break;
+  //   }
 
-    if (panel) {
-      const tempDynNodes = dynNodes;
-      tempDynNodes.push(panel);
-      setDynNodes(tempDynNodes);
-    }
-  }
+  //   if (panel) {
+  //     const tempDynNodes = dynNodes;
+  //     tempDynNodes.push(panel);
+  //     setDynNodes(tempDynNodes);
+  //   }
+  // }
 
   return (
     <MouseContext.Provider value={[mouseX, mouseY]}>
       <ConnectorContext.Provider
         value={[connector, setConnector, connectConnector, null, dispatch]}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
-          {activeConnectorLine}
-        </svg>
+        {activeConnectorLine}
 
-        <ConnectorMap nodes={nodes} connections={connections} />
+        <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
 
         <div className="Control" onMouseUp={endConnect}>
           <Suspense fallback={"Loading"}>
@@ -243,16 +247,6 @@ function App() {
                 });
               }}
             />
-
-            {dynNodes.map(node => {
-              return node;
-            })}
-
-            <button onClick={() => newPanel("const")}>New const</button>
-            <button onClick={() => newPanel("time")}>New time</button>
-            <button onClick={() => newPanel("arithmatic")}>
-              New Arithmatic
-            </button>
           </Suspense>
         </div>
       </ConnectorContext.Provider>
