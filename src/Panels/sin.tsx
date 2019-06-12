@@ -27,13 +27,16 @@ export function Sin({ id, x, y, input }: iSin) {
     registerNode,
     dispatch
   ] = useContext(ConnectorContext);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [factor, setFactor] = useState(1);
   const [value, setValue] = useState(1);
   const [prev, setPrev] = useState(Array<number>());
 
+  const canvasX = 300;
+  const canvasY = 200;
+
   useEffect(() => {
-    setValue(Math.sin(parseFloat(input[0]) * factor));
+    setValue(Math.sin(parseFloat(input[0])));
     dispatch({
       type: "update",
       id: id,
@@ -50,10 +53,6 @@ export function Sin({ id, x, y, input }: iSin) {
     renderCanvas();
   }, [input[0]]);
 
-  const updateFactor = (e: any) => {
-    setFactor(parseFloat(e.target.value));
-  };
-
   const inputs = [
     <Input id={id} direction={"in"} index={0} value={input[0]} />
   ];
@@ -67,23 +66,17 @@ export function Sin({ id, x, y, input }: iSin) {
       const ctx = canvasRef.current.getContext("2d");
       if (ctx) {
         ctx.fillStyle = "#FFF";
-        ctx.fillRect(0, 0, 280, 100);
+        ctx.fillRect(0, 0, canvasX, canvasY);
         ctx.fillStyle = "#000";
         prev.forEach((v, i) => {
-          ctx.fillRect(i * 2, 50 + v * 40, 2, 2);
+          ctx.fillRect(i * 2, canvasY * 0.5 + v * (canvasY * 0.4), 2, 2);
         });
       }
     }
   }
 
   const controls = [
-    <canvas id={"canvas"} ref={canvasRef} width={280} height={100} />,
-    <input
-      type={"range"}
-      name={"factor"}
-      onChange={updateFactor}
-      style={{ width: "100%" }}
-    />
+    <canvas id={"canvas"} ref={canvasRef} width={canvasX} height={canvasY} />
   ];
 
   return (

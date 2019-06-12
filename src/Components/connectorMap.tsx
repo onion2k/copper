@@ -20,6 +20,7 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
       const { x1, y1, x2, y2 } = connection;
       connectionsMap.push(
         <ConnectorMapLine
+          key={`${x1}-${y1}-${x2}-${y2}`}
           title={""}
           id="Connector"
           x1={x1}

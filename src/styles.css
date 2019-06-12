@@ -2,110 +2,13 @@
 
 html,
 body {
-  padding: 20px;
   font-family: "IBM Plex Sans", sans-serif;
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
-}
-/*
-#root {
-  width: 100%;
-  height: 100%;
-}
-
-.Control {
-  position: relative;
-  min-height: 100%;
-  font-family: "PT Sans", sans-serif;
-  font-size: 14px;
   user-select: none;
 }
-
-.Panel {
-  position: absolute;
-  width: 300px;
-  background-color: #f8f8f8;
-  border: 1px solid #aaaaaa;
-  border-radius: 10px;
-  margin: 15px;
-}
-
-.Title {
-  grid-column: 1 / 3;
-  padding: 10px;
-  border-bottom: 1px solid #aaaaaa;
-  font-size: 16px;
-}
-
-.IO {
-  display: grid;
-  grid-template-columns: 150px 150px;
-  align-items: center;
-  padding: 10px 0 5px;
-  font-size: 16px;
-}
-
-.IO label {
-  position: relative;
-  margin: 0;
-  padding: 5px 15px 10px;
-}
-
-.IO label > .node {
-  position: absolute;
-  top: 5px;
-  background-color: #dddddd;
-  border: 5px solid #888888;
-  width: 10px;
-  height: 10px;
-  border-radius: 10px;
-  transition: all 0.4s;
-}
-
-.IO label:hover > .node {
-  background-color: #88ff88;
-  border: 2px solid #888888;
-  width: 16px;
-  height: 16px;
-}
-
-.IO label > .node.connecting {
-  background-color: #ff8888;
-  border: 2px solid #888888;
-  width: 16px;
-  height: 16px;
-}
-
-.IO label.input {
-  grid-column: 1 / 2;
-}
-
-.IO label.input > .node {
-  left: -10px;
-}
-
-.IO label.output {
-  grid-column: 2 / 3;
-  text-align: right;
-}
-
-.IO label.output > .node {
-  right: -10px;
-}
-
-.Description {
-  grid-column: 1 / 3;
-  margin: 0;
-  padding: 10px;
-  border-top: 1px solid #aaaaaa;
-}
-
-p {
-  padding: 0;
-  margin: 0;
-} */
 
 article {
   position: absolute;
@@ -168,6 +71,8 @@ header .indicators .indicator.flash {
   width: 100%;
   font-family: "IBM Plex Sans Condensed", sans-serif;
   font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
 }
 .knobs input[type="range"] {
   display: inline-block;
@@ -206,8 +111,8 @@ ul.knobs li input[type="radio"] {
   font-size: 0.8rem;
 }
 
-.input.connector::before,
-.output.connector::after {
+.input.connector > div,
+.output.connector > div {
   position: absolute;
   content: "";
   width: 20px;
@@ -216,12 +121,12 @@ ul.knobs li input[type="radio"] {
   border: 2px solid gray;
 }
 
-.input.connector::before {
+.input.connector > div {
   left: -12px;
   pointer-events: all;
 }
 
-.output.connector::after {
+.output.connector > div {
   right: -10px;
   pointer-events: all;
 }
@@ -240,7 +145,7 @@ ul.knobs li input[type="radio"] {
   margin-left: 20px;
   pointer-events: none;
 }
-.inputs .input::before {
+.inputs .input > div {
   background-color: #33d6ff;
 }
 
@@ -258,7 +163,7 @@ ul.knobs li input[type="radio"] {
   min-height: 30px;
   margin-right: 20px;
 }
-.outputs .output::after {
+.outputs .output > div {
   background-color: #33ff4e;
 }
 

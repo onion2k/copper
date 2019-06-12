@@ -29,13 +29,6 @@ export function Connector({ id, direction, index }: iConnector) {
         width,
         height
       } = ref.current.getBoundingClientRect() as DOMRect;
-      // registerNode({
-      //   id: id,
-      //   direction: direction,
-      //   index: index,
-      //   x: x + width / 2,
-      //   y: y + height / 2
-      // });
       dispatch({
         type: "registerNode",
         node: {

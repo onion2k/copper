@@ -35,15 +35,21 @@ export function Panel({ id, title, x, y, inputs, outputs, controls }: iPanel) {
   const [pos, setPos] = useState({ x, y });
 
   useEffect(() => {
-    dispatch({
-      type: "panelRegister",
-      id,
-      value: {
-        pos,
-        panelRef
-      }
-    });
-  }, []);
+    if (panelRef.current !== null) {
+      dispatch({
+        type: "panelRegister",
+        id,
+        value: {
+          pos,
+          panelRef
+        }
+      });
+    }
+  }, [panelRef]);
+
+  // useEffect(() => {
+
+  // }, [state])
 
   useEffect(() => {
     if (dragging) {
@@ -70,7 +76,7 @@ export function Panel({ id, title, x, y, inputs, outputs, controls }: iPanel) {
           dispatch({
             type: "panelMove",
             id: id,
-            value: delta
+            value: { x: delta.x, y: delta.y }
           });
           setDragging(false);
           setPos({ x: pos.x + delta.x, y: pos.y + delta.y });
@@ -93,29 +99,3 @@ export function Panel({ id, title, x, y, inputs, outputs, controls }: iPanel) {
     </article>
   );
 }
-
-// <article>
-//     <header>
-//       <span>Connector Panel</span>
-//       <div class="indicators">
-//         <div class="indicator yellow"></div>
-//         <div class="indicator green"></div>
-//       </div>
-//     </header>
-//     <div class="io">
-//       <ul class="inputs">
-//         <li class="input connector">input</li>
-//         <li class="input connector">input</li>
-//         <li class="input connector">input</li>
-//       </ul>
-//       <ul class="outputs">
-//         <li class="output connector">output</li>
-//       </ul>
-//     </div>
-//     <div class="controls open">
-//       <div class="knobs">
-//         <input type="range" />
-//       </div>
-//     </div>
-//     <footer>Footer content</footer>
-//   </article>

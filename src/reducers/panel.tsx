@@ -1,13 +1,10 @@
 export default class {
   static register = (state: any, action: any) => {
-    console.log(action);
+    state.panels.push(action);
     return state;
   };
 
   static move = (state: any, action: any) => {
-    // console.log("Update ", action.id, " inputs");
-    // console.log("Update ", action.id, " outputs");
-
     state.nodes
       .filter((node: any) => {
         return action.id === node.id;
@@ -30,11 +27,6 @@ export default class {
           line.y2 += action.value.y;
         }
       });
-
-    console.log(state.connections);
-    console.log(state.nodes);
-    console.log(state.inputs[action.id]);
-    console.log(state.outputs[action.id]);
 
     return state;
   };

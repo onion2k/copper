@@ -18,6 +18,7 @@ import { uniqueID } from "./uniqueID";
 
 import { reducer } from "./reducer";
 const initialState = {
+  panels: [],
   outputs: {
     time0: 0,
     const1: 0,
@@ -98,15 +99,6 @@ function App() {
     );
 
     if (start && end) {
-      const tempConnections = connections;
-      tempConnections.push({
-        x1: start.x,
-        y1: start.y,
-        x2: end.x,
-        y2: end.y
-      });
-      setConnections(tempConnections);
-
       dispatch({
         type: "connect",
         from: connector.id,
@@ -119,12 +111,6 @@ function App() {
       });
     }
   };
-
-  // const registerNode = (node: any) => {
-  //   const newNodes = nodes;
-  //   newNodes.push(node);
-  //   setNodes(newNodes);
-  // };
 
   const endConnect = () => {
     if (connector) {
@@ -149,36 +135,6 @@ function App() {
       </svg>
     );
   }
-
-  // function newPanel(type = "const") {
-  //   let panel;
-  //   const id = uniqueID();
-
-  //   const props = {
-  //     key: id,
-  //     id: id,
-  //     x: 10,
-  //     y: 320
-  //   };
-
-  //   switch (type) {
-  //     case "const":
-  //       panel = <Const {...props} />;
-  //       break;
-  //     case "time":
-  //       panel = <Time {...props} initPauseState={true} />;
-  //       break;
-  //     case "arithmatic":
-  //       panel = <Arithmatic {...props} op={"add"} />;
-  //       break;
-  //   }
-
-  //   if (panel) {
-  //     const tempDynNodes = dynNodes;
-  //     tempDynNodes.push(panel);
-  //     setDynNodes(tempDynNodes);
-  //   }
-  // }
 
   return (
     <MouseContext.Provider value={[mouseX, mouseY]}>
@@ -207,7 +163,7 @@ function App() {
             <Const id={"const1"} x={10} y={160} />
             <Arithmatic
               id={"math0"}
-              x={360}
+              x={410}
               y={10}
               input={state.inputs["math0"]}
               output={(value: number) => {
@@ -222,8 +178,8 @@ function App() {
 
             <Sin
               id={"sin0"}
-              x={710}
-              y={195}
+              x={810}
+              y={10}
               input={state.inputs["sin0"]}
               output={(value: number) => {
                 dispatch({
@@ -236,7 +192,7 @@ function App() {
 
             <Value
               id={"value0"}
-              x={710}
+              x={1210}
               y={10}
               input={state.inputs["value0"]}
               output={(value: number) => {
