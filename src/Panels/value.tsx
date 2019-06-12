@@ -29,8 +29,11 @@ export function Value({ id, x, y, input }: iValue) {
     });
   }, [input[0]]);
 
-  const io = [
-    <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />,
+  const inputs = [
+    <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />
+  ];
+
+  const outputs = [
     <Output key={id} id={id} direction={"out"} index={0} value={"Output"} />
   ];
 
@@ -40,7 +43,8 @@ export function Value({ id, x, y, input }: iValue) {
       x={x}
       y={y}
       title={`Value`}
-      io={io}
+      inputs={inputs}
+      outputs={outputs}
       controls={"Display a value from an output."}
     />
   );

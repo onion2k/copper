@@ -1,11 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans|IBM+Plex+Sans+Condensed&display=swap");
+
 html,
 body {
+  padding: 20px;
+  font-family: "IBM Plex Sans", sans-serif;
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
 }
-
+/*
 #root {
   width: 100%;
   height: 100%;
@@ -101,6 +105,188 @@ body {
 p {
   padding: 0;
   margin: 0;
+} */
+
+article {
+  position: absolute;
+  width: 350px;
+  min-height: 120px;
+  margin-bottom: 20px;
+  background-color: gray;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  grid-area: header;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: move;
+  display: flex;
+}
+header span {
+  flex: 1;
+}
+header .indicators {
+  display: flex;
+  justify-content: flex-end;
+}
+header .indicators .indicator {
+  flex: 1;
+  width: 18px;
+  height: 18px;
+  background-color: #444;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+header .indicators .indicator.yellow.on {
+  color: yellow;
+  background-color: currentcolor;
+  box-shadow: 0 0 8px currentcolor;
+}
+header .indicators .indicator.green.on {
+  color: #40ff40;
+  background-color: currentcolor;
+  box-shadow: 0 0 8px currentcolor;
+}
+header .indicators .indicator.flash {
+  animation: flash;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+.controls {
+  display: flex;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.knobs {
+  padding: 10px 20px;
+  width: 100%;
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 0.8rem;
+}
+.knobs input[type="range"] {
+  display: inline-block;
+  width: 100%;
+}
+.knobs input,
+.knobs select,
+.knobs button {
+  display: inline-block;
+  width: 100%;
+}
+.knobs button,
+.knobs select {
+  border: 0;
+  background-color: white;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+ul.knobs {
+  padding: 5px 15px;
+  list-style: none;
+}
+ul.knobs li {
+  width: 100%;
+}
+ul.knobs li input[type="radio"] {
+  width: auto;
+}
+
+.io {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "inputs outputs";
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 0.8rem;
+}
+
+.input.connector::before,
+.output.connector::after {
+  position: absolute;
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid gray;
+}
+
+.input.connector::before {
+  left: -12px;
+  pointer-events: all;
+}
+
+.output.connector::after {
+  right: -10px;
+  pointer-events: all;
+}
+
+.inputs {
+  position: relative;
+  list-style: none;
+  padding: 5px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.inputs .input {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  margin-left: 20px;
+  pointer-events: none;
+}
+.inputs .input::before {
+  background-color: #33d6ff;
+}
+
+.outputs {
+  position: relative;
+  list-style: none;
+  padding: 5px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.outputs .output {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 30px;
+  margin-right: 20px;
+}
+.outputs .output::after {
+  background-color: #33ff4e;
+}
+
+footer {
+  flex: 1 1 20px;
+  padding: 10px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 0.8rem;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #444;
+    box-shadow: none;
+  }
+  49% {
+    background-color: #444;
+    box-shadow: none;
+  }
+  50% {
+    background-color: currentcolor;
+    box-shadow: 0 0 8px currentcolor;
+  }
+  100% {
+    background-color: currentcolor;
+    box-shadow: 0 0 8px currentcolor;
+  }
 }
 
 svg {

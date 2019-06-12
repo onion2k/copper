@@ -12,9 +12,11 @@ export function Input({ id, direction, index, value }: iInput) {
   const display = typeof value === "number" ? value.toFixed(3) : value;
 
   return (
-    <label key={`input-${id}-${direction}-${index}`} className="input">
-      ({display})
-      <Connector id={id} direction={direction} index={index} />
-    </label>
+    <li className="input connector">
+      <label key={`input-${id}-${direction}-${index}`} className="input">
+        ({display})
+        <Connector id={id} direction={direction} index={index} />
+      </label>
+    </li>
   );
 }

@@ -12,9 +12,11 @@ interface iOutput {
 export function Output({ id, direction, index, value }: iOutput) {
   const display = typeof value === "number" ? value.toFixed(3) : value;
   return (
-    <label key={`output-${id}-${direction}-${index}`} className="output">
-      ({display})
-      <Connector id={id} direction={direction} index={index} />
-    </label>
+    <li className="output connector">
+      <label key={`output-${id}-${direction}-${index}`} className="output">
+        ({display})
+        <Connector id={id} direction={direction} index={index} />
+      </label>
+    </li>
   );
 }

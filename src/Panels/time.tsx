@@ -45,7 +45,7 @@ export function Time({ id, x, y, initPauseState }: iTime) {
     }
   });
 
-  const io = (
+  const outputs = [
     <Output
       key={id}
       id={id}
@@ -53,8 +53,7 @@ export function Time({ id, x, y, initPauseState }: iTime) {
       index={0}
       value={value.toFixed(3)}
     />
-  );
-
+  ];
   const controls = (
     <button onClick={() => setPause(!pause)} style={{ width: "100%" }}>
       Pause
@@ -62,6 +61,14 @@ export function Time({ id, x, y, initPauseState }: iTime) {
   );
 
   return (
-    <Panel id={id} x={x} y={y} title={`Timer`} io={io} controls={controls} />
+    <Panel
+      id={id}
+      x={x}
+      y={y}
+      title={`Timer`}
+      inputs={null}
+      outputs={outputs}
+      controls={controls}
+    />
   );
 }

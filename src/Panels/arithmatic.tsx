@@ -40,10 +40,13 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
     });
   }, [input[0], input[1], op]);
 
-  const io = [
-    <Input id={id} direction={"in"} index={0} value={input[0]} />,
-    <Output key={id} id={id} direction={"out"} index={0} value={value} />,
-    <Input id={id} direction={"in"} index={1} value={input[1]} />
+  const inputs = [
+    <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />,
+    <Input id={`${id}`} direction={"in"} index={1} value={input[1]} />
+  ];
+
+  const outputs = [
+    <Output key={id} id={id} direction={"out"} index={0} value={value} />
   ];
 
   const controls = `Add input 1 and input 2.`;
@@ -54,7 +57,8 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
       x={x}
       y={y}
       title={`Math.${op}`}
-      io={io}
+      inputs={inputs}
+      outputs={outputs}
       controls={controls}
     />
   );

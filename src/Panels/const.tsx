@@ -33,9 +33,9 @@ export default function Const({ id, x, y }: iConst) {
     setValue(parseFloat(e.target.value));
   };
 
-  const io = (
+  const outputs = [
     <Output key={id} id={id} direction={"out"} index={0} value={value} />
-  );
+  ];
 
   const controls = (
     <input
@@ -47,6 +47,14 @@ export default function Const({ id, x, y }: iConst) {
   );
 
   return (
-    <Panel id={id} x={x} y={y} title={`Constant`} io={io} controls={controls} />
+    <Panel
+      id={id}
+      x={x}
+      y={y}
+      title={`Constant`}
+      inputs={null}
+      outputs={outputs}
+      controls={controls}
+    />
   );
 }

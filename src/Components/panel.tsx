@@ -7,7 +7,8 @@ interface iPanel {
   title: string;
   x: number;
   y: number;
-  io: any;
+  inputs: any;
+  outputs: any;
   controls: any;
 }
 
@@ -16,7 +17,7 @@ interface iInitPos {
   y: number;
 }
 
-export function Panel({ id, title, x, y, io, controls }: iPanel) {
+export function Panel({ id, title, x, y, inputs, outputs, controls }: iPanel) {
   const [
     connector,
     setConnector,
@@ -53,12 +54,12 @@ export function Panel({ id, title, x, y, io, controls }: iPanel) {
   }, [dragging, mouseX, mouseY]);
 
   return (
-    <div
+    <article
       ref={panelRef}
       className="Panel"
       style={{ top: pos.y + delta.y, left: pos.x + delta.x }}
     >
-      <div
+      <header
         className="Title"
         onMouseDown={(e: React.MouseEvent) => {
           setDragging(true);
@@ -76,10 +77,45 @@ export function Panel({ id, title, x, y, io, controls }: iPanel) {
           setDelta({ x: 0, y: 0 });
         }}
       >
-        {title}
+        <span>{title}</span>
+        <div className="indicators">
+          <div className="indicator yellow" />
+          <div className="indicator green" />
+        </div>
+      </header>
+      <div className="io">
+        <ul className="inputs">{inputs}</ul>
+        <ul className="outputs">{outputs}</ul>
       </div>
-      <div className="IO">{io}</div>
-      <p className="Description">{controls}</p>
-    </div>
+      <div className="controls">
+        <div className="knobs">{controls}</div>
+      </div>
+    </article>
   );
 }
+
+// <article>
+//     <header>
+//       <span>Connector Panel</span>
+//       <div class="indicators">
+//         <div class="indicator yellow"></div>
+//         <div class="indicator green"></div>
+//       </div>
+//     </header>
+//     <div class="io">
+//       <ul class="inputs">
+//         <li class="input connector">input</li>
+//         <li class="input connector">input</li>
+//         <li class="input connector">input</li>
+//       </ul>
+//       <ul class="outputs">
+//         <li class="output connector">output</li>
+//       </ul>
+//     </div>
+//     <div class="controls open">
+//       <div class="knobs">
+//         <input type="range" />
+//       </div>
+//     </div>
+//     <footer>Footer content</footer>
+//   </article>

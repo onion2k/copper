@@ -54,8 +54,11 @@ export function Sin({ id, x, y, input }: iSin) {
     setFactor(parseFloat(e.target.value));
   };
 
-  const io = [
-    <Input id={id} direction={"in"} index={0} value={input[0]} />,
+  const inputs = [
+    <Input id={id} direction={"in"} index={0} value={input[0]} />
+  ];
+
+  const outputs = [
     <Output key={id} id={id} direction={"out"} index={0} value={value} />
   ];
 
@@ -84,6 +87,14 @@ export function Sin({ id, x, y, input }: iSin) {
   ];
 
   return (
-    <Panel id={id} x={x} y={y} title={`Sin`} io={io} controls={controls} />
+    <Panel
+      id={id}
+      x={x}
+      y={y}
+      title={`Sin`}
+      inputs={inputs}
+      outputs={outputs}
+      controls={controls}
+    />
   );
 }
