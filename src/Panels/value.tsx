@@ -23,7 +23,7 @@ export function Value({ id, x, y, input }: iValue) {
 
   useEffect(() => {
     dispatch({
-      type: "update",
+      type: "recalculate",
       id: id,
       value: input[0]
     });

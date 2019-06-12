@@ -23,7 +23,7 @@ export default function Const({ id, x, y }: iConst) {
 
   useEffect(() => {
     dispatch({
-      type: "update",
+      type: "recalculate",
       id: id,
       value: value
     });

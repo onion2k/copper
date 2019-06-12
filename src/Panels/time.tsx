@@ -33,7 +33,7 @@ export function Time({ id, x, y, initPauseState }: iTime) {
 
   useEffect(() => {
     dispatch({
-      type: "update",
+      type: "recalculate",
       id: id,
       value: value
     });

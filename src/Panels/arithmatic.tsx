@@ -34,7 +34,7 @@ export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
         break;
     }
     dispatch({
-      type: "update",
+      type: "recalculate",
       id: id,
       value: value
     });

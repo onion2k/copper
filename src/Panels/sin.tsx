@@ -38,7 +38,7 @@ export function Sin({ id, x, y, input }: iSin) {
   useEffect(() => {
     setValue(Math.sin(parseFloat(input[0])));
     dispatch({
-      type: "update",
+      type: "recalculate",
       id: id,
       value: value
     });
