@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
 
 interface iPanel {
@@ -10,6 +11,7 @@ interface iPanel {
   inputs: any;
   outputs: any;
   controls: any;
+  nopadding?: boolean;
 }
 
 interface iInitPos {
@@ -17,14 +19,21 @@ interface iInitPos {
   y: number;
 }
 
-export function Panel({ id, title, x, y, inputs, outputs, controls }: iPanel) {
-  const [
-    connector,
-    setConnector,
-    connectConnector,
-    registerNode,
-    dispatch
-  ] = useContext(ConnectorContext);
+export function Panel({
+  id,
+  title,
+  x,
+  y,
+  inputs,
+  outputs,
+  controls,
+  nopadding
+}: iPanel) {
+  const [connector, setConnector, connectConnector] = useContext(
+    ConnectorContext
+  );
+
+  const dispatch = useContext(DispatchContext);
 
   const [mouseX, mouseY] = useContext(MouseContext);
 
@@ -94,7 +103,9 @@ export function Panel({ id, title, x, y, inputs, outputs, controls }: iPanel) {
         <ul className="outputs">{outputs}</ul>
       </div>
       <div className="controls">
-        <div className="knobs">{controls}</div>
+        <div className={`knobs ${nopadding ? "nopadding" : ""}`}>
+          {controls}
+        </div>
       </div>
     </article>
   );

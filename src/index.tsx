@@ -4,6 +4,7 @@ import { render } from "react-dom";
 import useMousePosition from "./Hooks/useMousePosition";
 import { ConnectorContext } from "./Contexts/connector";
 import { MouseContext } from "./Contexts/mouse";
+import { DispatchContext } from "./Contexts/dispatch";
 
 import Const from "./Panels/const";
 import { Time } from "./Panels/time";
@@ -137,76 +138,81 @@ function App() {
   }
 
   return (
-    <MouseContext.Provider value={[mouseX, mouseY]}>
-      <ConnectorContext.Provider
-        value={[connector, setConnector, connectConnector, null, dispatch]}
-      >
-        {activeConnectorLine}
+    <DispatchContext.Provider value={dispatch}>
+      <MouseContext.Provider value={[mouseX, mouseY]}>
+        <ConnectorContext.Provider
+          value={[connector, setConnector, connectConnector]}
+        >
+          {activeConnectorLine}
 
-        <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
+          <ConnectorMap
+            nodes={state.nodes}
+            connections={state.connectionLines}
+          />
 
-        <div className="Control" onMouseUp={endConnect}>
-          <Suspense fallback={"Loading"}>
-            <Time
-              id={"time0"}
-              x={10}
-              y={10}
-              output={(value: number) => {
-                dispatch({
-                  type: "update",
-                  id: "time0",
-                  value: value
-                });
-              }}
-              initPauseState={true}
-            />
-            <Const id={"const1"} x={10} y={160} />
-            <Arithmatic
-              id={"math0"}
-              x={410}
-              y={10}
-              input={state.inputs["math0"]}
-              output={(value: number) => {
-                dispatch({
-                  type: "update",
-                  id: "math0",
-                  value: value
-                });
-              }}
-              op="multiply"
-            />
+          <div className="Control" onMouseUp={endConnect}>
+            <Suspense fallback={"Loading"}>
+              <Time
+                id={"time0"}
+                x={10}
+                y={10}
+                output={(value: number) => {
+                  dispatch({
+                    type: "update",
+                    id: "time0",
+                    value: value
+                  });
+                }}
+                initPauseState={true}
+              />
+              <Const id={"const1"} x={10} y={160} />
+              <Arithmatic
+                id={"math0"}
+                x={410}
+                y={10}
+                input={state.inputs["math0"]}
+                output={(value: number) => {
+                  dispatch({
+                    type: "update",
+                    id: "math0",
+                    value: value
+                  });
+                }}
+                op="multiply"
+              />
 
-            <Sin
-              id={"sin0"}
-              x={810}
-              y={10}
-              input={state.inputs["sin0"]}
-              output={(value: number) => {
-                dispatch({
-                  type: "update",
-                  id: "sin0",
-                  value: value
-                });
-              }}
-            />
+              <Sin
+                id={"sin0"}
+                x={810}
+                y={10}
+                input={state.inputs["sin0"]}
+                output={(value: number) => {
+                  dispatch({
+                    type: "update",
+                    id: "sin0",
+                    value: value
+                  });
+                }}
+              />
 
-            <Value
-              id={"value0"}
-              x={1210}
-              y={10}
-              input={state.inputs["value0"]}
-              output={(value: number) => {
-                dispatch({
-                  type: "update",
-                  id: "value0",
-                  value: value
-                });
-              }}
-            />
-          </Suspense>
-        </div>
-      </ConnectorContext.Provider>
-    </MouseContext.Provider>
+              <Value
+                id={"value0"}
+                x={1210}
+                y={10}
+                input={state.inputs["value0"]}
+                output={(value: number) => {
+                  dispatch({
+                    type: "update",
+                    id: "value0",
+                    value: value
+                  });
+                }}
+              />
+            </Suspense>
+          </div>
+        </ConnectorContext.Provider>
+      </MouseContext.Provider>
+    </DispatchContext.Provider>
   );
 }
 

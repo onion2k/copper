@@ -74,6 +74,13 @@ header .indicators .indicator.flash {
   display: flex;
   flex-direction: column;
 }
+.knobs.nopadding {
+  padding: 0;
+}
+.knobs.nopadding > canvas {
+  border-radius: 0 0 10px 10px;
+}
+
 .knobs input[type="range"] {
   display: inline-block;
   width: 100%;

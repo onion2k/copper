@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
 
 interface iConnector {
@@ -9,13 +10,11 @@ interface iConnector {
 }
 
 export function Connector({ id, direction, index }: iConnector) {
-  const [
-    connector,
-    setConnector,
-    connectConnector,
-    registerNode,
-    dispatch
-  ] = useContext(ConnectorContext);
+  const [connector, setConnector, connectConnector] = useContext(
+    ConnectorContext
+  );
+
+  const dispatch = useContext(DispatchContext);
 
   const [mouseX, mouseY] = useContext(MouseContext);
 

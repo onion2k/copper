@@ -6,6 +6,7 @@ import React, {
   useContext
 } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { DispatchContext } from "../Contexts/dispatch";
 import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
@@ -20,13 +21,11 @@ interface iSin {
 }
 
 export function Sin({ id, x, y, input }: iSin) {
-  const [
-    connector,
-    setConnector,
-    connectConnector,
-    registerNode,
-    dispatch
-  ] = useContext(ConnectorContext);
+  const [connector, setConnector, connectConnector] = useContext(
+    ConnectorContext
+  );
+
+  const dispatch = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [value, setValue] = useState(1);
@@ -88,6 +87,7 @@ export function Sin({ id, x, y, input }: iSin) {
       inputs={inputs}
       outputs={outputs}
       controls={controls}
+      nopadding
     />
   );
 }

@@ -6,6 +6,7 @@ import React, {
   useContext
 } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { DispatchContext } from "../Contexts/dispatch";
 import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
@@ -20,13 +21,12 @@ interface iTime {
 }
 
 export function Time({ id, x, y, initPauseState }: iTime) {
-  const [
-    connector,
-    setConnector,
-    connectConnector,
-    registerNode,
-    dispatch
-  ] = useContext(ConnectorContext);
+  const [connector, setConnector, connectConnector] = useContext(
+    ConnectorContext
+  );
+
+  const dispatch = useContext(DispatchContext);
+
   const [value, setValue] = useState(0);
   const [pause, setPause] = useState(initPauseState);
   const [connect, setConnect] = useState(false);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
@@ -10,13 +11,11 @@ interface iConst {
 }
 
 export default function Const({ id, x, y }: iConst) {
-  const [
-    connector,
-    setConnector,
-    connectConnector,
-    registerNode,
-    dispatch
-  ] = useContext(ConnectorContext);
+  const [connector, setConnector, connectConnector] = useContext(
+    ConnectorContext
+  );
+
+  const dispatch = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
   const [connect, setConnect] = useState(false);

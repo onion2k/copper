@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { ConnectorContext } from "../Contexts/connector";
+import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
@@ -13,13 +14,11 @@ interface iValue {
 }
 
 export function Value({ id, x, y, input }: iValue) {
-  const [
-    connector,
-    setConnector,
-    connectConnector,
-    registerNode,
-    dispatch
-  ] = useContext(ConnectorContext);
+  const [connector, setConnector, connectConnector] = useContext(
+    ConnectorContext
+  );
+
+  const dispatch = useContext(DispatchContext);
 
   useEffect(() => {
     dispatch({
