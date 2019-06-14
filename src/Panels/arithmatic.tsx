@@ -11,10 +11,9 @@ interface iArithmatic {
   y: number;
   op: string;
   input?: any;
-  output?: any;
 }
 
-export function Arithmatic({ id, x, y, op, input, output }: iArithmatic) {
+export function Arithmatic({ id, x, y, op, input }: iArithmatic) {
   const [connector, setConnector, connectConnector] = useContext(
     ConnectorContext
   );

@@ -10,7 +10,6 @@ interface iValue {
   x: number;
   y: number;
   input?: any;
-  output?: any;
 }
 
 export function Value({ id, x, y, input }: iValue) {

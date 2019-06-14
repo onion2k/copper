@@ -161,62 +161,22 @@ function App() {
 
           <div className="Control" onMouseUp={endConnect}>
             <Suspense fallback={"Loading"}>
-              <Time
-                id={time0id.current}
-                x={10}
-                y={10}
-                output={(value: number) => {
-                  dispatch({
-                    type: "update",
-                    id: time0id,
-                    value: value
-                  });
-                }}
-                initPauseState={true}
-              />
+              <Time id={time0id.current} x={10} y={10} initPauseState={true} />
               <Const id={"const1"} x={10} y={160} />
               <Arithmatic
                 id={"math0"}
                 x={410}
                 y={10}
                 input={state.inputs["math0"]}
-                output={(value: number) => {
-                  dispatch({
-                    type: "update",
-                    id: "math0",
-                    value: value
-                  });
-                }}
                 op="multiply"
               />
-              {/*
-              <Sin
-                id={"sin0"}
-                x={810}
-                y={10}
-                input={state.inputs["sin0"]}
-                output={(value: number) => {
-                  dispatch({
-                    type: "update",
-                    id: "sin0",
-                    value: value
-                  });
-                }}
-              />
-
+              <Sin id={"sin0"} x={810} y={10} input={state.inputs["sin0"]} />
               <Value
                 id={"value0"}
                 x={1210}
                 y={10}
                 input={state.inputs["value0"]}
-                output={(value: number) => {
-                  dispatch({
-                    type: "update",
-                    id: "value0",
-                    value: value
-                  });
-                }}
-              /> */}
+              />
             </Suspense>
           </div>
         </ConnectorContext.Provider>

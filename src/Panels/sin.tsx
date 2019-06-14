@@ -17,7 +17,6 @@ interface iSin {
   x: number;
   y: number;
   input?: any;
-  output?: any;
 }
 
 export function Sin({ id, x, y, input }: iSin) {
