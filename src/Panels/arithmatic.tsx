@@ -10,34 +10,53 @@ interface iArithmatic {
   x: number;
   y: number;
   op: string;
+  state: any;
 }
 
-export function Arithmatic({ id, x, y, op }: iArithmatic) {
+export function Arithmatic({ id, x, y, op, state }: iArithmatic) {
   const dispatch = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
 
-  const input = [0, 0];
+  useEffect(() => {
+    dispatch({
+      type: "panel/register",
+      id: id,
+      value: [0, 1]
+    });
+  }, []);
 
   useEffect(() => {
-    switch (op) {
-      case "add":
-        setValue(input[0] + input[1]);
-        break;
-      case "multiply":
-        setValue(input[0] * input[1]);
-        break;
+    if (state.inputs[id]) {
+      switch (op) {
+        case "add":
+          setValue(state.inputs[id][0] + state.inputs[id][1]);
+          break;
+        case "multiply":
+          setValue(state.inputs[id][0] * state.inputs[id][1]);
+          break;
+      }
+      dispatch({
+        type: "recalculate",
+        id: id,
+        value: value
+      });
     }
-    dispatch({
-      type: "recalculate",
-      id: id,
-      value: value
-    });
-  }, [input[0], input[1], op]);
+  }, [state.inputs[id], op]);
 
   const inputs = [
-    <Input id={id} direction={"in"} index={0} value={input[0]} />,
-    <Input id={id} direction={"in"} index={1} value={input[1]} />
+    <Input
+      id={id}
+      direction={"in"}
+      index={0}
+      value={state.inputs[id] ? state.inputs[id][0] : null}
+    />,
+    <Input
+      id={id}
+      direction={"in"}
+      index={1}
+      value={state.inputs[id] ? state.inputs[id][1] : null}
+    />
   ];
 
   const outputs = [

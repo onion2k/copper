@@ -57,51 +57,51 @@ function App() {
   // const [connections, setConnections] = useState(Array<Connection>());
   const [connector, setConnector] = useState<Node | null>(null);
 
-  const connectConnector = (to: {
-    id: string;
-    direction: string;
-    index: number;
-    key: string;
-    x: number;
-    y: number;
-  }) => {
-    if (!connector) {
-      return;
-    }
+  // const connectConnector = (to: {
+  //   id: string;
+  //   direction: string;
+  //   index: number;
+  //   key: string;
+  //   x: number;
+  //   y: number;
+  // }) => {
+  //   if (!connector) {
+  //     return;
+  //   }
 
-    const { id, direction, index } = connector;
+  //   const { id, direction, index } = connector;
 
-    const start = state.nodes.find(
-      (node: { id: string; direction: string; index: number }) => {
-        return (
-          node.id === id && node.direction === direction && node.index === index
-        );
-      }
-    );
+  //   const start = state.nodes.find(
+  //     (node: { id: string; direction: string; index: number }) => {
+  //       return (
+  //         node.id === id && node.direction === direction && node.index === index
+  //       );
+  //     }
+  //   );
 
-    const end = state.nodes.find(
-      (node: { id: string; direction: string; index: number }) => {
-        return (
-          node.id === to.id &&
-          node.direction === to.direction &&
-          node.index === to.index
-        );
-      }
-    );
+  //   const end = state.nodes.find(
+  //     (node: { id: string; direction: string; index: number }) => {
+  //       return (
+  //         node.id === to.id &&
+  //         node.direction === to.direction &&
+  //         node.index === to.index
+  //       );
+  //     }
+  //   );
 
-    if (start && end) {
-      dispatch({
-        type: "connect",
-        from: connector.id,
-        to: to.id,
-        index: to.index,
-        x1: start.x,
-        y1: start.y,
-        x2: end.x,
-        y2: end.y
-      });
-    }
-  };
+  //   if (start && end) {
+  //     dispatch({
+  //       type: "connector/connect",
+  //       from: connector.id,
+  //       to: to.id,
+  //       index: to.index,
+  //       x1: start.x,
+  //       y1: start.y,
+  //       x2: end.x,
+  //       y2: end.y
+  //     });
+  //   }
+  // };
 
   const endConnect = () => {
     if (connector) {
@@ -136,26 +136,29 @@ function App() {
   return (
     <DispatchContext.Provider value={dispatch}>
       <MouseContext.Provider value={[mouseX, mouseY]}>
-        <ConnectorContext.Provider
+        {/* <ConnectorContext.Provider
           value={[connector, setConnector, connectConnector]}
-        >
-          {activeConnectorLine}
+        > */}
+        {activeConnectorLine}
 
-          <ConnectorMap
-            nodes={state.nodes}
-            connections={state.connectionLines}
-          />
+        <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
 
-          <div className="Control" onMouseUp={endConnect}>
-            <Suspense fallback={"Loading"}>
-              <Time id={time0.current} x={10} y={10} initPauseState={true} />
-              <Const id={const0.current} x={10} y={160} />
-              <Arithmatic id={math0.current} x={410} y={10} op="multiply" />
-              <Sin id={sin0.current} x={810} y={10} />
-              <Value id={value0.current} x={1210} y={10} />
-            </Suspense>
-          </div>
-        </ConnectorContext.Provider>
+        <div className="Control" onMouseUp={endConnect}>
+          <Suspense fallback={"Loading"}>
+            <Time id={time0.current} x={10} y={10} initPauseState={true} />
+            <Const id={const0.current} x={10} y={160} />
+            <Arithmatic
+              id={math0.current}
+              x={410}
+              y={10}
+              op="multiply"
+              state={state}
+            />
+            <Sin id={sin0.current} x={810} y={10} />
+            <Value id={value0.current} x={1210} y={10} />
+          </Suspense>
+        </div>
+        {/* </ConnectorContext.Provider> */}
       </MouseContext.Provider>
     </DispatchContext.Provider>
   );

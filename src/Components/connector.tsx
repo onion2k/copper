@@ -29,7 +29,7 @@ export function Connector({ id, direction, index }: iConnector) {
         height
       } = ref.current.getBoundingClientRect() as DOMRect;
       dispatch({
-        type: "registerNode",
+        type: "connector/register",
         node: {
           id,
           direction,
@@ -42,37 +42,37 @@ export function Connector({ id, direction, index }: iConnector) {
   }, [ref]);
 
   const startConnect = () => {
-    if (ref.current !== null) {
-      const {
-        x,
-        y,
-        width,
-        height
-      } = ref.current.getBoundingClientRect() as DOMRect;
-      const c = {
-        x: x + width / 2,
-        y: y + height / 2,
-        id: id,
-        direction: direction,
-        index: index,
-        key: `${id}-${direction}-${index}`
-      };
-      setConnector(c);
-    }
+    // if (ref.current !== null) {
+    //   const {
+    //     x,
+    //     y,
+    //     width,
+    //     height
+    //   } = ref.current.getBoundingClientRect() as DOMRect;
+    //   const c = {
+    //     x: x + width / 2,
+    //     y: y + height / 2,
+    //     id: id,
+    //     direction: direction,
+    //     index: index,
+    //     key: `${id}-${direction}-${index}`
+    //   };
+    //   setConnector(c);
+    // }
   };
 
   const endConnect = (e: any) => {
     e.preventDefault();
-    if (connector) {
-      const c = {
-        id: id,
-        direction: direction,
-        index: index,
-        key: `${id}-${direction}-${index}`
-      };
-      connectConnector(c);
-      setConnector(null);
-    }
+    // if (connector) {
+    //   const c = {
+    //     id: id,
+    //     direction: direction,
+    //     index: index,
+    //     key: `${id}-${direction}-${index}`
+    //   };
+    //   connectConnector(c);
+    //   setConnector(null);
+    // }
   };
 
   return (

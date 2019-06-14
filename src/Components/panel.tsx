@@ -62,7 +62,7 @@ export function Panel({
         }}
         onMouseUp={e => {
           dispatch({
-            type: "panelMove",
+            type: "panel/move",
             id: id,
             value: { x: delta.x, y: delta.y }
           });
