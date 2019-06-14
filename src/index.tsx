@@ -134,11 +134,13 @@ function App() {
   const sin0 = useRef(uniqueID());
   const value0 = useRef(uniqueID());
 
+  const const1 = useRef(uniqueID());
+  const value1 = useRef(uniqueID());
+
   return (
     <DispatchContext.Provider value={dispatch}>
       <MouseContext.Provider value={[mouseX, mouseY]}>
         <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
-
         <div
           className="Control"
           onMouseUp={() => {
@@ -146,7 +148,7 @@ function App() {
           }}
         >
           <Suspense fallback={"Loading"}>
-            <Time id={time0.current} x={10} y={10} initPauseState={true} />
+            {/* <Time id={time0.current} x={10} y={10} initPauseState={true} />
             <Const id={const0.current} x={10} y={160} />
             <Arithmatic
               id={math0.current}
@@ -156,7 +158,10 @@ function App() {
               state={state}
             />
             <Sin id={sin0.current} x={810} y={10} />
-            <Value id={value0.current} x={1210} y={10} />
+            <Value id={value0.current} x={1210} y={10} /> */}
+
+            <Const id={const1.current} x={10} y={160} />
+            <Value id={value1.current} x={510} y={160} />
           </Suspense>
         </div>
       </MouseContext.Provider>
