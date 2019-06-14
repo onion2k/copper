@@ -29,10 +29,6 @@ export function Panel({
   controls,
   nopadding
 }: iPanel) {
-  const [connector, setConnector, connectConnector] = useContext(
-    ConnectorContext
-  );
-
   const dispatch = useContext(DispatchContext);
 
   const [mouseX, mouseY] = useContext(MouseContext);
@@ -56,10 +52,6 @@ export function Panel({
     }
   }, [panelRef]);
 
-  // useEffect(() => {
-
-  // }, [state])
-
   useEffect(() => {
     if (dragging) {
       const deltaX = mouseX - initPos.x;
@@ -79,7 +71,6 @@ export function Panel({
         onMouseDown={(e: React.MouseEvent) => {
           setDragging(true);
           setInitPos({ x: e.clientX, y: e.clientY });
-          console.log("down", initPos, pos);
         }}
         onMouseUp={e => {
           dispatch({

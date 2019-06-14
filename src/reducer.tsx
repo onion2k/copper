@@ -27,6 +27,7 @@ export function reducer(state: any, action: any) {
        * Update the input if there's a registered connection
        */
       connection = newState.connections[action.id];
+
       if (connection) {
         newState.inputs[connection.id][connection.index] = action.value;
       }
@@ -41,7 +42,7 @@ export function reducer(state: any, action: any) {
       newState.connectionsNew[action.from] = action.to;
       return newState;
     case "register":
-      newState.inputs[action.id] = [];
+      newState.inputs[action.id] = action.value;
       return newState;
       break;
     case "registerNode":

@@ -70,8 +70,7 @@ function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const [nodes, setNodes] = useState(Array<Node>());
-  const [connections, setConnections] = useState(Array<Connection>());
+  // const [connections, setConnections] = useState(Array<Connection>());
   const [connector, setConnector] = useState<Node | null>(null);
 
   const connectConnector = (to: {
@@ -144,7 +143,11 @@ function App() {
     );
   }
 
-  const time0id = useRef(uniqueID());
+  const time0 = useRef(uniqueID());
+  const const0 = useRef(uniqueID());
+  const math0 = useRef(uniqueID());
+  const sin0 = useRef(uniqueID());
+  const value0 = useRef(uniqueID());
 
   return (
     <DispatchContext.Provider value={dispatch}>
@@ -161,22 +164,17 @@ function App() {
 
           <div className="Control" onMouseUp={endConnect}>
             <Suspense fallback={"Loading"}>
-              <Time id={time0id.current} x={10} y={10} initPauseState={true} />
-              <Const id={"const1"} x={10} y={160} />
+              <Time id={time0.current} x={10} y={10} initPauseState={true} />
+              <Const id={const0.current} x={10} y={160} />
               <Arithmatic
-                id={"math0"}
+                id={math0.current}
                 x={410}
                 y={10}
-                input={state.inputs["math0"]}
+                input={[0, 0]}
                 op="multiply"
               />
-              <Sin id={"sin0"} x={810} y={10} input={state.inputs["sin0"]} />
-              <Value
-                id={"value0"}
-                x={1210}
-                y={10}
-                input={state.inputs["value0"]}
-              />
+              <Sin id={sin0.current} x={810} y={10} input={[0, 0]} />
+              <Value id={value0.current} x={1210} y={10} input={[0]} />
             </Suspense>
           </div>
         </ConnectorContext.Provider>

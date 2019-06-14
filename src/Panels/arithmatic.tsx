@@ -18,6 +18,14 @@ export function Arithmatic({ id, x, y, op, input }: iArithmatic) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
+    dispatch({
+      type: "panelRegister",
+      id,
+      value: input
+    });
+  }, []);
+
+  useEffect(() => {
     switch (op) {
       case "add":
         setValue(parseFloat(input[0]) + parseFloat(input[1]));
