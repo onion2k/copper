@@ -54,8 +54,9 @@ function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
   // const [connections, setConnections] = useState(Array<Connection>());
-  const [connector, setConnector] = useState<Node | null>(null);
+  // const [connector, setConnector] = useState<Node | null>(null);
 
   // const connectConnector = (to: {
   //   id: string;
@@ -103,29 +104,29 @@ function App() {
   //   }
   // };
 
-  const endConnect = () => {
-    if (connector) {
-      setConnector(null);
-    }
-  };
+  // const endConnect = () => {
+  //   if (connector) {
+  //     setConnector(null);
+  //   }
+  // };
 
-  let activeConnectorLine = null;
-  if (connector) {
-    // disconnect if input, multiple if output?
-    // this happens on every render...
-    activeConnectorLine = (
-      <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
-        <ConnectorMapLine
-          id={"active"}
-          title={"title"}
-          x1={connector.x + window.scrollX}
-          y1={connector.y + window.scrollY}
-          x2={mouseX}
-          y2={mouseY}
-        />
-      </svg>
-    );
-  }
+  // let activeConnectorLine = null;
+  // if (connector) {
+  //   // disconnect if input, multiple if output?
+  //   // this happens on every render...
+  //   activeConnectorLine = (
+  //     <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+  //       <ConnectorMapLine
+  //         id={"active"}
+  //         title={"title"}
+  //         x1={connector.x + window.scrollX}
+  //         y1={connector.y + window.scrollY}
+  //         x2={mouseX}
+  //         y2={mouseY}
+  //       />
+  //     </svg>
+  //   );
+  // }
 
   const time0 = useRef(uniqueID());
   const const0 = useRef(uniqueID());
@@ -136,14 +137,14 @@ function App() {
   return (
     <DispatchContext.Provider value={dispatch}>
       <MouseContext.Provider value={[mouseX, mouseY]}>
-        {/* <ConnectorContext.Provider
-          value={[connector, setConnector, connectConnector]}
-        > */}
-        {activeConnectorLine}
-
         <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
 
-        <div className="Control" onMouseUp={endConnect}>
+        <div
+          className="Control"
+          onMouseUp={() => {
+            //dispatch end connect
+          }}
+        >
           <Suspense fallback={"Loading"}>
             <Time id={time0.current} x={10} y={10} initPauseState={true} />
             <Const id={const0.current} x={10} y={160} />
@@ -158,7 +159,6 @@ function App() {
             <Value id={value0.current} x={1210} y={10} />
           </Suspense>
         </div>
-        {/* </ConnectorContext.Provider> */}
       </MouseContext.Provider>
     </DispatchContext.Provider>
   );
