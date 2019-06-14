@@ -1,13 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useLayoutEffect,
-  useContext
-} from "react";
-import { ConnectorContext } from "../Contexts/connector";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
-import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
@@ -20,10 +12,6 @@ interface iSin {
 }
 
 export function Sin({ id, x, y, input }: iSin) {
-  const [connector, setConnector, connectConnector] = useContext(
-    ConnectorContext
-  );
-
   const dispatch = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);

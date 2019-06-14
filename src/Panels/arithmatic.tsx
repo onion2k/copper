@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ConnectorContext } from "../Contexts/connector";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
@@ -14,9 +13,6 @@ interface iArithmatic {
 }
 
 export function Arithmatic({ id, x, y, op, input }: iArithmatic) {
-  const [connector, setConnector, connectConnector] = useContext(
-    ConnectorContext
-  );
   const dispatch = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);

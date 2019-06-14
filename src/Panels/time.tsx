@@ -54,11 +54,7 @@ export function Time({ id, x, y, initPauseState }: iTime) {
     />
   ];
 
-  const controls = (
-    <button onClick={() => setPause(!pause)} style={{ width: "100%" }}>
-      Pause
-    </button>
-  );
+  const controls = <button onClick={() => setPause(!pause)}>Pause</button>;
 
   return (
     <Panel
