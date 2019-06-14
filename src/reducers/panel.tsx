@@ -1,6 +1,8 @@
 export default class {
   static register = (state: any, action: any) => {
     state.panels.push(action);
+    state.inputs[action.id] = action.value;
+    console.log(action);
     return state;
   };
 

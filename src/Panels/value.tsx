@@ -1,18 +1,21 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
 
+import { uniqueID } from "../uniqueID";
+
 interface iValue {
   id: string;
   x: number;
   y: number;
-  input?: any;
 }
 
-export function Value({ id, x, y, input }: iValue) {
+export function Value({ id, x, y }: iValue) {
   const dispatch = useContext(DispatchContext);
+
+  const input = [0];
 
   useEffect(() => {
     dispatch({
@@ -22,12 +25,20 @@ export function Value({ id, x, y, input }: iValue) {
     });
   }, [input[0]]);
 
+  const outputRef = useRef(uniqueID());
+
   const inputs = [
     <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />
   ];
 
   const outputs = [
-    <Output key={id} id={id} direction={"out"} index={0} value={"Output"} />
+    <Output
+      key={outputRef.current}
+      id={outputRef.current}
+      direction={"out"}
+      index={0}
+      value={"Output"}
+    />
   ];
 
   return (

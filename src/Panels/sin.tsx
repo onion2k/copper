@@ -4,14 +4,15 @@ import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
 
+import { uniqueID } from "../uniqueID";
+
 interface iSin {
   id: string;
   x: number;
   y: number;
-  input?: any;
 }
 
-export function Sin({ id, x, y, input }: iSin) {
+export function Sin({ id, x, y }: iSin) {
   const dispatch = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,8 +22,10 @@ export function Sin({ id, x, y, input }: iSin) {
   const canvasX = 300;
   const canvasY = 200;
 
+  const input = [0];
+
   useEffect(() => {
-    setValue(Math.sin(parseFloat(input[0])));
+    setValue(Math.sin(input[0]));
     dispatch({
       type: "recalculate",
       id: id,
@@ -43,9 +46,7 @@ export function Sin({ id, x, y, input }: iSin) {
     <Input id={id} direction={"in"} index={0} value={input[0]} />
   ];
 
-  const outputs = [
-    <Output key={id} id={id} direction={"out"} index={0} value={value} />
-  ];
+  const outputs = null;
 
   function renderCanvas() {
     if (canvasRef.current !== null) {

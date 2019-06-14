@@ -34,23 +34,11 @@ export function Panel({
   const [mouseX, mouseY] = useContext(MouseContext);
 
   const panelRef = useRef(null);
+
   const [dragging, setDragging] = useState(false);
   const [initPos, setInitPos] = useState({ x: 0, y: 0 });
   const [delta, setDelta] = useState({ x: 0, y: 0 });
   const [pos, setPos] = useState({ x, y });
-
-  useEffect(() => {
-    if (panelRef.current !== null) {
-      dispatch({
-        type: "panelRegister",
-        id,
-        value: {
-          pos,
-          panelRef
-        }
-      });
-    }
-  }, [panelRef]);
 
   useEffect(() => {
     if (dragging) {

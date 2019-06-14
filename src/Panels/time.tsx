@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
+
+import { uniqueID } from "../uniqueID";
 
 interface iTime {
   id: string;
@@ -16,6 +18,8 @@ export function Time({ id, x, y, initPauseState }: iTime) {
 
   const [value, setValue] = useState(0);
   const [pause, setPause] = useState(initPauseState);
+
+  const input = [0];
 
   useEffect(() => {
     dispatch({

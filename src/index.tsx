@@ -26,25 +26,9 @@ import { uniqueID } from "./uniqueID";
 import { reducer } from "./reducer";
 const initialState = {
   panels: [],
-  outputs: {
-    time0: 0,
-    const1: 0,
-    math0: 0,
-    value0: 0,
-    sin0: 0
-  },
-  inputs: {
-    sin0: [0],
-    math0: [0, 0],
-    value0: [0]
-  },
-  connections: {
-    sin0: null,
-    time0: null,
-    const1: null,
-    math0: null
-  },
-  connectionsNew: {},
+  inputs: {},
+  outputs: {},
+  connections: {},
   connectionLines: [],
   nodes: []
 };
@@ -166,15 +150,9 @@ function App() {
             <Suspense fallback={"Loading"}>
               <Time id={time0.current} x={10} y={10} initPauseState={true} />
               <Const id={const0.current} x={10} y={160} />
-              <Arithmatic
-                id={math0.current}
-                x={410}
-                y={10}
-                input={[0, 0]}
-                op="multiply"
-              />
-              <Sin id={sin0.current} x={810} y={10} input={[0, 0]} />
-              <Value id={value0.current} x={1210} y={10} input={[0]} />
+              <Arithmatic id={math0.current} x={410} y={10} op="multiply" />
+              <Sin id={sin0.current} x={810} y={10} />
+              <Value id={value0.current} x={1210} y={10} />
             </Suspense>
           </div>
         </ConnectorContext.Provider>
