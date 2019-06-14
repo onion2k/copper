@@ -1,4 +1,10 @@
-import React, { Suspense, useState, useEffect, useReducer } from "react";
+import React, {
+  Suspense,
+  useState,
+  useEffect,
+  useReducer,
+  useRef
+} from "react";
 import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
@@ -38,6 +44,7 @@ const initialState = {
     const1: null,
     math0: null
   },
+  connectionsNew: {},
   connectionLines: [],
   nodes: []
 };
@@ -137,6 +144,8 @@ function App() {
     );
   }
 
+  const time0id = useRef(uniqueID());
+
   return (
     <DispatchContext.Provider value={dispatch}>
       <MouseContext.Provider value={[mouseX, mouseY]}>
@@ -153,13 +162,13 @@ function App() {
           <div className="Control" onMouseUp={endConnect}>
             <Suspense fallback={"Loading"}>
               <Time
-                id={"time0"}
+                id={time0id.current}
                 x={10}
                 y={10}
                 output={(value: number) => {
                   dispatch({
                     type: "update",
-                    id: "time0",
+                    id: time0id,
                     value: value
                   });
                 }}
@@ -180,7 +189,7 @@ function App() {
                 }}
                 op="multiply"
               />
-
+              {/*
               <Sin
                 id={"sin0"}
                 x={810}
@@ -207,7 +216,7 @@ function App() {
                     value: value
                   });
                 }}
-              />
+              /> */}
             </Suspense>
           </div>
         </ConnectorContext.Provider>

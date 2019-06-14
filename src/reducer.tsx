@@ -18,7 +18,10 @@ export function reducer(state: any, action: any) {
       /**
        * This is assuming a single output for any given panel
        */
-      newState.outputs[action.id] = action.value;
+      // newState.outputs[action.id] = action.value;
+      // newState.inputs[newState.connectionsNew[action.id]] = action.value;
+
+      // console.log(newState.inputs[newState.connectionsNew[action.id]]);
 
       /**
        * Update the input if there's a registered connection
@@ -35,6 +38,7 @@ export function reducer(state: any, action: any) {
         index: action.index
       };
       newState.connectionLines.push({ ...action });
+      newState.connectionsNew[action.from] = action.to;
       return newState;
     case "register":
       newState.inputs[action.id] = [];

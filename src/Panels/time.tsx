@@ -54,6 +54,7 @@ export function Time({ id, x, y, initPauseState }: iTime) {
       value={value.toFixed(3)}
     />
   ];
+
   const controls = (
     <button onClick={() => setPause(!pause)} style={{ width: "100%" }}>
       Pause
