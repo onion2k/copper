@@ -41,38 +41,19 @@ export function Connector({ id, direction, index }: iConnector) {
     }
   }, [ref]);
 
-  const startConnect = () => {
-    // if (ref.current !== null) {
-    //   const {
-    //     x,
-    //     y,
-    //     width,
-    //     height
-    //   } = ref.current.getBoundingClientRect() as DOMRect;
-    //   const c = {
-    //     x: x + width / 2,
-    //     y: y + height / 2,
-    //     id: id,
-    //     direction: direction,
-    //     index: index,
-    //     key: `${id}-${direction}-${index}`
-    //   };
-    //   setConnector(c);
-    // }
-  };
-
-  const endConnect = (e: any) => {
-    e.preventDefault();
-    // if (connector) {
-    //   const c = {
-    //     id: id,
-    //     direction: direction,
-    //     index: index,
-    //     key: `${id}-${direction}-${index}`
-    //   };
-    //   connectConnector(c);
-    //   setConnector(null);
-    // }
+  const connect = () => {
+    if (ref.current !== null) {
+       const c = {
+         id: id,
+         direction: direction,
+         index: index
+       };
+       dispatch({
+         type: 'connect',
+         payload: c
+       })
+       //setConnector(c);
+     }
   };
 
   return (
@@ -84,8 +65,8 @@ export function Connector({ id, direction, index }: iConnector) {
           ? "connecting"
           : ""
       }`}
-      onMouseDown={startConnect}
-      onMouseUp={endConnect}
+      onMouseDown={connect}
+      onMouseUp={connect}
     />
   );
 }

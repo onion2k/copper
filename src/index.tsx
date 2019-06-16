@@ -20,6 +20,7 @@ import { Sin } from "./Panels/sin";
 
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
+import { ActiveConnector } from "./Components/activeConnector";
 
 import { uniqueID } from "./uniqueID";
 
@@ -110,24 +111,6 @@ function App() {
   //   }
   // };
 
-  // let activeConnectorLine = null;
-  // if (connector) {
-  //   // disconnect if input, multiple if output?
-  //   // this happens on every render...
-  //   activeConnectorLine = (
-  //     <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
-  //       <ConnectorMapLine
-  //         id={"active"}
-  //         title={"title"}
-  //         x1={connector.x + window.scrollX}
-  //         y1={connector.y + window.scrollY}
-  //         x2={mouseX}
-  //         y2={mouseY}
-  //       />
-  //     </svg>
-  //   );
-  // }
-
   const time0 = useRef(uniqueID());
   const const0 = useRef(uniqueID());
   const math0 = useRef(uniqueID());
@@ -160,10 +143,11 @@ function App() {
             <Sin id={sin0.current} x={810} y={10} />
             <Value id={value0.current} x={1210} y={10} /> */}
 
-            <Const id={const1.current} x={10} y={160} />
+            <Const id={const1.current} x={80} y={160} />
             <Value id={value1.current} x={510} y={160} />
           </Suspense>
         </div>
+        <ActiveConnector x={0} y={0} />
       </MouseContext.Provider>
     </DispatchContext.Provider>
   );
