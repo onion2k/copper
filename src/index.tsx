@@ -58,9 +58,9 @@ interface Connection {
 }
 
 function App() {
-  let { x: mouseX, y: mouseY } = useMousePosition();
-
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  let { x: mouseX, y: mouseY } = useMousePosition();
 
   // const [connections, setConnections] = useState(Array<Connection>());
   // const [connector, setConnector] = useState<Node | null>(null);
@@ -127,20 +127,15 @@ function App() {
   const value1 = useRef(uniqueID());
 
   return (
-    <Suspense fallback={"loading"}>
-      <DispatchContext.Provider value={{ dispatch, state }}>
-        <MouseContext.Provider value={[mouseX, mouseY]}>
-          <ConnectorMap
-            nodes={state.nodes}
-            connections={state.connectionLines}
-          />
-          <div
-            className="Control"
-            onMouseUp={() => {
-              //dispatch end connect
-            }}
-          >
-            {/* <Time id={time0.current} x={10} y={10} initPauseState={true} />
+    <DispatchContext.Provider value={{ dispatch, state }}>
+      <MouseContext.Provider value={[mouseX, mouseY]}>
+        <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
+        <div
+          onMouseUp={() => {
+            //dispatch end connect
+          }}
+        >
+          {/* <Time id={time0.current} x={10} y={10} initPauseState={true} />
             <Const id={const0.current} x={10} y={160} />
             <Arithmatic
               id={math0.current}
@@ -152,15 +147,15 @@ function App() {
             <Sin id={sin0.current} x={810} y={10} />
             <Value id={value0.current} x={1210} y={10} /> */}
 
-            <Value id={value1.current} x={510} y={160} />
-            <Const id={const1.current} x={80} y={160} />
-            <LazyConst id={const1.current} x={80} y={360} />
-            <LazyValue id={value1.current} x={510} y={360} />
-          </div>
-          <ActiveConnector x={0} y={0} />
-        </MouseContext.Provider>
-      </DispatchContext.Provider>
-    </Suspense>
+          <Value id={value1.current} x={510} y={160} />
+          <Const id={const1.current} x={80} y={160} />
+
+          {/* <LazyConst id={const1.current} x={80} y={360} />
+            <LazyValue id={value1.current} x={510} y={360} /> */}
+        </div>
+        <ActiveConnector x={0} y={0} />
+      </MouseContext.Provider>
+    </DispatchContext.Provider>
   );
 }
 

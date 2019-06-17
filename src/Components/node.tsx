@@ -1,7 +1,5 @@
-import React, { useRef, useState, useCallback, useContext } from "react";
+import React, { useRef, useContext } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
-
-import { uniqueID } from "../uniqueID";
 
 interface iNode {
   id: string;
@@ -10,33 +8,24 @@ interface iNode {
 }
 
 export function Node({ id, direction, index }: iNode) {
-  const { dispatch, state } = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
-  const position = useCallback(node => {
-    if (node !== null) {
-      const { x, y, width, height } = node.getBoundingClientRect();
-      dispatch({
-        type: "node/register",
-        payload: {
-          nodeId: id,
-          id,
-          direction,
-          index,
-          x: x + width / 2,
-          y: y + height / 2
-        }
-      });
-    }
-  }, []);
+  const ref = useRef<HTMLDivElement>(null);
 
   const connect = () => {
-    dispatch({
-      type: "node/connect",
-      payload: { nodeId: id }
-    });
+    if (ref.current !== null) {
+      const {
+        x,
+        y,
+        width,
+        height
+      } = ref.current.getBoundingClientRect() as DOMRect;
+      dispatch({
+        type: "node/connect",
+        payload: { nodeId: id, x, y, width, height }
+      });
+    }
   };
 
-  return (
-    <div key={id} ref={position} onMouseDown={connect} onMouseUp={connect} />
-  );
+  return <div key={id} ref={ref} onMouseDown={connect} onMouseUp={connect} />;
 }
