@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
 
 interface iNode {
@@ -11,6 +11,21 @@ export function Node({ id, direction, index }: iNode) {
   const { dispatch } = useContext(DispatchContext);
 
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (ref.current !== null) {
+      const {
+        x,
+        y,
+        width,
+        height
+      } = ref.current.getBoundingClientRect() as DOMRect;
+      dispatch({
+        type: "node/register",
+        payload: { nodeId: id, x: x + width / 2, y: y + height / 2 }
+      });
+    }
+  }, [ref]);
 
   const connect = () => {
     if (ref.current !== null) {

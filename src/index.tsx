@@ -42,14 +42,6 @@ const initialState = {
   nodes: []
 };
 
-interface Node {
-  id: string;
-  x: number;
-  y: number;
-  direction: string;
-  index: number;
-}
-
 interface Connection {
   x1: number;
   y1: number;
@@ -135,7 +127,8 @@ function App() {
             //dispatch end connect
           }}
         >
-          {/* <Time id={time0.current} x={10} y={10} initPauseState={true} />
+          <Suspense fallback={"Waiting"}>
+            {/* <Time id={time0.current} x={10} y={10} initPauseState={true} />
             <Const id={const0.current} x={10} y={160} />
             <Arithmatic
               id={math0.current}
@@ -146,12 +139,9 @@ function App() {
             />
             <Sin id={sin0.current} x={810} y={10} />
             <Value id={value0.current} x={1210} y={10} /> */}
-
-          <Value id={value1.current} x={510} y={160} />
-          <Const id={const1.current} x={80} y={160} />
-
-          {/* <LazyConst id={const1.current} x={80} y={360} />
-            <LazyValue id={value1.current} x={510} y={360} /> */}
+            <LazyValue id={value1.current} x={510} y={160} />
+            <LazyConst id={const1.current} x={80} y={160} />
+          </Suspense>
         </div>
         <ActiveConnector x={0} y={0} />
       </MouseContext.Provider>
