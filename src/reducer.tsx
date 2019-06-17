@@ -41,7 +41,7 @@ export function reducer(state: any, action: any) {
       return newState;
 
     case "node/register":
-      console.log(action.payload.nodeId, action.payload.x, action.payload.y);
+      console.log(action);
       newState.inputs[action.payload.nodeId] = action.payload;
       return newState;
 

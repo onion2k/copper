@@ -114,17 +114,17 @@ function App() {
       <MouseContext.Provider value={[mouseX, mouseY]}>
         <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
         <Suspense fallback={"Waiting"}>
-          {/* <LazyTime id={time0.current} x={10} y={10} initPauseState={true} /> */}
-          {/* <LazyConst id={const0.current} x={10} y={160} /> */}
+          <LazyTime key={'time0'} id={time0.current} x={10} y={10} initPauseState={true} />
+          <LazyConst key={'const0'} id={const0.current} x={10} y={160} />
           <LazyArithmatic
+						key={'math0'}
             id={math0.current}
             x={410}
             y={10}
             op="multiply"
-            state={state}
           />
-          {/* <LazySin id={sin0.current} x={810} y={10} />
-          <LazyValue id={value0.current} x={1210} y={10} /> */}
+          <LazySin key={'sin0'} id={'sin'+sin0.current} x={810} y={10} />
+          <LazyValue key={'value0'} id={value0.current} x={1210} y={10} />
         </Suspense>
         <ActiveConnector x={0} y={0} />
       </MouseContext.Provider>
@@ -134,3 +134,4 @@ function App() {
 
 const rootElement = document.getElementById("root");
 render(<App />, rootElement);
+

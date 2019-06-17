@@ -10,11 +10,10 @@ interface iArithmatic {
   x: number;
   y: number;
   op: string;
-  state: any;
 }
 
-export default function Arithmatic({ id, x, y, op, state }: iArithmatic) {
-  const { dispatch } = useContext(DispatchContext);
+export default function Arithmatic({ id, x, y, op }: iArithmatic) {
+  const { dispatch, state } = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
 
