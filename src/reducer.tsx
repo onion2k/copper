@@ -28,10 +28,6 @@ export function reducer(state: any, action: any) {
       return newState;
 
     case "node/connect":
-      const node = newState.inputs[action.payload.nodeId];
-
-      console.log(action.payload);
-
       if (!newState.connector) {
         newState.connector = {
           nodeId: action.payload.nodeId,
