@@ -14,7 +14,7 @@ interface iArithmatic {
 }
 
 export function Arithmatic({ id, x, y, op, state }: iArithmatic) {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
 

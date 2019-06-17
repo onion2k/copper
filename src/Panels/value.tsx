@@ -13,7 +13,7 @@ interface iValue {
 }
 
 export function Value({ id, x, y }: iValue) {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   const input = [0];
 

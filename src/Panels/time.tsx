@@ -14,7 +14,7 @@ interface iTime {
 }
 
 export function Time({ id, x, y, initPauseState }: iTime) {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
   const [pause, setPause] = useState(initPauseState);

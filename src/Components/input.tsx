@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Connector } from "./connector";
+import { Node } from "./node";
 
 interface iInput {
   id: string;
@@ -12,9 +12,9 @@ export function Input({ id, direction, index, value }: iInput) {
   const display = typeof value === "number" ? value.toFixed(3) : value;
 
   return (
-    <li className="input connector" key={`input-${id}-${direction}-${index}`}>
+    <li className="input node" key={`input-${id}-${direction}-${index}`}>
       ({display})
-      <Connector id={id} direction={direction} index={index} />
+      <Node id={id} direction={direction} index={index} />
     </li>
   );
 }

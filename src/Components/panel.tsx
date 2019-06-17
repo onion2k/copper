@@ -29,7 +29,7 @@ export function Panel({
   controls,
   nopadding
 }: iPanel) {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   const [mouseX, mouseY] = useContext(MouseContext);
 

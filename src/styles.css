@@ -118,8 +118,8 @@ ul.knobs li input[type="radio"] {
   font-size: 0.8rem;
 }
 
-.input.connector > div,
-.output.connector > div {
+.input.node > div,
+.output.node > div {
   position: absolute;
   content: "";
   width: 20px;
@@ -128,12 +128,12 @@ ul.knobs li input[type="radio"] {
   border: 2px solid gray;
 }
 
-.input.connector > div {
+.input.node > div {
   left: -12px;
   pointer-events: all;
 }
 
-.output.connector > div {
+.output.node > div {
   right: -10px;
   pointer-events: all;
 }

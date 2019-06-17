@@ -12,7 +12,7 @@ interface iConst {
 }
 
 export default function Const({ id, x, y }: iConst) {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
 

@@ -13,7 +13,7 @@ interface iSin {
 }
 
 export function Sin({ id, x, y }: iSin) {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [value, setValue] = useState(1);

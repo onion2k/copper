@@ -1,5 +1,11 @@
 import React from "react";
 
-export const DispatchContext = React.createContext<Function>(
-  () => {} // dispatch
-);
+interface DispatchInterface {
+  dispatch: Function;
+  state: any;
+}
+
+export const DispatchContext = React.createContext<DispatchInterface>({
+  dispatch: () => {},
+  state: {}
+});

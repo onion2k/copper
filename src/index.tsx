@@ -12,11 +12,13 @@ import { ConnectorContext } from "./Contexts/connector";
 import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
-import Const from "./Panels/const";
+// import Const from "./Panels/const";
 import { Time } from "./Panels/time";
 import { Value } from "./Panels/value";
 import { Arithmatic } from "./Panels/arithmatic";
 import { Sin } from "./Panels/sin";
+
+const LazyConst = React.lazy(() => import("./Panels/const"));
 
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
@@ -25,6 +27,9 @@ import { ActiveConnector } from "./Components/activeConnector";
 import { uniqueID } from "./uniqueID";
 
 import { reducer } from "./reducer";
+
+import "./styles.css";
+
 const initialState = {
   panels: [],
   inputs: {},
@@ -33,8 +38,6 @@ const initialState = {
   connectionLines: [],
   nodes: []
 };
-
-import "./styles.css";
 
 interface Node {
   id: string;
@@ -121,7 +124,7 @@ function App() {
   const value1 = useRef(uniqueID());
 
   return (
-    <DispatchContext.Provider value={dispatch}>
+    <DispatchContext.Provider value={{ dispatch, state }}>
       <MouseContext.Provider value={[mouseX, mouseY]}>
         <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
         <div
@@ -143,7 +146,7 @@ function App() {
             <Sin id={sin0.current} x={810} y={10} />
             <Value id={value0.current} x={1210} y={10} /> */}
 
-            <Const id={const1.current} x={80} y={160} />
+            <LazyConst id={const1.current} x={80} y={160} />
             <Value id={value1.current} x={510} y={160} />
           </Suspense>
         </div>
@@ -155,4 +158,3 @@ function App() {
 
 const rootElement = document.getElementById("root");
 render(<App />, rootElement);
-
