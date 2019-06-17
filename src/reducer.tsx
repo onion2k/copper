@@ -30,13 +30,13 @@ export function reducer(state: any, action: any) {
     case "node/connect":
       const node = newState.inputs[action.payload.nodeId];
 
-      console.log(action.payload.nodeId, node.x, node.y);
+      console.log(action.payload);
 
       if (!newState.connector) {
         newState.connector = {
-          nodeId: node.nodeId,
-          x: node.x,
-          y: node.y
+          nodeId: action.payload.nodeId,
+          x: action.payload.x,
+          y: action.payload.y
         };
       } else {
         // second half

@@ -22,7 +22,7 @@ export function Node({ id, direction, index }: iNode) {
       } = ref.current.getBoundingClientRect() as DOMRect;
       dispatch({
         type: "node/connect",
-        payload: { nodeId: id, x, y, width, height }
+        payload: { nodeId: id, x: x + width / 2, y: y + height / 2 }
       });
     }
   };
