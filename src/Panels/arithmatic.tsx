@@ -13,7 +13,7 @@ interface iArithmatic {
   state: any;
 }
 
-export function Arithmatic({ id, x, y, op, state }: iArithmatic) {
+export default function Arithmatic({ id, x, y, op, state }: iArithmatic) {
   const { dispatch } = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
@@ -67,6 +67,7 @@ export function Arithmatic({ id, x, y, op, state }: iArithmatic) {
 
   return (
     <Panel
+      key={id}
       id={id}
       x={x}
       y={y}

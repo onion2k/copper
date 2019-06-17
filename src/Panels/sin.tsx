@@ -12,7 +12,7 @@ interface iSin {
   y: number;
 }
 
-export function Sin({ id, x, y }: iSin) {
+export default function Sin({ id, x, y }: iSin) {
   const { dispatch } = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -68,6 +68,7 @@ export function Sin({ id, x, y }: iSin) {
 
   return (
     <Panel
+      key={id}
       id={id}
       x={x}
       y={y}

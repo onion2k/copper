@@ -28,8 +28,16 @@ export default function Const({ id, x, y }: iConst) {
     setValue(parseFloat(e.target.value));
   };
 
+  const outputRef = useRef(uniqueID());
+
   const outputs = [
-    <Output key={id} id={id} direction={"out"} index={0} value={value} />
+    <Output
+      key={outputRef.current}
+      id={outputRef.current}
+      direction={"out"}
+      index={0}
+      value={value}
+    />
   ];
 
   const controls = (
@@ -43,6 +51,7 @@ export default function Const({ id, x, y }: iConst) {
 
   return (
     <Panel
+      key={id}
       id={id}
       x={x}
       y={y}

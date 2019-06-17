@@ -30,7 +30,7 @@ export function reducer(state: any, action: any) {
     case "node/connect":
       const node = newState.inputs[action.payload.nodeId];
 
-      console.log(node.x, node.y);
+      console.log(action.payload.nodeId, node.x, node.y);
 
       if (!newState.connector) {
         newState.connector = {
@@ -45,7 +45,7 @@ export function reducer(state: any, action: any) {
       return newState;
 
     case "node/register":
-      console.log(action.payload.x, action.payload.y);
+      console.log(action.payload.nodeId, action.payload.x, action.payload.y);
       newState.inputs[action.payload.nodeId] = action.payload;
       return newState;
 

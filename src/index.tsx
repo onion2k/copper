@@ -8,17 +8,20 @@ import React, {
 import { render } from "react-dom";
 
 import useMousePosition from "./Hooks/useMousePosition";
-import { ConnectorContext } from "./Contexts/connector";
 import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
-// import Const from "./Panels/const";
-import { Time } from "./Panels/time";
-import { Value } from "./Panels/value";
-import { Arithmatic } from "./Panels/arithmatic";
-import { Sin } from "./Panels/sin";
+import Const from "./Panels/const";
+import Time from "./Panels/time";
+import Value from "./Panels/value";
+import Arithmatic from "./Panels/arithmatic";
+import Sin from "./Panels/sin";
 
 const LazyConst = React.lazy(() => import("./Panels/const"));
+// const LazyTime = React.lazy(() => import("./Panels/time"));
+const LazyValue = React.lazy(() => import("./Panels/value"));
+// const LazyArithmatic = React.lazy(() => import("./Panels/arithmatic"));
+// const LazySin = React.lazy(() => import("./Panels/sin"));
 
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
@@ -124,16 +127,19 @@ function App() {
   const value1 = useRef(uniqueID());
 
   return (
-    <DispatchContext.Provider value={{ dispatch, state }}>
-      <MouseContext.Provider value={[mouseX, mouseY]}>
-        <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
-        <div
-          className="Control"
-          onMouseUp={() => {
-            //dispatch end connect
-          }}
-        >
-          <Suspense fallback={"Loading"}>
+    <Suspense fallback={"loading"}>
+      <DispatchContext.Provider value={{ dispatch, state }}>
+        <MouseContext.Provider value={[mouseX, mouseY]}>
+          <ConnectorMap
+            nodes={state.nodes}
+            connections={state.connectionLines}
+          />
+          <div
+            className="Control"
+            onMouseUp={() => {
+              //dispatch end connect
+            }}
+          >
             {/* <Time id={time0.current} x={10} y={10} initPauseState={true} />
             <Const id={const0.current} x={10} y={160} />
             <Arithmatic
@@ -146,13 +152,15 @@ function App() {
             <Sin id={sin0.current} x={810} y={10} />
             <Value id={value0.current} x={1210} y={10} /> */}
 
-            <LazyConst id={const1.current} x={80} y={160} />
             <Value id={value1.current} x={510} y={160} />
-          </Suspense>
-        </div>
-        <ActiveConnector x={0} y={0} />
-      </MouseContext.Provider>
-    </DispatchContext.Provider>
+            <Const id={const1.current} x={80} y={160} />
+            <LazyConst id={const1.current} x={80} y={360} />
+            <LazyValue id={value1.current} x={510} y={360} />
+          </div>
+          <ActiveConnector x={0} y={0} />
+        </MouseContext.Provider>
+      </DispatchContext.Provider>
+    </Suspense>
   );
 }
 

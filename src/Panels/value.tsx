@@ -12,7 +12,7 @@ interface iValue {
   y: number;
 }
 
-export function Value({ id, x, y }: iValue) {
+export default function Value({ id, x, y }: iValue) {
   const { dispatch } = useContext(DispatchContext);
 
   const input = [0];
@@ -25,10 +25,17 @@ export function Value({ id, x, y }: iValue) {
     });
   }, [input[0]]);
 
+  const inputRef = useRef(uniqueID());
   const outputRef = useRef(uniqueID());
 
   const inputs = [
-    <Input id={`${id}`} direction={"in"} index={0} value={input[0]} />
+    <Input
+      key={inputRef.current}
+      id={`${id}`}
+      direction={"in"}
+      index={0}
+      value={input[0]}
+    />
   ];
 
   const outputs = [
@@ -43,6 +50,7 @@ export function Value({ id, x, y }: iValue) {
 
   return (
     <Panel
+      key={id}
       id={id}
       x={x}
       y={y}

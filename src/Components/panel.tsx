@@ -50,6 +50,7 @@ export function Panel({
 
   return (
     <article
+      key={`panel-${id}`}
       ref={panelRef}
       className="Panel"
       style={{ top: pos.y + delta.y, left: pos.x + delta.x }}
