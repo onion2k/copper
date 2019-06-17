@@ -13,7 +13,7 @@ export function Node({ id, direction, index }: iNode) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (ref.current !== null) {
+    if (ref && ref.current !== null) {
       const {
         x,
         y,
@@ -28,7 +28,7 @@ export function Node({ id, direction, index }: iNode) {
   }, [ref]);
 
   const connect = () => {
-    if (ref.current !== null) {
+    if (ref && ref.current !== null) {
       const {
         x,
         y,
