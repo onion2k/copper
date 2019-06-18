@@ -25,9 +25,18 @@ export default function Sin({ id, x, y }: iSin) {
   const input = [0];
 
   useEffect(() => {
+    dispatch({
+      type: "panel/register",
+      id: id,
+      value: input
+    });
+  }, []);
+
+  useEffect(() => {
     setValue(Math.sin(input[0]));
     dispatch({
       type: "recalculate",
+      msg: "sin",
       id: id,
       value: value
     });

@@ -19,11 +19,18 @@ export default function Time({ id, x, y, initPauseState }: iTime) {
   const [value, setValue] = useState(0);
   const [pause, setPause] = useState(initPauseState);
 
-  const input = [0];
+  useEffect(() => {
+    dispatch({
+      type: "panel/register",
+      id: id,
+      value: []
+    });
+  }, []);
 
   useEffect(() => {
     dispatch({
       type: "recalculate",
+      msg: "time",
       id: id,
       value: value
     });

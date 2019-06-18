@@ -19,7 +19,16 @@ export default function Value({ id, x, y }: iValue) {
 
   useEffect(() => {
     dispatch({
+      type: "panel/register",
+      id: id,
+      value: input
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch({
       type: "recalculate",
+      msg: "value",
       id: id,
       value: input[0]
     });

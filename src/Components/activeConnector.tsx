@@ -27,7 +27,7 @@ export function ActiveConnector({ id, x, y }: iActiveConnector) {
     <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
       <ConnectorMapLine
         id={"active"}
-        title={"title"}
+        title={""}
         x1={state.connector.x + window.scrollX}
         y1={state.connector.y + window.scrollY}
         x2={mouseX}

@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
 
 interface iNode {
@@ -13,19 +13,17 @@ export function Node({ id, direction, index }: iNode) {
 
   useEffect(() => {
     if (ref && ref.current) {
-window.requestAnimationFrame(()=>{
-			const {
+      const {
         x,
         y,
         width,
         height
       } = ref.current.getBoundingClientRect() as DOMRect;
-	    dispatch({
-		    type: "node/register",
-			  payload: { nodeId: id, x: x + width / 2, y: y + height / 2 }
-			});
-});
-}
+      dispatch({
+        type: "node/register",
+        payload: { nodeId: id, x: x + width / 2, y: y + height / 2 }
+      });
+    }
   }, [ref]);
 
   const connect = () => {

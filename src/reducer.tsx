@@ -13,7 +13,9 @@ export function reducer(state: any, action: any) {
        * This is assuming a single output for any given panel
        */
       // newState.outputs[action.id] = action.value;
-      // newState.inputs[newState.connectionsNew[action.id]] = action.value;
+      // newState.inputs[newState.connections[action.id]] = action.value;
+
+      console.log(newState);
 
       /**
        * Update the input if there's a registered connection
@@ -36,13 +38,23 @@ export function reducer(state: any, action: any) {
         };
       } else {
         // second half
+        console.log(action);
+        newState.connectionLines.push({
+          from: newState.connector.nodeId,
+          to: action.payload.nodeId,
+          x1: newState.connector.x,
+          y1: newState.connector.y,
+          x2: action.payload.x,
+          y2: action.payload.y
+        });
+        newState.connector = null;
       }
 
       return newState;
 
     case "node/register":
       console.log(action);
-      newState.inputs[action.payload.nodeId] = action.payload;
+      newState.nodes[action.payload.nodeId] = action.payload;
       return newState;
 
     case "panel/move":

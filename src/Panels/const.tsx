@@ -18,7 +18,16 @@ export default function Const({ id, x, y }: iConst) {
 
   useEffect(() => {
     dispatch({
+      type: "panel/register",
+      id: id,
+      value: []
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch({
       type: "recalculate",
+      msg: "const",
       id: id,
       value: value
     });
