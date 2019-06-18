@@ -15,7 +15,7 @@ export function reducer(state: any, action: any) {
       // newState.outputs[action.id] = action.value;
       // newState.inputs[newState.connections[action.id]] = action.value;
 
-      console.log(newState);
+      // console.log(newState);
 
       /**
        * Update the input if there's a registered connection
@@ -53,7 +53,6 @@ export function reducer(state: any, action: any) {
       return newState;
 
     case "node/register":
-      console.log(action);
       newState.nodes[action.payload.nodeId] = action.payload;
       return newState;
 
