@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useEffect, useState, useCallback, useRef, useContext } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
@@ -14,28 +14,25 @@ interface iArithmatic {
 
 export default function Arithmatic({ id, x, y, op }: iArithmatic) {
   const { dispatch, state } = useContext(DispatchContext);
-
   const [value, setValue] = useState(0);
-
-  const input = [0, 1];
-
+  const input = useRef([0, 1]);
+	
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      value: input
+      value: input.current
     });
   }, []);
 
   useEffect(() => {
-    console.log("math update", state.inputs[id]);
     if (state.inputs[id]) {
       switch (op) {
         case "add":
-          setValue(state.inputs[id][0] + state.inputs[id][1]);
+          setValue(input.current[0] + input.current[1]);
           break;
         case "multiply":
-          setValue(state.inputs[id][0] * state.inputs[id][1]);
+          setValue(input.current[0] * input.current[1]);
           break;
       }
       dispatch({
@@ -44,21 +41,21 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
         id: id,
         value: value
       });
-    }
-  }, [state.inputs[id], op]);
+		}  
+	}, [input.current[0], input.current[1], op]);
 
   const inputs = [
     <Input
       id={id}
       direction={"in"}
       index={0}
-      value={state.inputs[id] ? state.inputs[id][0] : null}
+      value={input.current[0]}
     />,
     <Input
       id={id}
       direction={"in"}
       index={1}
-      value={state.inputs[id] ? state.inputs[id][1] : null}
+      value={input.current[1]}
     />
   ];
 

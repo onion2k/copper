@@ -22,18 +22,18 @@ export default function Sin({ id, x, y }: iSin) {
   const canvasX = 300;
   const canvasY = 200;
 
-  const input = [0];
+  const input = useRef([0]);
 
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      value: input
+      value: input.current
     });
   }, []);
 
   useEffect(() => {
-    setValue(Math.sin(input[0]));
+    setValue(Math.sin(input.current[0]));
     dispatch({
       type: "recalculate",
       msg: "sin",
@@ -49,10 +49,10 @@ export default function Sin({ id, x, y }: iSin) {
     setPrev(tPrev);
 
     renderCanvas();
-  }, [input]);
+  }, [input.current[0]]);
 
   const inputs = [
-    <Input id={id} direction={"in"} index={0} value={input[0]} />
+    <Input id={id} direction={"in"} index={0} value={input.current[0]} />
   ];
 
   const outputs = null;

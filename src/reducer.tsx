@@ -16,11 +16,11 @@ export function reducer(state: any, action: any) {
       //   newState.outputs[action.id],
       //   newState.inputs[newState.outputs[action.id]]
       // );
+			//
 
       if (newState.outputs[action.id]) {
         const id = newState.outputs[action.id][0];
         const index = newState.outputs[action.id][1];
-
         newState.inputs[id][index] = action.value;
       }
 
@@ -54,13 +54,6 @@ export function reducer(state: any, action: any) {
           x2: action.payload.x,
           y2: action.payload.y
         });
-
-        console.log(
-          "Connnecting ",
-          action.payload.id,
-          " to ",
-          newState.connector.id
-        );
         newState.outputs[newState.connector.id] = [
           action.payload.id,
           action.payload.index

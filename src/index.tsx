@@ -129,8 +129,8 @@ function App() {
             y={10}
             op="multiply"
           />
-          <LazySin key={"sin0"} id={"sin" + sin0.current} x={810} y={10} />
-          <LazyValue key={"value0"} id={value0.current} x={1210} y={10} />
+		<LazySin key={"sin0"} id={"sin" + sin0.current} x={810} y={10} />
+		{/*      <LazyValue key={"value0"} id={value0.current} x={1210} y={10} /> */}
         </Suspense>
         <ActiveConnector x={0} y={0} />
       </MouseContext.Provider>
