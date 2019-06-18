@@ -49,7 +49,7 @@ export default function Sin({ id, x, y }: iSin) {
     setPrev(tPrev);
 
     renderCanvas();
-  }, [input[0]]);
+  }, [input]);
 
   const inputs = [
     <Input id={id} direction={"in"} index={0} value={input[0]} />

@@ -17,11 +17,13 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
 
   const [value, setValue] = useState(0);
 
+  const input = [0, 1];
+
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      value: [0, 1]
+      value: input
     });
   }, []);
 

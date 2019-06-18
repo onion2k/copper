@@ -32,7 +32,7 @@ export default function Value({ id, x, y }: iValue) {
       id: id,
       value: input[0]
     });
-  }, [input[0]]);
+  }, [input]);
 
   const inputs = [
     <Input key={id} id={`${id}`} direction={"in"} index={0} value={input[0]} />
