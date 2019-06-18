@@ -37,16 +37,8 @@ export default function Const({ id, x, y }: iConst) {
     setValue(parseFloat(e.target.value));
   };
 
-  const outputRef = useRef(uniqueID());
-
   const outputs = [
-    <Output
-      key={outputRef.current}
-      id={outputRef.current}
-      direction={"out"}
-      index={0}
-      value={value}
-    />
+    <Output key={id} id={id} direction={"out"} index={0} value={value} />
   ];
 
   const controls = (

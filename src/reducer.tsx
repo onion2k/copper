@@ -2,7 +2,6 @@ import panel from "./reducers/panel";
 
 export function reducer(state: any, action: any) {
   const newState = { ...state };
-  let connection;
   switch (action.type) {
     case "recalculate":
       /**
@@ -13,7 +12,17 @@ export function reducer(state: any, action: any) {
        * This is assuming a single output for any given panel
        */
       // newState.outputs[action.id] = action.value;
-      // newState.inputs[newState.connections[action.id]] = action.value;
+      // console.log(
+      //   newState.outputs[action.id],
+      //   newState.inputs[newState.outputs[action.id]]
+      // );
+
+      if (newState.outputs[action.id]) {
+        const id = newState.outputs[action.id][0];
+        const index = newState.outputs[action.id][1];
+
+        newState.inputs[id][index] = action.value;
+      }
 
       // console.log(newState);
 
@@ -32,28 +41,37 @@ export function reducer(state: any, action: any) {
     case "node/connect":
       if (!newState.connector) {
         newState.connector = {
-          nodeId: action.payload.nodeId,
+          id: action.payload.id,
           x: action.payload.x,
           y: action.payload.y
         };
       } else {
-        // second half
-        console.log(action);
         newState.connectionLines.push({
-          from: newState.connector.nodeId,
-          to: action.payload.nodeId,
+          from: newState.connector.id,
+          to: action.payload.id,
           x1: newState.connector.x,
           y1: newState.connector.y,
           x2: action.payload.x,
           y2: action.payload.y
         });
+
+        console.log(
+          "Connnecting ",
+          action.payload.id,
+          " to ",
+          newState.connector.id
+        );
+        newState.outputs[newState.connector.id] = [
+          action.payload.id,
+          action.payload.index
+        ];
         newState.connector = null;
       }
 
       return newState;
 
     case "node/register":
-      newState.nodes[action.payload.nodeId] = action.payload;
+      // newState.nodes[action.payload.id] = action.payload;
       return newState;
 
     case "panel/move":

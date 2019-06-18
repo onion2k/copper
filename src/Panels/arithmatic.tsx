@@ -26,6 +26,7 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
   }, []);
 
   useEffect(() => {
+    console.log("math update", state.inputs[id]);
     if (state.inputs[id]) {
       switch (op) {
         case "add":

@@ -34,27 +34,12 @@ export default function Value({ id, x, y }: iValue) {
     });
   }, [input[0]]);
 
-  const inputRef = useRef(uniqueID());
-  const outputRef = useRef(uniqueID());
-
   const inputs = [
-    <Input
-      key={inputRef.current}
-      id={`${id}`}
-      direction={"in"}
-      index={0}
-      value={input[0]}
-    />
+    <Input key={id} id={`${id}`} direction={"in"} index={0} value={input[0]} />
   ];
 
   const outputs = [
-    <Output
-      key={outputRef.current}
-      id={outputRef.current}
-      direction={"out"}
-      index={0}
-      value={"Output"}
-    />
+    <Output key={id} id={id} direction={"out"} index={0} value={"Output"} />
   ];
 
   return (

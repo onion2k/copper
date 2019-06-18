@@ -14,11 +14,7 @@ export function Output({ id, direction, index, value }: iOutput) {
   return (
     <li className="output node" key={`output-${id}-${direction}-${index}`}>
       ({display})
-      <Node
-        id={`output-${id}-${direction}-${index}`}
-        direction={direction}
-        index={index}
-      />
+      <Node id={id} direction={direction} index={index} />
     </li>
   );
 }
