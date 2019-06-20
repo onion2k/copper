@@ -136,6 +136,10 @@ ul.knobs li input[type="radio"] {
   pointer-events: all;
 }
 
+.node {
+  font-family: "Courier New", Courier, monospace;
+}
+
 .inputs {
   position: relative;
   list-style: none;

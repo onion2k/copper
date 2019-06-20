@@ -16,11 +16,12 @@ export function reducer(state: any, action: any) {
       //   newState.outputs[action.id],
       //   newState.inputs[newState.outputs[action.id]]
       // );
-			//
+      //
+      newState.outputs[action.id] = action.value;
 
-      if (newState.outputs[action.id]) {
-        const id = newState.outputs[action.id][0];
-        const index = newState.outputs[action.id][1];
+      if (newState.connections[action.id]) {
+        const id = newState.connections[action.id][0];
+        const index = newState.connections[action.id][1];
         newState.inputs[id][index] = action.value;
       }
 
@@ -54,10 +55,13 @@ export function reducer(state: any, action: any) {
           x2: action.payload.x,
           y2: action.payload.y
         });
-        newState.outputs[newState.connector.id] = [
+        newState.connections[newState.connector.id] = [
           action.payload.id,
           action.payload.index
         ];
+        newState.inputs[action.payload.id][action.payload.index] =
+          newState.outputs[newState.connector.id];
+
         newState.connector = null;
       }
 

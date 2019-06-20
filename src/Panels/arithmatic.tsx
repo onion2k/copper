@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useCallback, useRef, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  useContext
+} from "react";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
@@ -16,12 +22,12 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState(0);
   const input = useRef([0, 1]);
-	
+
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      value: input.current
+      inputs: input.current
     });
   }, []);
 
@@ -41,22 +47,12 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
         id: id,
         value: value
       });
-		}  
-	}, [input.current[0], input.current[1], op]);
+    }
+  }, [input.current[0], input.current[1], op]);
 
   const inputs = [
-    <Input
-      id={id}
-      direction={"in"}
-      index={0}
-      value={input.current[0]}
-    />,
-    <Input
-      id={id}
-      direction={"in"}
-      index={1}
-      value={input.current[1]}
-    />
+    <Input id={id} direction={"in"} index={0} value={input.current[0]} />,
+    <Input id={id} direction={"in"} index={1} value={input.current[1]} />
   ];
 
   const outputs = [

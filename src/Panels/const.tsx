@@ -20,7 +20,7 @@ export default function Const({ id, x, y }: iConst) {
     dispatch({
       type: "panel/register",
       id: id,
-      value: []
+      inputs: []
     });
   }, []);
 

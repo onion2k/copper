@@ -1,58 +1,52 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
-import { uniqueID } from "../uniqueID";
-
-interface iTime {
+interface iConst {
   id: string;
   x: number;
   y: number;
-  initPauseState: boolean;
+  value?: string;
 }
 
-export default function Time({ id, x, y, initPauseState }: iTime) {
+export default function Const({ id, x, y, value }: iConst) {
   const { dispatch } = useContext(DispatchContext);
 
-  const [value, setValue] = useState(0);
-  const [pause, setPause] = useState(initPauseState);
+  const [_value, setValue] = useState(value);
 
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      inputs: []
+      inputs: [],
+      output: _value
     });
   }, []);
 
   useEffect(() => {
     dispatch({
       type: "recalculate",
-      msg: "time",
+      msg: "const",
       id: id,
-      value: value
+      value: _value
     });
-  }, [value]);
-
-  useAnimationFrame(() => {
-    if (!pause) {
-      setValue(v => v + 0.01);
-    }
-  });
+  }, [_value]);
 
   const outputs = [
-    <Output
-      key={id}
-      id={id}
-      direction={"out"}
-      index={0}
-      value={value.toFixed(3)}
-    />
+    <Output key={id} id={id} direction={"out"} index={0} value={_value} />
   ];
 
-  const controls = <button onClick={() => setPause(!pause)}>Pause</button>;
+  const controls = (
+    <textarea
+      name={"text"}
+      onChange={e => {
+        setValue(e.target.value);
+      }}
+      style={{ width: "100%", height: "200px" }}
+      defaultValue={_value}
+    />
+  );
 
   return (
     <Panel
@@ -60,7 +54,7 @@ export default function Time({ id, x, y, initPauseState }: iTime) {
       id={id}
       x={x}
       y={y}
-      title={`Timer`}
+      title={`Text`}
       inputs={null}
       outputs={outputs}
       controls={controls}

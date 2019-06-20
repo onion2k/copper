@@ -28,7 +28,7 @@ export default function Sin({ id, x, y }: iSin) {
     dispatch({
       type: "panel/register",
       id: id,
-      value: input.current
+      inputs: input.current
     });
   }, []);
 

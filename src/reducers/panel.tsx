@@ -1,7 +1,10 @@
 export default class {
   static register = (state: any, action: any) => {
     state.panels.push(action);
-    state.inputs[action.id] = action.value;
+    state.inputs[action.id] = action.inputs;
+    if (action.output) {
+      state.outputs[action.id] = action.output;
+    }
     return state;
   };
 

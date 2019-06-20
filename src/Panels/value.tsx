@@ -15,13 +15,13 @@ interface iValue {
 export default function Value({ id, x, y }: iValue) {
   const { dispatch } = useContext(DispatchContext);
 
-  const input = [0];
+  const input = useRef([0]);
 
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      value: input
+      inputs: input
     });
   }, []);
 
@@ -30,12 +30,18 @@ export default function Value({ id, x, y }: iValue) {
       type: "recalculate",
       msg: "value",
       id: id,
-      value: input[0]
+      value: input.current[0]
     });
-  }, [input]);
+  }, [input.current[0]]);
 
   const inputs = [
-    <Input key={id} id={`${id}`} direction={"in"} index={0} value={input[0]} />
+    <Input
+      key={id}
+      id={`${id}`}
+      direction={"in"}
+      index={0}
+      value={input.current[0]}
+    />
   ];
 
   const outputs = [

@@ -17,6 +17,8 @@ const LazyValue = React.lazy(() => import("./Panels/value"));
 const LazyArithmatic = React.lazy(() => import("./Panels/arithmatic"));
 const LazySin = React.lazy(() => import("./Panels/sin"));
 const LazyShader = React.lazy(() => import("./Panels/shader"));
+const LazyColor = React.lazy(() => import("./Panels/color"));
+const LazyString = React.lazy(() => import("./Panels/string"));
 
 import { ConnectorMap } from "./Components/connectorMap";
 import { ConnectorMapLine } from "./Components/connectorMapLine";
@@ -27,6 +29,31 @@ import { uniqueID } from "./uniqueID";
 import { reducer } from "./reducer";
 
 import "./styles.css";
+
+const fs = `#ifdef GL_ES
+  precision mediump float;
+#endif
+
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main()
+{
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+
+  // Time varying pixel color
+  vec3 col = 0.5 + 0.5*cos(u_time + uv.xyx + vec3(0,2,4));
+
+  // Output to screen
+  gl_FragColor = vec4(col,1.0);
+}`;
+
+const vs = `attribute vec4 position;
+void main() {
+  gl_Position = position;
+}
+`;
 
 const initialState = {
   panels: [],
@@ -82,6 +109,24 @@ function App() {
             id={useRef(uniqueID()).current}
             x={1210}
             y={10}
+          />
+          {/* <LazyColor
+            key={"color0"}
+            id={useRef(uniqueID()).current}
+            x={10}
+            y={300}
+          /> */}
+          <LazyString
+            id={useRef(uniqueID()).current}
+            x={10}
+            y={300}
+            value={vs}
+          />
+          <LazyString
+            id={useRef(uniqueID()).current}
+            x={10}
+            y={700}
+            value={fs}
           />
         </Suspense>
         <ActiveConnector x={0} y={0} />

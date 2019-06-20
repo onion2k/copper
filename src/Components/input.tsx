@@ -13,7 +13,7 @@ export function Input({ id, direction, index, value }: iInput) {
 
   return (
     <li className="input node" key={`input-${id}-${direction}-${index}`}>
-      ({display})
+      {display}
       <Node id={id} direction={direction} index={index} />
     </li>
   );

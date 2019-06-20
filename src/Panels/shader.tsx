@@ -6,30 +6,30 @@ import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
 
-const fs = `#ifdef GL_ES
-  precision mediump float;
-#endif
+// const fs = `#ifdef GL_ES
+//   precision mediump float;
+// #endif
 
-uniform float u_time;
-uniform vec2 u_resolution;
+// uniform float u_time;
+// uniform vec2 u_resolution;
 
-void main()
-{
-  // Normalized pixel coordinates (from 0 to 1)
-  vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+// void main()
+// {
+//   // Normalized pixel coordinates (from 0 to 1)
+//   vec2 uv = gl_FragCoord.xy / u_resolution.xy;
 
-  // Time varying pixel color
-  vec3 col = 0.5 + 0.5*cos(u_time + uv.xyx + vec3(0,2,4));
+//   // Time varying pixel color
+//   vec3 col = 0.5 + 0.5*cos(u_time + uv.xyx + vec3(0,2,4));
 
-  // Output to screen
-  gl_FragColor = vec4(col,1.0);
-}`;
+//   // Output to screen
+//   gl_FragColor = vec4(col,1.0);
+// }`;
 
-const vs = `attribute vec4 position;
-void main() {
-  gl_Position = position;
-}
-`;
+// const vs = `attribute vec4 position;
+// void main() {
+//   gl_Position = position;
+// }
+// `;
 
 interface iShader {
   id: string;
@@ -37,7 +37,7 @@ interface iShader {
   y: number;
 }
 
-export default function Arithmatic({ id, x, y }: iShader) {
+export default function Shader({ id, x, y }: iShader) {
   const { dispatch } = useContext(DispatchContext);
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
@@ -51,28 +51,48 @@ export default function Arithmatic({ id, x, y }: iShader) {
   const canvasX = 300;
   const canvasY = 200;
 
-  const input = useRef([0, 1]);
+  const input = useRef(["", "", 1]);
 
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      value: input.current
+      inputs: input.current
     });
 
-    if (canvasRef.current !== null) {
-      const gl = canvasRef.current.getContext("webgl");
-      if (gl !== null) {
-        setGL(gl);
-        setProgramInfo(twgl.createProgramInfo(gl, [vs, fs]));
-        setBufferInfo(twgl.createBufferInfoFromArrays(gl, arrays));
+    // if (canvasRef.current !== null) {
+    //   const gl = canvasRef.current.getContext("webgl");
+    //   if (gl !== null) {
+    //     setGL(gl);
+    //     // setProgramInfo(twgl.createProgramInfo(gl, [input.current[0], input.current[1]]));
+    //     // setBufferInfo(twgl.createBufferInfoFromArrays(gl, arrays));
+    //   }
+    // }
+  }, [canvasRef]);
+
+  useEffect(() => {
+    console.log(input.current);
+    if (input.current[0] !== "" && input.current[1] !== "") {
+      if (canvasRef.current !== null) {
+        const gl = canvasRef.current.getContext("webgl");
+        if (gl !== null) {
+          setGL(gl);
+          setProgramInfo(
+            twgl.createProgramInfo(gl, [
+              input.current[0].toString(),
+              input.current[1].toString()
+            ])
+          );
+          setBufferInfo(twgl.createBufferInfoFromArrays(gl, arrays));
+        }
       }
     }
-  }, [canvasRef]);
+  }, [canvasRef, input.current[0], input.current[1]]);
 
   const inputs = [
     <Input id={id} direction={"in"} index={0} value={input.current[0]} />,
-    <Input id={id} direction={"in"} index={1} value={input.current[1]} />
+    <Input id={id} direction={"in"} index={1} value={input.current[1]} />,
+    <Input id={id} direction={"in"} index={2} value={input.current[2]} />
   ];
 
   const outputs = null;
@@ -86,7 +106,7 @@ export default function Arithmatic({ id, x, y }: iShader) {
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
       var uniforms = {
-        u_time: input.current[0],
+        u_time: input.current[2],
         u_resolution: [gl.canvas.width, gl.canvas.height]
       };
 
@@ -108,6 +128,7 @@ export default function Arithmatic({ id, x, y }: iShader) {
       inputs={inputs}
       outputs={outputs}
       controls={controls}
+      nopadding
     />
   );
 }
