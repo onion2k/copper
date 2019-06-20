@@ -55,7 +55,15 @@ export default function Sin({ id, x, y }: iSin) {
     <Input id={id} direction={"in"} index={0} value={input.current[0]} />
   ];
 
-  const outputs = null;
+  const outputs = [
+    <Output
+      key={id}
+      id={id}
+      direction={"out"}
+      index={0}
+      value={value.toFixed(3)}
+    />
+  ];
 
   function renderCanvas() {
     if (canvasRef.current !== null) {

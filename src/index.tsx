@@ -103,13 +103,13 @@ function App() {
             op="multiply"
           />
           <LazySin key={"sin0"} id={sin0.current} x={410} y={260} />
-          <LazyShader key={"shader0"} id={shader0.current} x={810} y={10} />
-          <LazyValue
+          <LazyShader key={"shader0"} id={shader0.current} x={1210} y={10} />
+          {/* <LazyValue
             key={"value0"}
             id={useRef(uniqueID()).current}
             x={1210}
             y={10}
-          />
+          /> */}
           {/* <LazyColor
             key={"color0"}
             id={useRef(uniqueID()).current}
