@@ -118,12 +118,14 @@ function App() {
           /> */}
           <LazyString
             id={useRef(uniqueID()).current}
+            title="Vertex Shader"
             x={10}
             y={300}
             value={vs}
           />
           <LazyString
             id={useRef(uniqueID()).current}
+            title="Fragment Shader"
             x={10}
             y={700}
             value={fs}

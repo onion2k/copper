@@ -5,12 +5,13 @@ import { Output } from "../Components/output";
 
 interface iConst {
   id: string;
+  title?: string;
   x: number;
   y: number;
   value?: string;
 }
 
-export default function Const({ id, x, y, value }: iConst) {
+export default function Const({ id, title, x, y, value }: iConst) {
   const { dispatch } = useContext(DispatchContext);
 
   const [_value, setValue] = useState(value);
@@ -54,7 +55,7 @@ export default function Const({ id, x, y, value }: iConst) {
       id={id}
       x={x}
       y={y}
-      title={`Text`}
+      title={title || `Text`}
       inputs={null}
       outputs={outputs}
       controls={controls}
