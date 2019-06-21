@@ -82,7 +82,13 @@ function App() {
   const sin0 = useRef(uniqueID());
   const shader0 = useRef(uniqueID());
 
+  let appClass = ["canvas"];
+  if (state.connector) {
+    appClass.push("active");
+  }
+
   return (
+    <div className={appClass.join(" ")}>
     <DispatchContext.Provider value={{ dispatch, state }}>
       <MouseContext.Provider value={[mouseX, mouseY]}>
         <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
@@ -134,6 +140,7 @@ function App() {
         <ActiveConnector x={0} y={0} />
       </MouseContext.Provider>
     </DispatchContext.Provider>
+    </div>
   );
 }
 

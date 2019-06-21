@@ -26,7 +26,7 @@ export function ConnectorMapLine({
       const pathLength = pathEl.getTotalLength();
       pathEnds.setAttribute("stroke-dasharray", String(pathLength / 3));
     }
-  });
+  }, [pathRef, endsRef, x1, y1, x2, y2]);
   return (
     <g key={`connector-${x1}-${y1}-${x2}-${y2}`}>
       <defs>

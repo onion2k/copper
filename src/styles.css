@@ -124,6 +124,7 @@ ul.knobs li input[type="radio"] {
   height: 20px;
   border-radius: 50%;
   border: 2px solid gray;
+  cursor: pointer;
 }
 
 .input.node > div {
@@ -222,4 +223,12 @@ textarea {
   font-family: "Courier New", Courier, monospace;
   border: 0;
   border-radius: 0 0 10px 10px;
+}
+
+.canvas {
+  width: 100vw;
+  height: 100vh;
+}
+.active {
+  cursor: grabbing !important;
 }
