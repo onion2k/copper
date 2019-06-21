@@ -51,8 +51,8 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
   }, [input.current[0], input.current[1], op]);
 
   const inputs = [
-    <Input id={id} direction={"in"} index={0} value={input.current[0]} />,
-    <Input id={id} direction={"in"} index={1} value={input.current[1]} />
+    <Input id={id} direction={"in"} index={0} value={input.current[0]} title={"A"} />,
+    <Input id={id} direction={"in"} index={1} value={input.current[1]} title={"B"} />
   ];
 
   const outputs = [

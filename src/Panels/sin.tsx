@@ -52,7 +52,7 @@ export default function Sin({ id, x, y }: iSin) {
   }, [input.current[0]]);
 
   const inputs = [
-    <Input id={id} direction={"in"} index={0} value={input.current[0]} />
+    <Input id={id} direction={"in"} index={0} value={input.current[0]} title={"A"} />
   ];
 
   const outputs = [
