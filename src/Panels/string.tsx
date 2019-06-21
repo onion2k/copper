@@ -45,6 +45,10 @@ export default function Const({ id, title, x, y, value }: iConst) {
         setValue(e.target.value);
       }}
       defaultValue={_value}
+      autoComplete="off"
+      autoCorrect="off"
+      autoCapitalize="off"
+      spellCheck={false}
     />
   );
 
