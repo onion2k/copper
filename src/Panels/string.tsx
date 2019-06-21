@@ -44,7 +44,6 @@ export default function Const({ id, title, x, y, value }: iConst) {
       onChange={e => {
         setValue(e.target.value);
       }}
-      style={{ width: "100%", height: "200px" }}
       defaultValue={_value}
     />
   );
@@ -59,6 +58,7 @@ export default function Const({ id, title, x, y, value }: iConst) {
       inputs={null}
       outputs={outputs}
       controls={controls}
+      nopadding
     />
   );
 }
