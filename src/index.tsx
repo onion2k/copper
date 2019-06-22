@@ -24,6 +24,9 @@ const Sin = React.lazy(() => import("./Panels/sin"));
 const Shader = React.lazy(() => import("./Panels/shader"));
 const Color = React.lazy(() => import("./Panels/color"));
 const String = React.lazy(() => import("./Panels/string"));
+const Event_MousePosition = React.lazy(() =>
+  import("./Panels/Event_MousePosition")
+);
 
 import { HeaderNav } from "./Components/headerNav";
 import { ActiveConnector } from "./Components/activeConnector";
@@ -83,6 +86,13 @@ const init: {
     y: 3
   },
   {
+    type: "mousePosition",
+    id: "mouse1",
+    title: "Mouse",
+    x: 6,
+    y: 1
+  },
+  {
     type: "string",
     id: "fs",
     title: "Fragment Shader",
@@ -94,8 +104,8 @@ const init: {
     type: "string",
     id: "vs",
     title: "Vertex Shader",
-    x: 6,
-    y: 1,
+    x: 1,
+    y: 6,
     value: vs
   }
 ];
@@ -200,6 +210,16 @@ function App() {
       case "value":
         return (
           <Value
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
+      case "mousePosition":
+        return (
+          <Event_MousePosition
             id={p.id}
             key={p.id}
             title={p.title}
