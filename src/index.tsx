@@ -65,13 +65,37 @@ const init: {
   title: string;
   x: number;
   y: number;
+  value?: any;
 }[] = [
+  {
+    type: "time",
+    id: "time1",
+    title: "Timer",
+    x: 1,
+    y: 1
+  },
   {
     type: "constant",
     id: "c1",
     title: "Constant 1",
     x: 1,
     y: 3
+  },
+  {
+    type: "string",
+    id: "fs",
+    title: "Fragment Shader",
+    x: 5,
+    y: 6,
+    value: fs
+  },
+  {
+    type: "string",
+    id: "vs",
+    title: "Vertex Shader",
+    x: 6,
+    y: 1,
+    value: vs
   }
 ];
 
@@ -150,6 +174,7 @@ function App() {
             title={p.title}
             x={cellSize * p.x}
             y={cellSize * p.y}
+            value={p.value || ""}
           />
         );
       case "shader":
@@ -223,23 +248,23 @@ function App() {
             connections={state.connectionLines}
           />
           <Suspense fallback={"Waiting"}>
-            <Time
+            {/* <Time
               key={"time0"}
               id={useRef(uniqueID()).current}
               title={"Time"}
               x={cellSize * 1}
               y={cellSize * 6}
               initPauseState={true}
-            />
+            /> */}
             {/* <Const key={"const0"} id={useRef(uniqueID()).current} x={10} y={160} /> */}
-            <Arithmatic
+            {/* <Arithmatic
               key={"math0"}
               id={useRef(uniqueID()).current}
               title={"Multiply"}
               x={cellSize * 7}
               y={cellSize * 1}
               op="multiply"
-            />
+            /> */}
             {/* <Sin
               key={"sin0"}
               id={useRef(uniqueID()).current}
