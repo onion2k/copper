@@ -99,7 +99,13 @@ function App() {
   };
 
   const panelsEl = panels.map(p => (
-    <Const id={p.id} title={p.title} x={cellSize * p.x} y={cellSize * p.y} />
+    <Const
+      id={p.id}
+      key={p.id}
+      title={p.title}
+      x={cellSize * p.x}
+      y={cellSize * p.y}
+    />
   ));
 
   return (
