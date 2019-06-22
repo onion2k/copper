@@ -121,6 +121,67 @@ function App() {
             initPauseState={true}
           />
         );
+      case "math":
+        return (
+          <Arithmatic
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+            op={"multiply"}
+          />
+        );
+      case "sin":
+        return (
+          <Sin
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
+      case "string":
+        return (
+          <String
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
+      case "shader":
+        return (
+          <Shader
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
+      case "color":
+        return (
+          <Color
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
+      case "value":
+        return (
+          <Value
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
     }
   });
 
@@ -174,6 +235,7 @@ function App() {
             <Arithmatic
               key={"math0"}
               id={useRef(uniqueID()).current}
+              title={"Multiply"}
               x={cellSize * 7}
               y={cellSize * 1}
               op="multiply"

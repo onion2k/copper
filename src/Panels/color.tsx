@@ -7,11 +7,12 @@ import { uniqueID } from "../uniqueID";
 
 interface iConst {
   id: string;
+  title?: string;
   x: number;
   y: number;
 }
 
-export default function Const({ id, x, y }: iConst) {
+export default function Const({ id, title, x, y }: iConst) {
   const { dispatch } = useContext(DispatchContext);
 
   const [color, setColor] = useState("#000000");
@@ -84,7 +85,7 @@ export default function Const({ id, x, y }: iConst) {
       id={id}
       x={x}
       y={y}
-      title={`Color`}
+      title={title || "Color"}
       inputs={null}
       outputs={outputs}
       controls={controls}

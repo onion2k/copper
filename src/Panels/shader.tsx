@@ -8,11 +8,12 @@ import { Output } from "../Components/output";
 
 interface iShader {
   id: string;
+  title?: string;
   x: number;
   y: number;
 }
 
-export default function Shader({ id, x, y }: iShader) {
+export default function Shader({ id, title, x, y }: iShader) {
   const { dispatch } = useContext(DispatchContext);
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
@@ -116,7 +117,7 @@ export default function Shader({ id, x, y }: iShader) {
       id={id}
       x={x}
       y={y}
-      title={`Shader`}
+      title={title || "Shader"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}

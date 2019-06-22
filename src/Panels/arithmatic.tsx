@@ -13,12 +13,13 @@ import { uniqueID } from "../uniqueID";
 
 interface iArithmatic {
   id: string;
+  title?: string;
   x: number;
   y: number;
   op: string;
 }
 
-export default function Arithmatic({ id, x, y, op }: iArithmatic) {
+export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState(0);
   const input = useRef([0, 1]);
@@ -87,7 +88,7 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
       id={id}
       x={x}
       y={y}
-      title={`Math.${op}`}
+      title={title || `Math.${op}`}
       inputs={inputs}
       outputs={outputs}
       controls={controls}

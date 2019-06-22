@@ -8,11 +8,12 @@ import { uniqueID } from "../uniqueID";
 
 interface iSin {
   id: string;
+  title?: string;
   x: number;
   y: number;
 }
 
-export default function Sin({ id, x, y }: iSin) {
+export default function Sin({ id, title, x, y }: iSin) {
   const { dispatch } = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -102,7 +103,7 @@ export default function Sin({ id, x, y }: iSin) {
       id={id}
       x={x}
       y={y}
-      title={`Sin`}
+      title={title || "Sin"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}
