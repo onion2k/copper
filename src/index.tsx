@@ -1,8 +1,4 @@
-import React, {
-  Suspense,
-  useReducer,
-  useRef
-} from "react";
+import React, { Suspense, useReducer, useRef } from "react";
 import { render } from "react-dom";
 
 const initialState = {
@@ -62,8 +58,8 @@ void main() {
 `;
 
 const panels = [
-  { type: 'constant', id: 'c1', title: 'Constant 1', x: 10, y: 160 }
-]
+  { type: "constant", id: "c1", title: "Constant 1", x: 10, y: 160 }
+];
 
 // interface Connection {
 //   x1: number;
@@ -84,60 +80,75 @@ function App() {
 
   return (
     <div className={appClass.join(" ")}>
-    <DispatchContext.Provider value={{ dispatch, state }}>
-      <MouseContext.Provider value={[mouseX, mouseY]}>
-        <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
-        <Suspense fallback={"Waiting"}>
-          <Time
-            key={"time0"}
-            id={useRef(uniqueID()).current}
-            x={10}
-            y={10}
-            initPauseState={true}
+      <DispatchContext.Provider value={{ dispatch, state }}>
+        <MouseContext.Provider value={[mouseX, mouseY]}>
+          <ConnectorMap
+            nodes={state.nodes}
+            connections={state.connectionLines}
           />
-          {/* <Const key={"const0"} id={useRef(uniqueID()).current} x={10} y={160} /> */}
-          <Arithmatic
-            key={"math0"}
-            id={useRef(uniqueID()).current}
-            x={410}
-            y={10}
-            op="multiply"
-          />
-          <Sin key={"sin0"} id={useRef(uniqueID()).current} x={410} y={260} />
-          <Shader key={"shader0"} id={useRef(uniqueID()).current} x={1210} y={10} />
-          {/* <Value
-            key={"value0"}
-            id={useRef(uniqueID()).current}
-            x={1210}
-            y={10}
-          /> */}
-          {/* <Color
-            key={"color0"}
-            id={useRef(uniqueID()).current}
-            x={10}
-            y={300}
-          /> */}
-          <String
-            id={useRef(uniqueID()).current}
-            title="Vertex Shader"
-            x={10}
-            y={300}
-            value={vs}
-          />
-          <String
-            id={useRef(uniqueID()).current}
-            title="Fragment Shader"
-            x={10}
-            y={700}
-            value={fs}
-          />
-          {panels.map((p)=>{
-            return (<Const id={useRef(p.id || uniqueID()).current} title={p.title} x={p.x} y={p.y} />);
-          })}
-        </Suspense>
-        <ActiveConnector x={0} y={0} />
-      </MouseContext.Provider>
-    </DispatchContext.Provider>
+          <Suspense fallback={"Waiting"}>
+            <Time
+              key={"time0"}
+              id={useRef(uniqueID()).current}
+              x={10}
+              y={10}
+              initPauseState={true}
+            />
+            {/* <Const key={"const0"} id={useRef(uniqueID()).current} x={10} y={160} /> */}
+            <Arithmatic
+              key={"math0"}
+              id={useRef(uniqueID()).current}
+              x={410}
+              y={10}
+              op="multiply"
+            />
+            <Sin key={"sin0"} id={useRef(uniqueID()).current} x={410} y={260} />
+            <Shader
+              key={"shader0"}
+              id={useRef(uniqueID()).current}
+              x={1210}
+              y={10}
+            />
+            {/* <Value
+              key={"value0"}
+              id={useRef(uniqueID()).current}
+              x={1210}
+              y={10}
+            /> */}
+            {/* <Color
+              key={"color0"}
+              id={useRef(uniqueID()).current}
+              x={10}
+              y={300}
+            /> */}
+            <String
+              id={useRef(uniqueID()).current}
+              title="Vertex Shader"
+              x={10}
+              y={300}
+              value={vs}
+            />
+            <String
+              id={useRef(uniqueID()).current}
+              title="Fragment Shader"
+              x={10}
+              y={700}
+              value={fs}
+            />
+            {panels.map(p => {
+              return (
+                <Const
+                  id={useRef(p.id || uniqueID()).current}
+                  title={p.title}
+                  x={p.x}
+                  y={p.y}
+                />
+              );
+            })}
+          </Suspense>
+          <ActiveConnector x={0} y={0} />
+        </MouseContext.Provider>
+      </DispatchContext.Provider>
     </div>
   );
 }

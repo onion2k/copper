@@ -51,12 +51,32 @@ export default function Arithmatic({ id, x, y, op }: iArithmatic) {
   }, [input.current[0], input.current[1], op]);
 
   const inputs = [
-    <Input id={id} key={`input-${id}-0`} direction={"in"} index={0} value={input.current[0]} title={"A"} />,
-    <Input id={id} key={`input-${id}-1`} direction={"in"} index={1} value={input.current[1]} title={"B"} />
+    <Input
+      id={id}
+      key={`input-${id}-0`}
+      direction={"in"}
+      index={0}
+      value={input.current[0]}
+      title={"A"}
+    />,
+    <Input
+      id={id}
+      key={`input-${id}-1`}
+      direction={"in"}
+      index={1}
+      value={input.current[1]}
+      title={"B"}
+    />
   ];
 
   const outputs = [
-    <Output id={id} key={`output-${id}-0`} direction={"out"} index={0} value={value} />
+    <Output
+      id={id}
+      key={`output-${id}-0`}
+      direction={"out"}
+      index={0}
+      value={value}
+    />
   ];
 
   const controls = `Add input 1 and input 2.`;

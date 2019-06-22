@@ -57,7 +57,7 @@ export default function Const({ id, title, x, y }: iConst) {
       id={id}
       x={x}
       y={y}
-      title={title || 'Constant'}
+      title={title || "Constant"}
       inputs={null}
       outputs={outputs}
       controls={controls}

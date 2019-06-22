@@ -84,7 +84,13 @@ export default function Shader({ id, x, y }: iShader) {
   const outputs = null;
 
   const controls = [
-    <canvas id={"canvas"} key={"canvas-shader-0"} ref={canvasRef} width={canvasX} height={canvasY} />
+    <canvas
+      id={"canvas"}
+      key={"canvas-shader-0"}
+      ref={canvasRef}
+      width={canvasX}
+      height={canvasY}
+    />
   ];
 
   useAnimationFrame(() => {
