@@ -72,9 +72,9 @@ function App() {
   }
 
   return (
-    <div className={appClass.join(" ")}>
-      <DispatchContext.Provider value={{ dispatch, state }}>
-        <header>Copper Header</header>
+    <DispatchContext.Provider value={{ dispatch, state }}>
+      <header>Copper Header</header>
+      <div className={appClass.join(" ")}>
         <MouseContext.Provider value={[mouseX, mouseY]}>
           <ConnectorMap
             nodes={state.nodes}
@@ -142,8 +142,8 @@ function App() {
           </Suspense>
           <ActiveConnector x={0} y={0} />
         </MouseContext.Provider>
-      </DispatchContext.Provider>
-    </div>
+      </div>
+    </DispatchContext.Provider>
   );
 }
 

@@ -17,7 +17,6 @@ header {
 }
 
 .canvas {
-  position: relative;
   width: 100vw;
   min-height: 100vh;
   background-color: #ffffff;
@@ -36,6 +35,7 @@ article {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 article header {
@@ -144,6 +144,7 @@ article .output.node > div {
   border-radius: 50%;
   border: 2px solid gray;
   cursor: pointer;
+  z-index: 2;
 }
 
 article .input.node > div {
@@ -231,7 +232,7 @@ svg {
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 }
 
