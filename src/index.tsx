@@ -86,35 +86,72 @@ function App() {
     appClass.push("active");
   }
 
-  const addConstantPanel = () => {
+  const addPanel = (type: string) => {
     const tempPanels = panels;
     tempPanels.push({
       id: uniqueID(),
-      type: "constant",
-      title: "Constant",
+      type: type,
+      title: type,
       x: 1,
       y: 1
     });
     setPanels(tempPanels);
   };
 
-  const panelsEl = panels.map(p => (
-    <Const
-      id={p.id}
-      key={p.id}
-      title={p.title}
-      x={cellSize * p.x}
-      y={cellSize * p.y}
-    />
-  ));
+  const panelsEl = panels.map(p => {
+    switch (p.type) {
+      case "constant":
+        return (
+          <Const
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
+      case "time":
+        return (
+          <Time
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+            initPauseState={true}
+          />
+        );
+    }
+  });
 
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
       <header className="nav">
-        Copper Header
+        <h1>Copper Header</h1>
         <ul className="addPanel">
           <li>
-            <button onClick={addConstantPanel}>Add Const</button>
+            <button onClick={() => addPanel("constant")}>Add Const</button>
+          </li>
+          <li>
+            <button onClick={() => addPanel("time")}>Add Time</button>
+          </li>
+          <li>
+            <button onClick={() => addPanel("math")}>Add Math</button>
+          </li>
+          <li>
+            <button onClick={() => addPanel("sin")}>Add Sin</button>
+          </li>
+          <li>
+            <button onClick={() => addPanel("string")}>Add String</button>
+          </li>
+          <li>
+            <button onClick={() => addPanel("shader")}>Add Shader</button>
+          </li>
+          <li>
+            <button onClick={() => addPanel("color")}>Add Color</button>
+          </li>
+          <li>
+            <button onClick={() => addPanel("value")}>Add Value</button>
           </li>
         </ul>
       </header>
@@ -128,6 +165,7 @@ function App() {
             <Time
               key={"time0"}
               id={useRef(uniqueID()).current}
+              title={"Time"}
               x={cellSize * 1}
               y={cellSize * 6}
               initPauseState={true}

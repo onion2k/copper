@@ -8,12 +8,13 @@ import { uniqueID } from "../uniqueID";
 
 interface iTime {
   id: string;
+  title: string;
   x: number;
   y: number;
   initPauseState: boolean;
 }
 
-export default function Time({ id, x, y, initPauseState }: iTime) {
+export default function Time({ id, title, x, y, initPauseState }: iTime) {
   const { dispatch } = useContext(DispatchContext);
 
   const [value, setValue] = useState(0);
@@ -60,7 +61,7 @@ export default function Time({ id, x, y, initPauseState }: iTime) {
       id={id}
       x={x}
       y={y}
-      title={`Timer`}
+      title={title || "timer"}
       inputs={null}
       outputs={outputs}
       controls={controls}

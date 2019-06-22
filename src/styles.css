@@ -10,13 +10,27 @@ body {
 
 .nav {
   position: absolute;
-  width: 100vw;
+  width: calc(100vw - 100px);
+  padding: 0 50px;
   min-height: 50px;
-  padding: 0 20px;
   display: flex;
+  justify-content: space-between;
   background-color: #bbb;
   align-items: center;
   z-index: 9;
+}
+
+.nav h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.nav .addPanel {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
 }
 
 .canvas {
