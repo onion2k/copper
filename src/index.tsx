@@ -1,32 +1,38 @@
 import React, {
   Suspense,
-  useState,
-  useEffect,
   useReducer,
   useRef
 } from "react";
 import { render } from "react-dom";
 
+const initialState = {
+  panels: [],
+  inputs: {},
+  outputs: {},
+  connections: {},
+  connectionLines: [],
+  nodes: []
+};
+
+import { reducer } from "./reducer";
+
 import useMousePosition from "./Hooks/useMousePosition";
 import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
-const LazyConst = React.lazy(() => import("./Panels/const"));
-const LazyTime = React.lazy(() => import("./Panels/time"));
-const LazyValue = React.lazy(() => import("./Panels/value"));
-const LazyArithmatic = React.lazy(() => import("./Panels/arithmatic"));
-const LazySin = React.lazy(() => import("./Panels/sin"));
-const LazyShader = React.lazy(() => import("./Panels/shader"));
-const LazyColor = React.lazy(() => import("./Panels/color"));
-const LazyString = React.lazy(() => import("./Panels/string"));
+const Const = React.lazy(() => import("./Panels/const"));
+const Time = React.lazy(() => import("./Panels/time"));
+const Value = React.lazy(() => import("./Panels/value"));
+const Arithmatic = React.lazy(() => import("./Panels/arithmatic"));
+const Sin = React.lazy(() => import("./Panels/sin"));
+const Shader = React.lazy(() => import("./Panels/shader"));
+const Color = React.lazy(() => import("./Panels/color"));
+const String = React.lazy(() => import("./Panels/string"));
 
 import { ConnectorMap } from "./Components/connectorMap";
-import { ConnectorMapLine } from "./Components/connectorMapLine";
 import { ActiveConnector } from "./Components/activeConnector";
 
 import { uniqueID } from "./uniqueID";
-
-import { reducer } from "./reducer";
 
 import "./styles.css";
 
@@ -55,32 +61,21 @@ void main() {
 }
 `;
 
-const initialState = {
-  panels: [],
-  inputs: {},
-  outputs: {},
-  connections: {},
-  connectionLines: [],
-  nodes: []
-};
+const panels = [
+  { type: 'constant', id: 'c1', title: 'Constant 1', x: 10, y: 160 }
+]
 
-interface Connection {
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-}
+// interface Connection {
+//   x1: number;
+//   y1: number;
+//   x2: number;
+//   y2: number;
+// }
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   let { x: mouseX, y: mouseY } = useMousePosition();
-
-  const time0 = useRef(uniqueID());
-  const const0 = useRef(uniqueID());
-  const math0 = useRef(uniqueID());
-  const sin0 = useRef(uniqueID());
-  const shader0 = useRef(uniqueID());
 
   let appClass = ["canvas"];
   if (state.connector) {
@@ -93,49 +88,52 @@ function App() {
       <MouseContext.Provider value={[mouseX, mouseY]}>
         <ConnectorMap nodes={state.nodes} connections={state.connectionLines} />
         <Suspense fallback={"Waiting"}>
-          <LazyTime
+          <Time
             key={"time0"}
-            id={time0.current}
+            id={useRef(uniqueID()).current}
             x={10}
             y={10}
             initPauseState={true}
           />
-          <LazyConst key={"const0"} id={const0.current} x={10} y={160} />
-          <LazyArithmatic
+          {/* <Const key={"const0"} id={useRef(uniqueID()).current} x={10} y={160} /> */}
+          <Arithmatic
             key={"math0"}
-            id={math0.current}
+            id={useRef(uniqueID()).current}
             x={410}
             y={10}
             op="multiply"
           />
-          <LazySin key={"sin0"} id={sin0.current} x={410} y={260} />
-          <LazyShader key={"shader0"} id={shader0.current} x={1210} y={10} />
-          {/* <LazyValue
+          <Sin key={"sin0"} id={useRef(uniqueID()).current} x={410} y={260} />
+          <Shader key={"shader0"} id={useRef(uniqueID()).current} x={1210} y={10} />
+          {/* <Value
             key={"value0"}
             id={useRef(uniqueID()).current}
             x={1210}
             y={10}
           /> */}
-          {/* <LazyColor
+          {/* <Color
             key={"color0"}
             id={useRef(uniqueID()).current}
             x={10}
             y={300}
           /> */}
-          <LazyString
+          <String
             id={useRef(uniqueID()).current}
             title="Vertex Shader"
             x={10}
             y={300}
             value={vs}
           />
-          <LazyString
+          <String
             id={useRef(uniqueID()).current}
             title="Fragment Shader"
             x={10}
             y={700}
             value={fs}
           />
+          {panels.map((p)=>{
+            return (<Const id={useRef(p.id || uniqueID()).current} title={p.title} x={p.x} y={p.y} />);
+          })}
         </Suspense>
         <ActiveConnector x={0} y={0} />
       </MouseContext.Provider>

@@ -56,6 +56,7 @@ export default function Shader({ id, x, y }: iShader) {
 
   const inputs = [
     <Input
+      key={`input-${id}-0`}
       id={id}
       direction={"in"}
       index={0}
@@ -63,6 +64,7 @@ export default function Shader({ id, x, y }: iShader) {
       title={"vs"}
     />,
     <Input
+      key={`input-${id}-1`}
       id={id}
       direction={"in"}
       index={1}
@@ -70,6 +72,7 @@ export default function Shader({ id, x, y }: iShader) {
       title={"fs"}
     />,
     <Input
+      key={`input-${id}-2`}
       id={id}
       direction={"in"}
       index={2}
@@ -81,7 +84,7 @@ export default function Shader({ id, x, y }: iShader) {
   const outputs = null;
 
   const controls = [
-    <canvas id={"canvas"} ref={canvasRef} width={canvasX} height={canvasY} />
+    <canvas id={"canvas"} key={"canvas-shader-0"} ref={canvasRef} width={canvasX} height={canvasY} />
   ];
 
   useAnimationFrame(() => {

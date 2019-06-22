@@ -52,12 +52,12 @@ export default function Sin({ id, x, y }: iSin) {
   }, [input.current[0]]);
 
   const inputs = [
-    <Input id={id} direction={"in"} index={0} value={input.current[0]} title={"A"} />
+    <Input id={id} key={`input-${id}-0`} direction={"in"} index={0} value={input.current[0]} title={"A"} />
   ];
 
   const outputs = [
     <Output
-      key={id}
+      key={`output-${id}-0`}
       id={id}
       direction={"out"}
       index={0}
@@ -80,7 +80,7 @@ export default function Sin({ id, x, y }: iSin) {
   }
 
   const controls = [
-    <canvas id={"canvas"} ref={canvasRef} width={canvasX} height={canvasY} />
+    <canvas id={"canvas-sin-0"} key={`canvas-sin-0`} ref={canvasRef} width={canvasX} height={canvasY} />
   ];
 
   return (

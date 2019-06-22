@@ -67,10 +67,6 @@ export function reducer(state: any, action: any) {
 
       return newState;
 
-    case "node/register":
-      // newState.nodes[action.payload.id] = action.payload;
-      return newState;
-
     case "panel/move":
       return panel.move(newState, action);
     case "panel/register":
