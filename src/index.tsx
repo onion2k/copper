@@ -1,4 +1,4 @@
-import React, { Suspense, useReducer, useRef } from "react";
+import React, { Suspense, useState, useReducer, useRef } from "react";
 import { render } from "react-dom";
 
 const initialState = {
@@ -57,23 +57,61 @@ void main() {
 }
 `;
 
-const panels = [
-  { type: "constant", id: "c1", title: "Constant 1", x: 10, y: 160 }
+const cellSize = 100;
+
+const init: {
+  id: string;
+  type: string;
+  title: string;
+  x: number;
+  y: number;
+}[] = [
+  {
+    type: "constant",
+    id: "c1",
+    title: "Constant 1",
+    x: 1,
+    y: 3
+  }
 ];
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const [panels, setPanels] = useState(init);
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   let appClass = ["canvas"];
+
   if (state.connector) {
     appClass.push("active");
   }
 
+  const addConstantPanel = () => {
+    const tempPanels = panels;
+    tempPanels.push({
+      id: uniqueID(),
+      type: "constant",
+      title: "Constant",
+      x: 1,
+      y: 1
+    });
+    setPanels(tempPanels);
+  };
+
+  const panelsEl = panels.map(p => (
+    <Const id={p.id} title={p.title} x={cellSize * p.x} y={cellSize * p.y} />
+  ));
+
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
-      <header>Copper Header</header>
+      <header className="nav">
+        Copper Header
+        <ul className="addPanel">
+          <li>
+            <button onClick={addConstantPanel}>Add Const</button>
+          </li>
+        </ul>
+      </header>
       <div className={appClass.join(" ")}>
         <MouseContext.Provider value={[mouseX, mouseY]}>
           <ConnectorMap
@@ -84,25 +122,30 @@ function App() {
             <Time
               key={"time0"}
               id={useRef(uniqueID()).current}
-              x={10}
-              y={10}
+              x={cellSize * 1}
+              y={cellSize * 6}
               initPauseState={true}
             />
             {/* <Const key={"const0"} id={useRef(uniqueID()).current} x={10} y={160} /> */}
             <Arithmatic
               key={"math0"}
               id={useRef(uniqueID()).current}
-              x={410}
-              y={10}
+              x={cellSize * 7}
+              y={cellSize * 1}
               op="multiply"
             />
-            <Sin key={"sin0"} id={useRef(uniqueID()).current} x={410} y={260} />
-            <Shader
+            {/* <Sin
+              key={"sin0"}
+              id={useRef(uniqueID()).current}
+              x={cellSize * 5}
+              y={cellSize * 3}
+            /> */}
+            {/* <Shader
               key={"shader0"}
               id={useRef(uniqueID()).current}
-              x={1210}
-              y={10}
-            />
+              x={cellSize * 9}
+              y={cellSize * 1}
+            /> */}
             {/* <Value
               key={"value0"}
               id={useRef(uniqueID()).current}
@@ -115,30 +158,21 @@ function App() {
               x={10}
               y={300}
             /> */}
-            <String
+            {/* <String
               id={useRef(uniqueID()).current}
               title="Vertex Shader"
-              x={10}
-              y={300}
+              x={cellSize * 1}
+              y={cellSize * 6}
               value={vs}
-            />
-            <String
+            /> */}
+            {/* <String
               id={useRef(uniqueID()).current}
               title="Fragment Shader"
-              x={10}
-              y={700}
+              x={cellSize * 5}
+              y={cellSize * 6}
               value={fs}
-            />
-            {panels.map(p => {
-              return (
-                <Const
-                  id={useRef(p.id || uniqueID()).current}
-                  title={p.title}
-                  x={p.x}
-                  y={p.y}
-                />
-              );
-            })}
+            /> */}
+            {panelsEl}
           </Suspense>
           <ActiveConnector x={0} y={0} />
         </MouseContext.Provider>

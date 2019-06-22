@@ -3,8 +3,6 @@ import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
-import { uniqueID } from "../uniqueID";
-
 interface iConst {
   id: string;
   title?: string;
@@ -14,7 +12,6 @@ interface iConst {
 
 export default function Const({ id, title, x, y }: iConst) {
   const { dispatch } = useContext(DispatchContext);
-
   const [value, setValue] = useState(0);
 
   useEffect(() => {

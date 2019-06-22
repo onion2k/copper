@@ -8,12 +8,15 @@ body {
   user-select: none;
 }
 
-header {
+.nav {
+  position: absolute;
+  width: 100vw;
   min-height: 50px;
   padding: 0 20px;
   display: flex;
   background-color: #bbb;
   align-items: center;
+  z-index: 9;
 }
 
 .canvas {
