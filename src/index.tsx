@@ -25,8 +25,9 @@ const Shader = React.lazy(() => import("./Panels/shader"));
 const Color = React.lazy(() => import("./Panels/color"));
 const String = React.lazy(() => import("./Panels/string"));
 
-import { ConnectorMap } from "./Components/connectorMap";
+import { HeaderNav } from "./Components/headerNav";
 import { ActiveConnector } from "./Components/activeConnector";
+import { ConnectorMap } from "./Components/connectorMap";
 
 import { uniqueID } from "./uniqueID";
 
@@ -110,7 +111,7 @@ function App() {
   }
 
   const addPanel = (type: string) => {
-    const tempPanels = panels;
+    const tempPanels = [...panels];
     tempPanels.push({
       id: uniqueID(),
       type: type,
@@ -211,99 +212,14 @@ function App() {
 
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
-      <header className="nav">
-        <h1>Copper</h1>
-        <ul className="addPanel">
-          <li>
-            <button onClick={() => addPanel("constant")}>Add Const</button>
-          </li>
-          <li>
-            <button onClick={() => addPanel("time")}>Add Time</button>
-          </li>
-          <li>
-            <button onClick={() => addPanel("math")}>Add Math</button>
-          </li>
-          <li>
-            <button onClick={() => addPanel("sin")}>Add Sin</button>
-          </li>
-          <li>
-            <button onClick={() => addPanel("string")}>Add String</button>
-          </li>
-          <li>
-            <button onClick={() => addPanel("shader")}>Add Shader</button>
-          </li>
-          <li>
-            <button onClick={() => addPanel("color")}>Add Color</button>
-          </li>
-          <li>
-            <button onClick={() => addPanel("value")}>Add Value</button>
-          </li>
-        </ul>
-      </header>
+      <HeaderNav addPanel={addPanel} />
       <div className={appClass.join(" ")}>
         <MouseContext.Provider value={[mouseX, mouseY]}>
           <ConnectorMap
             nodes={state.nodes}
             connections={state.connectionLines}
           />
-          <Suspense fallback={"Waiting"}>
-            {/* <Time
-              key={"time0"}
-              id={useRef(uniqueID()).current}
-              title={"Time"}
-              x={cellSize * 1}
-              y={cellSize * 6}
-              initPauseState={true}
-            /> */}
-            {/* <Const key={"const0"} id={useRef(uniqueID()).current} x={10} y={160} /> */}
-            {/* <Arithmatic
-              key={"math0"}
-              id={useRef(uniqueID()).current}
-              title={"Multiply"}
-              x={cellSize * 7}
-              y={cellSize * 1}
-              op="multiply"
-            /> */}
-            {/* <Sin
-              key={"sin0"}
-              id={useRef(uniqueID()).current}
-              x={cellSize * 5}
-              y={cellSize * 3}
-            /> */}
-            {/* <Shader
-              key={"shader0"}
-              id={useRef(uniqueID()).current}
-              x={cellSize * 9}
-              y={cellSize * 1}
-            /> */}
-            {/* <Value
-              key={"value0"}
-              id={useRef(uniqueID()).current}
-              x={1210}
-              y={10}
-            /> */}
-            {/* <Color
-              key={"color0"}
-              id={useRef(uniqueID()).current}
-              x={10}
-              y={300}
-            /> */}
-            {/* <String
-              id={useRef(uniqueID()).current}
-              title="Vertex Shader"
-              x={cellSize * 1}
-              y={cellSize * 6}
-              value={vs}
-            /> */}
-            {/* <String
-              id={useRef(uniqueID()).current}
-              title="Fragment Shader"
-              x={cellSize * 5}
-              y={cellSize * 6}
-              value={fs}
-            /> */}
-            {panelsEl}
-          </Suspense>
+          <Suspense fallback={"Waiting"}>{panelsEl}</Suspense>
           <ActiveConnector x={0} y={0} />
         </MouseContext.Provider>
       </div>
