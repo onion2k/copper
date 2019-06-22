@@ -105,7 +105,6 @@ function App() {
   let { x: mouseX, y: mouseY } = useMousePosition();
 
   let appClass = ["canvas"];
-
   if (state.connector) {
     appClass.push("active");
   }
@@ -213,7 +212,7 @@ function App() {
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
       <header className="nav">
-        <h1>Copper Header</h1>
+        <h1>Copper</h1>
         <ul className="addPanel">
           <li>
             <button onClick={() => addPanel("constant")}>Add Const</button>
