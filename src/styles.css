@@ -10,9 +10,7 @@ body {
 
 .nav {
   position: absolute;
-  width: calc(100vw - 100px);
-  padding: 0 50px;
-  min-height: 50px;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   background-color: #bbb;
@@ -21,16 +19,33 @@ body {
 }
 
 .nav h1 {
-  padding: 0;
+  flex: 1;
+  padding: 0 50px;
   margin: 0;
   font-size: 1rem;
 }
 
 .nav .addPanel {
+  flex: 2;
+  padding: 0;
+  margin: 0;
   list-style: none;
   display: flex;
   flex-direction: row;
-  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+.nav .addPanel button {
+  padding: 10px 15px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 0;
+  background-color: gray;
+  color: white;
+  cursor: pointer;
+}
+.nav .addPanel button:hover {
+  background-color: darkgray;
 }
 
 .canvas {

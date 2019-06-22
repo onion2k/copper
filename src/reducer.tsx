@@ -6,18 +6,14 @@ export function reducer(state: any, action: any) {
   switch (action.type) {
     case "recalculate":
       newState.outputs[action.id] = action.value;
-
       if (newState.connections[action.id]) {
         const id = newState.connections[action.id][0];
         const index = newState.connections[action.id][1];
         newState.inputs[id][index] = action.value;
       }
-
       return newState;
-
     case "node/connect":
       return node.connect(newState, action);
-
     case "panel/move":
       return panel.move(newState, action);
     case "panel/register":
