@@ -8,6 +8,23 @@ body {
   user-select: none;
 }
 
+header {
+  min-height: 50px;
+  padding: 0 20px;
+  display: flex;
+  background-color: #bbb;
+  align-items: center;
+}
+
+.canvas {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #ffffff;
+  background-image: url("./grid.png");
+  overflow: hidden;
+}
+
 article {
   position: absolute;
   width: 350px;
@@ -21,21 +38,23 @@ article {
   flex-direction: column;
 }
 
-header {
+article header {
   grid-area: header;
+  min-height: auto;
+  background-color: transparent;
   padding: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   cursor: move;
   display: flex;
 }
-header span {
+article header span {
   flex: 1;
 }
-header .indicators {
+article header .indicators {
   display: flex;
   justify-content: flex-end;
 }
-header .indicators .indicator {
+article header .indicators .indicator {
   flex: 1;
   width: 18px;
   height: 18px;
@@ -43,28 +62,28 @@ header .indicators .indicator {
   border-radius: 50%;
   margin-left: 5px;
 }
-header .indicators .indicator.yellow.on {
+article header .indicators .indicator.yellow.on {
   color: yellow;
   background-color: currentcolor;
   box-shadow: 0 0 8px currentcolor;
 }
-header .indicators .indicator.green.on {
+article header .indicators .indicator.green.on {
   color: #40ff40;
   background-color: currentcolor;
   box-shadow: 0 0 8px currentcolor;
 }
-header .indicators .indicator.flash {
+article header .indicators .indicator.flash {
   animation: flash;
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
 
-.controls {
+article .controls {
   display: flex;
   border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.knobs {
+article .knobs {
   padding: 10px 20px;
   width: 100%;
   font-family: "IBM Plex Sans Condensed", sans-serif;
@@ -72,43 +91,43 @@ header .indicators .indicator.flash {
   display: flex;
   flex-direction: column;
 }
-.knobs.nopadding {
+article .knobs.nopadding {
   padding: 0;
 }
-.knobs.nopadding > canvas {
+article .knobs.nopadding > canvas {
   border-radius: 0 0 10px 10px;
 }
 
-.knobs input[type="range"] {
+article .knobs input[type="range"] {
   display: inline-block;
   width: 100%;
 }
-.knobs input,
-.knobs select,
-.knobs button {
+article .knobs input,
+article .knobs select,
+article .knobs button {
   display: inline-block;
   width: 100%;
 }
-.knobs button,
-.knobs select {
+article .knobs button,
+article .knobs select {
   border: 0;
   background-color: white;
   padding: 5px;
   border-radius: 3px;
 }
 
-ul.knobs {
+article ul.knobs {
   padding: 5px 15px;
   list-style: none;
 }
-ul.knobs li {
+article ul.knobs li {
   width: 100%;
 }
-ul.knobs li input[type="radio"] {
+article ul.knobs li input[type="radio"] {
   width: auto;
 }
 
-.io {
+article .io {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "inputs outputs";
@@ -116,8 +135,8 @@ ul.knobs li input[type="radio"] {
   font-size: 0.8rem;
 }
 
-.input.node > div,
-.output.node > div {
+article .input.node > div,
+article .output.node > div {
   position: absolute;
   content: "";
   width: 20px;
@@ -127,57 +146,57 @@ ul.knobs li input[type="radio"] {
   cursor: pointer;
 }
 
-.input.node > div {
+article .input.node > div {
   left: -12px;
   pointer-events: all;
 }
 
-.output.node > div {
+article .output.node > div {
   right: -10px;
   pointer-events: all;
 }
 
-.node {
+article .node {
   font-family: "Courier New", Courier, monospace;
 }
 
-.inputs {
+article .inputs {
   position: relative;
   list-style: none;
   padding: 5px 0;
   margin-top: 0;
   margin-bottom: 0;
 }
-.inputs .input {
+article .inputs .input {
   display: flex;
   align-items: center;
   min-height: 30px;
   margin-left: 20px;
   pointer-events: none;
 }
-.inputs .input > div {
+article .inputs .input > div {
   background-color: #33d6ff;
 }
 
-.outputs {
+article .outputs {
   position: relative;
   list-style: none;
   padding: 5px 0;
   margin-top: 0;
   margin-bottom: 0;
 }
-.outputs .output {
+article .outputs .output {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   min-height: 30px;
   margin-right: 20px;
 }
-.outputs .output > div {
+article .outputs .output > div {
   background-color: #33ff4e;
 }
 
-footer {
+article footer {
   flex: 1 1 20px;
   padding: 10px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.25);
@@ -225,10 +244,6 @@ textarea {
   border-radius: 0 0 10px 10px;
 }
 
-.canvas {
-  width: 100vw;
-  height: 100vh;
-}
 .active {
   cursor: grabbing !important;
 }

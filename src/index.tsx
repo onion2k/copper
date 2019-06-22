@@ -61,13 +61,6 @@ const panels = [
   { type: "constant", id: "c1", title: "Constant 1", x: 10, y: 160 }
 ];
 
-// interface Connection {
-//   x1: number;
-//   y1: number;
-//   x2: number;
-//   y2: number;
-// }
-
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -81,6 +74,7 @@ function App() {
   return (
     <div className={appClass.join(" ")}>
       <DispatchContext.Provider value={{ dispatch, state }}>
+        <header>Copper Header</header>
         <MouseContext.Provider value={[mouseX, mouseY]}>
           <ConnectorMap
             nodes={state.nodes}
