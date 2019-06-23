@@ -41,6 +41,16 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           </ul>
         </li>
         <li>
+          Events
+          <ul>
+            <li>
+              <button onClick={() => addPanel("mousePosition")}>
+                Add Mouse Position
+              </button>
+            </li>
+          </ul>
+        </li>
+        <li>
           Complex Components
           <ul>
             <li>
