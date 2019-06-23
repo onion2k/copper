@@ -44,7 +44,9 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Complex Components
           <ul>
             <li>
-              <button onClick={() => addPanel("shader")}>Add Shader</button>
+              <button onClick={() => addPanel("shader")}>
+                Add GLSL Shader
+              </button>
             </li>
           </ul>
         </li>

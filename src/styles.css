@@ -13,7 +13,8 @@ body {
   width: 100vw;
   display: flex;
   justify-content: space-between;
-  background-color: #bbb;
+  background-color: #b87333;
+  color: #fff;
   align-items: center;
   z-index: 9;
 }
@@ -43,10 +44,8 @@ ul.addPanel {
 
 ul.addPanel li {
   color: #fff;
-  background: gray;
+  background: #b87333;
   display: block;
-  float: left;
-  padding: 1rem;
   margin: 0;
   position: relative;
   text-decoration: none;
@@ -55,6 +54,7 @@ ul.addPanel li {
 
 ul.addPanel > li {
   margin-left: 5px;
+  padding: 1rem 20px;
 }
 
 ul.addPanel li:hover,
@@ -69,7 +69,7 @@ ul.addPanel li:focus-within a {
 ul.addPanel li ul {
   visibility: hidden;
   opacity: 0;
-  min-width: 5rem;
+  min-width: 120px;
   position: absolute;
   transition: all 0.5s ease;
   margin-top: 1rem;
@@ -96,16 +96,20 @@ ul.addPanel li ul {
 }
 
 .nav .addPanel button {
-  padding: 10px 15px;
-  margin-left: 5px;
+  width: 100%;
+  padding: 20px;
   border: none;
   border-radius: 0;
-  background-color: gray;
+  background-color: #a56122;
   color: white;
   cursor: pointer;
+  text-align: left;
+  font-size: 0.8rem;
+  border-top: 1px solid #b87333;
 }
+
 .nav .addPanel button:hover {
-  background-color: darkgray;
+  background-color: #99571a;
 }
 
 .canvas {
