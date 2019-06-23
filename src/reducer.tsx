@@ -9,7 +9,12 @@ export function reducer(state: any, action: any) {
       if (newState.connections[action.id]) {
         const id = newState.connections[action.id][0];
         const index = newState.connections[action.id][1];
-        newState.inputs[id][index] = action.value;
+        const outputIndex = newState.connections[action.id][2];
+        if (outputIndex !== null) {
+          newState.inputs[id][index] = action.value[outputIndex];
+        } else {
+          newState.inputs[id][index] = action.value;
+        }
       }
       return newState;
     case "node/connect":

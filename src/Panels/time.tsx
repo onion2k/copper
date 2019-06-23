@@ -48,7 +48,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       key={id}
       id={id}
       direction={"out"}
-      index={0}
+      index={null}
       value={value.toFixed(3)}
     />
   ];

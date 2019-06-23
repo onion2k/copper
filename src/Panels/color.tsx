@@ -3,16 +3,14 @@ import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
-import { uniqueID } from "../uniqueID";
-
-interface iConst {
+interface iColor {
   id: string;
   title?: string;
   x: number;
   y: number;
 }
 
-export default function Const({ id, title, x, y }: iConst) {
+export default function Color({ id, title, x, y }: iColor) {
   const { dispatch } = useContext(DispatchContext);
 
   const [color, setColor] = useState("#000000");
@@ -43,7 +41,7 @@ export default function Const({ id, title, x, y }: iConst) {
   }, [r, g, b]);
 
   const outputs = [
-    <Output key={id} id={id} direction={"out"} index={0} value={color} />
+    <Output key={id} id={id} direction={"out"} index={null} value={color} />
   ];
 
   const controls = [

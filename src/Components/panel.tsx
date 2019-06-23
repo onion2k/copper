@@ -14,11 +14,6 @@ interface iPanel {
   nopadding?: boolean;
 }
 
-interface iInitPos {
-  x: number;
-  y: number;
-}
-
 export function Panel({
   id,
   title,

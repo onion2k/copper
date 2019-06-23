@@ -68,7 +68,7 @@ export default function Sin({ id, title, x, y }: iSin) {
       key={`output-${id}-0`}
       id={id}
       direction={"out"}
-      index={0}
+      index={null}
       value={value.toFixed(3)}
     />
   ];

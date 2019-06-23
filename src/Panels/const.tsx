@@ -36,7 +36,7 @@ export default function Const({ id, title, x, y }: iConst) {
   };
 
   const outputs = [
-    <Output key={id} id={id} direction={"out"} index={0} value={value} />
+    <Output key={id} id={id} direction={"out"} index={null} value={value} />
   ];
 
   const controls = (

@@ -75,7 +75,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       id={id}
       key={`output-${id}-0`}
       direction={"out"}
-      index={0}
+      index={null}
       value={value}
     />
   ];

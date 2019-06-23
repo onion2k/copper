@@ -3,7 +3,7 @@ import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
-interface iConst {
+interface iString {
   id: string;
   title?: string;
   x: number;
@@ -11,7 +11,7 @@ interface iConst {
   value?: string;
 }
 
-export default function Const({ id, title, x, y, value }: iConst) {
+export default function Const({ id, title, x, y, value }: iString) {
   const { dispatch } = useContext(DispatchContext);
 
   const [_value, setValue] = useState(value);
@@ -35,7 +35,7 @@ export default function Const({ id, title, x, y, value }: iConst) {
   }, [_value]);
 
   const outputs = [
-    <Output key={id} id={id} direction={"out"} index={0} value={_value} />
+    <Output key={id} id={id} direction={"out"} index={null} value={_value} />
   ];
 
   const controls = (

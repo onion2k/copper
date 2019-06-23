@@ -23,7 +23,7 @@ export default function Event_MousePosition({
   const canvasX = 350;
   const canvasY = 200;
 
-  const input = useRef([]);
+  const input = useRef([0]);
 
   useEffect(() => {
     dispatch({
@@ -44,11 +44,11 @@ export default function Event_MousePosition({
   useEffect(() => {
     dispatch({
       type: "recalculate",
-      msg: "sin",
+      msg: "mouse",
       id: id,
-      value: mousePos
+      value: [mousePos[0], mousePos[1]]
     });
-  }, [input.current[0]]);
+  }, [mousePos[0], mousePos[1]]);
 
   useEffect(() => {
     if (canvasRef.current !== null) {
@@ -72,7 +72,14 @@ export default function Event_MousePosition({
       id={id}
       direction={"out"}
       index={0}
-      value={`[${mousePos[0]},${mousePos[1]}]`}
+      value={mousePos[0]}
+    />,
+    <Output
+      key={`output-${id}-1`}
+      id={id}
+      direction={"out"}
+      index={1}
+      value={mousePos[1]}
     />
   ];
 

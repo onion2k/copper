@@ -4,7 +4,7 @@ import { DispatchContext } from "../Contexts/dispatch";
 interface iNode {
   id: string;
   direction: string;
-  index: number;
+  index: number | null;
 }
 
 export function Node({ id, direction, index }: iNode) {

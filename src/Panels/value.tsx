@@ -49,7 +49,7 @@ export default function Value({ id, title, x, y }: iValue) {
       key={id}
       id={id}
       direction={"out"}
-      index={0}
+      index={null}
       value={input.current[0]}
     />
   ];

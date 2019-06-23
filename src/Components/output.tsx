@@ -6,7 +6,7 @@ interface iOutput {
   id: string;
   title?: string;
   direction: string;
-  index: number;
+  index: number | null;
   value: number | string | undefined;
 }
 

@@ -10,6 +10,7 @@ export default class {
 
       state.connector = {
         id: action.payload.id,
+        index: action.payload.index,
         x: action.payload.x,
         y: action.payload.y
       };
@@ -20,6 +21,8 @@ export default class {
           cl.to === action.payload.id && cl.index === action.payload.index
         );
       });
+      /* state connector is the output */
+      /* payload is the input */
       state.connectionLines.push({
         from: state.connector.id,
         to: action.payload.id,
@@ -31,10 +34,18 @@ export default class {
       });
       state.connections[state.connector.id] = [
         action.payload.id,
-        action.payload.index
+        action.payload.index,
+        state.connector.index
       ];
-      state.inputs[action.payload.id][action.payload.index] =
-        state.outputs[state.connector.id];
+
+      /* update the input to the current output value */
+      if (state.connector.index === null) {
+        state.inputs[action.payload.id][action.payload.index] =
+          state.outputs[state.connector.id];
+      } else {
+        state.inputs[action.payload.id][action.payload.index] =
+          state.outputs[state.connector.id][state.connector.index];
+      }
       state.connector = null;
     }
 
