@@ -78,7 +78,7 @@ export default function Shader({ id, title, x, y }: iShader) {
       direction={"in"}
       index={2}
       value={input.current[2]}
-      title={"Time"}
+      title={"u_time"}
     />
   ];
 

@@ -36,7 +36,9 @@ export default function Event_MousePosition({
   useEffect(() => {
     if (canvasRef !== null && canvasRef.current !== null) {
       canvasRef.current.addEventListener("mousemove", e => {
-        setMousePos([e.offsetX, e.offsetY]);
+        const x = e.offsetX / canvasX;
+        const y = e.offsetY / canvasY;
+        setMousePos([x, y]);
       });
     }
   }, [canvasRef]);
@@ -58,7 +60,13 @@ export default function Event_MousePosition({
         ctx.fillRect(0, 0, canvasX, canvasY);
         ctx.fillStyle = "#000";
         ctx.beginPath();
-        ctx.arc(mousePos[0], mousePos[1], 5, 0, Math.PI * 2);
+        ctx.arc(
+          mousePos[0] * canvasX,
+          mousePos[1] * canvasY,
+          5,
+          0,
+          Math.PI * 2
+        );
         ctx.fill();
       }
     }
