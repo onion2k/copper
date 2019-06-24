@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { ConnectorContext } from "../Contexts/connector";
 import { ConnectorMapLine } from "./connectorMapLine";
 
 interface iConnectorMap {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { ConnectorContext } from "../Contexts/connector";
 import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
 
@@ -43,6 +42,11 @@ export function Panel({
     }
   }, [dragging, mouseX, mouseY]);
 
+  const close = () => {
+    console.log("Closing");
+    dispatch({});
+  };
+
   return (
     <article
       key={`panel-${id}`}
@@ -67,6 +71,7 @@ export function Panel({
           setDelta({ x: 0, y: 0 });
         }}
       >
+        <div className="indicator close" onClick={close} />
         <span>{title}</span>
         <div className="indicators">
           <div className="indicator yellow" />

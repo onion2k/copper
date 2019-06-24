@@ -4,8 +4,6 @@ import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
 
-import { uniqueID } from "../uniqueID";
-
 interface iValue {
   id: string;
   title?: string;

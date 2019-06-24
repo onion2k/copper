@@ -4,8 +4,6 @@ import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
 
-import { uniqueID } from "../uniqueID";
-
 interface iTime {
   id: string;
   title: string;

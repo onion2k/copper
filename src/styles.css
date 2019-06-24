@@ -143,15 +143,19 @@ article header {
   cursor: move;
   display: flex;
 }
+article header .close {
+  margin-right: 10px;
+  cursor: pointer;
+}
 article header span {
   flex: 1;
 }
 article header .indicators {
+  flex: 1;
   display: flex;
   justify-content: flex-end;
 }
-article header .indicators .indicator {
-  flex: 1;
+article header .indicator {
   width: 18px;
   height: 18px;
   background-color: #444;

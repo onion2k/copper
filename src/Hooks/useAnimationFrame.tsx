@@ -1,4 +1,4 @@
-import React, { useRef, useState, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 
 const useAnimationFrame = (callback: () => any) => {
   const callbackRef = useRef(callback);

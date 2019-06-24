@@ -16,7 +16,7 @@ interface iInitPos {
 }
 
 export function ActiveConnector({ id, x, y }: iActiveConnector) {
-  const { dispatch, state } = useContext(DispatchContext);
+  const { state } = useContext(DispatchContext);
   const [mouseX, mouseY] = useContext(MouseContext);
 
   if (!state.connector) {

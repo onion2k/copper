@@ -71,27 +71,27 @@ const init: {
   y: number;
   value?: any;
 }[] = [
-  {
-    type: "time",
-    id: "time1",
-    title: "Timer",
-    x: 1,
-    y: 1
-  },
-  {
-    type: "constant",
-    id: "c1",
-    title: "Constant 1",
-    x: 1,
-    y: 3
-  },
-  {
-    type: "mousePosition",
-    id: "mouse1",
-    title: "Mouse",
-    x: 6,
-    y: 1
-  },
+  // {
+  //   type: "time",
+  //   id: "time1",
+  //   title: "Timer",
+  //   x: 1,
+  //   y: 1
+  // },
+  // {
+  //   type: "constant",
+  //   id: "c1",
+  //   title: "Constant 1",
+  //   x: 1,
+  //   y: 3
+  // },
+  // {
+  //   type: "mousePosition",
+  //   id: "mouse1",
+  //   title: "Mouse",
+  //   x: 6,
+  //   y: 1
+  // },
   {
     type: "string",
     id: "fs",

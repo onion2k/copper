@@ -9,7 +9,6 @@ import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
 import { Output } from "../Components/output";
-import { uniqueID } from "../uniqueID";
 
 interface iArithmatic {
   id: string;

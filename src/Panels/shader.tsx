@@ -4,7 +4,6 @@ import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Input } from "../Components/input";
-import { Output } from "../Components/output";
 
 interface iShader {
   id: string;
