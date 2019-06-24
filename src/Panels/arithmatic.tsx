@@ -93,7 +93,6 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
   const controls = (
     <select
       onChange={e => {
-        console.log(e.target.value);
         setOp(e.target.value);
       }}
       defaultValue={_op}

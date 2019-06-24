@@ -104,7 +104,7 @@ function App() {
     tempPanels.push({
       id: uniqueID(),
       type: type,
-      title: type,
+      title: type.charAt(0).toUpperCase() + type.slice(1),
       x: 1,
       y: 1
     });
@@ -134,7 +134,7 @@ function App() {
             initPauseState={true}
           />
         );
-      case "math":
+      case "arithmatic":
         return (
           <Arithmatic
             id={p.id}

@@ -33,7 +33,7 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Operations
           <ul>
             <li>
-              <button onClick={() => addPanel("math")}>Math</button>
+              <button onClick={() => addPanel("arithmatic")}>Arithmatic</button>
             </li>
             <li>
               <button onClick={() => addPanel("sin")}>Sin</button>
