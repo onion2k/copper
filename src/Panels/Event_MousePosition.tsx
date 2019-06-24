@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import useAnimationFrame from "../Hooks/useAnimationFrame";
 import { DispatchContext } from "../Contexts/dispatch";
 import { Panel } from "../Components/panel";
 import { Output } from "../Components/output";
@@ -52,7 +53,7 @@ export default function Event_MousePosition({
     });
   }, [mousePos[0], mousePos[1]]);
 
-  useEffect(() => {
+  useAnimationFrame(() => {
     if (canvasRef.current !== null) {
       const ctx = canvasRef.current.getContext("2d");
       if (ctx) {
@@ -70,7 +71,7 @@ export default function Event_MousePosition({
         ctx.fill();
       }
     }
-  }, [canvasRef, mousePos[0], mousePos[1]]);
+  });
 
   const inputs = null;
 
