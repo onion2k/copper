@@ -44,7 +44,10 @@ export function Panel({
 
   const close = () => {
     console.log("Closing");
-    dispatch({});
+    dispatch({
+      type: "panel/unregister",
+      id: id
+    });
   };
 
   return (

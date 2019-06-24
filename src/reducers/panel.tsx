@@ -8,6 +8,13 @@ export default class {
     return state;
   };
 
+  static unregister = (state: any, action: any) => {
+    state.panels = state.panels.filter((panel: any) => {
+      return panel.id !== action.id;
+    });
+    return state;
+  };
+
   static move = (state: any, action: any) => {
     state.nodes
       .filter((node: any) => {

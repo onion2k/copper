@@ -21,7 +21,8 @@ interface iArithmatic {
 export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState(0);
-  const input = useRef([0, 1]);
+  const [_op, setOp] = useState(op);
+  const input = useRef([0, 0]);
 
   useEffect(() => {
     dispatch({
@@ -33,12 +34,22 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
 
   useEffect(() => {
     if (state.inputs[id]) {
-      switch (op) {
+      switch (_op) {
         case "add":
           setValue(input.current[0] + input.current[1]);
           break;
+        case "subtract":
+          setValue(input.current[0] - input.current[1]);
+          break;
         case "multiply":
           setValue(input.current[0] * input.current[1]);
+          break;
+        case "divide":
+          if (input.current[1] > 0) {
+            setValue(input.current[0] / input.current[1]);
+          } else {
+            setValue(0);
+          }
           break;
       }
       dispatch({
@@ -48,7 +59,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
         value: value
       });
     }
-  }, [input.current[0], input.current[1], op]);
+  }, [input.current[0], input.current[1], _op]);
 
   const inputs = [
     <Input
@@ -79,7 +90,20 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
     />
   ];
 
-  const controls = `Add input 1 and input 2.`;
+  const controls = (
+    <select
+      onChange={e => {
+        console.log(e.target.value);
+        setOp(e.target.value);
+      }}
+      defaultValue={_op}
+    >
+      <option value={"add"}>Add (A + B)</option>
+      <option value={"subtract"}>Subtract (A - B)</option>
+      <option value={"multiply"}>Multiply (A * B)</option>
+      <option value={"divide"}>Divide (A / B)</option>
+    </select>
+  );
 
   return (
     <Panel
@@ -87,7 +111,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       id={id}
       x={x}
       y={y}
-      title={title || `Math.${op}`}
+      title={`${title}: ${_op}` || `Math.${_op}`}
       inputs={inputs}
       outputs={outputs}
       controls={controls}

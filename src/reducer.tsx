@@ -23,6 +23,8 @@ export function reducer(state: any, action: any) {
       return panel.move(newState, action);
     case "panel/register":
       return panel.register(newState, action);
+    case "panel/unregister":
+      return panel.unregister(newState, action);
     default:
       throw new Error();
   }
