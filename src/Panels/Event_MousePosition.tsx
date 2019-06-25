@@ -18,6 +18,7 @@ export default function Event_MousePosition({
   y
 }: iEventMousePosition) {
   const { dispatch } = useContext(DispatchContext);
+  const [prevMousePos, setPrevMousePos] = useState([0, 0]);
   const [mousePos, setMousePos] = useState([0, 0]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -44,14 +45,14 @@ export default function Event_MousePosition({
     }
   }, [canvasRef]);
 
-  useEffect(() => {
-    dispatch({
-      type: "recalculate",
-      msg: "mouse",
-      id: id,
-      value: [mousePos[0], mousePos[1]]
-    });
-  }, [mousePos[0], mousePos[1]]);
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "recalculate",
+  //     msg: "mouse",
+  //     id: id,
+  //     value: [mousePos[0], mousePos[1]]
+  //   });
+  // }, [mousePos[0], mousePos[1]]);
 
   useAnimationFrame(() => {
     if (canvasRef.current !== null) {
@@ -70,6 +71,16 @@ export default function Event_MousePosition({
         );
         ctx.fill();
       }
+    }
+    if (mousePos !== prevMousePos) {
+      console.log("whee");
+      setPrevMousePos(mousePos);
+      dispatch({
+        type: "recalculate",
+        msg: "mouse",
+        id: id,
+        value: [mousePos[0], mousePos[1]]
+      });
     }
   });
 
