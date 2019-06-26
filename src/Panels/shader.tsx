@@ -10,9 +10,10 @@ interface iShader {
   title?: string;
   x: number;
   y: number;
+  defaults?: React.MutableRefObject<Array<any>>;
 }
 
-export default function Shader({ id, title, x, y }: iShader) {
+export default function Shader({ id, title, x, y, defaults }: iShader) {
   const { dispatch } = useContext(DispatchContext);
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
@@ -26,7 +27,7 @@ export default function Shader({ id, title, x, y }: iShader) {
   const canvasX = 300;
   const canvasY = 200;
 
-  const input = useRef(["", "", 0]);
+  const input = defaults ? defaults : useRef(["", "", 0]);
 
   useEffect(() => {
     dispatch({

@@ -20,13 +20,15 @@ const Const = React.lazy(() => import("./Panels/const"));
 const Time = React.lazy(() => import("./Panels/time"));
 const Value = React.lazy(() => import("./Panels/value"));
 const Arithmatic = React.lazy(() => import("./Panels/arithmatic"));
-const Sin = React.lazy(() => import("./Panels/sin"));
+const Trig = React.lazy(() => import("./Panels/trig"));
 const Shader = React.lazy(() => import("./Panels/shader"));
 const Color = React.lazy(() => import("./Panels/color"));
 const String = React.lazy(() => import("./Panels/string"));
 const Event_MousePosition = React.lazy(() =>
   import("./Panels/Event_MousePosition")
 );
+
+const Shader_Color = React.lazy(() => import("./Panels/shaders/color"));
 
 import { HeaderNav } from "./Components/headerNav";
 import { ActiveConnector } from "./Components/activeConnector";
@@ -35,31 +37,6 @@ import { ConnectorMap } from "./Components/connectorMap";
 import { uniqueID } from "./uniqueID";
 
 import "./styles.css";
-
-const fs = `#ifdef GL_ES
-  precision mediump float;
-#endif
-
-uniform float u_time;
-uniform vec2 u_resolution;
-
-void main()
-{
-  // Normalized pixel coordinates (from 0 to 1)
-  vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-
-  // Time varying pixel color
-  vec3 col = 0.5 + 0.5*cos(u_time + uv.xyx + vec3(0,2,4));
-
-  // Output to screen
-  gl_FragColor = vec4(col,1.0);
-}`;
-
-const vs = `attribute vec4 position;
-void main() {
-  gl_Position = position;
-}
-`;
 
 const cellSize = 100;
 
@@ -70,24 +47,7 @@ const init: {
   x: number;
   y: number;
   value?: any;
-}[] = [
-  {
-    type: "string",
-    id: "fs",
-    title: "Fragment Shader",
-    x: 5,
-    y: 6,
-    value: fs
-  },
-  {
-    type: "string",
-    id: "vs",
-    title: "Vertex Shader",
-    x: 1,
-    y: 6,
-    value: vs
-  }
-];
+}[] = [];
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -145,9 +105,9 @@ function App() {
             op={"multiply"}
           />
         );
-      case "sin":
+      case "trig":
         return (
-          <Sin
+          <Trig
             id={p.id}
             key={p.id}
             title={p.title}
@@ -199,6 +159,16 @@ function App() {
       case "mousePosition":
         return (
           <Event_MousePosition
+            id={p.id}
+            key={p.id}
+            title={p.title}
+            x={cellSize * p.x}
+            y={cellSize * p.y}
+          />
+        );
+      case "Shader_Color":
+        return (
+          <Shader_Color
             id={p.id}
             key={p.id}
             title={p.title}

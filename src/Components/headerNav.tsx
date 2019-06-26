@@ -36,7 +36,7 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
               <button onClick={() => addPanel("arithmatic")}>Arithmatic</button>
             </li>
             <li>
-              <button onClick={() => addPanel("sin")}>Sin</button>
+              <button onClick={() => addPanel("trig")}>Trigonometry</button>
             </li>
           </ul>
         </li>
@@ -51,10 +51,20 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           </ul>
         </li>
         <li>
-          Complex Components
+          Outputs
           <ul>
             <li>
               <button onClick={() => addPanel("shader")}>GLSL Shader</button>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Shaders
+          <ul>
+            <li>
+              <button onClick={() => addPanel("Shader_Color")}>
+                Color Shader
+              </button>
             </li>
           </ul>
         </li>

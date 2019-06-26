@@ -35,7 +35,7 @@ export default function Sin({ id, title, x, y }: iSin) {
     setValue(Math.sin(input.current[0]));
     dispatch({
       type: "recalculate",
-      msg: "sin",
+      msg: "trig",
       id: id,
       value: value
     });
@@ -87,8 +87,8 @@ export default function Sin({ id, title, x, y }: iSin) {
 
   const controls = [
     <canvas
-      id={"canvas-sin-0"}
-      key={`canvas-sin-0`}
+      id={"canvas-trig-0"}
+      key={`canvas-trig-0`}
       ref={canvasRef}
       width={canvasX}
       height={canvasY}
@@ -101,7 +101,7 @@ export default function Sin({ id, title, x, y }: iSin) {
       id={id}
       x={x}
       y={y}
-      title={title || "Sin"}
+      title={title || "Trig"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}
