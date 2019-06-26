@@ -27,8 +27,20 @@ const String = React.lazy(() => import("./Panels/string"));
 const Event_MousePosition = React.lazy(() =>
   import("./Panels/Event_MousePosition")
 );
-
 const Shader_Color = React.lazy(() => import("./Panels/shaders/color"));
+
+const panelTypes: { [s: string]: any } = {
+  CONST: { el: Const },
+  TIME: { el: Time, defaults: { initPauseState: true } },
+  VALUE: { el: Value },
+  ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
+  TRIG: { el: Trig },
+  SHADER: { el: Shader },
+  COLOR: { el: Color },
+  STRING: { el: String },
+  EVENT_MousePosition: { el: Event_MousePosition },
+  SHADER_Color: { el: Shader_Color }
+};
 
 import { HeaderNav } from "./Components/headerNav";
 import { ActiveConnector } from "./Components/activeConnector";
@@ -72,111 +84,21 @@ function App() {
   };
 
   const panelsEl = panels.map((p: any) => {
-    switch (p.type) {
-      case "constant":
-        return (
-          <Const
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-          />
-        );
-      case "time":
-        return (
-          <Time
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-            initPauseState={true}
-          />
-        );
-      case "arithmatic":
-        return (
-          <Arithmatic
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-            op={"multiply"}
-          />
-        );
-      case "trig":
-        return (
-          <Trig
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-          />
-        );
-      case "string":
-        return (
-          <String
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-            value={p.value || ""}
-          />
-        );
-      case "shader":
-        return (
-          <Shader
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-          />
-        );
-      case "color":
-        return (
-          <Color
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-          />
-        );
-      case "value":
-        return (
-          <Value
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-          />
-        );
-      case "mousePosition":
-        return (
-          <Event_MousePosition
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-          />
-        );
-      case "Shader_Color":
-        return (
-          <Shader_Color
-            id={p.id}
-            key={p.id}
-            title={p.title}
-            x={cellSize * p.x}
-            y={cellSize * p.y}
-          />
-        );
-    }
+    return React.createElement(
+      panelTypes[p.type].el,
+      Object.assign(
+        {},
+        {
+          id: p.id,
+          key: p.id,
+          title: p.title,
+          x: cellSize * p.x,
+          y: cellSize * p.y,
+          value: p.value
+        },
+        panelTypes[p.type].defaults
+      )
+    );
   });
 
   return (

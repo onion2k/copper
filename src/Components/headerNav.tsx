@@ -13,19 +13,19 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Primitives
           <ul>
             <li>
-              <button onClick={() => addPanel("constant")}>Const</button>
+              <button onClick={() => addPanel("CONST")}>Const</button>
             </li>
             <li>
-              <button onClick={() => addPanel("time")}>Time</button>
+              <button onClick={() => addPanel("TIME")}>Time</button>
             </li>
             <li>
-              <button onClick={() => addPanel("string")}>String</button>
+              <button onClick={() => addPanel("STRING")}>String</button>
             </li>
             <li>
-              <button onClick={() => addPanel("color")}>Color</button>
+              <button onClick={() => addPanel("COLOR")}>Color</button>
             </li>
             <li>
-              <button onClick={() => addPanel("value")}>Value</button>
+              <button onClick={() => addPanel("VALUE")}>Value</button>
             </li>
           </ul>
         </li>
@@ -33,10 +33,10 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Operations
           <ul>
             <li>
-              <button onClick={() => addPanel("arithmatic")}>Arithmatic</button>
+              <button onClick={() => addPanel("ARITHMATIC")}>Arithmatic</button>
             </li>
             <li>
-              <button onClick={() => addPanel("trig")}>Trigonometry</button>
+              <button onClick={() => addPanel("TRIG")}>Trigonometry</button>
             </li>
           </ul>
         </li>
@@ -44,7 +44,7 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Events
           <ul>
             <li>
-              <button onClick={() => addPanel("mousePosition")}>
+              <button onClick={() => addPanel("EVENT_MousePosition")}>
                 Mouse Position
               </button>
             </li>
@@ -54,7 +54,7 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Outputs
           <ul>
             <li>
-              <button onClick={() => addPanel("shader")}>GLSL Shader</button>
+              <button onClick={() => addPanel("SHADER")}>GLSL Shader</button>
             </li>
           </ul>
         </li>
@@ -62,7 +62,7 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Shaders
           <ul>
             <li>
-              <button onClick={() => addPanel("Shader_Color")}>
+              <button onClick={() => addPanel("SHADER_Color")}>
                 Color Shader
               </button>
             </li>
