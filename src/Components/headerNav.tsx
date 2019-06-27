@@ -69,6 +69,11 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
             <li>
               <button onClick={() => addPanel("SHADER_SDF")}>SDF Shader</button>
             </li>
+            <li>
+              <button onClick={() => addPanel("SHADER_Rings")}>
+                Rings Shader
+              </button>
+            </li>
           </ul>
         </li>
       </ul>
