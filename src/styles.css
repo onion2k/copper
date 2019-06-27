@@ -230,7 +230,7 @@ article ul.knobs li input[type="radio"] {
 
 article .io {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-template-areas: "inputs outputs";
   font-family: "IBM Plex Sans Condensed", sans-serif;
   font-size: 0.8rem;

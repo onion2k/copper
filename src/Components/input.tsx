@@ -15,7 +15,7 @@ export function Input({ id, title, direction, index, value }: iInput) {
       ? value.toFixed(3)
       : typeof value === "string"
       ? value.substr(0, 15) + "…"
-      : "";
+      : value.join(",");
 
   return (
     <li className="input node">

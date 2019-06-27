@@ -36,7 +36,7 @@ export default function Color({ id, title, x, y }: iColor) {
       type: "recalculate",
       msg: "color",
       id: id,
-      value: [r / 255, g / 255, b / 255]
+      value: [(r / 255).toFixed(2), (g / 255).toFixed(2), (b / 255).toFixed(2)]
     });
   }, [r, g, b]);
 
