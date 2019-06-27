@@ -135,6 +135,11 @@ article {
   z-index: 2;
 }
 
+article.large {
+  width: 700px;
+  min-height: 600px;
+}
+
 article header {
   grid-area: header;
   min-height: auto;

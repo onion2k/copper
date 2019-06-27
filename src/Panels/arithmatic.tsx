@@ -104,7 +104,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       id={id}
       x={x}
       y={y}
-      title={`${title}: ${_op}` || `Math.${_op}`}
+      title={_op}
       inputs={inputs}
       outputs={outputs}
       controls={controls}

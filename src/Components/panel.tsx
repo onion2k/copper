@@ -11,6 +11,7 @@ interface iPanel {
   outputs: any;
   controls: any;
   nopadding?: boolean;
+  large?: boolean;
 }
 
 export function Panel({
@@ -21,7 +22,8 @@ export function Panel({
   inputs,
   outputs,
   controls,
-  nopadding
+  nopadding,
+  large
 }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
 
@@ -54,7 +56,7 @@ export function Panel({
     <article
       key={`panel-${id}`}
       ref={panelRef}
-      className="Panel"
+      className={`Panel ${large ? "large" : ""}`}
       style={{ top: pos.y + delta.y, left: pos.x + delta.x }}
     >
       <header
