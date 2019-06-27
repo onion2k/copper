@@ -39,8 +39,8 @@ export default function Const({ id, title, x, y, value }: iString) {
   }, [output]);
 
   useEffect(() => {
-    console.log("new in", input.current[0] + _value);
-    setOutput(input.current[0] + _value);
+    console.log("new in", input.current[0] + "\n" + _value);
+    setOutput(input.current[0] + "\n" + _value);
   }, [input.current[0]]);
 
   const inputs = [
@@ -63,7 +63,7 @@ export default function Const({ id, title, x, y, value }: iString) {
       name={"text"}
       onChange={e => {
         setValue(e.target.value);
-        setOutput(input.current[0] + _value);
+        setOutput(input.current[0] + "\n" + _value);
       }}
       defaultValue={_value}
       autoComplete="off"
