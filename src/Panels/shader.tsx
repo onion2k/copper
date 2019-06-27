@@ -10,10 +10,11 @@ interface iShader {
   title?: string;
   x: number;
   y: number;
+  inputs?: Array<any>;
   defaults?: React.MutableRefObject<Array<any>>;
 }
 
-export default function Shader({ id, title, x, y, defaults }: iShader) {
+export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
   const { dispatch } = useContext(DispatchContext);
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
@@ -55,32 +56,34 @@ export default function Shader({ id, title, x, y, defaults }: iShader) {
     }
   }, [canvasRef, input.current[0], input.current[1]]);
 
-  const inputs = [
-    <Input
-      key={`input-${id}-0`}
-      id={id}
-      direction={"in"}
-      index={0}
-      value={input.current[0]}
-      title={"vs"}
-    />,
-    <Input
-      key={`input-${id}-1`}
-      id={id}
-      direction={"in"}
-      index={1}
-      value={input.current[1]}
-      title={"fs"}
-    />,
-    <Input
-      key={`input-${id}-2`}
-      id={id}
-      direction={"in"}
-      index={2}
-      value={input.current[2]}
-      title={"u_time"}
-    />
-  ];
+  if (!inputs) {
+    inputs = [
+      <Input
+        key={`input-${id}-0`}
+        id={id}
+        direction={"in"}
+        index={0}
+        value={input.current[0]}
+        title={"vs"}
+      />,
+      <Input
+        key={`input-${id}-1`}
+        id={id}
+        direction={"in"}
+        index={1}
+        value={input.current[1]}
+        title={"fs"}
+      />,
+      <Input
+        key={`input-${id}-2`}
+        id={id}
+        direction={"in"}
+        index={2}
+        value={input.current[2]}
+        title={"u_time"}
+      />
+    ];
+  }
 
   const outputs = null;
 
@@ -100,6 +103,7 @@ export default function Shader({ id, title, x, y, defaults }: iShader) {
 
       var uniforms = {
         u_time: input.current[2],
+        u_color: input.current[3],
         u_resolution: [gl.canvas.width, gl.canvas.height]
       };
 

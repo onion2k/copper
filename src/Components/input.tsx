@@ -6,7 +6,7 @@ interface iInput {
   title?: string;
   direction: string;
   index: number;
-  value: number | string;
+  value: number | number[] | string;
 }
 
 export function Input({ id, title, direction, index, value }: iInput) {

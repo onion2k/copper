@@ -36,7 +36,7 @@ export default function Shader_SDF({ id, title, x, y }: iSin) {
       id={id}
       x={x}
       y={y}
-      title={"SDF Shader"}
+      title={"Chevron Shader"}
       defaults={input}
     />
   );
