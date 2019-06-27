@@ -66,6 +66,9 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
                 Color Shader
               </button>
             </li>
+            <li>
+              <button onClick={() => addPanel("SHADER_SDF")}>SDF Shader</button>
+            </li>
           </ul>
         </li>
       </ul>

@@ -33,7 +33,7 @@ void main() {
 }
 `;
 
-export default function Shader_SDF({ id, title, x, y }: iSin) {
+export default function Shader_Color({ id, title, x, y }: iSin) {
   const input = useRef([vs, fs, 0]);
 
   return (
@@ -42,7 +42,7 @@ export default function Shader_SDF({ id, title, x, y }: iSin) {
       id={id}
       x={x}
       y={y}
-      title={"SDF Shader"}
+      title={"Color Shader"}
       defaults={input}
     />
   );

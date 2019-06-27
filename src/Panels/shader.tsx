@@ -24,7 +24,7 @@ export default function Shader({ id, title, x, y, defaults }: iShader) {
   const [bufferInfo, setBufferInfo] = useState<twgl.BufferInfo | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasX = 300;
+  const canvasX = 350;
   const canvasY = 200;
 
   const input = defaults ? defaults : useRef(["", "", 0]);

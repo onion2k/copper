@@ -28,6 +28,7 @@ const Event_MousePosition = React.lazy(() =>
   import("./Panels/Event_MousePosition")
 );
 const Shader_Color = React.lazy(() => import("./Panels/shaders/color"));
+const SHADER_SDF = React.lazy(() => import("./Panels/shaders/sdf"));
 
 const panelTypes: { [s: string]: any } = {
   CONST: { el: Const },
@@ -39,7 +40,8 @@ const panelTypes: { [s: string]: any } = {
   COLOR: { el: Color },
   STRING: { el: String },
   EVENT_MousePosition: { el: Event_MousePosition },
-  SHADER_Color: { el: Shader_Color }
+  SHADER_Color: { el: Shader_Color },
+  SHADER_SDF: { el: SHADER_SDF }
 };
 
 import { HeaderNav } from "./Components/headerNav";
@@ -65,11 +67,6 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [panels, setPanels] = useState(init);
   let { x: mouseX, y: mouseY } = useMousePosition();
-
-  let appClass = ["canvas"];
-  if (state.connector) {
-    appClass.push("active");
-  }
 
   const addPanel = (type: string) => {
     const tempPanels = [...panels];
@@ -100,6 +97,11 @@ function App() {
       )
     );
   });
+
+  let appClass = ["canvas"];
+  if (state.connector) {
+    appClass.push("active");
+  }
 
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
