@@ -30,6 +30,7 @@ const Event_MousePosition = React.lazy(() =>
 const Shader_Color = React.lazy(() => import("./Panels/shaders/color"));
 const Shader_SDF = React.lazy(() => import("./Panels/shaders/sdf"));
 const Shader_Rings = React.lazy(() => import("./Panels/shaders/rings"));
+const SHADER_Chevron = React.lazy(() => import("./Panels/shaders/chevron"));
 
 const panelTypes: { [s: string]: any } = {
   CONST: { el: Const },
@@ -43,7 +44,8 @@ const panelTypes: { [s: string]: any } = {
   EVENT_MousePosition: { el: Event_MousePosition },
   SHADER_Color: { el: Shader_Color },
   SHADER_SDF: { el: Shader_SDF },
-  SHADER_Rings: { el: Shader_Rings }
+  SHADER_Rings: { el: Shader_Rings },
+  SHADER_Chevron: { el: SHADER_Chevron }
 };
 
 import { HeaderNav } from "./Components/headerNav";
