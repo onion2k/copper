@@ -27,11 +27,6 @@ const String = React.lazy(() => import("./Panels/string"));
 const EVENT_MousePosition = React.lazy(() =>
   import("./Panels/Event_MousePosition")
 );
-const SHADER_Color = React.lazy(() => import("./Panels/shaders/color"));
-const SHADER_SDF = React.lazy(() => import("./Panels/shaders/sdf"));
-const SHADER_Rings = React.lazy(() => import("./Panels/shaders/rings"));
-const SHADER_Chevron = React.lazy(() => import("./Panels/shaders/chevron"));
-const SHADER_Space = React.lazy(() => import("./Panels/shaders/space"));
 
 import SHADERS from "./Panels/shaders";
 
