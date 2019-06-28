@@ -10,15 +10,15 @@ interface iShader {
 }
 
 const fs = `precision mediump float;
-uniform float u_time; // time
-uniform vec3  u_color; // color
-uniform vec2  u_resolution; // resolution
+
+uniform float u_time;
+uniform vec3  u_color;
+uniform vec2  u_resolution;
 
 void main(void){
     vec2 p = (gl_FragCoord.xy * 2.0 - u_resolution) / min(u_resolution.x, u_resolution.y);
-    // l = 0.05 / abs(length(p) - 0.5);
     float l = 0.05 / abs(length(p*sin(u_time)) - 0.3);
-    // l += 0.05 / abs(length(p) - 0.1);
+    l += 0.05 / abs(length(p) - 0.1);
     gl_FragColor = vec4(l * u_color, 1.0);
 }`;
 

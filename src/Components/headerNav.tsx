@@ -79,6 +79,11 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
                 Chevron Shader
               </button>
             </li>
+            <li>
+              <button onClick={() => addPanel("SHADER_Space")}>
+                Space Shader
+              </button>
+            </li>
           </ul>
         </li>
       </ul>
