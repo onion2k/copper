@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import useAnimationFrame from "../Hooks/useAnimationFrame";
-import { DispatchContext } from "../Contexts/dispatch";
-import { Panel } from "../Components/panel";
-import { Output } from "../Components/output";
+import useAnimationFrame from "../../Hooks/useAnimationFrame";
+import { DispatchContext } from "../../Contexts/dispatch";
+import { Panel } from "../../Components/panel";
+import { Output } from "../../Components/output";
 
 interface iTime {
   id: string;

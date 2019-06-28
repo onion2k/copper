@@ -45,7 +45,6 @@ export function Panel({
   }, [dragging, mouseX, mouseY]);
 
   const close = () => {
-    console.log("Closing");
     dispatch({
       type: "panel/unregister",
       id: id
@@ -62,6 +61,7 @@ export function Panel({
       <header
         className="Title"
         onMouseDown={(e: React.MouseEvent) => {
+          e.stopPropagation();
           setDragging(true);
           setInitPos({ x: e.clientX, y: e.clientY });
         }}

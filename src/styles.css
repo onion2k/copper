@@ -8,6 +8,13 @@ body {
   user-select: none;
 }
 
+#root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .nav {
   position: absolute;
   width: 100vw;
@@ -114,10 +121,12 @@ ul.addPanel li ul {
 }
 
 .canvas {
-  width: 100vw;
-  min-height: 100vh;
+  position: absolute;
+  min-width: 5000px;
+  min-height: 5000px;
   background-color: #ffffff;
   background-image: url("./grid.png");
+  background-position: top left;
   overflow: hidden;
 }
 

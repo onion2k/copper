@@ -32,7 +32,7 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
   }
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+    <svg xmlns="http://www.w3.org/2000/svg" height="5000" width="5000">
       {connectionsMap}
     </svg>
   );

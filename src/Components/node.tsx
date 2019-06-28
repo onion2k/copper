@@ -11,7 +11,8 @@ export function Node({ id, direction, index }: iNode) {
   const { dispatch } = useContext(DispatchContext);
   const ref = useRef<HTMLDivElement>(null);
 
-  const connect = () => {
+  const connect = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (ref && ref.current !== null) {
       const {
         x,

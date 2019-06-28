@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useContext } from "react";
-import { DispatchContext } from "../Contexts/dispatch";
-import { Panel } from "../Components/panel";
-import { Input } from "../Components/input";
-import { Output } from "../Components/output";
+import { DispatchContext } from "../../Contexts/dispatch";
+import { Panel } from "../../Components/panel";
+import { Input } from "../../Components/input";
+import { Output } from "../../Components/output";
 
 interface iValue {
   id: string;

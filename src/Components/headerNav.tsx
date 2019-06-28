@@ -1,4 +1,5 @@
 import React from "react";
+import SHADERS from "../Panels/shaders";
 
 interface iHeaderNav {
   addPanel: Function;
@@ -61,29 +62,15 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
         <li>
           Shaders
           <ul>
-            <li>
-              <button onClick={() => addPanel("SHADER_Color")}>
-                Color Shader
-              </button>
-            </li>
-            <li>
-              <button onClick={() => addPanel("SHADER_SDF")}>SDF Shader</button>
-            </li>
-            <li>
-              <button onClick={() => addPanel("SHADER_Rings")}>
-                Rings Shader
-              </button>
-            </li>
-            <li>
-              <button onClick={() => addPanel("SHADER_Chevron")}>
-                Chevron Shader
-              </button>
-            </li>
-            <li>
-              <button onClick={() => addPanel("SHADER_Space")}>
-                Space Shader
-              </button>
-            </li>
+            {Object.keys(SHADERS).map((shader: any) => {
+              return (
+                <li>
+                  <button onClick={() => addPanel(shader)}>
+                    {SHADERS[shader].title}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </li>
       </ul>

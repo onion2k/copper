@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import * as twgl from "twgl.js";
-import useAnimationFrame from "../Hooks/useAnimationFrame";
-import { DispatchContext } from "../Contexts/dispatch";
-import { Panel } from "../Components/panel";
-import { Input } from "../Components/input";
+import useAnimationFrame from "../../Hooks/useAnimationFrame";
+import { DispatchContext } from "../../Contexts/dispatch";
+import { Panel } from "../../Components/panel";
+import { Input } from "../../Components/input";
 
 interface iShader {
   id: string;

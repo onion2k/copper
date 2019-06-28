@@ -1,4 +1,10 @@
-import React, { Suspense, useState, useReducer, useRef } from "react";
+import React, {
+  Suspense,
+  useState,
+  useReducer,
+  useRef,
+  useEffect
+} from "react";
 import { render } from "react-dom";
 
 const initialState = {
@@ -16,33 +22,13 @@ import useMousePosition from "./Hooks/useMousePosition";
 import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
-const Const = React.lazy(() => import("./Panels/const"));
-const Time = React.lazy(() => import("./Panels/time"));
-const Value = React.lazy(() => import("./Panels/value"));
-const Arithmatic = React.lazy(() => import("./Panels/arithmatic"));
-const Trig = React.lazy(() => import("./Panels/trig"));
-const Shader = React.lazy(() => import("./Panels/shader"));
-const Color = React.lazy(() => import("./Panels/color"));
-const String = React.lazy(() => import("./Panels/string"));
-const EVENT_MousePosition = React.lazy(() =>
-  import("./Panels/Event_MousePosition")
-);
-
+import PRIMITIVES from "./Panels/primitives";
+import EVENTS from "./Panels/events";
 import SHADERS from "./Panels/shaders";
 
 const panelTypes: { [s: string]: any } = Object.assign(
-  {
-    CONST: { el: Const },
-    TIME: { el: Time, defaults: { initPauseState: true } },
-    VALUE: { el: Value },
-    ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
-    TRIG: { el: Trig },
-    SHADER: { el: Shader },
-    COLOR: { el: Color },
-    STRING: { el: String },
-
-    EVENT_MousePosition: { el: EVENT_MousePosition }
-  },
+  PRIMITIVES,
+  EVENTS,
   SHADERS
 );
 
@@ -67,8 +53,21 @@ const init: {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [panels, setPanels] = useState(init);
   let { x: mouseX, y: mouseY } = useMousePosition();
+  const [panels, setPanels] = useState(init);
+  const [dragging, setDragging] = useState(false);
+
+  const [initPos, setInitPos] = useState({ x: 0, y: 0 });
+  const [delta, setDelta] = useState({ x: 0, y: 0 });
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (dragging) {
+      const deltaX = mouseX - initPos.x;
+      const deltaY = mouseY - initPos.y;
+      setDelta({ x: deltaX, y: deltaY });
+    }
+  }, [dragging, mouseX, mouseY]);
 
   const addPanel = (type: string) => {
     const tempPanels = [...panels];
@@ -101,6 +100,7 @@ function App() {
   });
 
   let appClass = ["canvas"];
+
   if (state.connector) {
     appClass.push("active");
   }
@@ -108,7 +108,19 @@ function App() {
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
       <HeaderNav addPanel={addPanel} />
-      <div className={appClass.join(" ")}>
+      <div
+        className={appClass.join(" ")}
+        onMouseDown={(e: React.MouseEvent) => {
+          setDragging(false);
+          setInitPos({ x: e.clientX, y: e.clientY });
+        }}
+        onMouseUp={e => {
+          setDragging(false);
+          setPos({ x: pos.x + delta.x, y: pos.y + delta.y });
+          setDelta({ x: 0, y: 0 });
+        }}
+        style={{ top: pos.y + delta.y, left: pos.x + delta.x }}
+      >
         <MouseContext.Provider value={[mouseX, mouseY]}>
           <ConnectorMap
             nodes={state.nodes}
