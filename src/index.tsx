@@ -33,22 +33,23 @@ const SHADER_Rings = React.lazy(() => import("./Panels/shaders/rings"));
 const SHADER_Chevron = React.lazy(() => import("./Panels/shaders/chevron"));
 const SHADER_Space = React.lazy(() => import("./Panels/shaders/space"));
 
-const panelTypes: { [s: string]: any } = {
-  CONST: { el: Const },
-  TIME: { el: Time, defaults: { initPauseState: true } },
-  VALUE: { el: Value },
-  ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
-  TRIG: { el: Trig },
-  SHADER: { el: Shader },
-  COLOR: { el: Color },
-  STRING: { el: String },
-  EVENT_MousePosition: { el: EVENT_MousePosition },
-  SHADER_Color: { el: SHADER_Color },
-  SHADER_SDF: { el: SHADER_SDF },
-  SHADER_Rings: { el: SHADER_Rings },
-  SHADER_Chevron: { el: SHADER_Chevron },
-  SHADER_Space: { el: SHADER_Space }
-};
+import SHADERS from "./Panels/shaders";
+
+const panelTypes: { [s: string]: any } = Object.assign(
+  {
+    CONST: { el: Const },
+    TIME: { el: Time, defaults: { initPauseState: true } },
+    VALUE: { el: Value },
+    ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
+    TRIG: { el: Trig },
+    SHADER: { el: Shader },
+    COLOR: { el: Color },
+    STRING: { el: String },
+
+    EVENT_MousePosition: { el: EVENT_MousePosition }
+  },
+  SHADERS
+);
 
 import { HeaderNav } from "./Components/headerNav";
 import { ActiveConnector } from "./Components/activeConnector";
