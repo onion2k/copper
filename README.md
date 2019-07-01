@@ -1,3 +1,3 @@
 # Copper - a wirable UI
 
-Ignore this repo for now.
+Copper is a graphical UI for building data flows, graphics, forms, and more.
