@@ -1,12 +1,12 @@
 import React from "react";
 
-const SHADER_Color = React.lazy(() => import("./shaders/color"));
-const SHADER_SDF = React.lazy(() => import("./shaders/sdf"));
-const SHADER_Rings = React.lazy(() => import("./shaders/rings"));
-const SHADER_Chevron = React.lazy(() => import("./shaders/chevron"));
-const SHADER_Space = React.lazy(() => import("./shaders/space"));
-const SHADER_Spiral = React.lazy(() => import("./shaders/spiral"));
-const SHADER_Swirl = React.lazy(() => import("./shaders/swirl"));
+const SHADER_Color = React.lazy(() => import("./color"));
+const SHADER_SDF = React.lazy(() => import("./sdf"));
+const SHADER_Rings = React.lazy(() => import("./rings"));
+const SHADER_Chevron = React.lazy(() => import("./chevron"));
+const SHADER_Space = React.lazy(() => import("./space"));
+const SHADER_Spiral = React.lazy(() => import("./spiral"));
+const SHADER_Swirl = React.lazy(() => import("./swirl"));
 
 const SHADERS: { [s: string]: any } = {
   SHADER_Color: { el: SHADER_Color, title: "Color" },
