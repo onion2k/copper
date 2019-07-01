@@ -16,7 +16,7 @@ const PRIMITIVES: { [s: string]: any } = {
   COLOR: { el: Color },
   STRING: { el: String },
   ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
-  TRIG: { el: Trig },
+  TRIG: { el: Trig, defaults: { op: "sin" } },
   SHADER: { el: Shader }
 };
 

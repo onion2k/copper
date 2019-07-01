@@ -212,6 +212,10 @@ article .knobs.nopadding {
 article .knobs.nopadding > canvas {
   border-radius: 0 0 10px 10px;
 }
+article .knobs.nopadding > div {
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+}
 
 article .knobs input[type="range"] {
   display: inline-block;

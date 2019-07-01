@@ -9,10 +9,12 @@ interface iSin {
   title?: string;
   x: number;
   y: number;
+  op: string;
 }
 
-export default function Sin({ id, title, x, y }: iSin) {
+export default function Sin({ id, title, x, y, op }: iSin) {
   const { dispatch } = useContext(DispatchContext);
+  const [_op, setOp] = useState(op);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [value, setValue] = useState(1);
@@ -32,7 +34,17 @@ export default function Sin({ id, title, x, y }: iSin) {
   }, []);
 
   useEffect(() => {
-    setValue(Math.sin(input.current[0]));
+    switch (_op) {
+      case "sin":
+        setValue(Math.sin(input.current[0]));
+        break;
+      case "cos":
+        setValue(Math.cos(input.current[0]));
+        break;
+      case "tan":
+        setValue(Math.tan(input.current[0]));
+        break;
+    }
     dispatch({
       type: "recalculate",
       msg: "trig",
@@ -86,13 +98,27 @@ export default function Sin({ id, title, x, y }: iSin) {
   }
 
   const controls = [
-    <canvas
-      id={"canvas-trig-0"}
-      key={`canvas-trig-0`}
-      ref={canvasRef}
-      width={canvasX}
-      height={canvasY}
-    />
+    <>
+      <canvas
+        id={"canvas-trig-0"}
+        key={`canvas-trig-0`}
+        ref={canvasRef}
+        width={canvasX}
+        height={canvasY}
+      />
+      <div>
+        <select
+          onChange={e => {
+            setOp(e.target.value);
+          }}
+          defaultValue={_op}
+        >
+          <option value={"sin"}>Sin</option>
+          <option value={"cos"}>Cos</option>
+          <option value={"tan"}>Tan</option>
+        </select>
+      </div>
+    </>
   ];
 
   return (
