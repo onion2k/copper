@@ -1,4 +1,20 @@
+import { uniqueID } from "../uniqueID";
+
 export default class {
+  static add = (state: any, action: any) => {
+    const tempPanels = state.canvas;
+    tempPanels.push({
+      id: uniqueID(),
+      type: action.panelType,
+      title:
+        action.panelType.charAt(0).toUpperCase() + action.panelType.slice(1),
+      x: 1,
+      y: 1
+    });
+    state.canvas = tempPanels;
+    return state;
+  };
+
   static register = (state: any, action: any) => {
     state.panels.push(action);
     state.inputs[action.id] = action.inputs;
@@ -9,9 +25,38 @@ export default class {
   };
 
   static unregister = (state: any, action: any) => {
-    state.panels = state.panels.filter((panel: any) => {
+    state.canvas = state.canvas.filter((panel: any) => {
       return panel.id !== action.id;
     });
+
+    state.outputs = Object.keys(state.outputs).reduce(
+      (output: any, key: string) => {
+        if (key !== action.id) {
+          output[key] = state.outputs[key];
+        }
+        return output;
+      },
+      {}
+    );
+
+    state.connections = Object.keys(state.connections).reduce(
+      (connection: any, key: string) => {
+        if (key !== action.id) {
+          connection[key] = state.outputs[key];
+        }
+        return connection;
+      },
+      {}
+    );
+
+    state.connectionLines = state.connectionLines.filter(
+      (connectionLine: any) => {
+        return (
+          connectionLine.from !== action.id && connectionLine.to !== action.id
+        );
+      }
+    );
+
     return state;
   };
 

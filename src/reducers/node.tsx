@@ -32,6 +32,7 @@ export default class {
         y2: action.payload.y,
         index: action.payload.index
       });
+
       state.connections[state.connector.id] = [
         action.payload.id,
         action.payload.index,
