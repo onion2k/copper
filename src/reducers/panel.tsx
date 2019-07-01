@@ -42,7 +42,7 @@ export default class {
     state.connections = Object.keys(state.connections).reduce(
       (connection: any, key: string) => {
         if (key !== action.id) {
-          connection[key] = state.outputs[key];
+          connection[key] = state.connections[key];
         }
         return connection;
       },
