@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
+
+import {
+  IconLookup,
+  IconDefinition,
+  findIconDefinition
+} from "@fortawesome/fontawesome-svg-core";
+
+const closeIcon = findIconDefinition({ prefix: "fas", iconName: "times" });
 
 interface iPanel {
   id?: string;
@@ -76,7 +85,9 @@ export function Panel({
           setDelta({ x: 0, y: 0 });
         }}
       >
-        <div className="indicator close" onClick={close} />
+        <div className="indicator close" onClick={close}>
+					<FontAwesomeIcon icon={closeIcon} size="xs" />
+				</div>
         <span>{title}</span>
         <div className="indicators">
           <div className="indicator yellow" />

@@ -14,7 +14,8 @@ import {
   faQuestion,
   faVectorSquare,
   faClone,
-  faCalendar
+  faCalendar,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -23,7 +24,8 @@ library.add(
   faQuestion,
   faVectorSquare,
   faClone,
-  faCalendar
+  faCalendar,
+  faTimes
 );
 
 const initialState = {
