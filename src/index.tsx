@@ -7,7 +7,29 @@ import React, {
 } from "react";
 import { render } from "react-dom";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faQuoteRight,
+  faEquals,
+  faQuestion,
+  faVectorSquare,
+  faClone,
+  faCalendar,
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+  faQuoteRight,
+  faEquals,
+  faQuestion,
+  faVectorSquare,
+  faClone,
+  faCalendar,
+  faTimes
+);
+
 const initialState = {
+  canvas: [],
   panels: [],
   inputs: {},
   outputs: {},
@@ -25,11 +47,13 @@ import { DispatchContext } from "./Contexts/dispatch";
 import PRIMITIVES from "./Panels/primitives";
 import EVENTS from "./Panels/events";
 import SHADERS from "./Panels/shaders";
+import OUTPUTS from "./Panels/outputs";
 
 const panelTypes: { [s: string]: any } = Object.assign(
   PRIMITIVES,
   EVENTS,
-  SHADERS
+  SHADERS,
+  OUTPUTS
 );
 
 import { HeaderNav } from "./Components/headerNav";
@@ -54,7 +78,7 @@ const init: {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   let { x: mouseX, y: mouseY } = useMousePosition();
-  const [panels, setPanels] = useState(init);
+  // const [panels, setPanels] = useState(init);
   const [dragging, setDragging] = useState(false);
 
   const [initPos, setInitPos] = useState({ x: 0, y: 0 });
@@ -70,18 +94,17 @@ function App() {
   }, [dragging, mouseX, mouseY]);
 
   const addPanel = (type: string) => {
-    const tempPanels = [...panels];
-    tempPanels.push({
+    dispatch({
+      type: "panel/add",
       id: uniqueID(),
-      type: type,
+      panelType: type,
       title: type.charAt(0).toUpperCase() + type.slice(1),
       x: 1,
       y: 1
     });
-    setPanels(tempPanels);
   };
 
-  const panelsEl = panels.map((p: any) => {
+  const panelsEl = state.canvas.map((p: any) => {
     return React.createElement(
       panelTypes[p.type].el,
       Object.assign(

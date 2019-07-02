@@ -7,7 +7,6 @@ const Color = React.lazy(() => import("./color"));
 const String = React.lazy(() => import("./string"));
 const Arithmatic = React.lazy(() => import("./arithmatic"));
 const Trig = React.lazy(() => import("./trig"));
-const Shader = React.lazy(() => import("./shader"));
 
 const PRIMITIVES: { [s: string]: any } = {
   CONST: { el: Const },
@@ -16,8 +15,7 @@ const PRIMITIVES: { [s: string]: any } = {
   COLOR: { el: Color },
   STRING: { el: String },
   ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
-  TRIG: { el: Trig, defaults: { op: "sin" } },
-  SHADER: { el: Shader }
+  TRIG: { el: Trig, defaults: { op: "sin" } }
 };
 
 export default PRIMITIVES;

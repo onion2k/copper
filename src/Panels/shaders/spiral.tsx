@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Shader from "../primitives/shader";
+import Shader from "../outputs/shader";
 
 interface iSin {
   id: string;

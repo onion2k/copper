@@ -41,7 +41,14 @@ export default function Color({ id, title, x, y }: iColor) {
   }, [r, g, b]);
 
   const outputs = [
-    <Output key={id} id={id} direction={"out"} index={null} value={color} />
+    <Output
+      key={id}
+      id={id}
+      direction={"out"}
+      index={null}
+      value={color}
+      type="vec3"
+    />
   ];
 
   const controls = [

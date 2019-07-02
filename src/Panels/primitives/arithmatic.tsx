@@ -63,6 +63,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       index={0}
       value={input.current[0]}
       title={"A"}
+      type="float"
     />,
     <Input
       id={id}
@@ -71,6 +72,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       index={1}
       value={input.current[1]}
       title={"B"}
+      type="float"
     />
   ];
 
@@ -81,6 +83,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       direction={"out"}
       index={null}
       value={value}
+      type="float"
     />
   ];
 

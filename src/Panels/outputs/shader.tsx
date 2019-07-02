@@ -65,6 +65,7 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
         index={0}
         value={input.current[0]}
         title={"vs"}
+        type="string"
       />,
       <Input
         key={`input-${id}-1`}
@@ -73,6 +74,7 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
         index={1}
         value={input.current[1]}
         title={"fs"}
+        type="string"
       />,
       <Input
         key={`input-${id}-2`}
@@ -81,6 +83,7 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
         index={2}
         value={input.current[2]}
         title={"u_time"}
+        type="float"
       />
     ];
   }

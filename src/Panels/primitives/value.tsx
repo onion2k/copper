@@ -39,6 +39,7 @@ export default function Value({ id, title, x, y }: iValue) {
       direction={"in"}
       index={0}
       value={input.current[0]}
+      type="any"
     />
   ];
 
@@ -49,6 +50,7 @@ export default function Value({ id, title, x, y }: iValue) {
       direction={"out"}
       index={null}
       value={input.current[0]}
+      type="any"
     />
   ];
 
