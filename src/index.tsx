@@ -7,6 +7,25 @@ import React, {
 } from "react";
 import { render } from "react-dom";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faQuoteRight,
+  faEquals,
+  faQuestion,
+  faVectorSquare,
+  faClone,
+  faCalendar
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+  faQuoteRight,
+  faEquals,
+  faQuestion,
+  faVectorSquare,
+  faClone,
+  faCalendar
+);
+
 const initialState = {
   canvas: [],
   panels: [],

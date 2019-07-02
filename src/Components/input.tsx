@@ -21,7 +21,7 @@ export function Input({ id, title, direction, index, value, type }: iInput) {
   return (
     <li className={`input node ${type || "untyped"}`}>
       {title || "Input"} ({display})
-      <Node id={id} direction={direction} index={index} />
+      <Node id={id} direction={direction} index={index} type={type} />
     </li>
   );
 }

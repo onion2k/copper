@@ -26,7 +26,7 @@ export function Output({ id, direction, index, value, type }: iOutput) {
       key={`output-${id}-${direction}-${index}`}
     >
       {display || "Output"}
-      <Node id={id} direction={direction} index={index} />
+      <Node id={id} direction={direction} index={index} type={type} />
     </li>
   );
 }

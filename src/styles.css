@@ -259,16 +259,22 @@ article .io {
   font-size: 0.8rem;
 }
 
-article .input.node > div,
-article .output.node > div {
+article .node > div {
   position: absolute;
-  content: "";
   width: 20px;
   height: 20px;
   border-radius: 50%;
   border: 2px solid gray;
   cursor: pointer;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+article .node > div svg {
+  position: relative;
 }
 
 article .input.node > div {
@@ -377,6 +383,15 @@ textarea {
 * Typed nodes - colors
 */
 
+article .node > div svg {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+article .inputs .input.any > div,
+article .outputs .output.any > div {
+  background-color: #00f11d;
+}
+
 article .inputs .input.float > div,
 article .outputs .output.float > div {
   background-color: #ff7f00;
@@ -385,11 +400,6 @@ article .outputs .output.float > div {
 article .inputs .input.string > div,
 article .outputs .output.string > div {
   background-color: #ff0900;
-}
-
-article .inputs .input.any > div,
-article .outputs .output.any > div {
-  background-color: #00f11d;
 }
 
 article .inputs .input.vec3 > div,
