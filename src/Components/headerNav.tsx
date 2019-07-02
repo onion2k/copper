@@ -49,6 +49,11 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
                 Mouse Position
               </button>
             </li>
+            <li>
+              <button onClick={() => addPanel("EVENT_Http")}>
+                Http Request
+              </button>
+            </li>
           </ul>
         </li>
         <li>
@@ -56,6 +61,9 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           <ul>
             <li>
               <button onClick={() => addPanel("SHADER")}>GLSL Shader</button>
+            </li>
+            <li>
+              <button onClick={() => addPanel("TEMPLATE")}>Template</button>
             </li>
           </ul>
         </li>

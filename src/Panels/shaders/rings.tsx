@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Input } from "../../Components/input";
-import Shader from "../primitives/shader";
+import Shader from "../outputs/shader";
 
 interface iShader {
   id: string;

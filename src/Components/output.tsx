@@ -7,7 +7,7 @@ interface iOutput {
   title?: string;
   direction: string;
   index: number | null;
-  value: number | string | undefined;
+  value: number | string | object | undefined;
   type?: string;
 }
 

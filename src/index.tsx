@@ -47,11 +47,13 @@ import { DispatchContext } from "./Contexts/dispatch";
 import PRIMITIVES from "./Panels/primitives";
 import EVENTS from "./Panels/events";
 import SHADERS from "./Panels/shaders";
+import OUTPUTS from "./Panels/outputs";
 
 const panelTypes: { [s: string]: any } = Object.assign(
   PRIMITIVES,
   EVENTS,
-  SHADERS
+  SHADERS,
+  OUTPUTS
 );
 
 import { HeaderNav } from "./Components/headerNav";
