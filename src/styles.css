@@ -367,3 +367,37 @@ textarea {
 .active {
   cursor: grabbing !important;
 }
+
+/*
+* Typed nodes - colors
+*/
+
+article .inputs .input.float > div,
+article .outputs .output.float > div {
+  background-color: #ff7f00;
+}
+
+article .inputs .input.string > div,
+article .outputs .output.string > div {
+  background-color: #ff0900;
+}
+
+article .inputs .input.any > div,
+article .outputs .output.any > div {
+  background-color: #00f11d;
+}
+
+article .inputs .input.vec3 > div,
+article .outputs .output.vec3 > div {
+  background-color: #ffef00;
+}
+
+article .inputs .input.array > div,
+article .outputs .output.array > div {
+  background-color: #a800ff;
+}
+
+article .inputs .input.event > div,
+article .outputs .output.event > div {
+  background-color: #0079ff;
+}

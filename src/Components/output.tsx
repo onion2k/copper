@@ -8,9 +8,10 @@ interface iOutput {
   direction: string;
   index: number | null;
   value: number | string | undefined;
+  type?: string;
 }
 
-export function Output({ id, direction, index, value }: iOutput) {
+export function Output({ id, direction, index, value, type }: iOutput) {
   const display =
     typeof value === "number"
       ? value.toFixed(3)
@@ -20,7 +21,10 @@ export function Output({ id, direction, index, value }: iOutput) {
         : value
       : false;
   return (
-    <li className="output node" key={`output-${id}-${direction}-${index}`}>
+    <li
+      className={`output node ${type || "untyped"}`}
+      key={`output-${id}-${direction}-${index}`}
+    >
       {display || "Output"}
       <Node id={id} direction={direction} index={index} />
     </li>

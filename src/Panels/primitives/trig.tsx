@@ -70,6 +70,7 @@ export default function Sin({ id, title, x, y, op }: iSin) {
       index={0}
       value={input.current[0]}
       title={"A"}
+      type="float"
     />
   ];
 
@@ -80,6 +81,7 @@ export default function Sin({ id, title, x, y, op }: iSin) {
       direction={"out"}
       index={null}
       value={value.toFixed(3)}
+      type="float"
     />
   ];
 

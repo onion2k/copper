@@ -51,11 +51,19 @@ export default function Const({ id, title, x, y, value }: iString) {
       index={0}
       value={input.current[0]}
       title={"Text"}
+      type="string"
     />
   ];
 
   const outputs = [
-    <Output key={id} id={id} direction={"out"} index={null} value={output} />
+    <Output
+      key={id}
+      id={id}
+      direction={"out"}
+      index={null}
+      value={output}
+      type="string"
+    />
   ];
 
   const controls = (

@@ -7,9 +7,10 @@ interface iInput {
   direction: string;
   index: number;
   value: number | number[] | string;
+  type?: string;
 }
 
-export function Input({ id, title, direction, index, value }: iInput) {
+export function Input({ id, title, direction, index, value, type }: iInput) {
   const display =
     typeof value === "number"
       ? value.toFixed(3)
@@ -18,7 +19,7 @@ export function Input({ id, title, direction, index, value }: iInput) {
       : value.join(",");
 
   return (
-    <li className="input node">
+    <li className={`input node ${type || "untyped"}`}>
       {title || "Input"} ({display})
       <Node id={id} direction={direction} index={index} />
     </li>

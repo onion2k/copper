@@ -48,6 +48,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       direction={"out"}
       index={null}
       value={value.toFixed(3)}
+      type="float"
     />
   ];
 
