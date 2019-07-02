@@ -144,6 +144,11 @@ article {
   z-index: 2;
 }
 
+article.medium {
+  width: 525px;
+  min-height: 400px;
+}
+
 article.large {
   width: 700px;
   min-height: 600px;
