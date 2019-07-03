@@ -190,7 +190,7 @@ article header .indicator {
 
 article header .indicator svg {
   position: relative;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 article header .indicators .indicator {
@@ -245,10 +245,7 @@ article .knobs input,
 article .knobs select,
 article .knobs button {
   display: inline-block;
-  width: 100%;
-}
-article .knobs button,
-article .knobs select {
+  margin: 0 0 5px 0;
   border: 0;
   background-color: white;
   padding: 5px;

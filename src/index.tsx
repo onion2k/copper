@@ -45,12 +45,14 @@ import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
 import PRIMITIVES from "./Panels/primitives";
+import OPERATIONS from "./Panels/operations";
 import EVENTS from "./Panels/events";
 import SHADERS from "./Panels/shaders";
 import OUTPUTS from "./Panels/outputs";
 
 const panelTypes: { [s: string]: any } = Object.assign(
   PRIMITIVES,
+  OPERATIONS,
   EVENTS,
   SHADERS,
   OUTPUTS
