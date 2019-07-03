@@ -4,6 +4,8 @@ import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
+import { pick } from "lodash";
+
 interface iArithmatic {
   id: string;
   title?: string;
@@ -14,7 +16,7 @@ interface iArithmatic {
 export default function Arithmatic({ id, title, x, y }: iArithmatic) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState({});
-  const input = useRef([{}]);
+  const input = useRef([]);
 
   useEffect(() => {
     dispatch({
@@ -29,7 +31,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
       type: "recalculate",
       msg: "uniforms",
       id: id,
-      value: value
+      value: pick(input.current[0], ["id", "karma"])
     });
   }, [input.current[0]]);
 

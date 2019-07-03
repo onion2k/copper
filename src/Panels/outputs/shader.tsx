@@ -129,7 +129,7 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
       outputs={outputs}
       controls={controls}
       nopadding
-      large
+      medium
     />
   );
 }
