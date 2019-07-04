@@ -49,14 +49,22 @@ import "./styles.css";
 
 const cellSize = 100;
 
-const init: {
+const initPanels: {
   id: string;
   type: string;
   x: number;
   y: number;
   title?: string;
   value?: any;
-}[] = [{ id: "uniforms", type: "UNIFORMS", x: 2, y: 3 }];
+}[] = [
+  { id: "hn", type: "EVENT_Http", x: 1, y: 2 },
+  { id: "uniforms", type: "UNIFORMS", x: 6, y: 2 }
+];
+
+const initConnectors: {
+  from: string;
+  to: string;
+}[] = [{ from: "hn", to: "uniforms" }];
 
 function App() {
   const { x: mouseX, y: mouseY } = useMousePosition();
@@ -87,12 +95,25 @@ function App() {
     });
   };
 
+  const addConnector = (from: string, to: string) => {
+    dispatch({
+      type: "node/connect",
+      from,
+      to
+    });
+  };
+
   useEffect(() => {
-    if (init.length > 0) {
-      init.map(p => {
+    if (initPanels.length > 0) {
+      initPanels.map(p => {
         addPanel(p.type, p.x, p.y);
       });
     }
+    // if (initConnectors.length > 0) {
+    //   initConnectors.map(c => {
+    //     addConnector(c.type, c.x, c.y);
+    //   });
+    // }
   }, []);
 
   const panelsEl = state.canvas.map((p: any) => {

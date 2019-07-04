@@ -65,7 +65,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
       direction={"out"}
       index={null}
       value={output}
-      type="float"
+      type="array"
     />
   ];
 
@@ -73,7 +73,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
     <>
       {picks.map((value, i) => {
         return (
-          <div className={"uniforms"}>
+          <div className={"uniforms"} key={`uniform-${i}`}>
             <input
               type="text"
               name="pick"

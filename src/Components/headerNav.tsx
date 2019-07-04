@@ -75,7 +75,7 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           <ul>
             {Object.keys(SHADERS).map((shader: any) => {
               return (
-                <li>
+                <li key={`shader-add-${shader}`}>
                   <button onClick={() => addPanel(shader)}>
                     {SHADERS[shader].title}
                   </button>

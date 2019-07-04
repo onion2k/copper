@@ -39,7 +39,7 @@ export default function Http({
   const [_value, setValue] = useState("");
   const [output, setOutput] = useState<string | object>({});
 
-  const fire = (e: any) => {
+  const test = (e: any) => {
     e.preventDefault();
     if (_url) {
       api(_url).then(data => {
@@ -108,8 +108,8 @@ export default function Http({
         autoCapitalize="off"
         spellCheck={false}
       />
-      <button name={"fire"} onClick={fire}>
-        Fire
+      <button name={"test"} onClick={test}>
+        Test
       </button>
     </>
   );
