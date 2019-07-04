@@ -31,19 +31,32 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
   }, []);
 
   useEffect(() => {
-    setOutput(pick(input.current[0], picks));
+    const tempData: { [s: string]: string } = pick(input.current[0], picks);
+    const out: { [s: string]: string } = {};
+    picks.map((p: string) => {
+      out[p] = tempData[p] || "not found";
+    });
+    setOutput(out);
+
     dispatch({
       type: "recalculate",
       msg: "uniforms",
       id: id,
-      value: pick(input.current[0], picks)
+      value: out
     });
   }, [input.current[0]]);
 
   const updatePick = (id: string, i: number) => {
-    const tempPick: any = [...picks];
-    tempPick[i] = id;
-    setPicks(tempPick);
+    const tempPicks: any = [...picks];
+    tempPicks[i] = id;
+    setPicks(tempPicks);
+
+    const tempData: { [s: string]: string } = pick(input.current[0], tempPicks);
+    const out: { [s: string]: string } = {};
+    tempPicks.map((p: string) => {
+      out[p] = tempData[p] || `test-${p}`;
+    });
+    setOutput(out);
   };
 
   const inputs = [
@@ -80,12 +93,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
               defaultValue={value}
               onChange={e => updatePick(e.target.value, i)}
             />
-            <input
-              type="text"
-              name="pick"
-              defaultValue={output[picks[i]]}
-              disabled
-            />
+            <input type="text" name="pick" value={output[picks[i]]} disabled />
           </div>
         );
       })}
