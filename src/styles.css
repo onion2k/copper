@@ -428,3 +428,13 @@ article .inputs .input.event > div,
 article .outputs .output.event > div {
   background-color: #0079ff;
 }
+
+div.uniforms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+div.uniforms > input[disabled] {
+  background-color: #aaa;
+}
