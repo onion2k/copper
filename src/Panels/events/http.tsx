@@ -8,13 +8,13 @@ function api<T>(url: string): Promise<T> {
   return fetch(url)
     .then(response => {
       if (!response.ok) {
-        throw new Error(response.statusText)
+        throw new Error(response.statusText);
       }
-      return response.json() as Promise<T>
+      return response.json() as Promise<T>;
     })
     .then(data => {
-        return data
-    })
+      return data;
+    });
 }
 
 interface iString {
@@ -25,22 +25,28 @@ interface iString {
   url?: string;
 }
 
-export default function Http({ id, title, x, y, url="https://hacker-news.firebaseio.com/v0/user/onion2k.json" }: iString) {
+export default function Http({
+  id,
+  title,
+  x,
+  y,
+  url = "https://hacker-news.firebaseio.com/v0/user/onion2k.json"
+}: iString) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef([""]);
 
   const [_url, setUrl] = useState(url);
   const [_value, setValue] = useState("");
-  const [output, setOutput] = useState<string | object>(_value);
+  const [output, setOutput] = useState<string | object>({});
 
-  const fire = (e:any) => {
+  const test = (e: any) => {
     e.preventDefault();
     if (_url) {
-      api(_url).then((data)=>{
-        setOutput(JSON.stringify(data));
+      api(_url).then(data => {
+        setOutput(data as object);
       });
     }
-  }
+  };
 
   useEffect(() => {
     dispatch({
@@ -102,10 +108,9 @@ export default function Http({ id, title, x, y, url="https://hacker-news.firebas
         autoCapitalize="off"
         spellCheck={false}
       />
-      <button
-        name={"fire"}
-        onClick={fire}
-      >Fire</button>
+      <button name={"test"} onClick={test}>
+        Test
+      </button>
     </>
   );
 

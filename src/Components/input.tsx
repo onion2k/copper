@@ -6,7 +6,7 @@ interface iInput {
   title?: string;
   direction: string;
   index: number;
-  value: number | number[] | string;
+  value: number | number[] | string | object | undefined;
   type?: string;
 }
 
@@ -16,7 +16,7 @@ export function Input({ id, title, direction, index, value, type }: iInput) {
       ? value.toFixed(3)
       : typeof value === "string"
       ? value.substr(0, 15) + "…"
-      : value.join(",");
+      : "Input";
 
   return (
     <li className={`input node ${type || "untyped"}`}>

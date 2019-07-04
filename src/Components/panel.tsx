@@ -20,6 +20,7 @@ interface iPanel {
   outputs: any;
   controls: any;
   nopadding?: boolean;
+  medium?: boolean;
   large?: boolean;
 }
 
@@ -32,6 +33,7 @@ export function Panel({
   outputs,
   controls,
   nopadding,
+  medium,
   large
 }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
@@ -64,7 +66,7 @@ export function Panel({
     <article
       key={`panel-${id}`}
       ref={panelRef}
-      className={`Panel ${large ? "large" : ""}`}
+      className={`Panel ${large ? "large" : medium ? "medium" : ""}`}
       style={{ top: pos.y + delta.y, left: pos.x + delta.x }}
     >
       <header
@@ -86,8 +88,8 @@ export function Panel({
         }}
       >
         <div className="indicator close" onClick={close}>
-					<FontAwesomeIcon icon={closeIcon} size="xs" />
-				</div>
+          <FontAwesomeIcon icon={closeIcon} size="xs" />
+        </div>
         <span>{title}</span>
         <div className="indicators">
           <div className="indicator yellow" />

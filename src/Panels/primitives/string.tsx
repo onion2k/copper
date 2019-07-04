@@ -39,8 +39,8 @@ export default function Const({ id, title, x, y, value }: iString) {
   }, [output]);
 
   useEffect(() => {
-    console.log("new in", input.current[0] + "\n" + _value);
-    setOutput(input.current[0] + "\n" + _value);
+    console.log("new in", JSON.stringify(input.current[0]) + "\n" + _value);
+    setOutput(JSON.stringify(input.current[0]) + "\n" + _value);
   }, [input.current[0]]);
 
   const inputs = [

@@ -7,26 +7,7 @@ import React, {
 } from "react";
 import { render } from "react-dom";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faQuoteRight,
-  faEquals,
-  faQuestion,
-  faVectorSquare,
-  faClone,
-  faCalendar,
-  faTimes
-} from "@fortawesome/free-solid-svg-icons";
-
-library.add(
-  faQuoteRight,
-  faEquals,
-  faQuestion,
-  faVectorSquare,
-  faClone,
-  faCalendar,
-  faTimes
-);
+import "./icons";
 
 const initialState = {
   canvas: [],
@@ -45,12 +26,14 @@ import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
 import PRIMITIVES from "./Panels/primitives";
+import OPERATIONS from "./Panels/operations";
 import EVENTS from "./Panels/events";
 import SHADERS from "./Panels/shaders";
 import OUTPUTS from "./Panels/outputs";
 
 const panelTypes: { [s: string]: any } = Object.assign(
   PRIMITIVES,
+  OPERATIONS,
   EVENTS,
   SHADERS,
   OUTPUTS
@@ -66,19 +49,27 @@ import "./styles.css";
 
 const cellSize = 100;
 
-const init: {
+const initPanels: {
   id: string;
   type: string;
-  title: string;
   x: number;
   y: number;
+  title?: string;
   value?: any;
-}[] = [];
+}[] = [
+  { id: "hn", type: "EVENT_Http", x: 1, y: 2 },
+  { id: "uniforms", type: "UNIFORMS", x: 6, y: 2 }
+];
+
+const initConnectors: {
+  from: string;
+  to: string;
+}[] = [{ from: "hn", to: "uniforms" }];
 
 function App() {
+  const { x: mouseX, y: mouseY } = useMousePosition();
+
   const [state, dispatch] = useReducer(reducer, initialState);
-  let { x: mouseX, y: mouseY } = useMousePosition();
-  // const [panels, setPanels] = useState(init);
   const [dragging, setDragging] = useState(false);
 
   const [initPos, setInitPos] = useState({ x: 0, y: 0 });
@@ -93,16 +84,37 @@ function App() {
     }
   }, [dragging, mouseX, mouseY]);
 
-  const addPanel = (type: string) => {
+  const addPanel = (type: string, x?: number, y?: number) => {
     dispatch({
       type: "panel/add",
       id: uniqueID(),
       panelType: type,
       title: type.charAt(0).toUpperCase() + type.slice(1),
-      x: 1,
-      y: 1
+      x: x || 1,
+      y: y || 1
     });
   };
+
+  const addConnector = (from: string, to: string) => {
+    dispatch({
+      type: "node/connect",
+      from,
+      to
+    });
+  };
+
+  useEffect(() => {
+    if (initPanels.length > 0) {
+      initPanels.map(p => {
+        addPanel(p.type, p.x, p.y);
+      });
+    }
+    // if (initConnectors.length > 0) {
+    //   initConnectors.map(c => {
+    //     addConnector(c.type, c.x, c.y);
+    //   });
+    // }
+  }, []);
 
   const panelsEl = state.canvas.map((p: any) => {
     return React.createElement(
