@@ -16,8 +16,8 @@ interface iArithmatic {
 export default function Arithmatic({ id, title, x, y }: iArithmatic) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState({});
-  const [output, setOutput] = useState({});
-  const [picks, setPicks] = useState([]);
+  const [output, setOutput] = useState<{ [s: string]: any }>({});
+  const [picks, setPicks] = useState<Array<string>>([]);
   const input = useRef([]);
 
   const newpickRef = useRef<HTMLInputElement>(null);
@@ -47,10 +47,15 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
   }, [input.current[0]]);
 
   const updatePick = (id: string, i: number) => {
+    if (picks.indexOf(id) > -1) return;
     const tempPicks: any = [...picks];
-    tempPicks[i] = id;
+    if (!id) {
+      tempPicks.splice(i, 1);
+    } else {
+      tempPicks[i] = id;
+    }
+    console.log(tempPicks);
     setPicks(tempPicks);
-
     const tempData: { [s: string]: string } = pick(input.current[0], tempPicks);
     const out: { [s: string]: string } = {};
     tempPicks.map((p: string) => {
@@ -86,12 +91,20 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
     <>
       {picks.map((value, i) => {
         return (
-          <div className={"uniforms"} key={`uniform-${i}`}>
+          <div className={"uniforms"} key={`uniform-${picks[i]}`}>
             <input
               type="text"
               name="pick"
               defaultValue={value}
-              onChange={e => updatePick(e.target.value, i)}
+              onInput={e => {
+                if (
+                  newpickRef &&
+                  newpickRef.current &&
+                  newpickRef.current.value
+                ) {
+                  updatePick(newpickRef.current.value, i);
+                }
+              }}
             />
             <input type="text" name="pick" value={output[picks[i]]} disabled />
           </div>
