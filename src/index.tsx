@@ -7,26 +7,7 @@ import React, {
 } from "react";
 import { render } from "react-dom";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faQuoteRight,
-  faEquals,
-  faQuestion,
-  faVectorSquare,
-  faClone,
-  faCalendar,
-  faTimes
-} from "@fortawesome/free-solid-svg-icons";
-
-library.add(
-  faQuoteRight,
-  faEquals,
-  faQuestion,
-  faVectorSquare,
-  faClone,
-  faCalendar,
-  faTimes
-);
+import "./icons";
 
 const initialState = {
   canvas: [],
@@ -71,16 +52,16 @@ const cellSize = 100;
 const init: {
   id: string;
   type: string;
-  title: string;
   x: number;
   y: number;
+  title?: string;
   value?: any;
-}[] = [];
+}[] = [{ id: "uniforms", type: "UNIFORMS", x: 2, y: 3 }];
 
 function App() {
+  const { x: mouseX, y: mouseY } = useMousePosition();
+
   const [state, dispatch] = useReducer(reducer, initialState);
-  let { x: mouseX, y: mouseY } = useMousePosition();
-  // const [panels, setPanels] = useState(init);
   const [dragging, setDragging] = useState(false);
 
   const [initPos, setInitPos] = useState({ x: 0, y: 0 });
@@ -95,16 +76,24 @@ function App() {
     }
   }, [dragging, mouseX, mouseY]);
 
-  const addPanel = (type: string) => {
+  const addPanel = (type: string, x?: number, y?: number) => {
     dispatch({
       type: "panel/add",
       id: uniqueID(),
       panelType: type,
       title: type.charAt(0).toUpperCase() + type.slice(1),
-      x: 1,
-      y: 1
+      x: x || 1,
+      y: y || 1
     });
   };
+
+  useEffect(() => {
+    if (init.length > 0) {
+      init.map(p => {
+        addPanel(p.type, p.x, p.y);
+      });
+    }
+  }, []);
 
   const panelsEl = state.canvas.map((p: any) => {
     return React.createElement(
