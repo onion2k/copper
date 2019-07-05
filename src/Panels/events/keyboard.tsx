@@ -20,11 +20,11 @@ export default function Keyboard({ id, title, x, y }: iJson) {
   const newkeyRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (e: any) => {
-    console.log(e);
+    console.log(e.key);
   };
 
   const handleKeyUp = (e: any) => {
-    console.log(e);
+    console.log(e.key);
   };
 
   useEffect(() => {
@@ -85,11 +85,15 @@ export default function Keyboard({ id, title, x, y }: iJson) {
               type="text"
               name="pick"
               defaultValue={value}
-              onInput={e => {
-                if (newkeyRef && newkeyRef.current && newkeyRef.current.value) {
-                  updateKeys(newkeyRef.current.value, i);
+              onKeyUp={e => {
+                if (newkeyRef && newkeyRef.current) {
+                  updateKeys(e.key, i);
                 }
               }}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
             />
             <input type="text" name="pick" value={""} disabled />
           </div>
@@ -99,31 +103,31 @@ export default function Keyboard({ id, title, x, y }: iJson) {
         <input
           type="text"
           name="newpick"
+          placeholder={"Press a key"}
           defaultValue={""}
           ref={newkeyRef}
           onKeyUp={e => {
-            if (newkeyRef && newkeyRef.current && e.which === 13) {
-              updateKeys(newkeyRef.current.value, keys.length);
+            if (newkeyRef && newkeyRef.current) {
+              updateKeys(e.key, keys.length);
               newkeyRef.current.value = "";
             }
           }}
-          onBlur={e => {
-            if (newkeyRef && newkeyRef.current && newkeyRef.current.value) {
-              updateKeys(newkeyRef.current.value, keys.length);
-              newkeyRef.current.value = "";
-            }
-          }}
+          // onBlur={e => {
+          //   if (newkeyRef && newkeyRef.current && newkeyRef.current.value) {
+          //     updateKeys(e.key, keys.length);
+          //     newkeyRef.current.value = "";
+          //   }
+          // }}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
         />
         <input type="text" name="pick" defaultValue={""} disabled />
       </div>
       <div
+        className="keyboard"
         tabIndex={0}
-        style={{
-          height: "100px",
-          width: "100%",
-          marginTop: "5px",
-          backgroundColor: "rgba(255,255,255,0.1)"
-        }}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
       />
