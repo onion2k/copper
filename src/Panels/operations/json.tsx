@@ -6,14 +6,14 @@ import { Output } from "../../Components/output";
 
 import { pick } from "lodash";
 
-interface iArithmatic {
+interface iJson {
   id: string;
   title?: string;
   x: number;
   y: number;
 }
 
-export default function Arithmatic({ id, title, x, y }: iArithmatic) {
+export default function JSON({ id, title, x, y }: iJson) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState({});
   const [output, setOutput] = useState<{ [s: string]: any }>({});
@@ -31,11 +31,16 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
   }, []);
 
   useEffect(() => {
-    const tempData: { [s: string]: string } = pick(input.current[0], picks);
-    const out: { [s: string]: string } = {};
-    picks.map((p: string) => {
-      out[p] = tempData[p] || "not found";
-    });
+    let out: { [s: string]: string } = {};
+
+    if (picks.length > 0) {
+      const tempData: { [s: string]: string } = pick(input.current[0], picks);
+      picks.map((p: string) => {
+        out[p] = tempData[p] || "Not found";
+      });
+    } else {
+      out = input.current[0];
+    }
     setOutput(out);
 
     dispatch({
@@ -56,11 +61,17 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
     }
 
     setPicks(tempPicks);
-    const tempData: { [s: string]: string } = pick(input.current[0], tempPicks);
-    const out: { [s: string]: string } = {};
-    tempPicks.map((p: string) => {
-      out[p] = tempData[p] || `test-${p}`;
-    });
+
+    let out: { [s: string]: string } = {};
+
+    if (picks.length > 0) {
+      const tempData: { [s: string]: string } = pick(input.current[0], picks);
+      picks.map((p: string) => {
+        out[p] = tempData[p] || "Not found";
+      });
+    } else {
+      out = input.current[0];
+    }
 
     setOutput(out);
 
@@ -148,7 +159,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
       id={id}
       x={x}
       y={y}
-      title={"Uniforms"}
+      title={"JSON"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}

@@ -29,6 +29,7 @@ export default function Template({ id, title, x, y, value }: iString) {
 
   const [_value, setValue] = useState<string>(value || "");
   const [output, setOutput] = useState<string>(_value);
+  const [error, setError] = useState<string | null>(null);
   let compiled = useRef<Function>(() => {});
 
   useEffect(() => {
@@ -46,10 +47,12 @@ export default function Template({ id, title, x, y, value }: iString) {
     try {
       c = compiled.current(input.current[0]);
     } catch (e) {
-      setOutput(e.message);
+      setError(e.message);
+      setOutput("");
       return;
     }
 
+    setError(null);
     setOutput(c);
 
     dispatch({
@@ -109,7 +112,10 @@ export default function Template({ id, title, x, y, value }: iString) {
         autoCapitalize="off"
         spellCheck={false}
       />
-      <div className="template-output">{output}</div>
+      <div className="template-output">
+        {error ? <span>Error: {error}</span> : null}
+        {output}
+      </div>
     </>
   );
 

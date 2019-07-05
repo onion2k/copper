@@ -438,3 +438,11 @@ div.uniforms {
 div.uniforms > input[disabled] {
   background-color: #aaa;
 }
+
+.template-output {
+  white-space: pre;
+}
+
+.template-output > span {
+  color: #f88;
+}

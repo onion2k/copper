@@ -89,7 +89,7 @@ export default function Http({
       direction={"out"}
       index={null}
       value={output}
-      type="string"
+      type="array"
     />
   ];
 

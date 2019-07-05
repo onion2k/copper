@@ -58,7 +58,7 @@ const initPanels: {
   value?: any;
 }[] = [
   { id: "hn", type: "EVENT_Http", x: 1, y: 2 },
-  { id: "uniforms", type: "UNIFORMS", x: 6, y: 2 },
+  { id: "Json", type: "JSON", x: 6, y: 2 },
   {
     id: "template",
     type: "TEMPLATE",
