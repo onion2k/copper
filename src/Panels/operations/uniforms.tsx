@@ -46,22 +46,30 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
     });
   }, [input.current[0]]);
 
-  const updatePick = (id: string, i: number) => {
-    if (picks.indexOf(id) > -1) return;
+  const updatePick = (pickid: string, i: number) => {
+    if (picks.indexOf(pickid) > -1) return;
     const tempPicks: any = [...picks];
-    if (!id) {
+    if (!pickid) {
       tempPicks.splice(i, 1);
     } else {
-      tempPicks[i] = id;
+      tempPicks[i] = pickid;
     }
-    console.log(tempPicks);
+
     setPicks(tempPicks);
     const tempData: { [s: string]: string } = pick(input.current[0], tempPicks);
     const out: { [s: string]: string } = {};
     tempPicks.map((p: string) => {
       out[p] = tempData[p] || `test-${p}`;
     });
+
     setOutput(out);
+
+    dispatch({
+      type: "recalculate",
+      msg: "uniforms",
+      id: id,
+      value: out
+    });
   };
 
   const inputs = [
@@ -129,7 +137,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
             }
           }}
         />
-        <input type="text" name="pick" defaultValue={"data"} disabled />
+        <input type="text" name="pick" defaultValue={""} disabled />
       </div>
     </>
   );

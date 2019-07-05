@@ -58,7 +58,14 @@ const initPanels: {
   value?: any;
 }[] = [
   { id: "hn", type: "EVENT_Http", x: 1, y: 2 },
-  { id: "uniforms", type: "UNIFORMS", x: 6, y: 2 }
+  { id: "uniforms", type: "UNIFORMS", x: 6, y: 2 },
+  {
+    id: "template",
+    type: "TEMPLATE",
+    x: 11,
+    y: 2,
+    value: "Hello <%= id %>. Karma: <%= karma %>"
+  }
 ];
 
 const initConnectors: {
@@ -84,14 +91,15 @@ function App() {
     }
   }, [dragging, mouseX, mouseY]);
 
-  const addPanel = (type: string, x?: number, y?: number) => {
+  const addPanel = (type: string, x?: number, y?: number, value?: any) => {
     dispatch({
       type: "panel/add",
       id: uniqueID(),
       panelType: type,
       title: type.charAt(0).toUpperCase() + type.slice(1),
       x: x || 1,
-      y: y || 1
+      y: y || 1,
+      value: value || null
     });
   };
 
@@ -106,7 +114,7 @@ function App() {
   useEffect(() => {
     if (initPanels.length > 0) {
       initPanels.map(p => {
-        addPanel(p.type, p.x, p.y);
+        addPanel(p.type, p.x, p.y, p.value);
       });
     }
     // if (initConnectors.length > 0) {

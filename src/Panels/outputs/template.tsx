@@ -4,6 +4,8 @@ import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
+import { template } from "lodash";
+
 interface iString {
   id: string;
   title?: string;
@@ -12,12 +14,22 @@ interface iString {
   value?: string;
 }
 
+function interpolate(literals: any, ...expressions: any) {
+  let string = ``;
+  for (const [i, val] of expressions.entries()) {
+    string += literals[i] + val;
+  }
+  string += literals[literals.length - 1];
+  return string;
+}
+
 export default function Template({ id, title, x, y, value }: iString) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef([""]);
 
-  const [_value, setValue] = useState(value);
-  const [output, setOutput] = useState(_value);
+  const [_value, setValue] = useState<string>(value || "");
+  const [output, setOutput] = useState<string>(_value);
+  let compiled = useRef<Function>(() => {});
 
   useEffect(() => {
     dispatch({
@@ -29,17 +41,37 @@ export default function Template({ id, title, x, y, value }: iString) {
   }, []);
 
   useEffect(() => {
+    let c;
+
+    try {
+      c = compiled.current(input.current[0]);
+    } catch (e) {
+      setOutput(e.message);
+      return;
+    }
+
+    setOutput(c);
+
     dispatch({
       type: "recalculate",
       msg: "string",
       id: id,
-      value: output
+      value: c
     });
-  }, [output]);
+  }, [compiled.current, input.current[0]]);
 
   useEffect(() => {
-    setOutput(input.current[0] + "\n" + _value);
-  }, [input.current[0]]);
+    compiled.current = template(_value);
+
+    let c;
+    try {
+      c = compiled.current(input.current[0]);
+    } catch (e) {
+      console.log(_value, "failed");
+    }
+
+    setOutput(c);
+  }, [_value]);
 
   const inputs = [
     <Input
@@ -65,18 +97,20 @@ export default function Template({ id, title, x, y, value }: iString) {
   ];
 
   const controls = (
-    <textarea
-      name={"text"}
-      onChange={e => {
-        setValue(e.target.value);
-        setOutput(input.current[0] + "\n" + _value);
-      }}
-      defaultValue={_value}
-      autoComplete="off"
-      autoCorrect="off"
-      autoCapitalize="off"
-      spellCheck={false}
-    />
+    <>
+      <textarea
+        name={"text"}
+        onChange={e => {
+          setValue(e.target.value);
+        }}
+        defaultValue={_value}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+      />
+      <div className="template-output">{output}</div>
+    </>
   );
 
   return (
