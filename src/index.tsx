@@ -57,13 +57,13 @@ const initPanels: {
   title?: string;
   value?: any;
 }[] = [
-  { id: "hn", type: "EVENT_Keyboard", x: 1, y: 2 },
-  { id: "Json", type: "JSON", x: 6, y: 2 },
+  { id: "hn", type: "EVENT_Keyboard", x: 26, y: 27 },
+  { id: "Json", type: "JSON", x: 31, y: 27 },
   {
     id: "template",
     type: "TEMPLATE",
-    x: 11,
-    y: 2,
+    x: 36,
+    y: 27,
     value: "Hello <%= id %>. Karma: <%= karma %>"
   }
 ];
@@ -81,12 +81,19 @@ function App() {
 
   const [initPos, setInitPos] = useState({ x: 0, y: 0 });
   const [delta, setDelta] = useState({ x: 0, y: 0 });
+  const [center, setCenter] = useState({ x: 2500, y: 2500 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (dragging) {
-      const deltaX = mouseX - initPos.x;
-      const deltaY = mouseY - initPos.y;
+      let deltaX = mouseX - initPos.x;
+      let deltaY = mouseY - initPos.y;
+      if (pos.x + deltaX > center.x) {
+        deltaX = delta.x;
+      }
+      if (pos.y + deltaY > center.y) {
+        deltaY = delta.y;
+      }
       setDelta({ x: deltaX, y: deltaY });
     }
   }, [dragging, mouseX, mouseY]);
@@ -97,8 +104,8 @@ function App() {
       id: uniqueID(),
       panelType: type,
       title: type.charAt(0).toUpperCase() + type.slice(1),
-      x: x || 1,
-      y: y || 1,
+      x: x || 25,
+      y: y || 25,
       value: value || null
     });
   };
@@ -154,23 +161,34 @@ function App() {
       <div
         className={appClass.join(" ")}
         onMouseDown={(e: React.MouseEvent) => {
-          setDragging(false);
+          setDragging(true);
           setInitPos({ x: e.clientX, y: e.clientY });
         }}
         onMouseUp={e => {
-          setDragging(false);
-          setPos({ x: pos.x + delta.x, y: pos.y + delta.y });
-          setDelta({ x: 0, y: 0 });
+          if (state.connector) {
+            dispatch({
+              type: "node/disconnect"
+            });
+          } else {
+            setDragging(false);
+            const x = Math.min(pos.x + delta.x, center.x);
+            const y = Math.min(pos.y + delta.y, center.y);
+            setPos({ x, y });
+            setDelta({ x: 0, y: 0 });
+          }
         }}
-        style={{ top: pos.y + delta.y, left: pos.x + delta.x }}
+        style={{
+          top: pos.y + delta.y - center.y,
+          left: pos.x + delta.x - center.x
+        }}
       >
-        <MouseContext.Provider value={[mouseX, mouseY]}>
+        <MouseContext.Provider value={[mouseX, mouseY, pos.x, pos.y]}>
           <ConnectorMap
             nodes={state.nodes}
             connections={state.connectionLines}
           />
           <Suspense fallback={"Waiting"}>{panelsEl}</Suspense>
-          <ActiveConnector x={0} y={0} />
+          <ActiveConnector />
         </MouseContext.Provider>
       </div>
     </DispatchContext.Provider>

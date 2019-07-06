@@ -52,4 +52,9 @@ export default class {
 
     return state;
   };
+
+  static disconnect = (state: any, action: any) => {
+    state.connector = null;
+    return state;
+  };
 }

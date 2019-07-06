@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DispatchContext } from "../Contexts/dispatch";
+import { MouseContext } from "../Contexts/mouse";
 
 import {
   IconLookup,
@@ -26,6 +27,7 @@ interface iNode {
 
 export function Node({ id, direction, index, type }: iNode) {
   const { dispatch } = useContext(DispatchContext);
+  const [mx, my, posx, posy] = useContext(MouseContext);
   const ref = useRef<HTMLDivElement>(null);
 
   const connect = (e: React.MouseEvent) => {
@@ -41,8 +43,8 @@ export function Node({ id, direction, index, type }: iNode) {
         type: "node/connect",
         payload: {
           id,
-          x: x + width / 2,
-          y: y + height / 2,
+          x: x + width / 2 + (2500 - posx),
+          y: y + height / 2 + (2500 - posy),
           direction,
           index
         }

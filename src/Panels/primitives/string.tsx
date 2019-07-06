@@ -29,7 +29,6 @@ export default function Const({ id, title, x, y, value }: iString) {
   }, []);
 
   useEffect(() => {
-    console.log("new out", output);
     dispatch({
       type: "recalculate",
       msg: "string",

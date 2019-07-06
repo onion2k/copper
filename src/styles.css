@@ -127,7 +127,6 @@ ul.addPanel li ul {
   background-color: #ffffff;
   background-image: url("./grid.png");
   background-position: top left;
-  overflow: hidden;
 }
 
 article {
