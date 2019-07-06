@@ -25,29 +25,14 @@ import useMousePosition from "./Hooks/useMousePosition";
 import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
-import PRIMITIVES from "./Panels/primitives";
-import OPERATIONS from "./Panels/operations";
-import EVENTS from "./Panels/events";
-import SHADERS from "./Panels/shaders";
-import OUTPUTS from "./Panels/outputs";
-
-const panelTypes: { [s: string]: any } = Object.assign(
-  PRIMITIVES,
-  OPERATIONS,
-  EVENTS,
-  SHADERS,
-  OUTPUTS
-);
-
 import { HeaderNav } from "./Components/headerNav";
+import { Diagram } from "./Components/diagram";
 import { ActiveConnector } from "./Components/activeConnector";
 import { ConnectorMap } from "./Components/connectorMap";
 
 import { uniqueID } from "./uniqueID";
 
 import "./styles.css";
-
-const cellSize = 100;
 
 const initPanels: {
   id: string;
@@ -131,24 +116,6 @@ function App() {
     // }
   }, []);
 
-  const panelsEl = state.canvas.map((p: any) => {
-    return React.createElement(
-      panelTypes[p.type].el,
-      Object.assign(
-        {},
-        {
-          id: p.id,
-          key: p.id,
-          title: p.title,
-          x: cellSize * p.x,
-          y: cellSize * p.y,
-          value: p.value
-        },
-        panelTypes[p.type].defaults
-      )
-    );
-  });
-
   let appClass = ["canvas"];
 
   if (state.connector) {
@@ -158,39 +125,39 @@ function App() {
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
       <HeaderNav addPanel={addPanel} />
-      <div
-        className={appClass.join(" ")}
-        onMouseDown={(e: React.MouseEvent) => {
-          setDragging(true);
-          setInitPos({ x: e.clientX, y: e.clientY });
-        }}
-        onMouseUp={e => {
-          if (state.connector) {
-            dispatch({
-              type: "node/disconnect"
-            });
-          } else {
-            setDragging(false);
-            const x = Math.min(pos.x + delta.x, center.x);
-            const y = Math.min(pos.y + delta.y, center.y);
-            setPos({ x, y });
-            setDelta({ x: 0, y: 0 });
-          }
-        }}
-        style={{
-          top: pos.y + delta.y - center.y,
-          left: pos.x + delta.x - center.x
-        }}
-      >
-        <MouseContext.Provider value={[mouseX, mouseY, pos.x, pos.y]}>
+      <MouseContext.Provider value={[mouseX, mouseY, pos.x, pos.y]}>
+        <div
+          className={appClass.join(" ")}
+          onMouseDown={(e: React.MouseEvent) => {
+            setDragging(true);
+            setInitPos({ x: e.clientX, y: e.clientY });
+          }}
+          onMouseUp={e => {
+            if (state.connector) {
+              dispatch({
+                type: "node/disconnect"
+              });
+            } else {
+              setDragging(false);
+              const x = Math.min(pos.x + delta.x, center.x);
+              const y = Math.min(pos.y + delta.y, center.y);
+              setPos({ x, y });
+              setDelta({ x: 0, y: 0 });
+            }
+          }}
+          style={{
+            top: pos.y + delta.y - center.y,
+            left: pos.x + delta.x - center.x
+          }}
+        >
           <ConnectorMap
             nodes={state.nodes}
             connections={state.connectionLines}
           />
-          <Suspense fallback={"Waiting"}>{panelsEl}</Suspense>
+          <Diagram />
           <ActiveConnector />
-        </MouseContext.Provider>
-      </div>
+        </div>
+      </MouseContext.Provider>
     </DispatchContext.Provider>
   );
 }

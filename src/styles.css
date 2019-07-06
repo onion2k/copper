@@ -452,3 +452,7 @@ div.uniforms > input[disabled] {
   margin-top: 5px;
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+div.uniforms > input[disabled].pressed {
+  background-color: rgb(0, 255, 0);
+}

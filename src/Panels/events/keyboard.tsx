@@ -3,6 +3,8 @@ import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Output } from "../../Components/output";
 
+import { has } from "lodash";
+
 interface iJson {
   id: string;
   title?: string;
@@ -13,18 +15,25 @@ interface iJson {
 export default function Keyboard({ id, title, x, y }: iJson) {
   const { dispatch, state } = useContext(DispatchContext);
   const [keys, setKeys] = useState<Array<string>>([]);
-  const [output, setOutput] = useState<string | object>({});
+  const [output, setOutput] = useState<{ [s: string]: boolean }>({});
   const input = useRef([]);
-  const panelref = useRef(null);
 
   const newkeyRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (e: any) => {
-    console.log(e.key);
+    if (!e.repeat && has(output, e.key)) {
+      const tempOutput: { [s: string]: boolean } = { ...output };
+      tempOutput[e.key] = true;
+      setOutput(tempOutput);
+    }
   };
 
   const handleKeyUp = (e: any) => {
-    console.log(e.key);
+    if (!e.repeat && has(output, e.key)) {
+      const tempOutput: { [s: string]: boolean } = { ...output };
+      tempOutput[e.key] = false;
+      setOutput(tempOutput);
+    }
   };
 
   useEffect(() => {
@@ -40,9 +49,9 @@ export default function Keyboard({ id, title, x, y }: iJson) {
       type: "recalculate",
       msg: "key",
       id: id,
-      value: null
+      value: output
     });
-  }, []);
+  }, [output]);
 
   const updateKeys = (keyid: string, i: number) => {
     if (keys.indexOf(keyid) > -1) return;
@@ -52,15 +61,17 @@ export default function Keyboard({ id, title, x, y }: iJson) {
     } else {
       tempKeys[i] = keyid;
     }
-
     setKeys(tempKeys);
 
-    dispatch({
-      type: "recalculate",
-      msg: "uniforms",
-      id: id,
-      value: output
-    });
+    const tempOutput = tempKeys.reduce(function(
+      i: { [s: string]: boolean },
+      k: string
+    ) {
+      i[k] = false;
+      return i;
+    },
+    {});
+    setOutput(tempOutput);
   };
 
   const inputs = null;
@@ -95,7 +106,13 @@ export default function Keyboard({ id, title, x, y }: iJson) {
               autoCapitalize="off"
               spellCheck={false}
             />
-            <input type="text" name="pick" value={""} disabled />
+            <input
+              type="text"
+              name="key"
+              value={output[value].toString()}
+              disabled
+              className={output[value] ? "pressed" : ""}
+            />
           </div>
         );
       })}
