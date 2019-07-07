@@ -25,7 +25,7 @@ function interpolate(literals: any, ...expressions: any) {
 
 export default function Template({ id, title, x, y, value }: iString) {
   const { dispatch } = useContext(DispatchContext);
-  const input = useRef([""]);
+  const input = useRef(["", {}]);
 
   const [_value, setValue] = useState<string>(value || "");
   const [output, setOutput] = useState<string>(_value);
@@ -45,7 +45,7 @@ export default function Template({ id, title, x, y, value }: iString) {
     let c;
 
     try {
-      c = compiled.current(input.current[0]);
+      c = compiled.current(input.current[1]);
     } catch (e) {
       setError(e.message);
       setOutput("");
@@ -61,20 +61,22 @@ export default function Template({ id, title, x, y, value }: iString) {
       id: id,
       value: [c]
     });
-  }, [compiled.current, input.current[0]]);
+  }, [compiled.current, input.current[1]]);
 
   useEffect(() => {
-    compiled.current = template(_value);
+    compiled.current = input.current[0]
+      ? template(input.current[0] + "\n" + _value)
+      : template(_value);
 
     let c;
     try {
-      c = compiled.current(input.current[0]);
+      c = compiled.current(input.current[1]);
     } catch (e) {
       console.log(_value, "failed");
     }
 
     setOutput(c);
-  }, [_value]);
+  }, [input.current[0], _value]);
 
   const inputs = [
     <Input
@@ -83,6 +85,15 @@ export default function Template({ id, title, x, y, value }: iString) {
       direction={"in"}
       index={0}
       value={input.current[0]}
+      title={"Template"}
+      type="string"
+    />,
+    <Input
+      key={`input-${id}-1`}
+      id={id}
+      direction={"in"}
+      index={1}
+      value={input.current[1]}
       title={"Uniforms"}
       type="array"
     />
