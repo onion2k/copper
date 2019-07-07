@@ -54,9 +54,8 @@ export default function Keyboard({ id, title, x, y }: iJson) {
   }, [output]);
 
   const updateKeys = (keyid: string, i: number) => {
-    if (keys.indexOf(keyid) > -1) return;
     const tempKeys: any = [...keys];
-    if (!keyid) {
+    if (keyid === "Backspace") {
       tempKeys.splice(i, 1);
     } else {
       tempKeys[i] = keyid;
@@ -129,12 +128,6 @@ export default function Keyboard({ id, title, x, y }: iJson) {
               newkeyRef.current.value = "";
             }
           }}
-          // onBlur={e => {
-          //   if (newkeyRef && newkeyRef.current && newkeyRef.current.value) {
-          //     updateKeys(e.key, keys.length);
-          //     newkeyRef.current.value = "";
-          //   }
-          // }}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
