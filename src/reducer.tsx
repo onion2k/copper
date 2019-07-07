@@ -7,7 +7,7 @@ export function reducer(state: any, action: any) {
     case "recalculate":
       newState.outputs[action.id] = action.value;
       if (newState.connections[action.id]) {
-        newState.connections[action.id].forEach((c: any) => {
+        newState.connections[action.id].forEach((c: any, i: number) => {
           if (c !== null) {
             const id = c[0];
             const index = c[1];

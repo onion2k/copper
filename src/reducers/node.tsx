@@ -25,11 +25,14 @@ export default class {
       };
     } else {
       /* Remove the to line */
-
-      if (state.connector.type !== action.payload.type) {
+      if (
+        state.connector.type !== action.payload.type &&
+        action.payload.type !== "any"
+      ) {
         state.connector = null;
         return state;
       }
+
       state.connectionLines = state.connectionLines.filter((cl: any) => {
         return !(
           cl.to === action.payload.id && cl.index === action.payload.index
@@ -45,7 +48,7 @@ export default class {
         y1: state.connector.y,
         x2: action.payload.x,
         y2: action.payload.y,
-        index: state.connector.index
+        index: action.payload.index
       });
 
       if (!state.connections[action.payload.id])
