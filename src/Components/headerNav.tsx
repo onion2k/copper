@@ -1,11 +1,20 @@
 import React from "react";
 import SHADERS from "../Panels/shaders";
+import "./headerNav.css";
 
 interface iHeaderNav {
   addPanel: Function;
 }
 
 export function HeaderNav({ addPanel }: iHeaderNav) {
+  const addPanelCallback = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    type: string
+  ) => {
+    event.stopPropagation();
+    addPanel(type);
+  };
+
   return (
     <header className="nav">
       <h1>Copper</h1>
@@ -14,19 +23,21 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Primitives
           <ul>
             <li>
-              <button onClick={() => addPanel("CONST")}>Const</button>
+              <button onClick={e => addPanelCallback(e, "CONST")}>Const</button>
             </li>
             <li>
-              <button onClick={() => addPanel("TIME")}>Time</button>
+              <button onClick={e => addPanelCallback(e, "TIME")}>Time</button>
             </li>
             <li>
-              <button onClick={() => addPanel("STRING")}>String</button>
+              <button onClick={e => addPanelCallback(e, "STRING")}>
+                String
+              </button>
             </li>
             <li>
-              <button onClick={() => addPanel("COLOR")}>Color</button>
+              <button onClick={e => addPanelCallback(e, "COLOR")}>Color</button>
             </li>
             <li>
-              <button onClick={() => addPanel("VALUE")}>Value</button>
+              <button onClick={e => addPanelCallback(e, "VALUE")}>Value</button>
             </li>
           </ul>
         </li>
@@ -34,13 +45,17 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Operations
           <ul>
             <li>
-              <button onClick={() => addPanel("ARITHMATIC")}>Arithmatic</button>
+              <button onClick={e => addPanelCallback(e, "ARITHMATIC")}>
+                Arithmatic
+              </button>
             </li>
             <li>
-              <button onClick={() => addPanel("JSON")}>Json</button>
+              <button onClick={e => addPanelCallback(e, "JSON")}>Json</button>
             </li>
             <li>
-              <button onClick={() => addPanel("TRIG")}>Trigonometry</button>
+              <button onClick={e => addPanelCallback(e, "TRIG")}>
+                Trigonometry
+              </button>
             </li>
           </ul>
         </li>
@@ -48,12 +63,12 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Events
           <ul>
             <li>
-              <button onClick={() => addPanel("EVENT_MousePosition")}>
+              <button onClick={e => addPanelCallback(e, "EVENT_MousePosition")}>
                 Mouse Position
               </button>
             </li>
             <li>
-              <button onClick={() => addPanel("EVENT_Http")}>
+              <button onClick={e => addPanelCallback(e, "EVENT_Http")}>
                 Http Request
               </button>
             </li>
@@ -63,10 +78,14 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
           Outputs
           <ul>
             <li>
-              <button onClick={() => addPanel("SHADER")}>GLSL Shader</button>
+              <button onClick={e => addPanelCallback(e, "SHADER")}>
+                GLSL Shader
+              </button>
             </li>
             <li>
-              <button onClick={() => addPanel("TEMPLATE")}>Template</button>
+              <button onClick={e => addPanelCallback(e, "TEMPLATE")}>
+                Template
+              </button>
             </li>
           </ul>
         </li>
@@ -76,7 +95,7 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
             {Object.keys(SHADERS).map((shader: any) => {
               return (
                 <li key={`shader-add-${shader}`}>
-                  <button onClick={() => addPanel(shader)}>
+                  <button onClick={e => addPanelCallback(e, shader)}>
                     {SHADERS[shader].title}
                   </button>
                 </li>

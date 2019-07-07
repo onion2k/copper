@@ -50,7 +50,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
         type: "recalculate",
         msg: "math",
         id: id,
-        value: value
+        value: [value]
       });
     }
   }, [input.current[0], input.current[1], _op]);
@@ -81,7 +81,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       id={id}
       key={`output-${id}-0`}
       direction={"out"}
-      index={null}
+      index={0}
       value={value}
       type="float"
     />

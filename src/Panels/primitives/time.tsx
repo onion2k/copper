@@ -31,7 +31,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       type: "recalculate",
       msg: "time",
       id: id,
-      value: value
+      value: [value]
     });
   }, [value]);
 
@@ -46,7 +46,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       key={id}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={value.toFixed(3)}
       type="float"
     />

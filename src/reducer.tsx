@@ -7,14 +7,12 @@ export function reducer(state: any, action: any) {
     case "recalculate":
       newState.outputs[action.id] = action.value;
       if (newState.connections[action.id]) {
-        const id = newState.connections[action.id][0];
-        const index = newState.connections[action.id][1];
-        const outputIndex = newState.connections[action.id][2];
-        if (outputIndex !== null) {
+        newState.connections[action.id].forEach((c: any) => {
+          const id = c[0];
+          const index = c[1];
+          const outputIndex = c[2];
           newState.inputs[id][index] = action.value[outputIndex];
-        } else {
-          newState.inputs[id][index] = action.value;
-        }
+        });
       }
       return newState;
     case "node/connect":

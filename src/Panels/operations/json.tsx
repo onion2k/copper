@@ -79,7 +79,7 @@ export default function JSON({ id, title, x, y }: iJson) {
       type: "recalculate",
       msg: "uniforms",
       id: id,
-      value: out
+      value: [out]
     });
   };
 
@@ -100,7 +100,7 @@ export default function JSON({ id, title, x, y }: iJson) {
       id={id}
       key={`output-${id}-0`}
       direction={"out"}
-      index={null}
+      index={0}
       value={output}
       type="array"
     />

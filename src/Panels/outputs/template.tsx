@@ -59,7 +59,7 @@ export default function Template({ id, title, x, y, value }: iString) {
       type: "recalculate",
       msg: "string",
       id: id,
-      value: c
+      value: [c]
     });
   }, [compiled.current, input.current[0]]);
 
@@ -93,7 +93,7 @@ export default function Template({ id, title, x, y, value }: iString) {
       key={id}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={output}
       type="string"
     />

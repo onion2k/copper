@@ -42,15 +42,9 @@ const initPanels: {
   title?: string;
   value?: any;
 }[] = [
-  { id: "hn", type: "EVENT_Keyboard", x: 26, y: 27 },
-  { id: "Json", type: "JSON", x: 31, y: 27 },
-  {
-    id: "template",
-    type: "TEMPLATE",
-    x: 36,
-    y: 27,
-    value: "Hello <%= id %>. Karma: <%= karma %>"
-  }
+  { id: "hn", type: "EVENT_MousePosition", x: 26, y: 27 },
+  { id: "x", type: "VALUE", x: 31, y: 27 },
+  { id: "y", type: "VALUE", x: 31, y: 29 }
 ];
 
 const initConnectors: {
@@ -89,8 +83,8 @@ function App() {
       id: uniqueID(),
       panelType: type,
       title: type.charAt(0).toUpperCase() + type.slice(1),
-      x: x || 25,
-      y: y || 25,
+      x: x || 26,
+      y: y || 26,
       value: value || null
     });
   };

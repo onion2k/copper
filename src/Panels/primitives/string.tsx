@@ -33,12 +33,11 @@ export default function Const({ id, title, x, y, value }: iString) {
       type: "recalculate",
       msg: "string",
       id: id,
-      value: output
+      value: [output]
     });
   }, [output]);
 
   useEffect(() => {
-    console.log("new in", JSON.stringify(input.current[0]) + "\n" + _value);
     setOutput(JSON.stringify(input.current[0]) + "\n" + _value);
   }, [input.current[0]]);
 
@@ -59,7 +58,7 @@ export default function Const({ id, title, x, y, value }: iString) {
       key={id}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={output}
       type="string"
     />

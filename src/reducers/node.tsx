@@ -1,11 +1,19 @@
+// action - payload - from:id, index, x, y (output), to: id, index, index, x, y (input)
+
 export default class {
   static connect = (state: any, action: any) => {
     if (!state.connector) {
       /* Remove any node connected to the connector */
-      state.connections[action.payload.id] = null;
+      if (!state.connections[action.payload.id])
+        state.connections[action.payload.id] = [];
+
+      state.connections[action.payload.id][action.payload.index] = null;
+
       /* Remove the from line */
       state.connectionLines = state.connectionLines.filter((cl: any) => {
-        return cl.from !== action.payload.id;
+        return !(
+          cl.from === action.payload.id && cl.index === action.payload.index
+        );
       });
 
       state.connector = {
@@ -21,6 +29,7 @@ export default class {
           cl.to === action.payload.id && cl.index === action.payload.index
         );
       });
+
       /* state connector is the output */
       /* payload is the input */
       state.connectionLines.push({
@@ -30,23 +39,23 @@ export default class {
         y1: state.connector.y,
         x2: action.payload.x,
         y2: action.payload.y,
-        index: action.payload.index
+        index: state.connector.index
       });
 
-      state.connections[state.connector.id] = [
+      if (!state.connections[action.payload.id])
+        state.connections[action.payload.id] = [];
+
+      state.connections[state.connector.id][state.connector.index] = [
         action.payload.id,
         action.payload.index,
         state.connector.index
       ];
 
       /* update the input to the current output value */
-      if (state.connector.index === null) {
-        state.inputs[action.payload.id][action.payload.index] =
-          state.outputs[state.connector.id];
-      } else {
-        state.inputs[action.payload.id][action.payload.index] =
-          state.outputs[state.connector.id][state.connector.index];
-      }
+      state.inputs[action.payload.id][action.payload.index] =
+        state.outputs[state.connector.id][state.connector.index];
+
+      // Unset the active connector
       state.connector = null;
     }
 

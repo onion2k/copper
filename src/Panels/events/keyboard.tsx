@@ -49,7 +49,7 @@ export default function Keyboard({ id, title, x, y }: iJson) {
       type: "recalculate",
       msg: "key",
       id: id,
-      value: output
+      value: [output]
     });
   }, [output]);
 
@@ -80,7 +80,7 @@ export default function Keyboard({ id, title, x, y }: iJson) {
       id={id}
       key={`output-${id}-0`}
       direction={"out"}
-      index={null}
+      index={0}
       value={"a"}
       type="array"
     />

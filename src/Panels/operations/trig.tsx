@@ -49,7 +49,7 @@ export default function Sin({ id, title, x, y, op }: iSin) {
       type: "recalculate",
       msg: "trig",
       id: id,
-      value: value
+      value: [value]
     });
 
     const tPrev = prev;
@@ -79,7 +79,7 @@ export default function Sin({ id, title, x, y, op }: iSin) {
       key={`output-${id}-0`}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={value.toFixed(3)}
       type="float"
     />

@@ -28,7 +28,7 @@ export default function Value({ id, title, x, y }: iValue) {
       type: "recalculate",
       msg: "value",
       id: id,
-      value: input.current[0]
+      value: [input.current[0]]
     });
   }, [input.current[0]]);
 
@@ -48,7 +48,7 @@ export default function Value({ id, title, x, y }: iValue) {
       key={id}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={input.current[0]}
       type="any"
     />

@@ -45,7 +45,7 @@ export default function Color({ id, title, x, y }: iColor) {
       key={id}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={color}
       type="vec3"
     />
