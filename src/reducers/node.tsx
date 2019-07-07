@@ -20,10 +20,16 @@ export default class {
         id: action.payload.id,
         index: action.payload.index,
         x: action.payload.x,
-        y: action.payload.y
+        y: action.payload.y,
+        type: action.payload.type
       };
     } else {
       /* Remove the to line */
+
+      if (state.connector.type !== action.payload.type) {
+        state.connector = null;
+        return state;
+      }
       state.connectionLines = state.connectionLines.filter((cl: any) => {
         return !(
           cl.to === action.payload.id && cl.index === action.payload.index

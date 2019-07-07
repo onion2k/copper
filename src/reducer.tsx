@@ -8,10 +8,12 @@ export function reducer(state: any, action: any) {
       newState.outputs[action.id] = action.value;
       if (newState.connections[action.id]) {
         newState.connections[action.id].forEach((c: any) => {
-          const id = c[0];
-          const index = c[1];
-          const outputIndex = c[2];
-          newState.inputs[id][index] = action.value[outputIndex];
+          if (c !== null) {
+            const id = c[0];
+            const index = c[1];
+            const outputIndex = c[2];
+            newState.inputs[id][index] = action.value[outputIndex];
+          }
         });
       }
       return newState;

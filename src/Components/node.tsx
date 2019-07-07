@@ -46,7 +46,8 @@ export function Node({ id, direction, index, type }: iNode) {
           x: x + width / 2 + (2500 - posx),
           y: y + height / 2 + (2500 - posy),
           direction,
-          index
+          index,
+          type
         }
       });
     }
