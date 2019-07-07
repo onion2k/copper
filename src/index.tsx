@@ -42,9 +42,9 @@ const initPanels: {
   title?: string;
   value?: any;
 }[] = [
-  { id: "hn", type: "EVENT_MousePosition", x: 26, y: 27 },
-  { id: "x", type: "VALUE", x: 31, y: 27 },
-  { id: "y", type: "VALUE", x: 31, y: 29 }
+  { id: "hn", type: "STRING", x: 26, y: 27, value: "" },
+  { id: "x", type: "STRING", x: 31, y: 27, value: "xxx" },
+  { id: "y", type: "STRING", x: 36, y: 27 }
 ];
 
 const initConnectors: {

@@ -9,37 +9,38 @@ interface iString {
   title?: string;
   x: number;
   y: number;
-  value?: string;
+  value: string;
 }
 
-export default function Const({ id, title, x, y, value }: iString) {
+export default function String({ id, title, x, y, value }: iString) {
   const { dispatch } = useContext(DispatchContext);
+  const [_value, setValue] = useState(value || "");
+  const [output, setOutput] = useState(value || "");
   const input = useRef([""]);
-
-  const [_value, setValue] = useState(value);
-  const [output, setOutput] = useState(_value);
 
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
       inputs: input.current,
-      output: _value
+      output: output
     });
   }, []);
 
   useEffect(() => {
+    const tempOutput = input.current[0]
+      ? input.current[0] + "\n" + _value
+      : _value;
+    if (tempOutput !== null) {
+      setOutput(tempOutput);
+    }
     dispatch({
       type: "recalculate",
       msg: "string",
       id: id,
-      value: [output]
+      value: [tempOutput]
     });
-  }, [output]);
-
-  useEffect(() => {
-    setOutput(JSON.stringify(input.current[0]) + "\n" + _value);
-  }, [input.current[0]]);
+  }, [input.current[0], _value]);
 
   const inputs = [
     <Input
@@ -65,18 +66,20 @@ export default function Const({ id, title, x, y, value }: iString) {
   ];
 
   const controls = (
-    <textarea
-      name={"text"}
-      onChange={e => {
-        setValue(e.target.value);
-        setOutput(input.current[0] + "\n" + _value);
-      }}
-      defaultValue={_value}
-      autoComplete="off"
-      autoCorrect="off"
-      autoCapitalize="off"
-      spellCheck={false}
-    />
+    <>
+      <textarea
+        name={"text"}
+        onChange={e => {
+          setValue(e.target.value);
+        }}
+        defaultValue={_value}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+      />
+      <div className="template-output">{output || ""}</div>
+    </>
   );
 
   return (
