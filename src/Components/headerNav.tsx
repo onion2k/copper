@@ -72,6 +72,11 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
                 Http Request
               </button>
             </li>
+            <li>
+              <button onClick={e => addPanelCallback(e, "EVENT_Keyboard")}>
+                Keyboard
+              </button>
+            </li>
           </ul>
         </li>
         <li>
