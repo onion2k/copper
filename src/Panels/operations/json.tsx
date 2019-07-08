@@ -64,10 +64,10 @@ export default function JSON({ id, title, x, y }: iJson) {
 
     let out: { [s: string]: string } = {};
 
-    if (picks.length > 0) {
+    if (tempPicks.length > 0) {
       const tempData: { [s: string]: string } = pick(input.current[0], picks);
-      picks.map((p: string) => {
-        out[p] = tempData[p] || "Not found";
+      tempPicks.map((p: string) => {
+        out[p] = tempData[p] || "Test:" + p;
       });
     } else {
       out = input.current[0];

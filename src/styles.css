@@ -275,7 +275,7 @@ svg {
 textarea {
   padding: 5px;
   width: 340px;
-  height: 190px;
+  min-height: 40px;
   font-family: "Courier New", Courier, monospace;
   border: 0;
   border-radius: 0 0 10px 10px;
