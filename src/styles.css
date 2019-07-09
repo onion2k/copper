@@ -278,7 +278,6 @@ textarea {
   min-height: 40px;
   font-family: "Courier New", Courier, monospace;
   border: 0;
-  border-radius: 0 0 10px 10px;
 }
 
 .active {
