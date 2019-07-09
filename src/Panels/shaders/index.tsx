@@ -10,6 +10,7 @@ const SHADER_Swirl = React.lazy(() => import("./swirl"));
 const SHADER_Tunnel = React.lazy(() => import("./tunnel"));
 const SHADER_Glowlines = React.lazy(() => import("./glowlines"));
 const SHADER_StainedGlass = React.lazy(() => import("./stainedglass"));
+const SHADER_Spiral2 = React.lazy(() => import("./spiral2"));
 
 const SHADERS: { [s: string]: any } = {
   SHADER_Color: { el: SHADER_Color, title: "Color" },
@@ -18,6 +19,7 @@ const SHADERS: { [s: string]: any } = {
   SHADER_Chevron: { el: SHADER_Chevron, title: "Chevron" },
   SHADER_Space: { el: SHADER_Space, title: "Space" },
   SHADER_Spiral: { el: SHADER_Spiral, title: "Spiral" },
+  SHADER_Spiral2: { el: SHADER_Spiral2, title: "Spiral 2" },
   SHADER_Swirl: { el: SHADER_Swirl, title: "Swirl" },
   SHADER_Tunnel: { el: SHADER_Tunnel, title: "Tunnel" },
   SHADER_Glowlines: { el: SHADER_Glowlines, title: "Lines" },
