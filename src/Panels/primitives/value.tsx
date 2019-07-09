@@ -54,6 +54,8 @@ export default function Value({ id, title, x, y }: iValue) {
     />
   ];
 
+  const controls = <div className="template-output">{input.current[0]}</div>;
+
   return (
     <Panel
       key={id}
@@ -63,7 +65,7 @@ export default function Value({ id, title, x, y }: iValue) {
       title={title || "Value"}
       inputs={inputs}
       outputs={outputs}
-      controls={"Display a value from an output."}
+      controls={controls}
     />
   );
 }
