@@ -8,53 +8,19 @@ interface iSin {
   y: number;
 }
 
-const fs = `
-#ifdef GL_ES
-precision mediump float;
+const fs = `#ifdef GL_ES
+  precision mediump float;
 #endif
-
-// glslsandbox uniforms
 uniform float u_time;
 uniform vec2 u_resolution;
-
-// --------[ Original ShaderToy begins here ]---------- //
-#define pi 3.141592653589
-
-vec3 drawSpiral(vec2 uv, vec3 col, float thickness){
-
-    //float lim = 12.*pi;
-    float growth = sqrt(2.);
-    float theta = ( pi*log(length(uv)) )/(2.*log(growth) ); //angle of spiral for length of UV vector with spiral being r(theta)
-    vec2 spiral = pow(growth,2./pi * theta)*vec2(cos(theta),sin(theta));
-
-    if( abs(dot(normalize(uv),normalize(spiral))-1.) < 1.195 && abs(length(uv)-length(spiral)) < thickness  ){
-     col = vec3(1.)*(1.0 - abs(dot(normalize(uv),normalize(spiral))-1.));
-    }
-
-    col*=vec3((sin(u_time)+1.)/3.+.5,(cos(u_time)+1.)/3.+.5,(cos(u_time)+1.)/3.+.5);
-
-    return col;
-}
-
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {
-    // Normalized pixel coordinates (from 0 to 1)
-    vec2 uv = 2.*(fragCoord-u_resolution.xy*.5)/u_resolution.y;
-	uv/= fract(u_time) +.325; //fract(u_time)/.5+.675;
-
-    // Time varying pixel color
-    vec3 col = vec3(0.);
-
-    //col = shape(uv, col, vec2(0.45, 0.25), 1., vec3(1.),  .0125);
-    col = drawSpiral(uv, col, .45);
-    // Output to screen
-    fragColor = vec4(col / (col + 0.25),1.0);
-}
-// --------[ Original ShaderToy ends here ]---------- //
-
-void main(void)
-{
-    mainImage(gl_FragColor, gl_FragCoord.xy);
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+  // Time varying pixel color
+  vec3 col = 0.5 + 0.5*cos(u_time + uv.xyx + vec3(0,2,4));
+  // Output to screen
+  gl_FragColor = vec4(col,1.0);
 }`;
 
 const vs = `attribute vec4 position;
