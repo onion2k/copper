@@ -24,6 +24,7 @@ export default class {
         type: action.payload.type
       };
     } else {
+      console.log(action);
       /* Remove the to line */
       if (
         state.connector.type !== action.payload.type &&

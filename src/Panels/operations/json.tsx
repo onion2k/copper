@@ -18,7 +18,7 @@ export default function JSON({ id, title, x, y }: iJson) {
   const [value, setValue] = useState({});
   const [output, setOutput] = useState<{ [s: string]: any }>({});
   const [picks, setPicks] = useState<Array<string>>([]);
-  const input = useRef([]);
+  const input = useRef([{}]);
 
   const newpickRef = useRef<HTMLInputElement>(null);
 
@@ -45,9 +45,9 @@ export default function JSON({ id, title, x, y }: iJson) {
 
     dispatch({
       type: "recalculate",
-      msg: "uniforms",
+      msg: "json",
       id: id,
-      value: out
+      value: [out]
     });
   }, [input.current[0]]);
 
@@ -77,7 +77,7 @@ export default function JSON({ id, title, x, y }: iJson) {
 
     dispatch({
       type: "recalculate",
-      msg: "uniforms",
+      msg: "json",
       id: id,
       value: [out]
     });
