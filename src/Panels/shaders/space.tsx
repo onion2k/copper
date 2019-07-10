@@ -95,6 +95,7 @@ export default function Shader_Rings({ id, title, x, y }: iShader) {
       index={2}
       value={input.current[2]}
       title={"u_time"}
+      type="float"
     />,
     <Input
       key={`input-${id}-3`}
@@ -103,6 +104,7 @@ export default function Shader_Rings({ id, title, x, y }: iShader) {
       index={3}
       value={input.current[3]}
       title={"u_color"}
+      type="array"
     />
   ];
 
