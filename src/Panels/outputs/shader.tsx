@@ -106,7 +106,7 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
 
       var uniforms = {
         u_time: input.current[2],
-        u_color: input.current[3],
+        u_mouse: input.current[3],
         u_resolution: [gl.canvas.width, gl.canvas.height]
       };
 

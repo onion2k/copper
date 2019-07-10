@@ -69,7 +69,7 @@ export default function Event_MousePosition({
         type: "recalculate",
         msg: "mouse",
         id: id,
-        value: [mousePos[0], mousePos[1]]
+        value: [[mousePos[0], mousePos[1]]]
       });
     }
   });
@@ -82,16 +82,8 @@ export default function Event_MousePosition({
       id={id}
       direction={"out"}
       index={0}
-      value={mousePos[0]}
-      type="float"
-    />,
-    <Output
-      key={`output-${id}-1`}
-      id={id}
-      direction={"out"}
-      index={1}
-      value={mousePos[1]}
-      type="float"
+      value={[mousePos[0], mousePos[1]]}
+      type="array"
     />
   ];
 

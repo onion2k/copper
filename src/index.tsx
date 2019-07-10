@@ -42,16 +42,13 @@ const initPanels: {
   title?: string;
   value?: any;
 }[] = [
-  { id: "hn", type: "STRING", x: 25, y: 27, value: "Welcome to HN" },
-  { id: "x", type: "STRING", x: 29, y: 27, value: "Your ID is <%= id %>." },
   {
-    id: "y",
-    type: "STRING",
-    x: 33,
-    y: 27,
-    value: "Your karma is <%= karma %>."
+    id: "hn",
+    type: "EVENT_MousePosition",
+    x: 26,
+    y: 27
   },
-  { id: "temp", type: "TEMPLATE", x: 37, y: 27 }
+  { id: "x", type: "SPLIT", x: 31, y: 27 }
 ];
 
 const initConnectors: {

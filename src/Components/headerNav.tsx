@@ -57,6 +57,11 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
                 Trigonometry
               </button>
             </li>
+            <li>
+              <button onClick={e => addPanelCallback(e, "SPLIT")}>
+                Split Vec2
+              </button>
+            </li>
           </ul>
         </li>
         <li>
