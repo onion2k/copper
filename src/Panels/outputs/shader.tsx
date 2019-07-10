@@ -5,17 +5,27 @@ import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 
+import { zipObject } from "lodash";
+
 interface iShader {
   id: string;
   title?: string;
   x: number;
   y: number;
   inputs?: Array<any>;
-  uniforms?: React.MutableRefObject<Array<string>>;
+  uniforms?: Array<string>;
   defaults?: React.MutableRefObject<Array<any>>;
 }
 
-export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
+export default function Shader({
+  id,
+  title,
+  x,
+  y,
+  inputs,
+  uniforms,
+  defaults
+}: iShader) {
   const { dispatch } = useContext(DispatchContext);
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
@@ -61,18 +71,27 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
     if (gl !== null && programInfo !== null && bufferInfo !== null) {
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-      // build up from uniforms and inputs?
-
-      const uniforms = {
-        u_time: input.current[2],
-        u_mouse: input.current[3],
+      let uniformsObj: { [s: string]: any } = {
         u_resolution: [gl.canvas.width, gl.canvas.height]
       };
+
+      // TODO: Investigate if this is a bottleneck
+
+      if (uniforms) {
+        uniformsObj = Object.assign(
+          uniformsObj,
+          zipObject(uniforms, input.current.slice(2))
+        );
+      } else {
+        uniformsObj = Object.assign(uniformsObj, {
+          u_time: input.current[2]
+        });
+      }
 
       gl.useProgram(programInfo.program);
 
       twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
-      twgl.setUniforms(programInfo, uniforms);
+      twgl.setUniforms(programInfo, uniformsObj);
       twgl.drawBufferInfo(gl, bufferInfo);
     }
   });
