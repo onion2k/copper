@@ -87,6 +87,7 @@ export default function Shader_Color({ id, title, x, y }: iSin) {
       y={y}
       title={"Color Shader"}
       defaults={input}
+      uniforms={["u_time", "u_mouse"]}
       inputs={inputs}
     />
   );

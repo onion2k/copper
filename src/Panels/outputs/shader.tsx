@@ -11,6 +11,7 @@ interface iShader {
   x: number;
   y: number;
   inputs?: Array<any>;
+  uniforms?: React.MutableRefObject<Array<string>>;
   defaults?: React.MutableRefObject<Array<any>>;
 }
 
@@ -56,6 +57,26 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
     }
   }, [canvasRef, input.current[0], input.current[1]]);
 
+  useAnimationFrame(() => {
+    if (gl !== null && programInfo !== null && bufferInfo !== null) {
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+      // build up from uniforms and inputs?
+
+      const uniforms = {
+        u_time: input.current[2],
+        u_mouse: input.current[3],
+        u_resolution: [gl.canvas.width, gl.canvas.height]
+      };
+
+      gl.useProgram(programInfo.program);
+
+      twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
+      twgl.setUniforms(programInfo, uniforms);
+      twgl.drawBufferInfo(gl, bufferInfo);
+    }
+  });
+
   if (!inputs) {
     inputs = [
       <Input
@@ -99,24 +120,6 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
       height={canvasY}
     />
   ];
-
-  useAnimationFrame(() => {
-    if (gl !== null && programInfo !== null && bufferInfo !== null) {
-      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-
-      var uniforms = {
-        u_time: input.current[2],
-        u_mouse: input.current[3],
-        u_resolution: [gl.canvas.width, gl.canvas.height]
-      };
-
-      gl.useProgram(programInfo.program);
-
-      twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
-      twgl.setUniforms(programInfo, uniforms);
-      twgl.drawBufferInfo(gl, bufferInfo);
-    }
-  });
 
   return (
     <Panel

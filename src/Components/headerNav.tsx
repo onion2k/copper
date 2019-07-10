@@ -61,6 +61,11 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
               <button onClick={e => addPanelCallback(e, "SPLIT")}>
                 Split Vec2
               </button>
+              <li>
+                <button onClick={e => addPanelCallback(e, "COMBINE")}>
+                  Combine Vec2
+                </button>
+              </li>
             </li>
           </ul>
         </li>

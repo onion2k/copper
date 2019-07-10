@@ -13,10 +13,8 @@ interface iSplit {
 
 export default function Event_MousePosition({ id, title, x, y }: iSplit) {
   const { dispatch } = useContext(DispatchContext);
-  const [prevMousePos, setPrevMousePos] = useState([0, 0]);
-  const [value, setValue] = useState([0, 0]);
-
-  const input = useRef([0]);
+  const [value, setValue] = useState<any>([]);
+  const input = useRef([0, 0]);
 
   useEffect(() => {
     dispatch({
@@ -27,15 +25,15 @@ export default function Event_MousePosition({ id, title, x, y }: iSplit) {
   }, []);
 
   useEffect(() => {
-    const tempValue: any = input.current[0];
+    const tempValue = [input.current[0], input.current[1]];
     setValue(tempValue);
     dispatch({
       type: "recalculate",
-      msg: "mouse",
+      msg: "combine",
       id: id,
-      value: [tempValue[0], tempValue[1]]
+      value: [tempValue]
     });
-  }, [input.current[0]]);
+  }, [input.current[0], input.current[1]]);
 
   const inputs = [
     <Input
@@ -46,6 +44,15 @@ export default function Event_MousePosition({ id, title, x, y }: iSplit) {
       value={input.current[0]}
       title={"A"}
       type="any"
+    />,
+    <Input
+      id={id}
+      key={`input-${id}-1`}
+      direction={"in"}
+      index={1}
+      value={input.current[1]}
+      title={"B"}
+      type="any"
     />
   ];
 
@@ -55,16 +62,8 @@ export default function Event_MousePosition({ id, title, x, y }: iSplit) {
       id={id}
       direction={"out"}
       index={0}
-      value={value[0]}
-      type="float"
-    />,
-    <Output
-      key={`output-${id}-1`}
-      id={id}
-      direction={"out"}
-      index={1}
-      value={value[1]}
-      type="float"
+      value={value}
+      type="array"
     />
   ];
 
@@ -76,11 +75,10 @@ export default function Event_MousePosition({ id, title, x, y }: iSplit) {
       id={id}
       x={x}
       y={y}
-      title={title || "Split vec2"}
+      title={title || "Combine Vec2"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}
-      nopadding
     />
   );
 }
