@@ -45,15 +45,6 @@ export default function Event_MousePosition({
     }
   }, [canvasRef]);
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "recalculate",
-  //     msg: "mouse",
-  //     id: id,
-  //     value: [mousePos[0], mousePos[1]]
-  //   });
-  // }, [mousePos[0], mousePos[1]]);
-
   useAnimationFrame(() => {
     if (canvasRef.current !== null) {
       const ctx = canvasRef.current.getContext("2d");
@@ -73,13 +64,12 @@ export default function Event_MousePosition({
       }
     }
     if (mousePos !== prevMousePos) {
-      console.log("whee");
       setPrevMousePos(mousePos);
       dispatch({
         type: "recalculate",
         msg: "mouse",
         id: id,
-        value: [mousePos[0], mousePos[1]]
+        value: [[mousePos[0], mousePos[1]]]
       });
     }
   });
@@ -92,16 +82,8 @@ export default function Event_MousePosition({
       id={id}
       direction={"out"}
       index={0}
-      value={mousePos[0]}
-      type="float"
-    />,
-    <Output
-      key={`output-${id}-1`}
-      id={id}
-      direction={"out"}
-      index={1}
-      value={mousePos[1]}
-      type="float"
+      value={[mousePos[0], mousePos[1]]}
+      type="array"
     />
   ];
 

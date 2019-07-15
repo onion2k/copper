@@ -9,7 +9,8 @@ export default class {
       title:
         action.panelType.charAt(0).toUpperCase() + action.panelType.slice(1),
       x: action.x,
-      y: action.y
+      y: action.y,
+      value: action.value
     });
     state.canvas = tempPanels;
     return state;

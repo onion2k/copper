@@ -27,7 +27,7 @@ export default function Const({ id, title, x, y }: iConst) {
       type: "recalculate",
       msg: "const",
       id: id,
-      value: value
+      value: [value]
     });
   }, [value]);
 
@@ -40,7 +40,7 @@ export default function Const({ id, title, x, y }: iConst) {
       key={id}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={value}
       type="float"
     />

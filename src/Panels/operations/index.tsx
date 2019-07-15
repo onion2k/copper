@@ -1,13 +1,19 @@
 import React from "react";
 
 const Arithmatic = React.lazy(() => import("./arithmatic"));
-const Uniforms = React.lazy(() => import("./uniforms"));
+const Json = React.lazy(() => import("./json"));
 const Trig = React.lazy(() => import("./trig"));
+const Split = React.lazy(() => import("./split"));
+const Combine = React.lazy(() => import("./combine"));
+const Duplicate = React.lazy(() => import("./duplicate"));
 
 const OPERATIONS: { [s: string]: any } = {
   ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
-  UNIFORMS: { el: Uniforms },
-  TRIG: { el: Trig, defaults: { op: "sin" } }
+  JSON: { el: Json },
+  TRIG: { el: Trig, defaults: { op: "sin" } },
+  SPLIT: { el: Split },
+  COMBINE: { el: Combine },
+  DUPLICATE: { el: Duplicate }
 };
 
 export default OPERATIONS;

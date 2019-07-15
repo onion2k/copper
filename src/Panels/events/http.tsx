@@ -62,7 +62,7 @@ export default function Http({
       type: "recalculate",
       msg: "string",
       id: id,
-      value: output
+      value: [output]
     });
   }, [output]);
 
@@ -87,9 +87,9 @@ export default function Http({
       key={id}
       id={id}
       direction={"out"}
-      index={null}
+      index={0}
       value={output}
-      type="string"
+      type="array"
     />
   ];
 

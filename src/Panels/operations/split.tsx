@@ -1,18 +1,21 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iValue {
+interface iSplit {
   id: string;
   title?: string;
   x: number;
   y: number;
 }
 
-export default function Value({ id, title, x, y }: iValue) {
+export default function Split({ id, title, x, y }: iSplit) {
   const { dispatch } = useContext(DispatchContext);
+  const [prevMousePos, setPrevMousePos] = useState([0, 0]);
+  const [value, setValue] = useState([0, 0]);
+
   const input = useRef([0]);
 
   useEffect(() => {
@@ -24,11 +27,13 @@ export default function Value({ id, title, x, y }: iValue) {
   }, []);
 
   useEffect(() => {
+    const tempValue: any = input.current[0];
+    setValue(tempValue);
     dispatch({
       type: "recalculate",
-      msg: "value",
+      msg: "mouse",
       id: id,
-      value: [input.current[0]]
+      value: [tempValue[0], tempValue[1]]
     });
   }, [input.current[0]]);
 
@@ -39,22 +44,31 @@ export default function Value({ id, title, x, y }: iValue) {
       direction={"in"}
       index={0}
       value={input.current[0]}
-      type="any"
+      title={"A"}
+      type="array"
     />
   ];
 
   const outputs = [
     <Output
-      key={id}
+      key={`output-${id}-0`}
       id={id}
       direction={"out"}
       index={0}
-      value={input.current[0]}
-      type="any"
+      value={value[0]}
+      type="float"
+    />,
+    <Output
+      key={`output-${id}-1`}
+      id={id}
+      direction={"out"}
+      index={1}
+      value={value[1]}
+      type="float"
     />
   ];
 
-  const controls = <div className="template-output">{input.current[0]}</div>;
+  const controls = null;
 
   return (
     <Panel
@@ -62,10 +76,11 @@ export default function Value({ id, title, x, y }: iValue) {
       id={id}
       x={x}
       y={y}
-      title={title || "Value"}
+      title={title || "Split vec2"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}
+      nopadding
     />
   );
 }

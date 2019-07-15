@@ -4,80 +4,70 @@ import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iString {
+interface iSplit {
   id: string;
   title?: string;
   x: number;
   y: number;
-  value?: string;
 }
 
-export default function Template({ id, title, x, y, value }: iString) {
+export default function Duplicate({ id, title, x, y }: iSplit) {
   const { dispatch } = useContext(DispatchContext);
-  const input = useRef([""]);
+  const [value, setValue] = useState([0, 0]);
 
-  const [_value, setValue] = useState(value);
-  const [output, setOutput] = useState(_value);
+  const input = useRef([0]);
 
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
-      inputs: input.current,
-      output: _value
+      inputs: input.current
     });
   }, []);
 
   useEffect(() => {
+    const tempValue: any = input.current[0];
+    setValue([tempValue, tempValue]);
     dispatch({
       type: "recalculate",
-      msg: "string",
+      msg: "dupe",
       id: id,
-      value: output
+      value: [tempValue, tempValue]
     });
-  }, [output]);
-
-  useEffect(() => {
-    setOutput(input.current[0] + "\n" + _value);
   }, [input.current[0]]);
 
   const inputs = [
     <Input
-      key={`input-${id}-0`}
       id={id}
+      key={`input-${id}-0`}
       direction={"in"}
       index={0}
       value={input.current[0]}
-      title={"Uniforms"}
-      type="array"
+      title={"A"}
+      type="float"
     />
   ];
 
   const outputs = [
     <Output
-      key={id}
+      key={`output-${id}-0`}
       id={id}
       direction={"out"}
-      index={null}
-      value={output}
-      type="string"
+      index={0}
+      value={value[0]}
+      type="float"
+    />,
+    <Output
+      key={`output-${id}-1`}
+      id={id}
+      direction={"out"}
+      index={1}
+      value={value[1]}
+      type="float"
     />
   ];
 
-  const controls = (
-    <textarea
-      name={"text"}
-      onChange={e => {
-        setValue(e.target.value);
-        setOutput(input.current[0] + "\n" + _value);
-      }}
-      defaultValue={_value}
-      autoComplete="off"
-      autoCorrect="off"
-      autoCapitalize="off"
-      spellCheck={false}
-    />
-  );
+  const controls = null;
 
   return (
     <Panel
@@ -85,7 +75,7 @@ export default function Template({ id, title, x, y, value }: iString) {
       id={id}
       x={x}
       y={y}
-      title={title || `Template`}
+      title={title || "Dupe float"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}

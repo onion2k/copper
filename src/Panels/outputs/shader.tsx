@@ -5,16 +5,27 @@ import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 
+import { zipObject } from "lodash";
+
 interface iShader {
   id: string;
   title?: string;
   x: number;
   y: number;
   inputs?: Array<any>;
+  uniforms?: Array<string>;
   defaults?: React.MutableRefObject<Array<any>>;
 }
 
-export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
+export default function Shader({
+  id,
+  title,
+  x,
+  y,
+  inputs,
+  uniforms,
+  defaults
+}: iShader) {
   const { dispatch } = useContext(DispatchContext);
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
@@ -55,6 +66,35 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
       }
     }
   }, [canvasRef, input.current[0], input.current[1]]);
+
+  useAnimationFrame(() => {
+    if (gl !== null && programInfo !== null && bufferInfo !== null) {
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+      let uniformsObj: { [s: string]: any } = {
+        u_resolution: [gl.canvas.width, gl.canvas.height]
+      };
+
+      // TODO: Investigate if this is a bottleneck
+
+      if (uniforms) {
+        uniformsObj = Object.assign(
+          uniformsObj,
+          zipObject(uniforms, input.current.slice(2))
+        );
+      } else {
+        uniformsObj = Object.assign(uniformsObj, {
+          u_time: input.current[2]
+        });
+      }
+
+      gl.useProgram(programInfo.program);
+
+      twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
+      twgl.setUniforms(programInfo, uniformsObj);
+      twgl.drawBufferInfo(gl, bufferInfo);
+    }
+  });
 
   if (!inputs) {
     inputs = [
@@ -99,24 +139,6 @@ export default function Shader({ id, title, x, y, inputs, defaults }: iShader) {
       height={canvasY}
     />
   ];
-
-  useAnimationFrame(() => {
-    if (gl !== null && programInfo !== null && bufferInfo !== null) {
-      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-
-      var uniforms = {
-        u_time: input.current[2],
-        u_color: input.current[3],
-        u_resolution: [gl.canvas.width, gl.canvas.height]
-      };
-
-      gl.useProgram(programInfo.program);
-
-      twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
-      twgl.setUniforms(programInfo, uniforms);
-      twgl.drawBufferInfo(gl, bufferInfo);
-    }
-  });
 
   return (
     <Panel

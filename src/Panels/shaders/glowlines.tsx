@@ -64,7 +64,7 @@ export default function Shader_Tunnel({ id, title, x, y }: iShader) {
       index={3}
       value={input.current[3]}
       title={"u_color"}
-      type={"vec3"}
+      type={"array"}
     />
   ];
 

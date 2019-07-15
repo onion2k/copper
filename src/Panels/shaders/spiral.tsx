@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Input } from "../../Components/input";
 import Shader from "../outputs/shader";
 
 interface iSin {
@@ -48,6 +49,18 @@ void main() {
 export default function Shader_Spiral({ id, title, x, y }: iSin) {
   const input = useRef([vs, fs, 0]);
 
+  const inputs = [
+    <Input
+      key={`input-${id}-2`}
+      id={id}
+      direction={"in"}
+      index={2}
+      value={input.current[2]}
+      title={"u_time"}
+      type="float"
+    />
+  ];
+
   return (
     <Shader
       key={id}
@@ -56,6 +69,7 @@ export default function Shader_Spiral({ id, title, x, y }: iSin) {
       y={y}
       title={"Spiral Shader"}
       defaults={input}
+      inputs={inputs}
     />
   );
 }

@@ -6,19 +6,19 @@ import { Output } from "../../Components/output";
 
 import { pick } from "lodash";
 
-interface iArithmatic {
+interface iJson {
   id: string;
   title?: string;
   x: number;
   y: number;
 }
 
-export default function Arithmatic({ id, title, x, y }: iArithmatic) {
+export default function JSON({ id, title, x, y }: iJson) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState({});
-  const [output, setOutput] = useState({});
-  const [picks, setPicks] = useState([]);
-  const input = useRef([]);
+  const [output, setOutput] = useState<{ [s: string]: any }>({});
+  const [picks, setPicks] = useState<Array<string>>([]);
+  const input = useRef([{}]);
 
   const newpickRef = useRef<HTMLInputElement>(null);
 
@@ -31,32 +31,56 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
   }, []);
 
   useEffect(() => {
-    const tempData: { [s: string]: string } = pick(input.current[0], picks);
-    const out: { [s: string]: string } = {};
-    picks.map((p: string) => {
-      out[p] = tempData[p] || "not found";
-    });
+    let out: { [s: string]: string } = {};
+
+    if (picks.length > 0) {
+      const tempData: { [s: string]: string } = pick(input.current[0], picks);
+      picks.map((p: string) => {
+        out[p] = tempData[p] || "Not found";
+      });
+    } else {
+      out = input.current[0];
+    }
     setOutput(out);
 
     dispatch({
       type: "recalculate",
-      msg: "uniforms",
+      msg: "json",
       id: id,
-      value: out
+      value: [out]
     });
   }, [input.current[0]]);
 
-  const updatePick = (id: string, i: number) => {
+  const updatePick = (pickid: string, i: number) => {
+    if (picks.indexOf(pickid) > -1) return;
     const tempPicks: any = [...picks];
-    tempPicks[i] = id;
+    if (!pickid) {
+      tempPicks.splice(i, 1);
+    } else {
+      tempPicks[i] = pickid;
+    }
+
     setPicks(tempPicks);
 
-    const tempData: { [s: string]: string } = pick(input.current[0], tempPicks);
-    const out: { [s: string]: string } = {};
-    tempPicks.map((p: string) => {
-      out[p] = tempData[p] || `test-${p}`;
-    });
+    let out: { [s: string]: string } = {};
+
+    if (tempPicks.length > 0) {
+      const tempData: { [s: string]: string } = pick(input.current[0], picks);
+      tempPicks.map((p: string) => {
+        out[p] = tempData[p] || "Test:" + p;
+      });
+    } else {
+      out = input.current[0];
+    }
+
     setOutput(out);
+
+    dispatch({
+      type: "recalculate",
+      msg: "json",
+      id: id,
+      value: [out]
+    });
   };
 
   const inputs = [
@@ -76,7 +100,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
       id={id}
       key={`output-${id}-0`}
       direction={"out"}
-      index={null}
+      index={0}
       value={output}
       type="array"
     />
@@ -86,12 +110,20 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
     <>
       {picks.map((value, i) => {
         return (
-          <div className={"uniforms"} key={`uniform-${i}`}>
+          <div className={"uniforms"} key={`uniform-${picks[i]}`}>
             <input
               type="text"
               name="pick"
               defaultValue={value}
-              onChange={e => updatePick(e.target.value, i)}
+              onInput={e => {
+                if (
+                  newpickRef &&
+                  newpickRef.current &&
+                  newpickRef.current.value
+                ) {
+                  updatePick(newpickRef.current.value, i);
+                }
+              }}
             />
             <input type="text" name="pick" value={output[picks[i]]} disabled />
           </div>
@@ -116,7 +148,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
             }
           }}
         />
-        <input type="text" name="pick" defaultValue={"data"} disabled />
+        <input type="text" name="pick" defaultValue={""} disabled />
       </div>
     </>
   );
@@ -127,7 +159,7 @@ export default function Arithmatic({ id, title, x, y }: iArithmatic) {
       id={id}
       x={x}
       y={y}
-      title={"Uniforms"}
+      title={"JSON"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}
