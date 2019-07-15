@@ -79,6 +79,7 @@ export default function Shader_Color({ id, title, x, y }: iSin) {
       type="array"
     />
   ];
+
   return (
     <Shader
       key={id}
