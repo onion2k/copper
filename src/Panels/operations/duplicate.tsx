@@ -11,10 +11,11 @@ interface iSplit {
   y: number;
 }
 
-export default function Combine({ id, title, x, y }: iSplit) {
+export default function Duplicate({ id, title, x, y }: iSplit) {
   const { dispatch } = useContext(DispatchContext);
-  const [value, setValue] = useState<any>([]);
-  const input = useRef([0, 0]);
+  const [value, setValue] = useState([0, 0]);
+
+  const input = useRef([0]);
 
   useEffect(() => {
     dispatch({
@@ -25,15 +26,15 @@ export default function Combine({ id, title, x, y }: iSplit) {
   }, []);
 
   useEffect(() => {
-    const tempValue = [input.current[0], input.current[1]];
-    setValue(tempValue);
+    const tempValue: any = input.current[0];
+    setValue([tempValue, tempValue]);
     dispatch({
       type: "recalculate",
-      msg: "combine",
+      msg: "dupe",
       id: id,
-      value: [tempValue]
+      value: [tempValue, tempValue]
     });
-  }, [input.current[0], input.current[1]]);
+  }, [input.current[0]]);
 
   const inputs = [
     <Input
@@ -43,16 +44,7 @@ export default function Combine({ id, title, x, y }: iSplit) {
       index={0}
       value={input.current[0]}
       title={"A"}
-      type="any"
-    />,
-    <Input
-      id={id}
-      key={`input-${id}-1`}
-      direction={"in"}
-      index={1}
-      value={input.current[1]}
-      title={"B"}
-      type="any"
+      type="float"
     />
   ];
 
@@ -62,8 +54,16 @@ export default function Combine({ id, title, x, y }: iSplit) {
       id={id}
       direction={"out"}
       index={0}
-      value={value}
-      type="array"
+      value={value[0]}
+      type="float"
+    />,
+    <Output
+      key={`output-${id}-1`}
+      id={id}
+      direction={"out"}
+      index={1}
+      value={value[1]}
+      type="float"
     />
   ];
 
@@ -75,10 +75,11 @@ export default function Combine({ id, title, x, y }: iSplit) {
       id={id}
       x={x}
       y={y}
-      title={title || "Combine Vec2"}
+      title={title || "Dupe float"}
       inputs={inputs}
       outputs={outputs}
       controls={controls}
+      nopadding
     />
   );
 }

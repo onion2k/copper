@@ -11,7 +11,7 @@ interface iSplit {
   y: number;
 }
 
-export default function Event_MousePosition({ id, title, x, y }: iSplit) {
+export default function Split({ id, title, x, y }: iSplit) {
   const { dispatch } = useContext(DispatchContext);
   const [prevMousePos, setPrevMousePos] = useState([0, 0]);
   const [value, setValue] = useState([0, 0]);
@@ -45,7 +45,7 @@ export default function Event_MousePosition({ id, title, x, y }: iSplit) {
       index={0}
       value={input.current[0]}
       title={"A"}
-      type="any"
+      type="array"
     />
   ];
 

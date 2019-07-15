@@ -5,13 +5,15 @@ const Json = React.lazy(() => import("./json"));
 const Trig = React.lazy(() => import("./trig"));
 const Split = React.lazy(() => import("./split"));
 const Combine = React.lazy(() => import("./combine"));
+const Duplicate = React.lazy(() => import("./duplicate"));
 
 const OPERATIONS: { [s: string]: any } = {
   ARITHMATIC: { el: Arithmatic, defaults: { op: "multiply" } },
   JSON: { el: Json },
   TRIG: { el: Trig, defaults: { op: "sin" } },
   SPLIT: { el: Split },
-  COMBINE: { el: Combine }
+  COMBINE: { el: Combine },
+  DUPLICATE: { el: Duplicate }
 };
 
 export default OPERATIONS;

@@ -67,6 +67,11 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
                 Combine Vec2
               </button>
             </li>
+            <li>
+              <button onClick={e => addPanelCallback(e, "DUPLICATE")}>
+                Duplicate
+              </button>
+            </li>
           </ul>
         </li>
         <li>

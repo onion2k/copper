@@ -12,7 +12,7 @@ interface iSin {
   op: string;
 }
 
-export default function Sin({ id, title, x, y, op }: iSin) {
+export default function Trig({ id, title, x, y, op }: iSin) {
   const { dispatch } = useContext(DispatchContext);
   const [_op, setOp] = useState(op);
 
