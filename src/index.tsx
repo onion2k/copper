@@ -38,17 +38,34 @@ const initPanels: {
 }[] = [
   {
     id: "hn",
-    type: "MOUSE",
+    type: "TIME",
     x: 2600,
     y: 2700
   },
-  { id: "x", type: "SPLIT", x: 3100, y: 2700 }
+  { id: "x", type: "DUPLICATE", x: 3100, y: 2700 }
 ];
 
-// const initConnectors: {
-//   from: string;
-//   to: string;
-// }[] = [{ from: "hn", to: "uniforms" }];
+const initConnectors: {
+  from: string;
+  from_index: number;
+  to: string;
+  to_index: number;
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+}[] = [
+  {
+    from: "hn",
+    from_index: 0,
+    to: "x",
+    to_index: 0,
+    x1: 200,
+    y1: 200,
+    x2: 400,
+    y2: 400
+  }
+];
 
 function App() {
   const { x: mouseX, y: mouseY } = useMousePosition();
@@ -73,15 +90,15 @@ function App() {
       }
       setDelta({ x: deltaX, y: deltaY });
     }
-  }, [dragging, mouseX, mouseY, initPos, center, delta, pos]);
+  }, [dragging, mouseX, mouseY, initPos, center, delta, pos, state]);
 
   const addPanel = useCallback(
-    (type: string, x?: number, y?: number, value?: any) => {
+    (type: string, id?: string, x?: number, y?: number, value?: any) => {
       const newX = x || 2500 - pos.x + 200; // 200 should be screen.x / 2
       const newY = y || 2500 - pos.y + 200; // 200 should be screen.y / 2
       dispatch({
         type: "panel/add",
-        id: uniqueID(),
+        id: id || uniqueID(),
         panelType: type,
         title: type.charAt(0).toUpperCase() + type.slice(1),
         x: x || newX,
@@ -92,18 +109,47 @@ function App() {
     [dispatch, pos]
   );
 
-  // const addConnector = (from: string, to: string) => {
-  //   dispatch({
-  //     type: "node/connect",
-  //     from,
-  //     to
-  //   });
-  // };
+  const addConnector = (
+    from: string,
+    from_index: number,
+    to: string,
+    to_index: number,
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number
+  ) => {
+    dispatch({
+      type: "node/quickConnect",
+      from,
+      from_index,
+      to,
+      to_index,
+      x1,
+      y1,
+      x2,
+      y2
+    });
+  };
 
   useEffect(() => {
     if (initPanels.length > 0) {
       initPanels.forEach(p => {
-        addPanel(p.type, p.x, p.y, p.value);
+        addPanel(p.type, p.id, p.x, p.y, p.value);
+      });
+    }
+    if (initConnectors.length > 0) {
+      initConnectors.forEach(c => {
+        addConnector(
+          c.from,
+          c.from_index,
+          c.to,
+          c.to_index,
+          c.x1,
+          c.y1,
+          c.x2,
+          c.y1
+        );
       });
     }
     // eslint-disable-next-line

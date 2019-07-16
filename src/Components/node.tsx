@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
@@ -28,6 +28,34 @@ export function Node({ id, direction, index, type }: iNode) {
   const { dispatch } = useContext(DispatchContext);
   const [, , posx, posy] = useContext(MouseContext);
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (ref !== null && ref.current !== null) {
+      setTimeout(() => {
+        if (ref !== null && ref.current !== null) {
+          const {
+            x,
+            y,
+            width,
+            height
+          } = ref.current.getBoundingClientRect() as DOMRect;
+          if (width) {
+            dispatch({
+              type: "node/register",
+              payload: {
+                id,
+                x: x + width / 2 + 2500,
+                y: y + height / 2 + 2500,
+                direction,
+                index,
+                type
+              }
+            });
+          }
+        }
+      }, 0);
+    }
+  }, [dispatch, id, ref, direction, index, type]);
 
   const connect = (e: React.MouseEvent) => {
     e.stopPropagation();
