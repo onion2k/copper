@@ -9,8 +9,7 @@ import { Output } from "../../Components/output";
 import { pick } from "lodash";
 
 export default function JSON({ id, title, x, y }: iPanel) {
-  const { dispatch, state } = useContext(DispatchContext);
-  const [value, setValue] = useState({});
+  const { dispatch } = useContext(DispatchContext);
   const [output, setOutput] = useState<{ [s: string]: any }>({});
   const [picks, setPicks] = useState<Array<string>>([]);
   const input = useRef([{}]);
@@ -23,14 +22,14 @@ export default function JSON({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     let out: { [s: string]: string } = {};
 
     if (picks.length > 0) {
       const tempData: { [s: string]: string } = pick(input.current[0], picks);
-      picks.map((p: string) => {
+      picks.forEach((p: string) => {
         out[p] = tempData[p] || "Not found";
       });
     } else {
@@ -61,7 +60,7 @@ export default function JSON({ id, title, x, y }: iPanel) {
 
     if (tempPicks.length > 0) {
       const tempData: { [s: string]: string } = pick(input.current[0], picks);
-      tempPicks.map((p: string) => {
+      tempPicks.forEach((p: string) => {
         out[p] = tempData[p] || "Test:" + p;
       });
     } else {

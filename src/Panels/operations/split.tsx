@@ -8,7 +8,6 @@ import { Output } from "../../Components/output";
 
 export default function Split({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
-  const [prevMousePos, setPrevMousePos] = useState([0, 0]);
   const [value, setValue] = useState([0, 0]);
 
   const input = useRef([0]);
@@ -19,7 +18,7 @@ export default function Split({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     const tempValue: any = input.current[0];

@@ -34,7 +34,7 @@ export default function Http({
   const input = useRef([""]);
 
   const [_url, setUrl] = useState(url);
-  const [_value, setValue] = useState("");
+  const [_value] = useState("");
   const [output, setOutput] = useState<string | object>({});
 
   const test = (e: any) => {
@@ -53,7 +53,7 @@ export default function Http({
       inputs: input.current,
       output: _value
     });
-  }, []);
+  }, [dispatch, id, _value]);
 
   useEffect(() => {
     dispatch({
@@ -62,11 +62,11 @@ export default function Http({
       id: id,
       value: [output]
     });
-  }, [output]);
+  }, [dispatch, id, output]);
 
   useEffect(() => {
     setOutput(_value);
-  }, [input.current[0]]);
+  }, [dispatch, _value, input.current[0]]);
 
   const inputs = [
     <Input

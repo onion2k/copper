@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useContext } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
 

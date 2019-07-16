@@ -23,7 +23,7 @@ export default function Event_MousePosition({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (canvasRef !== null && canvasRef.current !== null) {

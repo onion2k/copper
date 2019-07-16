@@ -1,23 +1,7 @@
-import React, {
-  Suspense,
-  useState,
-  useReducer,
-  useRef,
-  useEffect
-} from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { render } from "react-dom";
 
 import "./icons";
-
-const initialState = {
-  canvas: [],
-  panels: [],
-  inputs: {},
-  outputs: {},
-  connections: {},
-  connectionLines: [],
-  nodes: []
-};
 
 import { reducer } from "./reducer";
 
@@ -33,6 +17,16 @@ import { ConnectorMap } from "./Components/connectorMap";
 import { uniqueID } from "./uniqueID";
 
 import "./styles.css";
+
+const initialState = {
+  canvas: [],
+  panels: [],
+  inputs: {},
+  outputs: {},
+  connections: {},
+  connectionLines: [],
+  nodes: []
+};
 
 const initPanels: {
   id: string;
@@ -51,10 +45,10 @@ const initPanels: {
   { id: "x", type: "SPLIT", x: 31, y: 27 }
 ];
 
-const initConnectors: {
-  from: string;
-  to: string;
-}[] = [{ from: "hn", to: "uniforms" }];
+// const initConnectors: {
+//   from: string;
+//   to: string;
+// }[] = [{ from: "hn", to: "uniforms" }];
 
 function App() {
   const { x: mouseX, y: mouseY } = useMousePosition();
@@ -64,7 +58,7 @@ function App() {
 
   const [initPos, setInitPos] = useState({ x: 0, y: 0 });
   const [delta, setDelta] = useState({ x: 0, y: 0 });
-  const [center, setCenter] = useState({ x: 2500, y: 2500 });
+  const [center] = useState({ x: 2500, y: 2500 });
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -79,7 +73,7 @@ function App() {
       }
       setDelta({ x: deltaX, y: deltaY });
     }
-  }, [dragging, mouseX, mouseY]);
+  }, [dragging, mouseX, mouseY, initPos, center, delta, pos]);
 
   const addPanel = (type: string, x?: number, y?: number, value?: any) => {
     dispatch({
@@ -93,17 +87,17 @@ function App() {
     });
   };
 
-  const addConnector = (from: string, to: string) => {
-    dispatch({
-      type: "node/connect",
-      from,
-      to
-    });
-  };
+  // const addConnector = (from: string, to: string) => {
+  //   dispatch({
+  //     type: "node/connect",
+  //     from,
+  //     to
+  //   });
+  // };
 
   useEffect(() => {
     if (initPanels.length > 0) {
-      initPanels.map(p => {
+      initPanels.forEach(p => {
         addPanel(p.type, p.x, p.y, p.value);
       });
     }

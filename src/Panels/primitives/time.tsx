@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import iPanel from "../../Interfaces/panel";
 
 import useAnimationFrame from "../../Hooks/useAnimationFrame";
@@ -22,7 +22,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       id: id,
       inputs: []
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch({

@@ -17,7 +17,7 @@ export default function Combine({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     const tempValue = [input.current[0], input.current[1]];

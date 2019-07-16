@@ -16,7 +16,7 @@ export default function Value({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch({

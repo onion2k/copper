@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useRef, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
 
 import {
-  IconLookup,
   IconDefinition,
   findIconDefinition
 } from "@fortawesome/fontawesome-svg-core";
@@ -27,7 +26,7 @@ interface iNode {
 
 export function Node({ id, direction, index, type }: iNode) {
   const { dispatch } = useContext(DispatchContext);
-  const [mx, my, posx, posy] = useContext(MouseContext);
+  const [, , posx, posy] = useContext(MouseContext);
   const ref = useRef<HTMLDivElement>(null);
 
   const connect = (e: React.MouseEvent) => {

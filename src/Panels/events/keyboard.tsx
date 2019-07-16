@@ -8,7 +8,7 @@ import { Output } from "../../Components/output";
 import { has } from "lodash";
 
 export default function Keyboard({ id, title, x, y }: iPanel) {
-  const { dispatch, state } = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
   const [keys, setKeys] = useState<Array<string>>([]);
   const [output, setOutput] = useState<{ [s: string]: boolean }>({});
   const input = useRef([]);
@@ -37,7 +37,7 @@ export default function Keyboard({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch({

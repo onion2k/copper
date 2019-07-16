@@ -18,7 +18,7 @@ export default function Duplicate({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     const tempValue: any = input.current[0];

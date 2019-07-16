@@ -28,7 +28,7 @@ export default function Shader({
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
   const [programInfo, setProgramInfo] = useState<twgl.ProgramInfo | null>(null);
-  const [arrays, setArrays] = useState({
+  const [arrays] = useState({
     position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0]
   });
   const [bufferInfo, setBufferInfo] = useState<twgl.BufferInfo | null>(null);
@@ -37,7 +37,7 @@ export default function Shader({
   const canvasX = 700;
   const canvasY = 500;
 
-  const input = defaults ? defaults : useRef(["", "", 0]);
+  const input = useRef(["", "", 0]);
 
   useEffect(() => {
     dispatch({
@@ -45,7 +45,7 @@ export default function Shader({
       id: id,
       inputs: input.current
     });
-  }, [canvasRef]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (input.current[0] !== "" && input.current[1] !== "") {
@@ -63,7 +63,7 @@ export default function Shader({
         }
       }
     }
-  }, [canvasRef, input.current[0], input.current[1]]);
+  }, [canvasRef, input.current[0], input.current[1], arrays]);
 
   useAnimationFrame(() => {
     if (gl !== null && programInfo !== null && bufferInfo !== null) {

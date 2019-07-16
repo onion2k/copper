@@ -16,7 +16,7 @@ const useAnimationFrame = (callback: () => any) => {
   useLayoutEffect(() => {
     frameRef.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameRef.current);
-  }, []);
+  }, [loop]);
 };
 
 export default useAnimationFrame;

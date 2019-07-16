@@ -3,11 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DispatchContext } from "../Contexts/dispatch";
 import { MouseContext } from "../Contexts/mouse";
 
-import {
-  IconLookup,
-  IconDefinition,
-  findIconDefinition
-} from "@fortawesome/fontawesome-svg-core";
+import { findIconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 const closeIcon = findIconDefinition({ prefix: "fas", iconName: "times" });
 
@@ -53,7 +49,7 @@ export function Panel({
       const deltaY = mouseY - initPos.y;
       setDelta({ x: deltaX, y: deltaY });
     }
-  }, [dragging, mouseX, mouseY]);
+  }, [dragging, mouseX, mouseY, initPos.x, initPos.y]);
 
   const close = () => {
     dispatch({

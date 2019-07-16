@@ -1,4 +1,5 @@
 import React from "react";
+
 import { PRIMITIVES_KEYS } from "../Panels/primitives";
 import { OPERATIONS_KEYS } from "../Panels/operations";
 import { EVENTS_KEYS } from "../Panels/events";

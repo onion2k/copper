@@ -12,14 +12,14 @@ interface iTemplate extends iPanel {
   value?: string;
 }
 
-function interpolate(literals: any, ...expressions: any) {
-  let string = ``;
-  for (const [i, val] of expressions.entries()) {
-    string += literals[i] + val;
-  }
-  string += literals[literals.length - 1];
-  return string;
-}
+// function interpolate(literals: any, ...expressions: any) {
+//   let string = ``;
+//   for (const [i, val] of expressions.entries()) {
+//     string += literals[i] + val;
+//   }
+//   string += literals[literals.length - 1];
+//   return string;
+// }
 
 export default function Template({ id, title, x, y, value }: iTemplate) {
   const { dispatch } = useContext(DispatchContext);
@@ -37,7 +37,7 @@ export default function Template({ id, title, x, y, value }: iTemplate) {
       inputs: input.current,
       output: _value
     });
-  }, []);
+  }, [dispatch, id, _value]);
 
   useEffect(() => {
     let c;

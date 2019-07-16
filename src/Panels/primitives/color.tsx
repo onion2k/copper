@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import iPanel from "../../Interfaces/panel";
 
 import { DispatchContext } from "../../Contexts/dispatch";
@@ -19,7 +19,7 @@ export default function Color({ id, title, x, y }: iPanel) {
       id: id,
       inputs: []
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     setColor(

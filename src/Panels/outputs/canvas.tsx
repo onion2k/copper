@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import iPanel from "../../Interfaces/panel";
 
-import useAnimationFrame from "../../Hooks/useAnimationFrame";
+// import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
@@ -21,7 +21,7 @@ export default function Shader({ id, title, x, y }: iPanel) {
       id: id,
       inputs: input.current
     });
-  }, [canvasRef]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     // Draw something

@@ -23,7 +23,7 @@ export default function String({ id, title, x, y, value }: iString) {
       inputs: input.current,
       output: output
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     const tempOutput = input.current[0]

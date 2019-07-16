@@ -17,7 +17,7 @@ const panelTypes: { [s: string]: any } = Object.assign(
 
 const cellSize = 100;
 
-export function Diagram({}) {
+export function Diagram() {
   const { state } = useContext(DispatchContext);
 
   const panelsEl = state.canvas.map((p: any) => {

@@ -22,7 +22,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (state.inputs[id]) {

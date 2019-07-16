@@ -29,7 +29,7 @@ export default function Trig({ id, title, x, y, op }: iSin) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     switch (_op) {
