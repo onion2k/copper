@@ -38,6 +38,7 @@ export default function Shader({
   const canvasY = 500;
 
   const input = useRef(["", "", 0]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -63,7 +64,7 @@ export default function Shader({
         }
       }
     }
-  }, [canvasRef, input.current[0], input.current[1], arrays]);
+  }, [canvasRef, input0, input1, arrays]);
 
   useAnimationFrame(() => {
     if (gl !== null && programInfo !== null && bufferInfo !== null) {

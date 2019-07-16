@@ -32,6 +32,7 @@ export default function Http({
 }: iHttp) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef([""]);
+  const [input0] = input.current;
 
   const [_url, setUrl] = useState(url);
   const [_value] = useState("");
@@ -66,7 +67,7 @@ export default function Http({
 
   useEffect(() => {
     setOutput(_value);
-  }, [dispatch, _value, input.current[0]]);
+  }, [dispatch, _value, input0]);
 
   const inputs = [
     <Input

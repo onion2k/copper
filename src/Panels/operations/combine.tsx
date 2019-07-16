@@ -10,6 +10,7 @@ export default function Combine({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
   const [value, setValue] = useState<any>([]);
   const input = useRef([0, 0]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -28,7 +29,7 @@ export default function Combine({ id, title, x, y }: iPanel) {
       id: id,
       value: [tempValue]
     });
-  }, [dispatch, id, input.current[0], input.current[1]]);
+  }, [dispatch, id, input0, input1]);
 
   const inputs = [
     <Input

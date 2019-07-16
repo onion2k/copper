@@ -14,7 +14,9 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
   const { dispatch } = useContext(DispatchContext);
   const [value, setValue] = useState<number | undefined>(0);
   const [_op, setOp] = useState(op);
+
   const input = useRef([0, 0]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -53,7 +55,7 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       value: [tempValue]
     });
     // }
-  }, [dispatch, id, input.current[0], input.current[1], _op]);
+  }, [dispatch, id, input0, input1, _op]);
 
   const inputs = [
     <Input

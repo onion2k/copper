@@ -13,6 +13,7 @@ export default function JSON({ id, title, x, y }: iPanel) {
   const [output, setOutput] = useState<{ [s: string]: any }>({});
   const [picks, setPicks] = useState<Array<string>>([]);
   const input = useRef([{}]);
+  const [input0] = input.current;
 
   const newpickRef = useRef<HTMLInputElement>(null);
 
@@ -43,7 +44,7 @@ export default function JSON({ id, title, x, y }: iPanel) {
       id: id,
       value: [out]
     });
-  }, [dispatch, id, picks, input.current[0]]);
+  }, [dispatch, id, picks, input0]);
 
   const updatePick = (pickid: string, i: number) => {
     if (picks.indexOf(pickid) > -1) return;

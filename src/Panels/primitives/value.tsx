@@ -9,6 +9,7 @@ import { Output } from "../../Components/output";
 export default function Value({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef([0]);
+  const [input0] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -25,7 +26,7 @@ export default function Value({ id, title, x, y }: iPanel) {
       id: id,
       value: [input.current[0]]
     });
-  }, [dispatch, id, input.current[0]]);
+  }, [dispatch, id, input0]);
 
   const inputs = [
     <Input

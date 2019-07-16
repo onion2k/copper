@@ -11,6 +11,7 @@ export default function Split({ id, title, x, y }: iPanel) {
   const [value, setValue] = useState([0, 0]);
 
   const input = useRef([0]);
+  const [input0] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -29,7 +30,7 @@ export default function Split({ id, title, x, y }: iPanel) {
       id: id,
       value: [tempValue[0], tempValue[1]]
     });
-  }, [dispatch, id, input.current[0]]);
+  }, [dispatch, id, input0]);
 
   const inputs = [
     <Input

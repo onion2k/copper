@@ -23,12 +23,14 @@ interface iTemplate extends iPanel {
 
 export default function Template({ id, title, x, y, value }: iTemplate) {
   const { dispatch } = useContext(DispatchContext);
-  const input = useRef(["", {}]);
 
   const [_value, setValue] = useState<string>(value || "");
   const [output, setOutput] = useState<string>(_value);
   const [error, setError] = useState<string | null>(null);
   let compiled = useRef<Function>(() => {});
+
+  const input = useRef(["", {}]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -59,7 +61,7 @@ export default function Template({ id, title, x, y, value }: iTemplate) {
       id: id,
       value: [c]
     });
-  }, [dispatch, id, compiled, input.current[1]]);
+  }, [dispatch, id, compiled, input1]);
 
   useEffect(() => {
     compiled.current = input.current[0]
@@ -74,7 +76,7 @@ export default function Template({ id, title, x, y, value }: iTemplate) {
     }
 
     setOutput(c);
-  }, [input.current[0], _value]);
+  }, [input0, _value]);
 
   const inputs = [
     <Input

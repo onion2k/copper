@@ -13,7 +13,8 @@ export default function Shader({ id, title, x, y }: iPanel) {
   const canvasX = 700;
   const canvasY = 500;
 
-  const input = useRef([]);
+  const input = useRef(["", ""]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -25,7 +26,7 @@ export default function Shader({ id, title, x, y }: iPanel) {
 
   useEffect(() => {
     // Draw something
-  }, [canvasRef, input.current[0], input.current[1]]);
+  }, [canvasRef, input0, input1]);
 
   const inputs = [
     <Input

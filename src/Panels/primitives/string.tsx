@@ -15,6 +15,7 @@ export default function String({ id, title, x, y, value }: iString) {
   const [_value, setValue] = useState(value || "");
   const [output, setOutput] = useState(value || "");
   const input = useRef([""]);
+  const [input0] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -38,7 +39,7 @@ export default function String({ id, title, x, y, value }: iString) {
       id: id,
       value: [tempOutput]
     });
-  }, [dispatch, id, input.current[0], _value]);
+  }, [dispatch, id, input0, _value]);
 
   const inputs = [
     <Input
