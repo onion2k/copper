@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iArithmatic {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iArithmatic extends iPanel {
   op: string;
 }
 

@@ -1,13 +1,8 @@
 import React, { useRef } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { Input } from "../../Components/input";
 import Shader from "../outputs/shader";
-
-interface iSin {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
 
 const fs = `precision mediump float;
 uniform float u_time;
@@ -46,7 +41,7 @@ void main() {
 }
 `;
 
-export default function Shader_Spiral({ id, title, x, y }: iSin) {
+export default function Shader_Spiral({ id, title, x, y }: iPanel) {
   const input = useRef([vs, fs, 0]);
 
   const inputs = [

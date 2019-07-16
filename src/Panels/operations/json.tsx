@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
@@ -6,14 +8,7 @@ import { Output } from "../../Components/output";
 
 import { pick } from "lodash";
 
-interface iJson {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function JSON({ id, title, x, y }: iJson) {
+export default function JSON({ id, title, x, y }: iPanel) {
   const { dispatch, state } = useContext(DispatchContext);
   const [value, setValue] = useState({});
   const [output, setOutput] = useState<{ [s: string]: any }>({});

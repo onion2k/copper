@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import * as twgl from "twgl.js";
 import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
@@ -7,11 +9,7 @@ import { Input } from "../../Components/input";
 
 import { zipObject } from "lodash";
 
-interface iShader {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iShader extends iPanel {
   inputs?: Array<any>;
   uniforms?: Array<string>;
   defaults?: React.MutableRefObject<Array<any>>;

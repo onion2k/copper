@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iSin {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iSin extends iPanel {
   op: string;
 }
 

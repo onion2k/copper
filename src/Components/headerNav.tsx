@@ -1,4 +1,8 @@
 import React from "react";
+import { PRIMITIVES_KEYS } from "../Panels/primitives";
+import { OPERATIONS_KEYS } from "../Panels/operations";
+import { EVENTS_KEYS } from "../Panels/events";
+import { OUTPUTS_KEYS } from "../Panels/outputs";
 import SHADERS from "../Panels/shaders";
 import "./headerNav.css";
 
@@ -15,99 +19,39 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
     addPanel(type);
   };
 
+  const panelList = (keys: any) => {
+    return (
+      <ul>
+        {keys.map((key: any) => {
+          return (
+            <li key={`panel-add-${key}`}>
+              <button onClick={e => addPanelCallback(e, key)}>{key}</button>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
+
   return (
     <header className="nav">
       <h1>Copper</h1>
       <ul className="addPanel">
         <li>
           Primitives
-          <ul>
-            <li>
-              <button onClick={e => addPanelCallback(e, "CONST")}>Const</button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "TIME")}>Time</button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "STRING")}>
-                String
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "COLOR")}>Color</button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "VALUE")}>Value</button>
-            </li>
-          </ul>
+          {panelList(PRIMITIVES_KEYS)}
         </li>
         <li>
           Operations
-          <ul>
-            <li>
-              <button onClick={e => addPanelCallback(e, "ARITHMATIC")}>
-                Arithmatic
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "JSON")}>Json</button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "TRIG")}>
-                Trigonometry
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "SPLIT")}>
-                Split Vec2
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "COMBINE")}>
-                Combine Vec2
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "DUPLICATE")}>
-                Duplicate
-              </button>
-            </li>
-          </ul>
+          {panelList(OPERATIONS_KEYS)}
         </li>
         <li>
           Events
-          <ul>
-            <li>
-              <button onClick={e => addPanelCallback(e, "EVENT_MousePosition")}>
-                Mouse Position
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "EVENT_Http")}>
-                Http Request
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "EVENT_Keyboard")}>
-                Keyboard
-              </button>
-            </li>
-          </ul>
+          {panelList(EVENTS_KEYS)}
         </li>
         <li>
           Outputs
-          <ul>
-            <li>
-              <button onClick={e => addPanelCallback(e, "SHADER")}>
-                GLSL Shader
-              </button>
-            </li>
-            <li>
-              <button onClick={e => addPanelCallback(e, "TEMPLATE")}>
-                Template
-              </button>
-            </li>
-          </ul>
+          {panelList(OUTPUTS_KEYS)}
         </li>
         <li>
           Shaders

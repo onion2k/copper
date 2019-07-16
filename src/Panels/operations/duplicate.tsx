@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iSplit {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Duplicate({ id, title, x, y }: iSplit) {
+export default function Duplicate({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
   const [value, setValue] = useState([0, 0]);
 

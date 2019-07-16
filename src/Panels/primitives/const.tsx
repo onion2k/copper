@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Output } from "../../Components/output";
 
-interface iConst {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Const({ id, title, x, y }: iConst) {
+export default function Const({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
   const [value, setValue] = useState(0);
 

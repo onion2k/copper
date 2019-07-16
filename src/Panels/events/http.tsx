@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
@@ -17,11 +19,7 @@ function api<T>(url: string): Promise<T> {
     });
 }
 
-interface iString {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iHttp extends iPanel {
   url?: string;
 }
 
@@ -31,7 +29,7 @@ export default function Http({
   x,
   y,
   url = "https://hacker-news.firebaseio.com/v0/user/onion2k.json"
-}: iString) {
+}: iHttp) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef([""]);
 

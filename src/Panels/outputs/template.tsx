@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
@@ -6,11 +8,7 @@ import { Output } from "../../Components/output";
 
 import { template } from "lodash";
 
-interface iString {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iTemplate extends iPanel {
   value?: string;
 }
 
@@ -23,7 +21,7 @@ function interpolate(literals: any, ...expressions: any) {
   return string;
 }
 
-export default function Template({ id, title, x, y, value }: iString) {
+export default function Template({ id, title, x, y, value }: iTemplate) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef(["", {}]);
 

@@ -1,22 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Output } from "../../Components/output";
 
-interface iEventMousePosition {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Event_MousePosition({
-  id,
-  title,
-  x,
-  y
-}: iEventMousePosition) {
+export default function Event_MousePosition({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
   const [prevMousePos, setPrevMousePos] = useState([0, 0]);
   const [mousePos, setMousePos] = useState([0, 0]);

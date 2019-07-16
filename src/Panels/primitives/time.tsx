@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Output } from "../../Components/output";
 
-interface iTime {
-  id: string;
-  title: string;
-  x: number;
-  y: number;
+interface iTime extends iPanel {
   initPauseState: boolean;
 }
 

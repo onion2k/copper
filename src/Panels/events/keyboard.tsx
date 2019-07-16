@@ -1,18 +1,13 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Output } from "../../Components/output";
 
 import { has } from "lodash";
 
-interface iJson {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Keyboard({ id, title, x, y }: iJson) {
+export default function Keyboard({ id, title, x, y }: iPanel) {
   const { dispatch, state } = useContext(DispatchContext);
   const [keys, setKeys] = useState<Array<string>>([]);
   const [output, setOutput] = useState<{ [s: string]: boolean }>({});

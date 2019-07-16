@@ -1,20 +1,12 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import * as twgl from "twgl.js";
+import iPanel from "../../Interfaces/panel";
+
 import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 
-import { zipObject } from "lodash";
-
-interface iShader {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Shader({ id, title, x, y }: iShader) {
+export default function Shader({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);

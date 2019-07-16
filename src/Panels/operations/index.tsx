@@ -16,4 +16,6 @@ const OPERATIONS: { [s: string]: any } = {
   DUPLICATE: { el: Duplicate }
 };
 
+export const OPERATIONS_KEYS = Object.keys(OPERATIONS);
+
 export default OPERATIONS;

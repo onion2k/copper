@@ -44,7 +44,7 @@ const initPanels: {
 }[] = [
   {
     id: "hn",
-    type: "EVENT_MousePosition",
+    type: "MOUSE",
     x: 26,
     y: 27
   },
