@@ -23,10 +23,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app",
-    "rules": {
-      "react-hooks/exhaustive-deps": false
-    }
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
@@ -35,6 +32,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@testing-library/react": "^8.0.5"
+    "@testing-library/react": "^8.0.5",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@types/jest": "^24.0.15"
   }
 }
