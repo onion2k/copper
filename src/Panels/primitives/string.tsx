@@ -22,7 +22,7 @@ export default function String({ id, title, x, y, value }: iString) {
       type: "panel/register",
       id: id,
       inputs: input.current,
-      output: output
+      output: [output]
     });
   }, [dispatch, id, output]);
 

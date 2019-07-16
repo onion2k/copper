@@ -31,7 +31,7 @@ export default function JSON({ id, title, x, y }: iPanel) {
     if (picks.length > 0) {
       const tempData: { [s: string]: string } = pick(input.current[0], picks);
       picks.forEach((p: string) => {
-        out[p] = tempData[p] || "Not found";
+        out[p] = tempData[p] || "Test:" + p;
       });
     } else {
       out = input.current[0];

@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useCallback } from "react";
 import { render } from "react-dom";
 
 import "./icons";
@@ -39,10 +39,10 @@ const initPanels: {
   {
     id: "hn",
     type: "MOUSE",
-    x: 26,
-    y: 27
+    x: 2600,
+    y: 2700
   },
-  { id: "x", type: "SPLIT", x: 31, y: 27 }
+  { id: "x", type: "SPLIT", x: 3100, y: 2700 }
 ];
 
 // const initConnectors: {
@@ -75,17 +75,22 @@ function App() {
     }
   }, [dragging, mouseX, mouseY, initPos, center, delta, pos]);
 
-  const addPanel = (type: string, x?: number, y?: number, value?: any) => {
-    dispatch({
-      type: "panel/add",
-      id: uniqueID(),
-      panelType: type,
-      title: type.charAt(0).toUpperCase() + type.slice(1),
-      x: x || 26,
-      y: y || 26,
-      value: value || null
-    });
-  };
+  const addPanel = useCallback(
+    (type: string, x?: number, y?: number, value?: any) => {
+      const newX = x || 2500 - pos.x + 200; // 200 should be screen.x / 2
+      const newY = y || 2500 - pos.y + 200; // 200 should be screen.y / 2
+      dispatch({
+        type: "panel/add",
+        id: uniqueID(),
+        panelType: type,
+        title: type.charAt(0).toUpperCase() + type.slice(1),
+        x: x || newX,
+        y: y || newY,
+        value: value || null
+      });
+    },
+    [dispatch, pos]
+  );
 
   // const addConnector = (from: string, to: string) => {
   //   dispatch({
@@ -101,11 +106,7 @@ function App() {
         addPanel(p.type, p.x, p.y, p.value);
       });
     }
-    // if (initConnectors.length > 0) {
-    //   initConnectors.map(c => {
-    //     addConnector(c.type, c.x, c.y);
-    //   });
-    // }
+    // eslint-disable-next-line
   }, []);
 
   let appClass = ["canvas"];

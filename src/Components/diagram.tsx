@@ -15,8 +15,6 @@ const panelTypes: { [s: string]: any } = Object.assign(
   OUTPUTS
 );
 
-const cellSize = 100;
-
 export function Diagram() {
   const { state } = useContext(DispatchContext);
 
@@ -29,8 +27,8 @@ export function Diagram() {
           id: p.id,
           key: p.id,
           title: p.title,
-          x: cellSize * p.x,
-          y: cellSize * p.y,
+          x: p.x,
+          y: p.y,
           value: p.value
         },
         panelTypes[p.type].defaults

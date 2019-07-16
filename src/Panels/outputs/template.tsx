@@ -72,7 +72,8 @@ export default function Template({ id, title, x, y, value }: iTemplate) {
     try {
       c = compiled.current(input.current[1]);
     } catch (e) {
-      console.log(_value, "failed");
+      setError(e.message);
+      setOutput("");
     }
 
     setOutput(c);
