@@ -46,7 +46,7 @@ export default function Keyboard({ id, title, x, y }: iPanel) {
       id: id,
       value: [output]
     });
-  }, [output]);
+  }, [dispatch, id, output]);
 
   const updateKeys = (keyid: string, i: number) => {
     const tempKeys: any = [...keys];

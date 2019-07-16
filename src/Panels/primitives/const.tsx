@@ -24,7 +24,7 @@ export default function Const({ id, title, x, y }: iPanel) {
       id: id,
       value: [value]
     });
-  }, [value]);
+  }, [dispatch, id, value]);
 
   const updateIo = (e: any) => {
     setValue(parseFloat(e.target.value));

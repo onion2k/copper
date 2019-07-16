@@ -59,7 +59,7 @@ export default function Template({ id, title, x, y, value }: iTemplate) {
       id: id,
       value: [c]
     });
-  }, [compiled.current, input.current[1]]);
+  }, [dispatch, id, compiled, input.current[1]]);
 
   useEffect(() => {
     compiled.current = input.current[0]

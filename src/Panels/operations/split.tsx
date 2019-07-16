@@ -29,7 +29,7 @@ export default function Split({ id, title, x, y }: iPanel) {
       id: id,
       value: [tempValue[0], tempValue[1]]
     });
-  }, [input.current[0]]);
+  }, [dispatch, id, input.current[0]]);
 
   const inputs = [
     <Input

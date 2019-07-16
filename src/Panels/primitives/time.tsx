@@ -31,7 +31,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       id: id,
       value: [value]
     });
-  }, [value]);
+  }, [dispatch, id, value]);
 
   useAnimationFrame(() => {
     if (!pause) {

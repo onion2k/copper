@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useCallback } from "react";
 
 const useAnimationFrame = (callback: () => any) => {
   const callbackRef = useRef(callback);
@@ -6,11 +6,11 @@ const useAnimationFrame = (callback: () => any) => {
     callbackRef.current = callback;
   }, [callback]);
 
-  const loop = () => {
+  const loop = useCallback(() => {
     frameRef.current = requestAnimationFrame(loop);
     const cb = callbackRef.current;
     cb();
-  };
+  }, []);
 
   const frameRef = useRef(0);
   useLayoutEffect(() => {

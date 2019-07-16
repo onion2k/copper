@@ -29,7 +29,7 @@ export default function Duplicate({ id, title, x, y }: iPanel) {
       id: id,
       value: [tempValue, tempValue]
     });
-  }, [input.current[0]]);
+  }, [dispatch, id, input.current[0]]);
 
   const inputs = [
     <Input

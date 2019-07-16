@@ -43,7 +43,7 @@ export default function JSON({ id, title, x, y }: iPanel) {
       id: id,
       value: [out]
     });
-  }, [input.current[0]]);
+  }, [dispatch, id, picks, input.current[0]]);
 
   const updatePick = (pickid: string, i: number) => {
     if (picks.indexOf(pickid) > -1) return;

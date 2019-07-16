@@ -28,7 +28,7 @@ export default function Combine({ id, title, x, y }: iPanel) {
       id: id,
       value: [tempValue]
     });
-  }, [input.current[0], input.current[1]]);
+  }, [dispatch, id, input.current[0], input.current[1]]);
 
   const inputs = [
     <Input

@@ -33,7 +33,7 @@ export default function Color({ id, title, x, y }: iPanel) {
       id: id,
       value: [(r / 255).toFixed(2), (g / 255).toFixed(2), (b / 255).toFixed(2)]
     });
-  }, [r, g, b]);
+  }, [dispatch, id, r, g, b]);
 
   const outputs = [
     <Output

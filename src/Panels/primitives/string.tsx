@@ -23,7 +23,7 @@ export default function String({ id, title, x, y, value }: iString) {
       inputs: input.current,
       output: output
     });
-  }, [dispatch, id]);
+  }, [dispatch, id, output]);
 
   useEffect(() => {
     const tempOutput = input.current[0]
@@ -38,7 +38,7 @@ export default function String({ id, title, x, y, value }: iString) {
       id: id,
       value: [tempOutput]
     });
-  }, [input.current[0], _value]);
+  }, [dispatch, id, input.current[0], _value]);
 
   const inputs = [
     <Input

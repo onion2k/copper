@@ -25,7 +25,7 @@ export default function Value({ id, title, x, y }: iPanel) {
       id: id,
       value: [input.current[0]]
     });
-  }, [input.current[0]]);
+  }, [dispatch, id, input.current[0]]);
 
   const inputs = [
     <Input
