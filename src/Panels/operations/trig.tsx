@@ -28,6 +28,7 @@ export default function Trig({ id, title, x, y, op }: iSin) {
   const canvasY = 200;
 
   const input = useRef([0]);
+  const input0 = input.current[0];
 
   const renderCanvas = useCallback(() => {
     if (canvasRef.current !== null) {
@@ -78,7 +79,7 @@ export default function Trig({ id, title, x, y, op }: iSin) {
     setPrev(tPrev);
 
     renderCanvas();
-  }, [dispatch, id, _op, value, prev, renderCanvas, input.current[0]]);
+  }, [dispatch, id, _op, value, prev, renderCanvas, input0]);
 
   const inputs = [
     <Input
