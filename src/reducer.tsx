@@ -1,5 +1,5 @@
-import panel from "./reducers/panel";
-import node from "./reducers/node";
+import panel from "./Reducers/panel";
+import node from "./Reducers/node";
 
 export function reducer(state: any, action: any) {
   const newState = { ...state };

@@ -60,10 +60,10 @@ const initConnectors: {
     from_index: 0,
     to: "x",
     to_index: 0,
-    x1: 200,
-    y1: 200,
-    x2: 400,
-    y2: 400
+    x1: 2948,
+    y1: 2761,
+    x2: 3100,
+    y2: 2761
   }
 ];
 
