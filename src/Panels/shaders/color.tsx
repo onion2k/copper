@@ -26,7 +26,7 @@ void main() {
 `;
 
 export default function Shader_Color({ id, title, x, y }: iPanel) {
-  const input = useRef([vs, fs, 0]);
+  const input = useRef([vs, fs, 0, []]);
 
   const inputs = [
     <Input

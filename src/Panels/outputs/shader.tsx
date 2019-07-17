@@ -10,9 +10,9 @@ import { Input } from "../../Components/input";
 import { zipObject } from "lodash";
 
 interface iShader extends iPanel {
+  defaults: React.MutableRefObject<Array<any>>;
   inputs?: Array<any>;
   uniforms?: Array<string>;
-  defaults?: React.MutableRefObject<Array<any>>;
 }
 
 export default function Shader({
@@ -37,7 +37,7 @@ export default function Shader({
   const canvasX = 700;
   const canvasY = 500;
 
-  const input = useRef(["", "", 0]);
+  const input = defaults;
   const [input0, input1] = input.current;
 
   useEffect(() => {
@@ -46,19 +46,16 @@ export default function Shader({
       id: id,
       inputs: input.current
     });
-  }, [dispatch, id]);
+  }, [dispatch, id, input]);
 
   useEffect(() => {
-    if (input.current[0] !== "" && input.current[1] !== "") {
+    if (input0 !== "" && input1 !== "") {
       if (canvasRef.current !== null) {
         const gl = canvasRef.current.getContext("webgl");
         if (gl !== null) {
           setGL(gl);
           setProgramInfo(
-            twgl.createProgramInfo(gl, [
-              input.current[0].toString(),
-              input.current[1].toString()
-            ])
+            twgl.createProgramInfo(gl, [input0.toString(), input1.toString()])
           );
           setBufferInfo(twgl.createBufferInfoFromArrays(gl, arrays));
         }

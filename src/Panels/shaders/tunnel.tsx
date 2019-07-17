@@ -64,6 +64,7 @@ export default function Shader_Tunnel({ id, title, x, y }: iPanel) {
       x={x}
       y={y}
       title={"Tunnel Shader"}
+      uniforms={["u_time", "u_color"]}
       inputs={inputs}
       defaults={input}
     />

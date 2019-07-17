@@ -42,7 +42,7 @@ export default function Color({ id, title, x, y }: iPanel) {
       direction={"out"}
       index={0}
       value={color}
-      type="vec3"
+      type="array"
     />
   ];
 

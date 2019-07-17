@@ -62,6 +62,7 @@ export default function Shader_Swirl({ id, title, x, y }: iPanel) {
       x={x}
       y={y}
       title={"Swirl Shader"}
+      uniforms={["u_time", "u_color"]}
       defaults={input}
       inputs={inputs}
     />

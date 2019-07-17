@@ -42,7 +42,7 @@ const initPanels: {
     x: 2600,
     y: 2700
   },
-  { id: "x", type: "DUPLICATE", x: 3100, y: 2700 }
+  { id: "x", type: "SHADER_Chevron", x: 3100, y: 2700 }
 ];
 
 const initConnectors: {
@@ -59,7 +59,7 @@ const initConnectors: {
     from: "hn",
     from_index: 0,
     to: "x",
-    to_index: 0,
+    to_index: 2,
     x1: 2948,
     y1: 2761,
     x2: 3100,

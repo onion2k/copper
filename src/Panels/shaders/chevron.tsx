@@ -55,6 +55,7 @@ export default function Shader_Chevron({ id, title, x, y }: iPanel) {
       x={x}
       y={y}
       title={"Chevron Shader"}
+      uniforms={["u_time", "u_color"]}
       inputs={inputs}
       defaults={input}
     />
