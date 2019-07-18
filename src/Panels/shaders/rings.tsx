@@ -55,6 +55,7 @@ export default function Shader_Rings({ id, title, x, y }: iPanel) {
       y={y}
       title={"Rings Shader"}
       inputs={inputs}
+      uniforms={["u_time", "u_color"]}
       defaults={input}
     />
   );
