@@ -104,6 +104,7 @@ export default function Shader_SDF({ id, title, x, y }: iPanel) {
       title={"SDF Shader"}
       defaults={input}
       inputs={inputs}
+      uniforms={["u_time"]}
     />
   );
 }

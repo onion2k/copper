@@ -57,6 +57,7 @@ export default function Shader_Color({ id, title, x, y }: iPanel) {
       y={y}
       title={"Color Shader"}
       defaults={input}
+      uniforms={["u_time", "u_color"]}
       inputs={inputs}
     />
   );

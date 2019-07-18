@@ -12,7 +12,7 @@ import { zipObject } from "lodash";
 interface iShader extends iPanel {
   inputs?: Array<any>;
   uniforms?: Array<string>;
-  defaults?: React.MutableRefObject<Array<any>>;
+  defaults: React.MutableRefObject<Array<any>>;
 }
 
 export default function Shader({
@@ -37,7 +37,7 @@ export default function Shader({
   const canvasX = 700;
   const canvasY = 500;
 
-  const input = useRef(["", "", 0]);
+  const input = defaults;
   const [input0, input1] = input.current;
 
   useEffect(() => {
@@ -55,10 +55,7 @@ export default function Shader({
         if (gl !== null) {
           setGL(gl);
           setProgramInfo(
-            twgl.createProgramInfo(gl, [
-              input.current[0].toString(),
-              input.current[1].toString()
-            ])
+            twgl.createProgramInfo(gl, [input0.toString(), input1.toString()])
           );
           setBufferInfo(twgl.createBufferInfoFromArrays(gl, arrays));
         }
