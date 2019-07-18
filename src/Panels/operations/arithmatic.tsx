@@ -1,22 +1,22 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iArithmatic {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iArithmatic extends iPanel {
   op: string;
 }
 
 export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
-  const { dispatch, state } = useContext(DispatchContext);
-  const [value, setValue] = useState(0);
+  const { dispatch } = useContext(DispatchContext);
+  const [value, setValue] = useState<number | undefined>(0);
   const [_op, setOp] = useState(op);
+
   const input = useRef([0, 0]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -24,36 +24,38 @@ export default function Arithmatic({ id, title, x, y, op }: iArithmatic) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
-    if (state.inputs[id]) {
-      switch (_op) {
-        case "add":
-          setValue(input.current[0] + input.current[1]);
-          break;
-        case "subtract":
-          setValue(input.current[0] - input.current[1]);
-          break;
-        case "multiply":
-          setValue(input.current[0] * input.current[1]);
-          break;
-        case "divide":
-          if (input.current[1] > 0) {
-            setValue(input.current[0] / input.current[1]);
-          } else {
-            setValue(0);
-          }
-          break;
-      }
-      dispatch({
-        type: "recalculate",
-        msg: "math",
-        id: id,
-        value: [value]
-      });
+    // if (state.inputs[id]) {
+    let tempValue;
+    switch (_op) {
+      case "add":
+        tempValue = input.current[0] + input.current[1];
+        break;
+      case "subtract":
+        tempValue = input.current[0] - input.current[1];
+        break;
+      case "multiply":
+        tempValue = input.current[0] * input.current[1];
+        break;
+      case "divide":
+        if (input.current[1] > 0) {
+          tempValue = input.current[0] / input.current[1];
+        } else {
+          tempValue = 0;
+        }
+        break;
     }
-  }, [input.current[0], input.current[1], _op]);
+    setValue(tempValue);
+    dispatch({
+      type: "recalculate",
+      msg: "math",
+      id: id,
+      value: [tempValue]
+    });
+    // }
+  }, [dispatch, id, input0, input1, _op]);
 
   const inputs = [
     <Input

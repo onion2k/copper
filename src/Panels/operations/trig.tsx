@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useContext
+} from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iSin {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iSin extends iPanel {
   op: string;
 }
 
@@ -24,6 +28,21 @@ export default function Trig({ id, title, x, y, op }: iSin) {
   const canvasY = 200;
 
   const input = useRef([0]);
+  const input0 = input.current[0];
+
+  const renderCanvas = useCallback(() => {
+    if (canvasRef.current !== null) {
+      const ctx = canvasRef.current.getContext("2d");
+      if (ctx) {
+        ctx.fillStyle = "#FFF";
+        ctx.fillRect(0, 0, canvasX, canvasY);
+        ctx.fillStyle = "#000";
+        prev.forEach((v, i) => {
+          ctx.fillRect(i * 2, canvasY * 0.5 + v * (canvasY * 0.4), 2, 2);
+        });
+      }
+    }
+  }, [canvasRef, prev]);
 
   useEffect(() => {
     dispatch({
@@ -31,7 +50,7 @@ export default function Trig({ id, title, x, y, op }: iSin) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     switch (_op) {
@@ -60,7 +79,7 @@ export default function Trig({ id, title, x, y, op }: iSin) {
     setPrev(tPrev);
 
     renderCanvas();
-  }, [input.current[0]]);
+  }, [dispatch, id, _op, value, prev, renderCanvas, input0]);
 
   const inputs = [
     <Input
@@ -84,20 +103,6 @@ export default function Trig({ id, title, x, y, op }: iSin) {
       type="float"
     />
   ];
-
-  function renderCanvas() {
-    if (canvasRef.current !== null) {
-      const ctx = canvasRef.current.getContext("2d");
-      if (ctx) {
-        ctx.fillStyle = "#FFF";
-        ctx.fillRect(0, 0, canvasX, canvasY);
-        ctx.fillStyle = "#000";
-        prev.forEach((v, i) => {
-          ctx.fillRect(i * 2, canvasY * 0.5 + v * (canvasY * 0.4), 2, 2);
-        });
-      }
-    }
-  }
 
   const controls = [
     <>

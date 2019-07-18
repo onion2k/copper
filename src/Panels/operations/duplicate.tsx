@@ -1,21 +1,17 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iSplit {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Duplicate({ id, title, x, y }: iSplit) {
+export default function Duplicate({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
   const [value, setValue] = useState([0, 0]);
 
   const input = useRef([0]);
+  const [input0] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -23,7 +19,7 @@ export default function Duplicate({ id, title, x, y }: iSplit) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     const tempValue: any = input.current[0];
@@ -34,7 +30,7 @@ export default function Duplicate({ id, title, x, y }: iSplit) {
       id: id,
       value: [tempValue, tempValue]
     });
-  }, [input.current[0]]);
+  }, [dispatch, id, input0]);
 
   const inputs = [
     <Input

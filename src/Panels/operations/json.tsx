@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
@@ -6,19 +8,12 @@ import { Output } from "../../Components/output";
 
 import { pick } from "lodash";
 
-interface iJson {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function JSON({ id, title, x, y }: iJson) {
-  const { dispatch, state } = useContext(DispatchContext);
-  const [value, setValue] = useState({});
+export default function JSON({ id, title, x, y }: iPanel) {
+  const { dispatch } = useContext(DispatchContext);
   const [output, setOutput] = useState<{ [s: string]: any }>({});
   const [picks, setPicks] = useState<Array<string>>([]);
   const input = useRef([{}]);
+  const [input0] = input.current;
 
   const newpickRef = useRef<HTMLInputElement>(null);
 
@@ -28,15 +23,15 @@ export default function JSON({ id, title, x, y }: iJson) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     let out: { [s: string]: string } = {};
 
     if (picks.length > 0) {
       const tempData: { [s: string]: string } = pick(input.current[0], picks);
-      picks.map((p: string) => {
-        out[p] = tempData[p] || "Not found";
+      picks.forEach((p: string) => {
+        out[p] = tempData[p] || "Test:" + p;
       });
     } else {
       out = input.current[0];
@@ -49,7 +44,7 @@ export default function JSON({ id, title, x, y }: iJson) {
       id: id,
       value: [out]
     });
-  }, [input.current[0]]);
+  }, [dispatch, id, picks, input0]);
 
   const updatePick = (pickid: string, i: number) => {
     if (picks.indexOf(pickid) > -1) return;
@@ -66,7 +61,7 @@ export default function JSON({ id, title, x, y }: iJson) {
 
     if (tempPicks.length > 0) {
       const tempData: { [s: string]: string } = pick(input.current[0], picks);
-      tempPicks.map((p: string) => {
+      tempPicks.forEach((p: string) => {
         out[p] = tempData[p] || "Test:" + p;
       });
     } else {

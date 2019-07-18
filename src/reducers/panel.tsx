@@ -1,10 +1,8 @@
-import { uniqueID } from "../uniqueID";
-
 export default class {
   static add = (state: any, action: any) => {
     const tempPanels = state.canvas;
     tempPanels.push({
-      id: uniqueID(),
+      id: action.id,
       type: action.panelType,
       title:
         action.panelType.charAt(0).toUpperCase() + action.panelType.slice(1),

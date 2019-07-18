@@ -1,4 +1,4 @@
-import React, { useRef, useState, useLayoutEffect, useContext } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 
 interface iConnectorMapLine {
   id: string;

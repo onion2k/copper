@@ -14,4 +14,6 @@ const PRIMITIVES: { [s: string]: any } = {
   STRING: { el: String }
 };
 
+export const PRIMITIVES_KEYS = Object.keys(PRIMITIVES);
+
 export default PRIMITIVES;

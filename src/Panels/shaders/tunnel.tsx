@@ -1,13 +1,8 @@
 import React, { useRef } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { Input } from "../../Components/input";
 import Shader from "../outputs/shader";
-
-interface iShader {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
 
 const fs = `#ifdef GL_ES
 precision mediump float;
@@ -38,7 +33,7 @@ void main() {
 }
 `;
 
-export default function Shader_Tunnel({ id, title, x, y }: iShader) {
+export default function Shader_Tunnel({ id, title, x, y }: iPanel) {
   const input = useRef([vs, fs, 0, [1, 0, 0]]);
 
   const inputs = [

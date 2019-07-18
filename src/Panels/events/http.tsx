@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
@@ -17,11 +19,7 @@ function api<T>(url: string): Promise<T> {
     });
 }
 
-interface iString {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iHttp extends iPanel {
   url?: string;
 }
 
@@ -31,12 +29,13 @@ export default function Http({
   x,
   y,
   url = "https://hacker-news.firebaseio.com/v0/user/onion2k.json"
-}: iString) {
+}: iHttp) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef([""]);
+  const [input0] = input.current;
 
   const [_url, setUrl] = useState(url);
-  const [_value, setValue] = useState("");
+  const [_value] = useState("");
   const [output, setOutput] = useState<string | object>({});
 
   const test = (e: any) => {
@@ -55,7 +54,7 @@ export default function Http({
       inputs: input.current,
       output: _value
     });
-  }, []);
+  }, [dispatch, id, _value]);
 
   useEffect(() => {
     dispatch({
@@ -64,11 +63,11 @@ export default function Http({
       id: id,
       value: [output]
     });
-  }, [output]);
+  }, [dispatch, id, output]);
 
   useEffect(() => {
     setOutput(_value);
-  }, [input.current[0]]);
+  }, [dispatch, _value, input0]);
 
   const inputs = [
     <Input

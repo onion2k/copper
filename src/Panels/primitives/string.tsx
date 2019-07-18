@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iString {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iString extends iPanel {
   value: string;
 }
 
@@ -17,15 +15,16 @@ export default function String({ id, title, x, y, value }: iString) {
   const [_value, setValue] = useState(value || "");
   const [output, setOutput] = useState(value || "");
   const input = useRef([""]);
+  const [input0] = input.current;
 
   useEffect(() => {
     dispatch({
       type: "panel/register",
       id: id,
       inputs: input.current,
-      output: output
+      output: [output]
     });
-  }, []);
+  }, [dispatch, id, output]);
 
   useEffect(() => {
     const tempOutput = input.current[0]
@@ -40,7 +39,7 @@ export default function String({ id, title, x, y, value }: iString) {
       id: id,
       value: [tempOutput]
     });
-  }, [input.current[0], _value]);
+  }, [dispatch, id, input0, _value]);
 
   const inputs = [
     <Input

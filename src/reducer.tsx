@@ -1,5 +1,5 @@
-import panel from "./reducers/panel";
-import node from "./reducers/node";
+import panel from "./Reducers/panel";
+import node from "./Reducers/node";
 
 export function reducer(state: any, action: any) {
   const newState = { ...state };
@@ -19,8 +19,12 @@ export function reducer(state: any, action: any) {
       return newState;
     case "node/connect":
       return node.connect(newState, action);
+    case "node/quickConnect":
+      return node.quickConnect(newState, action);
     case "node/disconnect":
       return node.disconnect(newState, action);
+    case "node/register":
+      return node.register(newState, action);
     case "panel/add":
       return panel.add(newState, action);
     case "panel/move":

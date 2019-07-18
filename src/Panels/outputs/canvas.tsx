@@ -1,27 +1,20 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-import * as twgl from "twgl.js";
-import useAnimationFrame from "../../Hooks/useAnimationFrame";
+import React, { useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
+// import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 
-import { zipObject } from "lodash";
-
-interface iShader {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Shader({ id, title, x, y }: iShader) {
+export default function Shader({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasX = 700;
   const canvasY = 500;
 
-  const input = useRef([]);
+  const input = useRef(["", ""]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -29,11 +22,11 @@ export default function Shader({ id, title, x, y }: iShader) {
       id: id,
       inputs: input.current
     });
-  }, [canvasRef]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     // Draw something
-  }, [canvasRef, input.current[0], input.current[1]]);
+  }, [canvasRef, input0, input1]);
 
   const inputs = [
     <Input

@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import * as twgl from "twgl.js";
 import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
@@ -7,11 +9,7 @@ import { Input } from "../../Components/input";
 
 import { zipObject } from "lodash";
 
-interface iShader {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iShader extends iPanel {
   inputs?: Array<any>;
   uniforms?: Array<string>;
   defaults?: React.MutableRefObject<Array<any>>;
@@ -30,7 +28,7 @@ export default function Shader({
 
   const [gl, setGL] = useState<WebGLRenderingContext | null>(null);
   const [programInfo, setProgramInfo] = useState<twgl.ProgramInfo | null>(null);
-  const [arrays, setArrays] = useState({
+  const [arrays] = useState({
     position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0]
   });
   const [bufferInfo, setBufferInfo] = useState<twgl.BufferInfo | null>(null);
@@ -39,7 +37,8 @@ export default function Shader({
   const canvasX = 700;
   const canvasY = 500;
 
-  const input = defaults ? defaults : useRef(["", "", 0]);
+  const input = useRef(["", "", 0]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -47,7 +46,7 @@ export default function Shader({
       id: id,
       inputs: input.current
     });
-  }, [canvasRef]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (input.current[0] !== "" && input.current[1] !== "") {
@@ -65,7 +64,7 @@ export default function Shader({
         }
       }
     }
-  }, [canvasRef, input.current[0], input.current[1]]);
+  }, [canvasRef, input0, input1, arrays]);
 
   useAnimationFrame(() => {
     if (gl !== null && programInfo !== null && bufferInfo !== null) {

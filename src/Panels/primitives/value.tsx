@@ -1,19 +1,15 @@
 import React, { useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
 import { Output } from "../../Components/output";
 
-interface iValue {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Value({ id, title, x, y }: iValue) {
+export default function Value({ id, title, x, y }: iPanel) {
   const { dispatch } = useContext(DispatchContext);
   const input = useRef([0]);
+  const [input0] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -21,7 +17,7 @@ export default function Value({ id, title, x, y }: iValue) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch({
@@ -30,7 +26,7 @@ export default function Value({ id, title, x, y }: iValue) {
       id: id,
       value: [input.current[0]]
     });
-  }, [input.current[0]]);
+  }, [dispatch, id, input0]);
 
   const inputs = [
     <Input

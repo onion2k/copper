@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Input } from "../../Components/input";
@@ -6,31 +8,29 @@ import { Output } from "../../Components/output";
 
 import { template } from "lodash";
 
-interface iString {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
+interface iTemplate extends iPanel {
   value?: string;
 }
 
-function interpolate(literals: any, ...expressions: any) {
-  let string = ``;
-  for (const [i, val] of expressions.entries()) {
-    string += literals[i] + val;
-  }
-  string += literals[literals.length - 1];
-  return string;
-}
+// function interpolate(literals: any, ...expressions: any) {
+//   let string = ``;
+//   for (const [i, val] of expressions.entries()) {
+//     string += literals[i] + val;
+//   }
+//   string += literals[literals.length - 1];
+//   return string;
+// }
 
-export default function Template({ id, title, x, y, value }: iString) {
+export default function Template({ id, title, x, y, value }: iTemplate) {
   const { dispatch } = useContext(DispatchContext);
-  const input = useRef(["", {}]);
 
   const [_value, setValue] = useState<string>(value || "");
   const [output, setOutput] = useState<string>(_value);
   const [error, setError] = useState<string | null>(null);
   let compiled = useRef<Function>(() => {});
+
+  const input = useRef(["", {}]);
+  const [input0, input1] = input.current;
 
   useEffect(() => {
     dispatch({
@@ -39,7 +39,7 @@ export default function Template({ id, title, x, y, value }: iString) {
       inputs: input.current,
       output: _value
     });
-  }, []);
+  }, [dispatch, id, _value]);
 
   useEffect(() => {
     let c;
@@ -61,7 +61,7 @@ export default function Template({ id, title, x, y, value }: iString) {
       id: id,
       value: [c]
     });
-  }, [compiled.current, input.current[1]]);
+  }, [dispatch, id, compiled, input1]);
 
   useEffect(() => {
     compiled.current = input.current[0]
@@ -72,11 +72,12 @@ export default function Template({ id, title, x, y, value }: iString) {
     try {
       c = compiled.current(input.current[1]);
     } catch (e) {
-      console.log(_value, "failed");
+      setError(e.message);
+      setOutput("");
     }
 
     setOutput(c);
-  }, [input.current[0], _value]);
+  }, [input0, _value]);
 
   const inputs = [
     <Input

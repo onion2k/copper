@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import useAnimationFrame from "../../Hooks/useAnimationFrame";
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Output } from "../../Components/output";
 
-interface iTime {
-  id: string;
-  title: string;
-  x: number;
-  y: number;
+interface iTime extends iPanel {
   initPauseState: boolean;
 }
 
@@ -24,7 +22,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       id: id,
       inputs: []
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch({
@@ -33,7 +31,7 @@ export default function Time({ id, title, x, y, initPauseState }: iTime) {
       id: id,
       value: [value]
     });
-  }, [value]);
+  }, [dispatch, id, value]);
 
   useAnimationFrame(() => {
     if (!pause) {

@@ -9,10 +9,10 @@
     "@types/lodash": "^4.14.135",
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.14",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
-    "react-scripts": "2.1.4",
+    "react-scripts": "^3.0.1",
     "twgl.js": "^4.10.1",
     "typescript": "^3.3.3"
   },
@@ -30,5 +30,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@testing-library/react": "^8.0.5",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@types/jest": "^24.0.15"
+  }
 }

@@ -1,19 +1,14 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import iPanel from "../../Interfaces/panel";
+
 import { DispatchContext } from "../../Contexts/dispatch";
 import { Panel } from "../../Components/panel";
 import { Output } from "../../Components/output";
 
 import { has } from "lodash";
 
-interface iJson {
-  id: string;
-  title?: string;
-  x: number;
-  y: number;
-}
-
-export default function Keyboard({ id, title, x, y }: iJson) {
-  const { dispatch, state } = useContext(DispatchContext);
+export default function Keyboard({ id, title, x, y }: iPanel) {
+  const { dispatch } = useContext(DispatchContext);
   const [keys, setKeys] = useState<Array<string>>([]);
   const [output, setOutput] = useState<{ [s: string]: boolean }>({});
   const input = useRef([]);
@@ -42,7 +37,7 @@ export default function Keyboard({ id, title, x, y }: iJson) {
       id: id,
       inputs: input.current
     });
-  }, []);
+  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch({
@@ -51,7 +46,7 @@ export default function Keyboard({ id, title, x, y }: iJson) {
       id: id,
       value: [output]
     });
-  }, [output]);
+  }, [dispatch, id, output]);
 
   const updateKeys = (keyid: string, i: number) => {
     const tempKeys: any = [...keys];
