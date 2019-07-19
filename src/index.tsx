@@ -10,6 +10,7 @@ import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
 import { HeaderNav } from "./Components/headerNav";
+import { Footer } from "./Components/footer";
 import { Diagram } from "./Components/diagram";
 import { ActiveConnector } from "./Components/activeConnector";
 import { ConnectorMap } from "./Components/connectorMap";
@@ -164,6 +165,7 @@ function App() {
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
       <HeaderNav addPanel={addPanel} />
+      <Footer />
       <MouseContext.Provider value={[mouseX, mouseY, pos.x, pos.y]}>
         <div
           className={appClass.join(" ")}
