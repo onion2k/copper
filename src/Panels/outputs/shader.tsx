@@ -10,9 +10,9 @@ import { Input } from "../../Components/input";
 import { zipObject } from "lodash";
 
 interface iShader extends iPanel {
-  defaults: React.MutableRefObject<Array<any>>;
   inputs?: Array<any>;
   uniforms?: Array<string>;
+  defaults: React.MutableRefObject<Array<any>>;
 }
 
 export default function Shader({

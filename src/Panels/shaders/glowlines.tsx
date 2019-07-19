@@ -72,6 +72,7 @@ export default function Shader_Tunnel({ id, title, x, y }: iPanel) {
       title={"Glowlines Shader"}
       uniforms={["u_time", "u_color"]}
       inputs={inputs}
+      uniforms={["u_time", "u_color"]}
       defaults={input}
     />
   );

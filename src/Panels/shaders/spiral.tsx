@@ -64,6 +64,7 @@ export default function Shader_Spiral({ id, title, x, y }: iPanel) {
       y={y}
       title={"Spiral Shader"}
       defaults={input}
+      uniforms={["u_time", "u_color"]}
       inputs={inputs}
     />
   );
