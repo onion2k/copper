@@ -1,4 +1,11 @@
+/**
+ * Is maintaining a canvas list and a panel list separately a stupid idea?
+ */
+
 export default class {
+  /**
+   * Fires when a panel is added to the diagram
+   */
   static add = (state: any, action: any) => {
     const tempPanels = state.canvas;
     tempPanels.push({
@@ -14,8 +21,11 @@ export default class {
     return state;
   };
 
+  /**
+   * Fires when a panel mounts
+   */
   static register = (state: any, action: any) => {
-    state.panels.push(action);
+    // state.panels.push(action);
     state.inputs[action.id] = action.inputs;
     if (action.output) {
       state.outputs[action.id] = action.output;
@@ -23,6 +33,9 @@ export default class {
     return state;
   };
 
+  /**
+   * Fires when a panel is closed
+   */
   static unregister = (state: any, action: any) => {
     state.canvas = state.canvas.filter((panel: any) => {
       return panel.id !== action.id;
@@ -59,7 +72,21 @@ export default class {
     return state;
   };
 
+  /**
+   * Fires when a panel is moved
+   */
   static move = (state: any, action: any) => {
+    console.log(action);
+
+    state.canvas
+      .filter((panel: any) => {
+        return action.id === panel.id;
+      })
+      .forEach((panel: any) => {
+        panel.x += action.value.x;
+        panel.y += action.value.y;
+      });
+
     state.nodes
       .filter((node: any) => {
         return action.id === node.id;

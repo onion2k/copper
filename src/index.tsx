@@ -10,6 +10,7 @@ import { MouseContext } from "./Contexts/mouse";
 import { DispatchContext } from "./Contexts/dispatch";
 
 import { HeaderNav } from "./Components/headerNav";
+import { Footer } from "./Components/footer";
 import { Diagram } from "./Components/diagram";
 import { ActiveConnector } from "./Components/activeConnector";
 import { ConnectorMap } from "./Components/connectorMap";
@@ -42,7 +43,7 @@ const initPanels: {
     x: 2600,
     y: 2700
   },
-  { id: "x", type: "DUPLICATE", x: 3100, y: 2700 }
+  { id: "x", type: "SHADER_Chevron", x: 3100, y: 2700 }
 ];
 
 const initConnectors: {
@@ -59,7 +60,7 @@ const initConnectors: {
     from: "hn",
     from_index: 0,
     to: "x",
-    to_index: 0,
+    to_index: 2,
     x1: 2948,
     y1: 2761,
     x2: 3100,
@@ -164,6 +165,7 @@ function App() {
   return (
     <DispatchContext.Provider value={{ dispatch, state }}>
       <HeaderNav addPanel={addPanel} />
+      <Footer />
       <MouseContext.Provider value={[mouseX, mouseY, pos.x, pos.y]}>
         <div
           className={appClass.join(" ")}

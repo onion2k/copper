@@ -46,10 +46,10 @@ export default function Shader({
       id: id,
       inputs: input.current
     });
-  }, [dispatch, id]);
+  }, [dispatch, id, input]);
 
   useEffect(() => {
-    if (input.current[0] !== "" && input.current[1] !== "") {
+    if (input0 !== "" && input1 !== "") {
       if (canvasRef.current !== null) {
         const gl = canvasRef.current.getContext("webgl");
         if (gl !== null) {

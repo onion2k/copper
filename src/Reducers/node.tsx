@@ -2,7 +2,6 @@
 
 export default class {
   static register = (state: any, action: any) => {
-    console.log(action);
     return state;
   };
 

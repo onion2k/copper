@@ -11,7 +11,7 @@
 
 .nav h1 {
   flex: 1;
-  padding: 0 50px;
+  padding: 0 20px;
   margin: 0;
   font-size: 1rem;
 }
@@ -44,7 +44,7 @@ ul.addPanel li {
 
 ul.addPanel > li {
   min-width: 150px;
-  padding: 1rem 20px;
+  padding: 15px;
   border-right: 1px solid #a56122;
 }
 
@@ -60,11 +60,11 @@ ul.addPanel li:focus-within a {
 ul.addPanel li ul {
   visibility: hidden;
   opacity: 0;
-  min-width: 191px;
+  min-width: 181px;
   position: absolute;
   transition: all 0.5s ease;
-  margin-top: 1rem;
-  right: 0;
+  margin-top: 15px;
+  right: -1px;
   display: none;
 }
 
@@ -88,7 +88,7 @@ ul.addPanel li ul {
 
 .nav .addPanel button {
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   border: none;
   border-radius: 0;
   background-color: #a56122;
