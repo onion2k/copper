@@ -6,7 +6,8 @@ import {
   faVectorSquare,
   faClone,
   faCalendar,
-  faTimes
+  faTimes,
+  faCog
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -16,5 +17,6 @@ library.add(
   faVectorSquare,
   faClone,
   faCalendar,
-  faTimes
+  faTimes,
+  faCog
 );
