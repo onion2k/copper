@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from "react";
+import React, { useContext, Suspense } from "react";
 import { DispatchContext } from "../Contexts/dispatch";
 
 import PRIMITIVES from "../Panels/primitives";
@@ -19,7 +19,7 @@ export function Diagram() {
   const { state } = useContext(DispatchContext);
 
   const panelsEl = state.canvas.map((p: any) => {
-    return React.createElement(
+    const panel = React.createElement(
       panelTypes[p.type].el,
       Object.assign(
         {},
@@ -34,7 +34,8 @@ export function Diagram() {
         panelTypes[p.type].defaults
       )
     );
+    return <Suspense fallback={"Waiting"}>{panel}</Suspense>;
   });
 
-  return <Suspense fallback={"Waiting"}>{panelsEl}</Suspense>;
+  return <>{panelsEl}</>;
 }
