@@ -27,7 +27,7 @@ const emptyPanel = (p: any) => (
       <div className="indicator close">
         <FontAwesomeIcon icon={closeIcon} size="xs" />
       </div>
-      <span>Loading...</span>
+      <span>Loading {p.title}</span>
       <div className="indicators" />
     </header>
     <div className="controls">
