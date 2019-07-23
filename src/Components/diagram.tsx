@@ -63,7 +63,11 @@ export function Diagram() {
         panelTypes[p.type].defaults
       )
     );
-    return <Suspense fallback={preloadingPanel}>{panel}</Suspense>;
+    return (
+      <Suspense fallback={preloadingPanel} key={p.id}>
+        {panel}
+      </Suspense>
+    );
   });
 
   return <>{panelsEl}</>;

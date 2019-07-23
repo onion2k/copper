@@ -21,11 +21,11 @@ import "./styles.css";
 
 const initialState = {
   canvas: [],
-  panels: [],
   inputs: {},
   outputs: {},
   connections: {},
   connectionLines: [],
+  connectome: {},
   nodes: []
 };
 

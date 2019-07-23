@@ -10,6 +10,7 @@ export function Footer() {
   const exportState = useCallback(() => {
     const exportData = pick(state, ["canvas", "connections"]);
 
+    console.log(state);
     console.log(exportData);
   }, [state]);
 

@@ -76,8 +76,6 @@ export default class {
    * Fires when a panel is moved
    */
   static move = (state: any, action: any) => {
-    console.log(action);
-
     state.canvas
       .filter((panel: any) => {
         return action.id === panel.id;

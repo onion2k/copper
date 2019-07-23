@@ -1,5 +1,7 @@
 // action - payload - from:id, index, x, y (output), to: id, index, index, x, y (input)
 
+import { set } from "lodash";
+
 export default class {
   static register = (state: any, action: any) => {
     return state;
@@ -70,7 +72,6 @@ export default class {
       state.inputs[action.payload.id][action.payload.index] =
         state.outputs[state.connector.id][state.connector.index];
 
-      console.log(state.connector, action.payload);
       // Unset the active connector
       state.connector = null;
     }
@@ -79,8 +80,6 @@ export default class {
   };
 
   static quickConnect = (state: any, action: any) => {
-    /* state connector is the output */
-    /* payload is the input */
     state.connectionLines.push({
       from: action.from,
       from_index: action.from_index,
@@ -101,11 +100,23 @@ export default class {
     ];
 
     /* update the input to the current output value */
-    if (!state.inputs[action.to]) state.inputs[action.to] = [];
-    if (!state.outputs[action.from]) state.outputs[action.from] = [];
+    // if (!state.inputs[action.to]) state.inputs[action.to] = [];
+    // if (!state.outputs[action.from]) state.outputs[action.from] = [];
 
-    state.inputs[action.to][action.to_index] =
-      state.outputs[action.from][action.from_index];
+    // state.inputs[action.to][action.to_index] =
+    //   state.outputs[action.from][action.from_index];
+
+    set(state, `connectome.${action.from}.${action.from_index}`, action);
+
+    set(state, `outputs.${action.from}.${action.from_index}`, []);
+
+    set(
+      state,
+      `inputs.${action.to}.${action.to_index}`,
+      state.outputs[action.from][action.from_index]
+    );
+
+    console.log(state);
 
     return state;
   };
