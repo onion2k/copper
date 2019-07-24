@@ -64,6 +64,12 @@ export function Panel({
       ref={panelRef}
       className={`Panel ${large ? "large" : medium ? "medium" : ""}`}
       style={{ top: pos.y + delta.y, left: pos.x + delta.x }}
+      onMouseDown={(e: React.MouseEvent) => {
+        e.stopPropagation();
+      }}
+      onMouseUp={(e: React.MouseEvent) => {
+        e.stopPropagation();
+      }}
     >
       <header
         className="Title"
