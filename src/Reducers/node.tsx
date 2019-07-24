@@ -1,6 +1,6 @@
 // action - payload - from:id, index, x, y (output), to: id, index, index, x, y (input)
 
-import { set } from "lodash";
+import { flow, get, set, pick, omit } from "lodash/fp";
 
 export default class {
   static register = (state: any, action: any) => {
@@ -99,22 +99,16 @@ export default class {
       action.from_index
     ];
 
-    /* update the input to the current output value */
-    // if (!state.inputs[action.to]) state.inputs[action.to] = [];
-    // if (!state.outputs[action.from]) state.outputs[action.from] = [];
+    const output = get(["outputs", action.from, action.from_index], state);
 
-    // state.inputs[action.to][action.to_index] =
-    //   state.outputs[action.from][action.from_index];
-
-    set(state, `connectome.${action.from}.${action.from_index}`, action);
-
-    set(state, `outputs.${action.from}.${action.from_index}`, []);
-
-    set(
-      state,
-      `inputs.${action.to}.${action.to_index}`,
-      state.outputs[action.from][action.from_index]
-    );
+    state = flow(
+      set(
+        ["connectome", action.from, action.from_index],
+        omit(["type"], action)
+      ),
+      set(["outputs", action.from, action.from_index], []),
+      set(["inputs", action.to, action.to_index], output)
+    )(state);
 
     console.log(state);
 
