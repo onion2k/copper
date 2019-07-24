@@ -170,10 +170,14 @@ function App() {
         <div
           className={appClass.join(" ")}
           onMouseDown={(e: React.MouseEvent) => {
+            // ignore right click
+            if (e.button === 2) return;
             setDragging(true);
             setInitPos({ x: e.clientX, y: e.clientY });
           }}
           onMouseUp={e => {
+            // ignore right click
+            if (e.button === 2) return;
             if (state.connector) {
               dispatch({
                 type: "node/disconnect"
