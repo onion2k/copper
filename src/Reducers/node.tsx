@@ -72,6 +72,7 @@ export default class {
       state.inputs[action.payload.id][action.payload.index] =
         state.outputs[state.connector.id][state.connector.index];
 
+      console.log(state);
       // Unset the active connector
       state.connector = null;
     }

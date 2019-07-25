@@ -19,7 +19,7 @@ import { uniqueID } from "./uniqueID";
 
 import "./styles.css";
 
-const initialState = {
+export const initialState = {
   canvas: [],
   inputs: {},
   outputs: {},

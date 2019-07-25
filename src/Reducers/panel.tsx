@@ -1,4 +1,4 @@
-import { flow, get, set, update, pick, omit, concat } from "lodash/fp";
+import { flow, get, set, update, pick, omit, concat, getOr } from "lodash/fp";
 
 export default class {
   /**
@@ -26,10 +26,14 @@ export default class {
    * Fires when a panel mounts
    */
   static register = (state: any, action: any) => {
-    state.inputs[action.id] = action.inputs;
-    if (action.output) {
-      state.outputs[action.id] = action.output;
-    }
+    // state.inputs[action.id] = action.inputs;
+    // if (action.output) {
+    //   state.outputs[action.id] = action.output;
+    // }
+    state = flow(
+      set(["inputs", action.id], action.inputs),
+      set(["outputs", action.id], getOr([], "output", action))
+    )(state);
     return state;
   };
 
