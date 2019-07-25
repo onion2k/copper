@@ -110,7 +110,7 @@ export default class {
       set(["inputs", action.to, action.to_index], output)
     )(state);
 
-    console.log(state);
+    // console.log(state);
 
     return state;
   };

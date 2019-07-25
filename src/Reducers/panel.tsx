@@ -1,23 +1,24 @@
-/**
- * Is maintaining a canvas list and a panel list separately a stupid idea?
- */
+import { flow, get, set, update, pick, omit, concat } from "lodash/fp";
 
 export default class {
   /**
    * Fires when a panel is added to the diagram
    */
   static add = (state: any, action: any) => {
-    const tempPanels = state.canvas;
-    tempPanels.push({
-      id: action.id,
-      type: action.panelType,
-      title:
-        action.panelType.charAt(0).toUpperCase() + action.panelType.slice(1),
-      x: action.x,
-      y: action.y,
-      value: action.value
-    });
-    state.canvas = tempPanels;
+    state = update(
+      "canvas",
+      concat({
+        id: action.id,
+        type: action.panelType,
+        title:
+          action.panelType.charAt(0).toUpperCase() + action.panelType.slice(1),
+        x: action.x,
+        y: action.y,
+        value: action.value
+      }),
+      state
+    );
+
     return state;
   };
 
@@ -25,7 +26,6 @@ export default class {
    * Fires when a panel mounts
    */
   static register = (state: any, action: any) => {
-    // state.panels.push(action);
     state.inputs[action.id] = action.inputs;
     if (action.output) {
       state.outputs[action.id] = action.output;
