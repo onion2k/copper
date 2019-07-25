@@ -18,7 +18,6 @@ export default class {
       }),
       state
     );
-
     return state;
   };
 
