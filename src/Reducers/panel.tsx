@@ -1,4 +1,14 @@
-import { flow, get, set, update, pick, map, concat, getOr } from "lodash/fp";
+import {
+  flow,
+  get,
+  set,
+  update,
+  filter,
+  map,
+  concat,
+  getOr,
+  values
+} from "lodash/fp";
 
 export default class {
   /**
@@ -64,12 +74,18 @@ export default class {
       {}
     );
 
-    state.connectionLines = state.connectionLines.filter(
-      (connectionLine: any) => {
-        return (
-          connectionLine.from !== action.id && connectionLine.to !== action.id
-        );
-      }
+    state = set(
+      "connectome",
+      flow(
+        values,
+        map(
+          filter((connector: any) => {
+            console.log(connector);
+            return connector.from !== action.id && connector.to !== action.id;
+          })
+        )
+      ),
+      state
     );
 
     return state;
