@@ -107,7 +107,7 @@ export default class {
           connector.y2 += action.value.y;
         }
       })(panel);
-    })(state.connectome);
+    })(get("connectome", state));
 
     return state;
   };
