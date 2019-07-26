@@ -1,4 +1,4 @@
-import { flow, get, set, update, pick, omit, concat, getOr } from "lodash/fp";
+import { flow, get, set, update, pick, map, concat, getOr } from "lodash/fp";
 
 export default class {
   /**
@@ -97,19 +97,17 @@ export default class {
         node.y += action.value.y;
       });
 
-    state.connectionLines
-      .filter((line: any) => {
-        return action.id === line.from || action.id === line.to;
-      })
-      .forEach((line: any) => {
-        if (action.id === line.from) {
-          line.x1 += action.value.x;
-          line.y1 += action.value.y;
-        } else {
-          line.x2 += action.value.x;
-          line.y2 += action.value.y;
+    map((panel: any) => {
+      map((connector: any) => {
+        if (action.id === connector.from) {
+          connector.x1 += action.value.x;
+          connector.y1 += action.value.y;
+        } else if (action.id === connector.to) {
+          connector.x2 += action.value.x;
+          connector.y2 += action.value.y;
         }
-      });
+      })(panel);
+    })(state.connectome);
 
     return state;
   };

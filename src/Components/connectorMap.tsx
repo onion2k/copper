@@ -1,4 +1,5 @@
 import React from "react";
+import { map } from "lodash";
 import { ConnectorMapLine } from "./connectorMapLine";
 
 interface iConnectorMap {
@@ -9,14 +10,25 @@ interface iConnectorMap {
     x: number;
     y: number;
   }>;
-  connections: Array<{ x1: number; y1: number; x2: number; y2: number }>;
+  connections: {
+    [s: string]: Array<{
+      from: string;
+      from_index: number;
+      to: string;
+      to_index: number;
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+    }>;
+  };
 }
 
 export function ConnectorMap({ nodes, connections }: iConnectorMap) {
   let connectionsMap = new Array<any>();
-  if (connections.length > 0) {
-    connections.forEach(connection => {
-      const { x1, y1, x2, y2 } = connection;
+  map(connections, panel => {
+    panel.forEach((connector: any) => {
+      const { x1, y1, x2, y2 } = connector;
       connectionsMap.push(
         <ConnectorMapLine
           key={`${x1}-${y1}-${x2}-${y2}`}
@@ -29,7 +41,7 @@ export function ConnectorMap({ nodes, connections }: iConnectorMap) {
         />
       );
     });
-  }
+  });
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" height="5000" width="5000">

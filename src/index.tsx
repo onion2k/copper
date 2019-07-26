@@ -195,10 +195,7 @@ function App() {
             left: pos.x + delta.x - center.x
           }}
         >
-          <ConnectorMap
-            nodes={state.nodes}
-            connections={state.connectionLines}
-          />
+          <ConnectorMap nodes={state.nodes} connections={state.connectome} />
           <Diagram />
           <ActiveConnector />
         </div>
