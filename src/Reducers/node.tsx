@@ -1,6 +1,6 @@
 // action - payload - from:id, index, x, y (output), to: id, index, index, x, y (input)
 
-import { flow, get, set, pick, omit } from "lodash/fp";
+import { flow, get, set, update, pick, omit } from "lodash/fp";
 
 export default class {
   static register = (state: any, action: any) => {
@@ -47,17 +47,17 @@ export default class {
 
       /* state connector is the output */
       /* payload is the input */
-      state.connectionLines.push({
-        from: state.connector.id,
-        from_index: state.connector.index,
-        to: action.payload.id,
-        to_index: action.payload.index,
-        x1: state.connector.x,
-        y1: state.connector.y,
-        x2: action.payload.x,
-        y2: action.payload.y,
-        index: action.payload.index
-      });
+      // state.connectionLines.push({
+      //   from: state.connector.id,
+      //   from_index: state.connector.index,
+      //   to: action.payload.id,
+      //   to_index: action.payload.index,
+      //   x1: state.connector.x,
+      //   y1: state.connector.y,
+      //   x2: action.payload.x,
+      //   y2: action.payload.y,
+      //   index: action.payload.index
+      // });
 
       if (!state.connections[action.payload.id])
         state.connections[action.payload.id] = [];
@@ -72,7 +72,25 @@ export default class {
       state.inputs[action.payload.id][action.payload.index] =
         state.outputs[state.connector.id][state.connector.index];
 
-      console.log(state);
+      const output = get(["outputs", action.from, action.from_index], state);
+
+      const c = {
+        from: state.connector.id,
+        from_index: state.connector.index,
+        to: action.payload.id,
+        to_index: action.payload.index,
+        x1: state.connector.x,
+        y1: state.connector.y,
+        x2: action.payload.x,
+        y2: action.payload.y
+      };
+
+      state = flow(
+        set(["connectome", c.from, c.from_index], c),
+        set(["outputs", c.from, c.from_index], []),
+        set(["inputs", c.to, c.to_index], output)
+      )(state);
+
       // Unset the active connector
       state.connector = null;
     }
@@ -99,7 +117,7 @@ export default class {
       set(["inputs", action.to, action.to_index], output)
     )(state);
 
-    // console.log(state);
+    console.log(state);
 
     return state;
   };

@@ -4,7 +4,9 @@ import {
   set,
   update,
   filter,
+  find,
   map,
+  mapValues,
   concat,
   getOr,
   values
@@ -35,10 +37,6 @@ export default class {
    * Fires when a panel mounts
    */
   static register = (state: any, action: any) => {
-    // state.inputs[action.id] = action.inputs;
-    // if (action.output) {
-    //   state.outputs[action.id] = action.output;
-    // }
     state = flow(
       set(["inputs", action.id], action.inputs),
       set(["outputs", action.id], getOr([], "output", action))
@@ -74,13 +72,12 @@ export default class {
       {}
     );
 
-    state = set(
+    state = update(
       "connectome",
       flow(
         values,
-        map(
+        mapValues(
           filter((connector: any) => {
-            console.log(connector);
             return connector.from !== action.id && connector.to !== action.id;
           })
         )
@@ -113,17 +110,24 @@ export default class {
         node.y += action.value.y;
       });
 
-    map((panel: any) => {
-      map((connector: any) => {
-        if (action.id === connector.from) {
-          connector.x1 += action.value.x;
-          connector.y1 += action.value.y;
-        } else if (action.id === connector.to) {
-          connector.x2 += action.value.x;
-          connector.y2 += action.value.y;
-        }
-      })(panel);
-    })(get("connectome", state));
+    state = update(
+      "connectome",
+      flow(
+        mapValues(
+          map((connector: any) => {
+            if (action.id === connector.from) {
+              connector.x1 += action.value.x;
+              connector.y1 += action.value.y;
+            } else if (action.id === connector.to) {
+              connector.x2 += action.value.x;
+              connector.y2 += action.value.y;
+            }
+            return connector;
+          })
+        )
+      ),
+      state
+    );
 
     return state;
   };
