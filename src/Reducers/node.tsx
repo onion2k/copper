@@ -81,18 +81,6 @@ export default class {
   };
 
   static quickConnect = (state: any, action: any) => {
-    // state.connectionLines.push({
-    //   from: action.from,
-    //   from_index: action.from_index,
-    //   to: action.to,
-    //   to_index: action.to_index,
-    //   x1: action.x1,
-    //   y1: action.y1,
-    //   x2: action.x2,
-    //   y2: action.y2,
-    //   index: action.to_index
-    // });
-
     if (!state.connections[action.from]) state.connections[action.from] = [];
     state.connections[action.from][action.from_index] = [
       action.to,

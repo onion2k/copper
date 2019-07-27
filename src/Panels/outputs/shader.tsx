@@ -34,8 +34,8 @@ export default function Shader({
   const [bufferInfo, setBufferInfo] = useState<twgl.BufferInfo | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasX = 700;
-  const canvasY = 500;
+  const canvasX = 350;
+  const canvasY = 350;
 
   const input = defaults;
   const [input0, input1] = input.current;
@@ -147,7 +147,6 @@ export default function Shader({
       outputs={outputs}
       controls={controls}
       nopadding
-      medium
     />
   );
 }
