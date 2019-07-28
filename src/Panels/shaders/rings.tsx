@@ -24,7 +24,7 @@ void main() {
 `;
 
 export default function Shader_Rings({ id, title, x, y }: iPanel) {
-  const input = useRef([vs, fs, 0, [1, 0, 0]]);
+  const input = useRef([vs, fs, 0, [1, 0, 1]]);
 
   const inputs = [
     <Input

@@ -41,7 +41,13 @@ const initPanels: {
     x: 2600,
     y: 2700
   },
-  { id: "x", type: "SHADER_Chevron", x: 3100, y: 2700 }
+  {
+    id: "c",
+    type: "COLOR",
+    x: 2600,
+    y: 2950
+  },
+  { id: "x", type: "SHADER_Rings", x: 3100, y: 2700 }
 ];
 
 const initConnectors: {
