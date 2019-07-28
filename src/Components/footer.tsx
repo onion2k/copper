@@ -8,10 +8,8 @@ export function Footer() {
   const { state } = useContext(DispatchContext);
 
   const exportState = useCallback(() => {
-    const exportData = pick(state, ["canvas", "connections"]);
-
-    console.log(state);
-    console.log(exportData);
+    const exportData = pick(state, ["canvas", "connectome"]);
+    console.log(JSON.stringify(exportData, null, 2));
   }, [state]);
 
   return (

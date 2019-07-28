@@ -23,8 +23,8 @@ export const initialState = {
   canvas: [],
   inputs: {},
   outputs: {},
-  connectome: {},
-  nodes: []
+  connectome: {}
+  // nodes: []
 };
 
 const initPanels: {
