@@ -1,6 +1,6 @@
 // action - payload - from:id, index, x, y (output), to: id, index, index, x, y (input)
 
-import { flow, get, set, update, pick, omit } from "lodash/fp";
+import { flow, get, set, omit } from "lodash/fp";
 
 export default class {
   static register = (state: any, action: any) => {
