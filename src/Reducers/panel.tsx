@@ -37,10 +37,14 @@ export default class {
    * Fires when a panel mounts
    */
   static register = (state: any, action: any) => {
-    state = flow(
-      set(["inputs", action.id], action.inputs),
-      set(["outputs", action.id], getOr([], "output", action))
-    )(state);
+    state.inputs[action.id] = action.inputs;
+    state.outputs[action.id] = action.output;
+
+    // state = flow(
+    //   // set(["inputs", action.id], action.inputs),
+    //   set(["outputs", action.id], getOr([], "output", action))
+    // )(state);
+    console.log(state, action);
     return state;
   };
 

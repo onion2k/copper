@@ -1,17 +1,25 @@
-import panel from "./Reducers/panel";
-import node from "./Reducers/node";
+import panel from "./panel";
+import node from "./node";
 
 export function reducer(state: any, action: any) {
   const newState = { ...state };
   switch (action.type) {
     case "recalculate":
       newState.outputs[action.id] = action.value;
-      if (newState.connections[action.id]) {
-        newState.connections[action.id].forEach((c: any, i: number) => {
+      if (newState.connectome[action.id]) {
+        newState.connectome[action.id].forEach((c: any, i: number) => {
           if (c !== null) {
-            const id = c[0];
-            const index = c[1];
-            const outputIndex = c[2];
+            const id = c.to;
+            const index = c.to_index;
+            const outputIndex = i;
+            // console.log(
+            //   id,
+            //   index,
+            //   outputIndex,
+            //   action.value[outputIndex],
+            //   newState.inputs[id]
+            // );
+            // console.log(newState.inputs[id]);
             newState.inputs[id][index] = action.value[outputIndex];
           }
         });

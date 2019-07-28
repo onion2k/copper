@@ -39,11 +39,11 @@ export default class {
         return state;
       }
 
-      state.connectionLines = state.connectionLines.filter((cl: any) => {
-        return !(
-          cl.to === action.payload.id && cl.index === action.payload.index
-        );
-      });
+      // state.connectionLines = state.connectionLines.filter((cl: any) => {
+      //   return !(
+      //     cl.to === action.payload.id && cl.index === action.payload.index
+      //   );
+      // });
 
       /* state connector is the output */
       /* payload is the input */
@@ -69,10 +69,8 @@ export default class {
       ];
 
       /* update the input to the current output value */
-      state.inputs[action.payload.id][action.payload.index] =
-        state.outputs[state.connector.id][state.connector.index];
-
-      const output = get(["outputs", action.from, action.from_index], state);
+      // state.inputs[action.payload.id][action.payload.index] =
+      //   state.outputs[state.connector.id][state.connector.index];
 
       const c = {
         from: state.connector.id,
@@ -85,10 +83,12 @@ export default class {
         y2: action.payload.y
       };
 
+      const output = get(["outputs", c.from, c.from_index], state);
+
       state = flow(
-        set(["connectome", c.from, c.from_index], c),
-        set(["outputs", c.from, c.from_index], []),
-        set(["inputs", c.to, c.to_index], output)
+        set(["connectome", c.from, c.from_index], c)
+        // set(["outputs", c.from, c.from_index], []),
+        // set(["inputs", c.to, c.to_index], output)
       )(state);
 
       // Unset the active connector
@@ -113,11 +113,9 @@ export default class {
         ["connectome", action.from, action.from_index],
         omit(["type"], action)
       ),
-      set(["outputs", action.from, action.from_index], []),
+      // set(["outputs", action.from, action.from_index], []),
       set(["inputs", action.to, action.to_index], output)
     )(state);
-
-    console.log(state);
 
     return state;
   };

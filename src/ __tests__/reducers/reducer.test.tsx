@@ -2,7 +2,7 @@
 import { useReducer } from "react";
 import { renderHook, act } from "@testing-library/react-hooks";
 import { cleanup } from "@testing-library/react";
-import { reducer } from "../../reducer";
+import { reducer } from "../../Reducers/reducer";
 
 const initialState = { canvas: [] };
 

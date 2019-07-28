@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 import "./icons";
 
-import { reducer } from "./reducer";
+import { reducer } from "./Reducers/reducer";
 
 import useMousePosition from "./Hooks/useMousePosition";
 import { MouseContext } from "./Contexts/mouse";
@@ -56,16 +56,16 @@ const initConnectors: {
   x2: number;
   y2: number;
 }[] = [
-  {
-    from: "hn",
-    from_index: 0,
-    to: "x",
-    to_index: 2,
-    x1: 2948,
-    y1: 2761,
-    x2: 3100,
-    y2: 2761
-  }
+  // {
+  //   from: "hn",
+  //   from_index: 0,
+  //   to: "x",
+  //   to_index: 2,
+  //   x1: 2948,
+  //   y1: 2761,
+  //   x2: 3100,
+  //   y2: 2761
+  // }
 ];
 
 function App() {
