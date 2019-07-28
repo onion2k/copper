@@ -23,8 +23,6 @@ export const initialState = {
   canvas: [],
   inputs: {},
   outputs: {},
-  connections: {},
-  connectionLines: [],
   connectome: {},
   nodes: []
 };
@@ -195,7 +193,7 @@ function App() {
             left: pos.x + delta.x - center.x
           }}
         >
-          <ConnectorMap nodes={state.nodes} connections={state.connectome} />
+          <ConnectorMap connections={state.connectome} />
           <Diagram />
           <ActiveConnector />
         </div>

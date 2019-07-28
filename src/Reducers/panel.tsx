@@ -39,12 +39,6 @@ export default class {
   static register = (state: any, action: any) => {
     state.inputs[action.id] = action.inputs;
     state.outputs[action.id] = action.output;
-
-    // state = flow(
-    //   // set(["inputs", action.id], action.inputs),
-    //   set(["outputs", action.id], getOr([], "output", action))
-    // )(state);
-    console.log(state, action);
     return state;
   };
 
@@ -66,15 +60,15 @@ export default class {
       {}
     );
 
-    state.connections = Object.keys(state.connections).reduce(
-      (connection: any, key: string) => {
-        if (key !== action.id) {
-          connection[key] = state.connections[key];
-        }
-        return connection;
-      },
-      {}
-    );
+    // state.connections = Object.keys(state.connections).reduce(
+    //   (connection: any, key: string) => {
+    //     if (key !== action.id) {
+    //       connection[key] = state.connections[key];
+    //     }
+    //     return connection;
+    //   },
+    //   {}
+    // );
 
     state = update(
       "connectome",
@@ -105,14 +99,14 @@ export default class {
         panel.y += action.value.y;
       });
 
-    state.nodes
-      .filter((node: any) => {
-        return action.id === node.id;
-      })
-      .forEach((node: any) => {
-        node.x += action.value.x;
-        node.y += action.value.y;
-      });
+    // state.nodes
+    //   .filter((node: any) => {
+    //     return action.id === node.id;
+    //   })
+    //   .forEach((node: any) => {
+    //     node.x += action.value.x;
+    //     node.y += action.value.y;
+    //   });
 
     state = update(
       "connectome",

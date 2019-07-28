@@ -12,14 +12,6 @@ export function reducer(state: any, action: any) {
             const id = c.to;
             const index = c.to_index;
             const outputIndex = i;
-            // console.log(
-            //   id,
-            //   index,
-            //   outputIndex,
-            //   action.value[outputIndex],
-            //   newState.inputs[id]
-            // );
-            // console.log(newState.inputs[id]);
             newState.inputs[id][index] = action.value[outputIndex];
           }
         });

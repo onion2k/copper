@@ -3,13 +3,6 @@ import { map } from "lodash";
 import { ConnectorMapLine } from "./connectorMapLine";
 
 interface iConnectorMap {
-  nodes: Array<{
-    id: string;
-    direction: string;
-    index: number;
-    x: number;
-    y: number;
-  }>;
   connections: {
     [s: string]: Array<{
       from: string;
@@ -24,7 +17,7 @@ interface iConnectorMap {
   };
 }
 
-export function ConnectorMap({ nodes, connections }: iConnectorMap) {
+export function ConnectorMap({ connections }: iConnectorMap) {
   let connectionsMap = new Array<any>();
   map(connections, panel => {
     panel.forEach((connector: any) => {
