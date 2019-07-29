@@ -56,16 +56,6 @@ export default class {
       {}
     );
 
-    // state.connections = Object.keys(state.connections).reduce(
-    //   (connection: any, key: string) => {
-    //     if (key !== action.id) {
-    //       connection[key] = state.connections[key];
-    //     }
-    //     return connection;
-    //   },
-    //   {}
-    // );
-
     state = update(
       "connectome",
       flow(
@@ -94,15 +84,6 @@ export default class {
         panel.x += action.value.x;
         panel.y += action.value.y;
       });
-
-    // state.nodes
-    //   .filter((node: any) => {
-    //     return action.id === node.id;
-    //   })
-    //   .forEach((node: any) => {
-    //     node.x += action.value.x;
-    //     node.y += action.value.y;
-    //   });
 
     state = update(
       "connectome",
