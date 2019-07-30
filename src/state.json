@@ -1,11 +1,19 @@
 {
   "canvas": [
     {
-      "id": "hn",
-      "type": "TIME",
-      "title": "TIME",
-      "x": 2605,
-      "y": 2635,
+      "id": "23fa-1a79-2d3a-8499",
+      "type": "VALUE",
+      "title": "VALUE",
+      "x": 3239,
+      "y": 2633,
+      "value": null
+    },
+    {
+      "id": "x",
+      "type": "SHADER_Rings",
+      "title": "SHADER_Rings",
+      "x": 3285,
+      "y": 3060,
       "value": null
     },
     {
@@ -17,19 +25,11 @@
       "value": null
     },
     {
-      "id": "x",
-      "type": "SHADER_Rings",
-      "title": "SHADER_Rings",
-      "x": 3255,
-      "y": 2874,
-      "value": null
-    },
-    {
-      "id": "23fa-1a79-2d3a-8499",
-      "type": "VALUE",
-      "title": "VALUE",
-      "x": 3239,
-      "y": 2633,
+      "id": "hn",
+      "type": "TIME",
+      "title": "TIME",
+      "x": 2605,
+      "y": 2635,
       "value": null
     }
   ],
@@ -42,8 +42,8 @@
         "to_index": 2,
         "x1": 2952.984375,
         "y1": 2696,
-        "x2": 3255,
-        "y2": 2935
+        "x2": 3285,
+        "y2": 3121
       }
     ],
     "c": [
@@ -54,8 +54,8 @@
         "to_index": 3,
         "x1": 2947.984375,
         "y1": 3011,
-        "x2": 3255,
-        "y2": 3011
+        "x2": 3285,
+        "y2": 3151
       }
     ]
   }
