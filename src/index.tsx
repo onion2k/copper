@@ -19,6 +19,8 @@ import { uniqueID } from "./uniqueID";
 
 import "./styles.css";
 
+import state from "./state.json";
+
 export const initialState = {
   canvas: [],
   inputs: {},
@@ -34,43 +36,20 @@ const initPanels: {
   y: number;
   title?: string;
   value?: any;
-}[] = [
-  {
-    id: "hn",
-    type: "TIME",
-    x: 2600,
-    y: 2700
-  },
-  {
-    id: "c",
-    type: "COLOR",
-    x: 2600,
-    y: 2950
-  },
-  { id: "x", type: "SHADER_Rings", x: 3100, y: 2700 }
-];
+}[] = state.canvas;
 
 const initConnectors: {
-  from: string;
-  from_index: number;
-  to: string;
-  to_index: number;
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-}[] = [
-  // {
-  //   from: "hn",
-  //   from_index: 0,
-  //   to: "x",
-  //   to_index: 2,
-  //   x1: 2948,
-  //   y1: 2761,
-  //   x2: 3100,
-  //   y2: 2761
-  // }
-];
+  [s: string]: Array<{
+    from: string;
+    from_index: number;
+    to: string;
+    to_index: number;
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+  }>;
+} = state.connectome;
 
 function App() {
   const { x: mouseX, y: mouseY } = useMousePosition();
@@ -143,8 +122,9 @@ function App() {
         addPanel(p.type, p.id, p.x, p.y, p.value);
       });
     }
-    if (initConnectors.length > 0) {
-      initConnectors.forEach(c => {
+    Object.entries(initConnectors).forEach((panel: any) => {
+      const [, connections] = panel;
+      connections.forEach((c: any) => {
         addConnector(
           c.from,
           c.from_index,
@@ -156,7 +136,7 @@ function App() {
           c.y1
         );
       });
-    }
+    });
     // eslint-disable-next-line
   }, []);
 

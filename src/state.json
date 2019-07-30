@@ -1,0 +1,62 @@
+{
+  "canvas": [
+    {
+      "id": "hn",
+      "type": "TIME",
+      "title": "TIME",
+      "x": 2605,
+      "y": 2635,
+      "value": null
+    },
+    {
+      "id": "c",
+      "type": "COLOR",
+      "title": "COLOR",
+      "x": 2600,
+      "y": 2950,
+      "value": null
+    },
+    {
+      "id": "x",
+      "type": "SHADER_Rings",
+      "title": "SHADER_Rings",
+      "x": 3255,
+      "y": 2874,
+      "value": null
+    },
+    {
+      "id": "23fa-1a79-2d3a-8499",
+      "type": "VALUE",
+      "title": "VALUE",
+      "x": 3239,
+      "y": 2633,
+      "value": null
+    }
+  ],
+  "connectome": {
+    "hn": [
+      {
+        "from": "hn",
+        "from_index": 0,
+        "to": "x",
+        "to_index": 2,
+        "x1": 2952.984375,
+        "y1": 2696,
+        "x2": 3255,
+        "y2": 2935
+      }
+    ],
+    "c": [
+      {
+        "from": "c",
+        "from_index": 0,
+        "to": "x",
+        "to_index": 3,
+        "x1": 2947.984375,
+        "y1": 3011,
+        "x2": 3255,
+        "y2": 3011
+      }
+    ]
+  }
+}

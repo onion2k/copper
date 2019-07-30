@@ -48,6 +48,7 @@ export default function Color({ id, title, x, y }: iPanel) {
 
   const controls = [
     <input
+      key="red"
       type={"range"}
       name={"input"}
       min={0}
@@ -58,6 +59,7 @@ export default function Color({ id, title, x, y }: iPanel) {
       style={{ width: "100%" }}
     />,
     <input
+      key="green"
       type={"range"}
       name={"input"}
       min={0}
@@ -68,6 +70,7 @@ export default function Color({ id, title, x, y }: iPanel) {
       style={{ width: "100%" }}
     />,
     <input
+      key="blue"
       type={"range"}
       name={"input"}
       min={0}
