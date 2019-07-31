@@ -19,7 +19,8 @@ import { uniqueID } from "./uniqueID";
 
 import "./styles.css";
 
-import state from "./state.json";
+import statejson from "./state.json";
+let diagramLoadState = statejson;
 
 export const initialState = {
   canvas: [],
@@ -29,6 +30,12 @@ export const initialState = {
   // nodes: []
 };
 
+const localCopperState = localStorage.getItem("copper");
+
+if (localCopperState !== null) {
+  diagramLoadState = JSON.parse(localCopperState);
+}
+
 const initPanels: {
   id: string;
   type: string;
@@ -36,7 +43,7 @@ const initPanels: {
   y: number;
   title?: string;
   value?: any;
-}[] = state.canvas;
+}[] = diagramLoadState.canvas;
 
 const initConnectors: {
   [s: string]: Array<{
@@ -49,7 +56,7 @@ const initConnectors: {
     x2: number;
     y2: number;
   }>;
-} = state.connectome;
+} = diagramLoadState.connectome;
 
 function App() {
   const { x: mouseX, y: mouseY } = useMousePosition();
