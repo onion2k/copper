@@ -59,9 +59,9 @@ export default class {
     state = update(
       "connectome",
       flow(
-        values,
         mapValues(
           filter((connector: any) => {
+            console.log(connector.from, connector.to, action.id);
             return connector.from !== action.id && connector.to !== action.id;
           })
         )
