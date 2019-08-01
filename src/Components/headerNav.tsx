@@ -4,6 +4,7 @@ import { PRIMITIVES_KEYS } from "../Panels/primitives";
 import { OPERATIONS_KEYS } from "../Panels/operations";
 import { EVENTS_KEYS } from "../Panels/events";
 import { OUTPUTS_KEYS } from "../Panels/outputs";
+import { MATHS_KEYS } from "../Panels/math";
 import SHADERS from "../Panels/shaders";
 import "./headerNav.css";
 
@@ -41,6 +42,10 @@ export function HeaderNav({ addPanel }: iHeaderNav) {
         <li>
           Primitives
           {panelList(PRIMITIVES_KEYS)}
+        </li>
+        <li>
+          Maths
+          {panelList(MATHS_KEYS)}
         </li>
         <li>
           Operations

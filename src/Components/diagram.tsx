@@ -5,6 +5,7 @@ import { DispatchContext } from "../Contexts/dispatch";
 import { findIconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 import PRIMITIVES from "../Panels/primitives";
+import MATHS from "../Panels/math";
 import OPERATIONS from "../Panels/operations";
 import EVENTS from "../Panels/events";
 import SHADERS from "../Panels/shaders";
@@ -15,6 +16,7 @@ const closeIcon = findIconDefinition({ prefix: "fas", iconName: "times" });
 
 const panelTypes: { [s: string]: any } = Object.assign(
   PRIMITIVES,
+  MATHS,
   OPERATIONS,
   EVENTS,
   SHADERS,

@@ -61,7 +61,6 @@ export default class {
       flow(
         mapValues(
           filter((connector: any) => {
-            console.log(connector.from, connector.to, action.id);
             return connector.from !== action.id && connector.to !== action.id;
           })
         )
